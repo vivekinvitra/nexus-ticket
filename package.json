@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx @cloudflare/next-on-pages@1",
+    "build:next": "next build",
     "start": "next start",
     "lint": "next lint",
     "sitemap": "node scripts/generate-sitemap.js",
@@ -26,6 +27,7 @@
     "cssnano": "^7.0.4",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.6",
+    "@cloudflare/next-on-pages": "^1.13.12",
     "terser": "^5.31.3",
     "typescript": "^5.5.3"
   }
