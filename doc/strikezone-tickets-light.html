@@ -1,0 +1,3199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StrikeZone — Sports Tickets Comparison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════
+   DESIGN TOKENS - LIGHT THEME (TICOMBO STYLE)
+══════════════════════════════════════════════════ */
+:root {
+  --white:       #ffffff;
+  --off-white:   #fafafa;
+  --light-gray:  #f5f5f5;
+  --border-gray: #e0e0e0;
+  --text-gray:   #6b7280;
+  --text-dark:   #1f2937;
+  --primary:     #10b981;
+  --primary-dark:#059669;
+  --primary-light:#d1fae5;
+  --accent:      #3b82f6;
+  --accent-light:#dbeafe;
+  --orange:      #f59e0b;
+  --orange-light:#fef3c7;
+  --red:         #ef4444;
+  --nav-h:       70px;
+  --font-head:   'Poppins', sans-serif;
+  --font-body:   'Inter', sans-serif;
+  --r:           8px;
+  --r-lg:        12px;
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.08);
+  --shadow:      0 4px 6px rgba(0,0,0,0.07);
+  --shadow-lg:   0 10px 25px rgba(0,0,0,0.10);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 15px; }
+body {
+  background: var(--off-white);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; font-family: inherit; }
+input, select { font-family: inherit; }
+
+/* ══════════════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════════════ */
+nav {
+  height: var(--nav-h);
+  background: var(--white);
+  border-bottom: 1px solid var(--border-gray);
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  gap: 32px;
+  box-shadow: var(--shadow-sm);
+}
+.nav-logo {
+  font-family: var(--font-head);
+  font-size: 26px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  color: var(--text-dark);
+}
+.nav-logo .strike { color: var(--primary); }
+.nav-logo sup {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  background: var(--primary);
+  color: var(--white);
+  padding: 3px 7px;
+  border-radius: 4px;
+  letter-spacing: .04em;
+  margin-left: 2px;
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+.nav-links { display: flex; align-items: center; gap: 4px; flex: 1; }
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-gray);
+  padding: 8px 14px;
+  border-radius: var(--r);
+  transition: all .2s;
+  position: relative;
+}
+.nav-links a:hover { color: var(--text-dark); background: var(--light-gray); }
+.nav-links a.active {
+  color: var(--primary);
+  background: var(--primary-light);
+  font-weight: 600;
+}
+
+.nav-right { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+.search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--light-gray);
+  border: 1px solid var(--border-gray);
+  border-radius: var(--r);
+  padding: 8px 14px;
+  transition: all .2s;
+}
+.search-wrap:focus-within { border-color: var(--primary); background: var(--white); }
+.search-wrap svg { color: var(--text-gray); flex-shrink: 0; }
+.search-wrap input {
+  background: none; border: none; outline: none;
+  color: var(--text-dark); font-size: 14px; width: 180px;
+}
+.search-wrap input::placeholder { color: var(--text-gray); }
+.btn-pri {
+  background: var(--primary);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: var(--r);
+  transition: all .2s;
+}
+.btn-pri:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+.btn-out {
+  background: transparent;
+  color: var(--text-dark);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 9px 20px;
+  border-radius: var(--r);
+  border: 1px solid var(--border-gray);
+  transition: all .2s;
+}
+.btn-out:hover { border-color: var(--text-gray); background: var(--light-gray); }
+
+/* ══════════════════════════════════════════════════
+   HERO BANNER - COMPACT WITH IMAGE
+══════════════════════════════════════════════════ */
+.hero {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-gray);
+}
+.hero-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 50px 40px;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 60px;
+  align-items: center;
+}
+.hero-left {}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.hero-tag::before { content:'●'; animation: pulse 2s infinite; font-size: 8px; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.hero-h1 {
+  font-family: var(--font-head);
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+}
+.hero-h1 .highlight { color: var(--primary); }
+.hero-sub {
+  font-size: 17px;
+  color: var(--text-gray);
+  line-height: 1.7;
+  margin-bottom: 28px;
+  max-width: 520px;
+}
+.hero-cta { display: flex; gap: 12px; align-items: center; }
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-gray);
+}
+.stat-val {
+  font-family: var(--font-head);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1;
+}
+.stat-val span { color: var(--primary); }
+.stat-lbl {
+  font-size: 12px;
+  color: var(--text-gray);
+  margin-top: 4px;
+}
+
+.hero-image {
+  background: var(--light-gray);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  position: relative;
+  height: 360px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-image-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-light) 100%);
+  opacity: .4;
+}
+.hero-image-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 40px;
+}
+.hero-image-icon {
+  font-size: 80px;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+}
+.hero-image-text {
+  font-family: var(--font-head);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+.hero-image-sub {
+  font-size: 14px;
+  color: var(--text-gray);
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════════
+   DATE FILTER BAR
+══════════════════════════════════════════════════ */
+.date-filter-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-gray);
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 800;
+  box-shadow: var(--shadow-sm);
+}
+.date-filter-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.date-filter-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-right: 8px;
+}
+.date-tab {
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-gray);
+  background: transparent;
+  border: 1px solid var(--border-gray);
+  border-radius: var(--r);
+  transition: all .2s;
+  white-space: nowrap;
+}
+.date-tab:hover { background: var(--light-gray); }
+.date-tab.active {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+  font-weight: 600;
+}
+.date-picker-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--light-gray);
+  border: 1px solid var(--border-gray);
+  border-radius: var(--r);
+  padding: 8px 12px;
+}
+.date-picker-wrap svg { color: var(--text-gray); }
+.date-picker {
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 14px;
+  color: var(--text-dark);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* ══════════════════════════════════════════════════
+   SPORT CATEGORY TABS
+══════════════════════════════════════════════════ */
+.sport-tabs-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-gray);
+}
+.sport-tabs-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.sport-tabs-inner::-webkit-scrollbar { display: none; }
+.sport-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-gray);
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all .2s;
+  background: none;
+}
+.sport-tab:hover { color: var(--text-dark); background: var(--light-gray); }
+.sport-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  font-weight: 600;
+}
+.sport-tab .tab-icon { font-size: 18px; }
+.sport-tab .tab-count {
+  background: var(--light-gray);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 100px;
+  color: var(--text-gray);
+}
+.sport-tab.active .tab-count {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+/* ══════════════════════════════════════════════════
+   MAIN CONTENT LAYOUT
+══════════════════════════════════════════════════ */
+.page-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 40px 60px;
+}
+.content-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ══════════════════════════════════════════════════
+   LHS FILTER PANEL
+══════════════════════════════════════════════════ */
+.filter-panel {
+  background: var(--white);
+  border: 1px solid var(--border-gray);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  position: sticky;
+  top: calc(var(--nav-h) + 70px);
+  box-shadow: var(--shadow-sm);
+}
+.filter-head {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border-gray);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.filter-head h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+.filter-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.filter-reset:hover { opacity: .7; }
+.filter-section {
+  border-bottom: 1px solid var(--border-gray);
+  padding: 18px 20px;
+}
+.filter-section:last-child { border-bottom: none; }
+.filter-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: all .15s;
+}
+.filter-option:hover .filter-label { color: var(--text-dark); }
+.filter-checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 2px solid var(--border-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .15s;
+  flex-shrink: 0;
+  background: var(--white);
+}
+.filter-option.checked .filter-checkbox {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+.filter-option.checked .filter-checkbox::after {
+  content: '✓';
+  font-size: 11px;
+  color: var(--white);
+  font-weight: 700;
+}
+.filter-label {
+  font-size: 14px;
+  color: var(--text-gray);
+  flex: 1;
+}
+.filter-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-gray);
+  background: var(--light-gray);
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+.price-range {
+  margin-top: 12px;
+}
+.price-slider {
+  width: 100%;
+  appearance: none;
+  height: 6px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--primary) 60%, var(--light-gray) 60%);
+  outline: none;
+  cursor: pointer;
+}
+.price-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  border: 3px solid var(--white);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.price-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-gray);
+  margin-top: 8px;
+  font-weight: 500;
+}
+.affiliate-promo {
+  background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+  border: 1px solid var(--primary);
+  border-radius: var(--r);
+  padding: 16px;
+  margin: 18px 20px;
+  text-align: center;
+}
+.affiliate-promo-title {
+  font-size: 11px;
+  color: var(--text-gray);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 6px;
+}
+.affiliate-promo-name {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+.affiliate-promo-btn {
+  display: block;
+  width: 100%;
+  background: var(--primary);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: var(--r);
+  transition: all .2s;
+}
+.affiliate-promo-btn:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow);
+}
+
+/* ══════════════════════════════════════════════════
+   TICKET LISTINGS
+══════════════════════════════════════════════════ */
+.listings-area {}
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-title h2 {
+  font-family: var(--font-head);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+.section-icon { font-size: 28px; }
+.section-count {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+.section-sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sort-label {
+  font-size: 13px;
+  color: var(--text-gray);
+}
+.sort-select {
+  background: var(--white);
+  border: 1px solid var(--border-gray);
+  border-radius: var(--r);
+  color: var(--text-dark);
+  font-size: 13px;
+  padding: 7px 12px;
+  outline: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.ticket-table {
+  background: var(--white);
+  border: 1px solid var(--border-gray);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 40px;
+}
+.ticket-table-head {
+  display: grid;
+  grid-template-columns: 2.5fr 1.3fr 1fr 1fr 1fr 1fr;
+  gap: 16px;
+  padding: 14px 24px;
+  background: var(--light-gray);
+  border-bottom: 1px solid var(--border-gray);
+}
+.th {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-gray);
+}
+.ticket-row {
+  display: grid;
+  grid-template-columns: 2.5fr 1.3fr 1fr 1fr 1fr 1fr;
+  gap: 16px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-gray);
+  align-items: center;
+  cursor: pointer;
+  transition: all .15s;
+  position: relative;
+}
+.ticket-row:last-child { border-bottom: none; }
+.ticket-row:hover { background: var(--light-gray); }
+.ticket-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: transparent;
+  transition: background .15s;
+}
+.ticket-row:hover::before { background: var(--primary); }
+
+.row-event {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.row-sport-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  background: var(--light-gray);
+}
+.row-event-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.row-league {
+  font-size: 12px;
+  color: var(--text-gray);
+  margin-top: 2px;
+}
+.row-date {
+  font-size: 14px;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+.row-date small {
+  display: block;
+  font-size: 12px;
+  color: var(--text-gray);
+  font-weight: 400;
+  margin-top: 2px;
+}
+.row-venue {
+  font-size: 13px;
+  color: var(--text-gray);
+}
+.row-venue small {
+  display: block;
+  font-size: 11px;
+  margin-top: 2px;
+}
+.row-avail {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.avail-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.avail-high {
+  color: var(--primary);
+}
+.avail-high .avail-dot {
+  background: var(--primary);
+}
+.avail-low {
+  color: var(--orange);
+}
+.avail-low .avail-dot {
+  background: var(--orange);
+}
+.avail-sold {
+  color: var(--text-gray);
+}
+.row-price {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1;
+}
+.row-price small {
+  display: block;
+  font-size: 11px;
+  color: var(--text-gray);
+  font-weight: 400;
+  font-family: var(--font-body);
+  margin-top: 3px;
+}
+.row-action {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-ticket {
+  background: var(--primary);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: var(--r);
+  transition: all .2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.btn-ticket:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+.btn-ticket .arrow {
+  font-size: 12px;
+}
+
+.ticket-row.featured-row {
+  background: var(--primary-light);
+}
+.ticket-row.featured-row::before {
+  background: var(--primary);
+}
+.featured-badge {
+  background: var(--primary);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 100px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-left: 8px;
+}
+
+.ticket-row.sold-out {
+  opacity: .5;
+}
+.ticket-row.sold-out .btn-ticket {
+  background: var(--border-gray);
+  color: var(--text-gray);
+  cursor: not-allowed;
+}
+.ticket-row.sold-out .btn-ticket:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.load-more-wrap {
+  padding: 20px 0;
+  text-align: center;
+}
+.btn-load {
+  background: var(--white);
+  border: 1px solid var(--border-gray);
+  color: var(--text-dark);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 28px;
+  border-radius: var(--r);
+  transition: all .2s;
+}
+.btn-load:hover {
+  background: var(--light-gray);
+  border-color: var(--text-gray);
+}
+
+/* ══════════════════════════════════════════════════
+   NEWS SECTION
+══════════════════════════════════════════════════ */
+.news-section {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border-gray);
+}
+.news-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.news-section-head h2 {
+  font-family: var(--font-head);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+.news-section-head h2 span {
+  color: var(--primary);
+}
+.news-view-all {
+  font-size: 14px;
+  color: var(--primary);
+  font-weight: 600;
+  transition: opacity .2s;
+}
+.news-view-all:hover {
+  opacity: .7;
+}
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.news-card {
+  background: var(--white);
+  border: 1px solid var(--border-gray);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all .2s;
+  box-shadow: var(--shadow-sm);
+}
+.news-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+.news-thumb {
+  height: 160px;
+  background: var(--light-gray);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.news-thumb-icon {
+  font-size: 48px;
+  z-index: 1;
+}
+.news-cat {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.cat-football {
+  background: var(--accent);
+  color: var(--white);
+}
+.cat-cricket {
+  background: var(--primary);
+  color: var(--white);
+}
+.cat-horserace {
+  background: var(--orange);
+  color: var(--white);
+}
+.cat-tennis {
+  background: var(--red);
+  color: var(--white);
+}
+.cat-boxing {
+  background: #8b5cf6;
+  color: var(--white);
+}
+.cat-f1 {
+  background: #ef4444;
+  color: var(--white);
+}
+.cat-general {
+  background: var(--text-gray);
+  color: var(--white);
+}
+
+.news-body {
+  padding: 18px;
+}
+.news-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-gray);
+  margin-bottom: 8px;
+}
+.news-meta-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text-gray);
+}
+.news-title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-dark);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 10px;
+  transition: color .2s;
+}
+.news-card:hover .news-title {
+  color: var(--primary);
+}
+.news-snip {
+  font-size: 13px;
+  color: var(--text-gray);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ══════════════════════════════════════════════════
+   AFFILIATE PARTNERS
+══════════════════════════════════════════════════ */
+.partners-strip {
+  background: var(--white);
+  border-top: 1px solid var(--border-gray);
+  border-bottom: 1px solid var(--border-gray);
+  padding: 32px 40px;
+  margin: 60px 0 0;
+}
+.partners-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.partners-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-gray);
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.partners-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.partner-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  border: 1px solid var(--border-gray);
+  border-radius: var(--r);
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+}
+.partner-chip:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+.partner-chip .chip-icon {
+  font-size: 18px;
+}
+
+/* ══════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════ */
+footer {
+  background: var(--white);
+  border-top: 1px solid var(--border-gray);
+  padding: 60px 40px 32px;
+}
+.footer-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 340px repeat(4, 1fr);
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border-gray);
+}
+.footer-brand {}
+.footer-logo {
+  font-family: var(--font-head);
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+.footer-logo .strike {
+  color: var(--primary);
+}
+.footer-tagline {
+  font-size: 14px;
+  color: var(--text-gray);
+  line-height: 1.7;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+.footer-socials {
+  display: flex;
+  gap: 10px;
+}
+.social-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--light-gray);
+  border: 1px solid var(--border-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.social-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+.footer-col-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+}
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-links a {
+  font-size: 14px;
+  color: var(--text-gray);
+  transition: color .2s;
+}
+.footer-links a:hover {
+  color: var(--primary);
+}
+.footer-bottom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 28px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.footer-legal {
+  font-size: 12px;
+  color: var(--text-gray);
+  line-height: 1.7;
+  max-width: 720px;
+}
+.footer-legal strong {
+  color: var(--text-dark);
+}
+.footer-bottom-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.footer-bottom-links a {
+  font-size: 12px;
+  color: var(--text-gray);
+  transition: color .2s;
+}
+.footer-bottom-links a:hover {
+  color: var(--primary);
+}
+.footer-copy {
+  font-size: 12px;
+  color: var(--text-gray);
+  max-width: 1280px;
+  margin: 24px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-gray);
+  text-align: center;
+}
+.footer-copy .heart {
+  color: var(--red);
+}
+
+/* ══════════════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════════════ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, .6);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.overlay.open {
+  display: flex;
+}
+.modal {
+  background: var(--white);
+  border: 1px solid var(--border-gray);
+  border-radius: var(--r-lg);
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modal-in .25s ease;
+  box-shadow: var(--shadow-lg);
+}
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--light-gray);
+  border: 1px solid var(--border-gray);
+  color: var(--text-gray);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .2s;
+}
+.modal-close:hover {
+  background: var(--border-gray);
+  color: var(--text-dark);
+}
+.modal-head {
+  padding: 32px 32px 0;
+}
+.modal-sport {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+.modal-event-name {
+  font-family: var(--font-head);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+.modal-league {
+  font-size: 13px;
+  color: var(--text-gray);
+}
+.modal-divider {
+  height: 1px;
+  background: var(--border-gray);
+  margin: 24px 32px;
+}
+.modal-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 0 32px;
+}
+.modal-info-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-gray);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+.modal-info-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+.modal-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px;
+}
+.modal-price-label {
+  font-size: 14px;
+  color: var(--text-gray);
+}
+.modal-price-val {
+  font-family: var(--font-head);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.modal-price-val small {
+  font-size: 13px;
+  color: var(--text-gray);
+  font-weight: 400;
+  font-family: var(--font-body);
+}
+.modal-partners {
+  padding: 0 32px 24px;
+}
+.modal-partners-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-gray);
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.modal-partner-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modal-partner-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--light-gray);
+  border: 1px solid var(--border-gray);
+  border-radius: var(--r);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all .2s;
+  text-align: left;
+  width: 100%;
+}
+.modal-partner-btn:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+.modal-partner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.modal-partner-icon {
+  font-size: 22px;
+}
+.modal-partner-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+.modal-partner-tag {
+  font-size: 12px;
+  color: var(--text-gray);
+}
+.modal-partner-price {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.modal-partner-price.better {
+  color: var(--orange);
+}
+.modal-disclaimer {
+  padding: 0 32px 32px;
+  font-size: 12px;
+  color: var(--text-gray);
+  line-height: 1.7;
+}
+.modal-disclaimer a {
+  color: var(--primary);
+}
+
+/* ══════════════════════════════════════════════════
+   PAGE SECTIONS
+══════════════════════════════════════════════════ */
+.page {
+  display: none;
+}
+.page.active {
+  display: block;
+}
+
+/* ══════════════════════════════════════════════════
+   NEWS PAGE
+══════════════════════════════════════════════════ */
+.news-page-head {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-gray);
+  padding: 40px 40px 32px;
+}
+.news-page-head-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.news-page-head-inner h1 {
+  font-family: var(--font-head);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+.news-page-head-inner h1 span {
+  color: var(--primary);
+}
+.news-page-head-inner p {
+  font-size: 16px;
+  color: var(--text-gray);
+  margin-bottom: 20px;
+}
+.news-page-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.news-page-tabs button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-gray);
+  background: var(--light-gray);
+  border: 1px solid var(--border-gray);
+  border-radius: var(--r);
+  transition: all .2s;
+}
+.news-page-tabs button.active {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+  font-weight: 600;
+}
+.news-page-tabs button:hover:not(.active) {
+  background: var(--border-gray);
+}
+.news-page-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE DESIGN - MOBILE, TABLET, DESKTOP
+══════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────
+   TABLET LANDSCAPE & SMALLER DESKTOPS (max-width: 1100px)
+───────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  /* Hero adjustments */
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 40px 30px;
+  }
+  .hero-image {
+    max-width: 500px;
+    margin: 0 auto;
+    height: 320px;
+  }
+  
+  /* Reduce ticket table columns */
+  .ticket-table-head,
+  .ticket-row {
+    grid-template-columns: 2.2fr 1.2fr 1fr 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  
+  /* Footer adjustments */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+/* ─────────────────────────────────────────────────
+   TABLET PORTRAIT (max-width: 900px)
+───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  /* Navigation */
+  nav {
+    padding: 0 20px;
+    gap: 12px;
+    height: 65px;
+  }
+  .nav-logo {
+    font-size: 22px;
+  }
+  .nav-links {
+    display: none; /* Hide main nav links on tablet, show mobile menu */
+  }
+  .nav-right {
+    gap: 8px;
+  }
+  .search-wrap {
+    display: none; /* Hide search on tablet */
+  }
+  .btn-out {
+    display: none; /* Hide sign in button on tablet */
+  }
+  
+  /* Hero */
+  .hero-content {
+    padding: 35px 20px;
+  }
+  .hero-h1 {
+    font-size: 38px;
+  }
+  .hero-sub {
+    font-size: 16px;
+  }
+  .hero-stats {
+    gap: 24px;
+  }
+  .stat-val {
+    font-size: 28px;
+  }
+  
+  /* Date filter bar */
+  .date-filter-inner {
+    padding: 14px 20px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .date-filter-label {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+  .date-tab {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+  
+  /* Sport tabs */
+  .sport-tabs-inner {
+    padding: 0 20px;
+  }
+  .sport-tab {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+  
+  /* Main content */
+  .page-wrap {
+    padding: 24px 20px 50px;
+  }
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .filter-panel {
+    position: static;
+    top: auto;
+  }
+  
+  /* Ticket table - simplified columns */
+  .ticket-table-head,
+  .ticket-row {
+    grid-template-columns: 2fr 1.2fr 1fr 1fr;
+    gap: 10px;
+    padding: 16px 20px;
+  }
+  .row-venue {
+    display: none; /* Hide venue column on tablet */
+  }
+  .row-avail {
+    font-size: 12px;
+  }
+  
+  /* News grid */
+  .news-grid,
+  .news-page-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Partners strip */
+  .partners-strip {
+    padding: 28px 20px;
+  }
+  .partners-row {
+    gap: 10px;
+  }
+  .partner-chip {
+    padding: 9px 16px;
+    font-size: 13px;
+  }
+}
+
+/* ─────────────────────────────────────────────────
+   MOBILE LANDSCAPE & LARGE PHONES (max-width: 768px)
+───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Navigation - mobile menu */
+  nav {
+    height: 60px;
+    padding: 0 16px;
+  }
+  .nav-logo {
+    font-size: 20px;
+  }
+  .nav-logo sup {
+    font-size: 8px;
+    padding: 2px 5px;
+  }
+  .btn-pri {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+  
+  /* Hero */
+  .hero-content {
+    padding: 30px 16px;
+    gap: 30px;
+  }
+  .hero-h1 {
+    font-size: 34px;
+  }
+  .hero-sub {
+    font-size: 15px;
+  }
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .hero-stats > div {
+    flex: 1 1 45%;
+  }
+  .hero-image {
+    height: 280px;
+  }
+  
+  /* Date filter - more compact */
+  .date-filter-inner {
+    padding: 12px 16px;
+  }
+  .date-tab {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  .date-picker-wrap {
+    padding: 6px 10px;
+  }
+  
+  /* Sport tabs */
+  .sport-tabs-inner {
+    padding: 0 16px;
+  }
+  .sport-tab {
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+  .sport-tab .tab-icon {
+    font-size: 16px;
+  }
+  
+  /* Main content */
+  .page-wrap {
+    padding: 20px 16px 40px;
+  }
+  
+  /* Filter panel - full width on mobile */
+  .filter-panel {
+    border-radius: var(--r);
+  }
+  
+  /* Ticket table - card layout */
+  .ticket-table {
+    border-radius: var(--r);
+  }
+  .ticket-table-head {
+    display: none; /* Hide headers on mobile */
+  }
+  .ticket-row {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 12px;
+  }
+  .ticket-row::before {
+    display: none;
+  }
+  .row-event {
+    grid-column: 1;
+  }
+  .row-date,
+  .row-venue,
+  .row-avail,
+  .row-price {
+    grid-column: 1;
+  }
+  .row-action {
+    grid-column: 1;
+    justify-content: stretch;
+  }
+  .row-action .btn-ticket {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* News grid */
+  .news-grid,
+  .news-page-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  /* Footer */
+  .footer {
+    padding: 40px 16px 24px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .footer-bottom {
+    padding-top: 20px;
+  }
+  .footer-legal {
+    font-size: 11px;
+  }
+  .footer-copy {
+    font-size: 11px;
+  }
+}
+
+/* ─────────────────────────────────────────────────
+   MOBILE PORTRAIT (max-width: 640px)
+───────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Typography adjustments */
+  html {
+    font-size: 14px;
+  }
+  
+  /* Navigation */
+  nav {
+    height: 56px;
+    padding: 0 12px;
+    gap: 8px;
+  }
+  .nav-logo {
+    font-size: 18px;
+  }
+  .btn-pri {
+    font-size: 12px;
+    padding: 7px 14px;
+    white-space: nowrap;
+  }
+  
+  /* Hero */
+  .hero-content {
+    padding: 24px 12px;
+    gap: 24px;
+  }
+  .hero-tag {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+  .hero-h1 {
+    font-size: 28px;
+    line-height: 1.15;
+  }
+  .hero-sub {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .hero-cta {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+  .hero-cta .btn-pri,
+  .hero-cta .btn-out {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-stats {
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 20px;
+    margin-top: 20px;
+  }
+  .hero-stats > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .stat-val {
+    font-size: 24px;
+  }
+  .stat-lbl {
+    text-align: right;
+  }
+  .hero-image {
+    height: 240px;
+  }
+  .hero-image-icon {
+    font-size: 60px;
+  }
+  .hero-image-text {
+    font-size: 20px;
+  }
+  
+  /* Date filter bar */
+  .date-filter-inner {
+    padding: 10px 12px;
+    gap: 6px;
+  }
+  .date-filter-label {
+    font-size: 12px;
+    margin-right: 0;
+    margin-bottom: 6px;
+  }
+  .date-tab {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+  .date-picker-wrap {
+    width: 100%;
+    margin-top: 6px;
+  }
+  .date-picker {
+    font-size: 12px;
+    width: 100%;
+  }
+  
+  /* Sport tabs */
+  .sport-tabs-inner {
+    padding: 0 12px;
+  }
+  .sport-tab {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+  .sport-tab .tab-icon {
+    font-size: 14px;
+  }
+  .sport-tab .tab-count {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+  
+  /* Main content */
+  .page-wrap {
+    padding: 16px 12px 32px;
+  }
+  
+  /* Filter panel */
+  .filter-panel {
+    margin-bottom: 20px;
+  }
+  .filter-head h3 {
+    font-size: 13px;
+  }
+  .filter-section {
+    padding: 14px 16px;
+  }
+  .filter-section-title {
+    font-size: 11px;
+  }
+  .filter-option {
+    padding: 6px 0;
+  }
+  .filter-label {
+    font-size: 13px;
+  }
+  .affiliate-promo {
+    margin: 14px 16px;
+    padding: 14px;
+  }
+  .affiliate-promo-name {
+    font-size: 18px;
+  }
+  
+  /* Section headers */
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .section-title h2 {
+    font-size: 20px;
+  }
+  .section-icon {
+    font-size: 24px;
+  }
+  .section-sort {
+    width: 100%;
+  }
+  .sort-select {
+    width: 100%;
+    padding: 8px 12px;
+  }
+  
+  /* Ticket rows - mobile card style */
+  .ticket-row {
+    padding: 14px;
+    border-radius: var(--r);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow-sm);
+  }
+  .ticket-row:hover {
+    box-shadow: var(--shadow);
+  }
+  .row-sport-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+  .row-event-name {
+    font-size: 13px;
+  }
+  .row-league {
+    font-size: 11px;
+  }
+  .featured-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+  
+  /* Show all info in mobile card layout */
+  .row-date {
+    display: block;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .row-venue {
+    display: block;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  .row-avail {
+    display: inline-flex;
+    margin-top: 8px;
+    font-size: 12px;
+  }
+  .row-price {
+    margin-top: 8px;
+    font-size: 20px;
+  }
+  .row-price small {
+    font-size: 10px;
+  }
+  
+  /* Load more button */
+  .load-more-wrap {
+    padding: 16px 0;
+  }
+  .btn-load {
+    width: 100%;
+    padding: 12px;
+    font-size: 13px;
+  }
+  
+  /* News section */
+  .news-section {
+    margin-top: 40px;
+    padding-top: 32px;
+  }
+  .news-section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .news-section-head h2 {
+    font-size: 24px;
+  }
+  .news-thumb {
+    height: 140px;
+  }
+  .news-thumb-icon {
+    font-size: 40px;
+  }
+  .news-cat {
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+  .news-body {
+    padding: 14px;
+  }
+  .news-meta {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+  .news-title {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .news-snip {
+    font-size: 12px;
+  }
+  
+  /* Partners strip */
+  .partners-strip {
+    padding: 24px 12px;
+  }
+  .partners-label {
+    font-size: 11px;
+    margin-bottom: 16px;
+  }
+  .partner-chip {
+    font-size: 12px;
+    padding: 8px 14px;
+  }
+  .partner-chip .chip-icon {
+    font-size: 16px;
+  }
+  
+  /* Footer */
+  footer {
+    padding: 32px 12px 20px;
+  }
+  .footer-brand {
+    margin-bottom: 8px;
+  }
+  .footer-logo {
+    font-size: 22px;
+  }
+  .footer-tagline {
+    font-size: 13px;
+  }
+  .footer-socials {
+    gap: 8px;
+  }
+  .social-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+  .footer-col-title {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+  .footer-links {
+    gap: 8px;
+  }
+  .footer-links a {
+    font-size: 13px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .footer-legal {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .footer-bottom-links {
+    gap: 16px;
+    flex-direction: column;
+  }
+  .footer-bottom-links a {
+    font-size: 11px;
+  }
+  .footer-copy {
+    margin-top: 16px;
+    padding-top: 16px;
+    font-size: 10px;
+  }
+  
+  /* Modal adjustments */
+  .modal {
+    max-width: 100%;
+    margin: 0;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+    max-height: 92vh;
+  }
+  .modal-head {
+    padding: 24px 20px 0;
+  }
+  .modal-sport {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  .modal-event-name {
+    font-size: 20px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .modal-league {
+    font-size: 12px;
+  }
+  .modal-divider {
+    margin: 20px 20px;
+  }
+  .modal-info-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 20px;
+  }
+  .modal-info-label {
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+  .modal-info-value {
+    font-size: 13px;
+  }
+  .modal-price-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 20px 20px;
+  }
+  .modal-price-val {
+    font-size: 32px;
+  }
+  .modal-price-val small {
+    font-size: 12px;
+  }
+  .modal-partners {
+    padding: 0 20px 20px;
+  }
+  .modal-partners-title {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+  .modal-partner-btn {
+    padding: 12px 14px;
+  }
+  .modal-partner-icon {
+    font-size: 20px;
+  }
+  .modal-partner-name {
+    font-size: 14px;
+  }
+  .modal-partner-tag {
+    font-size: 11px;
+  }
+  .modal-partner-price {
+    font-size: 20px;
+  }
+  .modal-disclaimer {
+    padding: 0 20px 24px;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .modal-close {
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+  
+  /* News page */
+  .news-page-head {
+    padding: 32px 12px 24px;
+  }
+  .news-page-head-inner h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  .news-page-head-inner p {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .news-page-tabs {
+    gap: 6px;
+  }
+  .news-page-tabs button {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+}
+
+/* ─────────────────────────────────────────────────
+   SMALL MOBILE (max-width: 375px)
+───────────────────────────────────────────────── */
+@media (max-width: 375px) {
+  .hero-h1 {
+    font-size: 24px;
+  }
+  .hero-sub {
+    font-size: 13px;
+  }
+  .stat-val {
+    font-size: 22px;
+  }
+  .section-title h2 {
+    font-size: 18px;
+  }
+  .partner-chip {
+    font-size: 11px;
+    padding: 7px 12px;
+  }
+  .modal-event-name {
+    font-size: 18px;
+  }
+  .modal-price-val {
+    font-size: 28px;
+  }
+}
+
+/* ─────────────────────────────────────────────────
+   LARGE DESKTOP (min-width: 1400px)
+───────────────────────────────────────────────── */
+@media (min-width: 1400px) {
+  .page-wrap,
+  .hero-content,
+  .date-filter-inner,
+  .sport-tabs-inner,
+  .partners-inner,
+  .footer-grid,
+  .footer-bottom,
+  .footer-copy,
+  .news-page-head-inner {
+    max-width: 1400px;
+  }
+  
+  .ticket-table-head,
+  .ticket-row {
+    grid-template-columns: 2.8fr 1.3fr 1.1fr 1fr 1.1fr 1fr;
+    gap: 20px;
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   SCROLLBAR
+══════════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--light-gray);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-gray);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-gray);
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════════════ -->
+<nav>
+  <a href="#" class="nav-logo" onclick="showPage('home')">
+    <span class="strike">Strike</span><span>Zone</span><sup>Tickets</sup>
+  </a>
+  <div class="nav-links">
+    <a href="#" class="active" onclick="showPage('home');setActive(this)">Home</a>
+    <a href="#" onclick="showPage('football');setActive(this)">Football</a>
+    <a href="#" onclick="showPage('cricket');setActive(this)">Cricket</a>
+    <a href="#" onclick="showPage('horse');setActive(this)">Horse Racing</a>
+    <a href="#" onclick="showPage('tennis');setActive(this)">Tennis</a>
+    <a href="#" onclick="showPage('boxing');setActive(this)">Boxing</a>
+    <a href="#" onclick="showPage('f1');setActive(this)">Formula 1</a>
+    <a href="#" onclick="showPage('news');setActive(this)">News</a>
+  </div>
+  <div class="nav-right">
+    <div class="search-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" placeholder="Search events...">
+    </div>
+    <button class="btn-out">Sign In</button>
+    <button class="btn-pri">Get Tickets</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     HOME PAGE
+══════════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- HERO BANNER -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-tag">🎟️ Live Ticket Comparison Platform</div>
+        <h1 class="hero-h1">Find the Best <span class="highlight">Sports Tickets</span> at the Best Prices</h1>
+        <p class="hero-sub">Compare ticket prices across all major platforms in seconds. From Premier League to Wimbledon, get instant access to thousands of live sports events.</p>
+        <div class="hero-cta">
+          <button class="btn-pri" onclick="document.getElementById('tickets-section').scrollIntoView({behavior:'smooth'})">Browse Tickets</button>
+          <button class="btn-out">How It Works</button>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-val">12<span>K+</span></div>
+            <div class="stat-lbl">Events Available</div>
+          </div>
+          <div>
+            <div class="stat-val">48<span>+</span></div>
+            <div class="stat-lbl">Ticket Partners</div>
+          </div>
+          <div>
+            <div class="stat-val">95<span>%</span></div>
+            <div class="stat-lbl">User Satisfaction</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="hero-image">
+          <div class="hero-image-bg"></div>
+          <div class="hero-image-content">
+            <div class="hero-image-icon">🏟️</div>
+            <div class="hero-image-text">Your Seat Awaits</div>
+            <div class="hero-image-sub">Premium tickets, best prices</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATE FILTER BAR -->
+  <div class="date-filter-bar">
+    <div class="date-filter-inner">
+      <span class="date-filter-label">📅 Show tickets for:</span>
+      <button class="date-tab active" onclick="filterByDate('today',this)">Today</button>
+      <button class="date-tab" onclick="filterByDate('tomorrow',this)">Tomorrow</button>
+      <button class="date-tab" onclick="filterByDate('week',this)">This Week</button>
+      <button class="date-tab" onclick="filterByDate('month',this)">This Month</button>
+      <div class="date-picker-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <input type="date" class="date-picker" value="2025-03-14">
+      </div>
+    </div>
+  </div>
+
+  <!-- SPORT TABS -->
+  <div class="sport-tabs-bar">
+    <div class="sport-tabs-inner">
+      <button class="sport-tab active" onclick="filterSport('all',this)">
+        <span class="tab-icon">🏆</span> All Sports <span class="tab-count">248</span>
+      </button>
+      <button class="sport-tab" onclick="filterSport('football',this)">
+        <span class="tab-icon">⚽</span> Football <span class="tab-count">84</span>
+      </button>
+      <button class="sport-tab" onclick="filterSport('cricket',this)">
+        <span class="tab-icon">🏏</span> Cricket <span class="tab-count">32</span>
+      </button>
+      <button class="sport-tab" onclick="filterSport('horse',this)">
+        <span class="tab-icon">🐎</span> Horse Racing <span class="tab-count">46</span>
+      </button>
+      <button class="sport-tab" onclick="filterSport('tennis',this)">
+        <span class="tab-icon">🎾</span> Tennis <span class="tab-count">28</span>
+      </button>
+      <button class="sport-tab" onclick="filterSport('boxing',this)">
+        <span class="tab-icon">🥊</span> Boxing <span class="tab-count">14</span>
+      </button>
+      <button class="sport-tab" onclick="filterSport('f1',this)">
+        <span class="tab-icon">🏎️</span> Formula 1 <span class="tab-count">22</span>
+      </button>
+      <button class="sport-tab" onclick="filterSport('rugby',this)">
+        <span class="tab-icon">🏉</span> Rugby <span class="tab-count">18</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="page-wrap" id="tickets-section">
+    <div class="content-grid">
+
+      <!-- LHS FILTER PANEL -->
+      <aside class="filter-panel">
+        <div class="filter-head">
+          <h3>Filters</h3>
+          <button class="filter-reset" onclick="resetFilters()">Reset</button>
+        </div>
+        <div class="filter-section">
+          <div class="filter-section-title">Price Range</div>
+          <div class="price-range">
+            <input type="range" class="price-slider" min="0" max="500" value="300" oninput="document.getElementById('priceVal').textContent='£'+this.value">
+          </div>
+          <div class="price-labels">
+            <span>£0</span>
+            <span id="priceVal">£300</span>
+          </div>
+        </div>
+        <div class="filter-section">
+          <div class="filter-section-title">Availability</div>
+          <div class="filter-option checked" onclick="toggleFilter(this)">
+            <div class="filter-checkbox"></div>
+            <span class="filter-label">Available</span>
+            <span class="filter-badge">210</span>
+          </div>
+          <div class="filter-option checked" onclick="toggleFilter(this)">
+            <div class="filter-checkbox"></div>
+            <span class="filter-label">Limited Seats</span>
+            <span class="filter-badge">28</span>
+          </div>
+          <div class="filter-option" onclick="toggleFilter(this)">
+            <div class="filter-checkbox"></div>
+            <span class="filter-label">Sold Out</span>
+            <span class="filter-badge">10</span>
+          </div>
+        </div>
+        <div class="filter-section">
+          <div class="filter-section-title">Ticket Partner</div>
+          <div class="filter-option checked" onclick="toggleFilter(this)">
+            <div class="filter-checkbox"></div>
+            <span class="filter-label">Ticketmaster</span>
+            <span class="filter-badge">94</span>
+          </div>
+          <div class="filter-option checked" onclick="toggleFilter(this)">
+            <div class="filter-checkbox"></div>
+            <span class="filter-label">StubHub</span>
+            <span class="filter-badge">78</span>
+          </div>
+          <div class="filter-option checked" onclick="toggleFilter(this)">
+            <div class="filter-checkbox"></div>
+            <span class="filter-label">Viagogo</span>
+            <span class="filter-badge">52</span>
+          </div>
+          <div class="filter-option checked" onclick="toggleFilter(this)">
+            <div class="filter-checkbox"></div>
+            <span class="filter-label">SeatGeek</span>
+            <span class="filter-badge">24</span>
+          </div>
+        </div>
+        <div class="affiliate-promo">
+          <div class="affiliate-promo-title">⭐ Featured Partner</div>
+          <div class="affiliate-promo-name">Ticketmaster</div>
+          <a href="https://www.ticketmaster.com" target="_blank" rel="noopener" class="affiliate-promo-btn">Visit Site →</a>
+        </div>
+      </aside>
+
+      <!-- TICKET LISTINGS -->
+      <div class="listings-area">
+
+        <!-- FOOTBALL -->
+        <div id="section-football">
+          <div class="section-head">
+            <div class="section-title">
+              <span class="section-icon">⚽</span>
+              <h2>Football</h2>
+              <span class="section-count">84 events</span>
+            </div>
+            <div class="section-sort">
+              <span class="sort-label">Sort:</span>
+              <select class="sort-select">
+                <option>Date (Soonest)</option>
+                <option>Price (Low to High)</option>
+                <option>Price (High to Low)</option>
+                <option>Popularity</option>
+              </select>
+            </div>
+          </div>
+          <div class="ticket-table">
+            <div class="ticket-table-head">
+              <div class="th">Event</div>
+              <div class="th">Date & Time</div>
+              <div class="th">Venue</div>
+              <div class="th">Availability</div>
+              <div class="th">Price From</div>
+              <div class="th"></div>
+            </div>
+
+            <div class="ticket-row featured-row" onclick="openModal('Man Utd vs Arsenal','Football','Premier League','Old Trafford, Manchester','Today, 17:30','£85','⚽')">
+              <div class="row-event">
+                <div class="row-sport-icon">⚽</div>
+                <div>
+                  <div class="row-event-name">Man Utd vs Arsenal <span class="featured-badge">Hot</span></div>
+                  <div class="row-league">Premier League</div>
+                </div>
+              </div>
+              <div class="row-date">Today<small>17:30 GMT</small></div>
+              <div class="row-venue">Old Trafford<small>Manchester</small></div>
+              <div class="row-avail avail-low"><span class="avail-dot"></span> Limited</div>
+              <div class="row-price">£85 <small>per ticket</small></div>
+              <div class="row-action"><button class="btn-ticket">Get Tickets <span class="arrow">→</span></button></div>
+            </div>
+
+            <div class="ticket-row" onclick="openModal('Liverpool vs Chelsea','Football','Premier League','Anfield, Liverpool','Tomorrow, 20:00','£72','⚽')">
+              <div class="row-event">
+                <div class="row-sport-icon">⚽</div>
+                <div>
+                  <div class="row-event-name">Liverpool vs Chelsea</div>
+                  <div class="row-league">Premier League</div>
+                </div>
+              </div>
+              <div class="row-date">Tomorrow<small>20:00 GMT</small></div>
+              <div class="row-venue">Anfield<small>Liverpool</small></div>
+              <div class="row-avail avail-high"><span class="avail-dot"></span> Available</div>
+              <div class="row-price">£72 <small>per ticket</small></div>
+              <div class="row-action"><button class="btn-ticket">Get Tickets <span class="arrow">→</span></button></div>
+            </div>
+
+            <div class="ticket-row" onclick="openModal('Spain vs England','Football','UEFA Nations League','Estadio Bernabéu, Madrid','24 Mar, 20:45','£110','⚽')">
+              <div class="row-event">
+                <div class="row-sport-icon">⚽</div>
+                <div>
+                  <div class="row-event-name">Spain vs England</div>
+                  <div class="row-league">UEFA Nations League</div>
+                </div>
+              </div>
+              <div class="row-date">24 Mar<small>20:45 CET</small></div>
+              <div class="row-venue">Bernabéu<small>Madrid</small></div>
+              <div class="row-avail avail-high"><span class="avail-dot"></span> Available</div>
+              <div class="row-price">£110 <small>per ticket</small></div>
+              <div class="row-action"><button class="btn-ticket">Get Tickets <span class="arrow">→</span></button></div>
+            </div>
+
+            <div class="ticket-row sold-out">
+              <div class="row-event">
+                <div class="row-sport-icon">⚽</div>
+                <div>
+                  <div class="row-event-name">Man City vs Real Madrid</div>
+                  <div class="row-league">UEFA Champions League</div>
+                </div>
+              </div>
+              <div class="row-date">11 Mar<small>20:00 GMT</small></div>
+              <div class="row-venue">Etihad Stadium<small>Manchester</small></div>
+              <div class="row-avail avail-sold">— Sold Out</div>
+              <div class="row-price">—</div>
+              <div class="row-action"><button class="btn-ticket" disabled>Sold Out</button></div>
+            </div>
+
+            <div class="ticket-row" onclick="openModal('FA Cup Semi-Final','Football','Emirates FA Cup','Wembley Stadium, London','5 Apr, 15:30','£68','⚽')">
+              <div class="row-event">
+                <div class="row-sport-icon">⚽</div>
+                <div>
+                  <div class="row-event-name">FA Cup Semi-Final</div>
+                  <div class="row-league">Emirates FA Cup</div>
+                </div>
+              </div>
+              <div class="row-date">5 Apr<small>15:30 GMT</small></div>
+              <div class="row-venue">Wembley Stadium<small>London</small></div>
+              <div class="row-avail avail-high"><span class="avail-dot"></span> Available</div>
+              <div class="row-price">£68 <small>per ticket</small></div>
+              <div class="row-action"><button class="btn-ticket">Get Tickets <span class="arrow">→</span></button></div>
+            </div>
+
+          </div>
+          <div class="load-more-wrap">
+            <button class="btn-load">Load More Football Events</button>
+          </div>
+        </div>
+
+        <!-- CRICKET -->
+        <div id="section-cricket">
+          <div class="section-head">
+            <div class="section-title">
+              <span class="section-icon">🏏</span>
+              <h2>Cricket</h2>
+              <span class="section-count">32 events</span>
+            </div>
+            <div class="section-sort">
+              <span class="sort-label">Sort:</span>
+              <select class="sort-select">
+                <option>Date (Soonest)</option>
+                <option>Price (Low to High)</option>
+              </select>
+            </div>
+          </div>
+          <div class="ticket-table">
+            <div class="ticket-table-head">
+              <div class="th">Event</div>
+              <div class="th">Date & Time</div>
+              <div class="th">Venue</div>
+              <div class="th">Availability</div>
+              <div class="th">Price From</div>
+              <div class="th"></div>
+            </div>
+
+            <div class="ticket-row featured-row" onclick="openModal('England vs India 2nd ODI','Cricket','India Tour','Lords, London','Tomorrow, 10:30','£45','🏏')">
+              <div class="row-event">
+                <div class="row-sport-icon">🏏</div>
+                <div>
+                  <div class="row-event-name">England vs India 2nd ODI <span class="featured-badge">Featured</span></div>
+                  <div class="row-league">India Tour of England</div>
+                </div>
+              </div>
+              <div class="row-date">Tomorrow<small>10:30 GMT</small></div>
+              <div class="row-venue">Lords<small>London</small></div>
+              <div class="row-avail avail-high"><span class="avail-dot"></span> Available</div>
+              <div class="row-price">£45 <small>per ticket</small></div>
+              <div class="row-action"><button class="btn-ticket">Get Tickets <span class="arrow">→</span></button></div>
+            </div>
+
+            <div class="ticket-row" onclick="openModal('IPL: MI vs CSK','Cricket','IPL 2025','Wankhede, Mumbai','20 Mar, 19:30','£22','🏏')">
+              <div class="row-event">
+                <div class="row-sport-icon">🏏</div>
+                <div>
+                  <div class="row-event-name">Mumbai Indians vs Chennai</div>
+                  <div class="row-league">Indian Premier League</div>
+                </div>
+              </div>
+              <div class="row-date">20 Mar<small>19:30 IST</small></div>
+              <div class="row-venue">Wankhede<small>Mumbai</small></div>
+              <div class="row-avail avail-low"><span class="avail-dot"></span> Limited</div>
+              <div class="row-price">£22 <small>per ticket</small></div>
+              <div class="row-action"><button class="btn-ticket">Get Tickets <span class="arrow">→</span></button></div>
+            </div>
+
+          </div>
+          <div class="load-more-wrap">
+            <button class="btn-load">Load More Cricket Events</button>
+          </div>
+        </div>
+
+        <!-- HORSE RACING -->
+        <div id="section-horse">
+          <div class="section-head">
+            <div class="section-title">
+              <span class="section-icon">🐎</span>
+              <h2>Horse Racing</h2>
+              <span class="section-count">46 events</span>
+            </div>
+            <div class="section-sort">
+              <span class="sort-label">Sort:</span>
+              <select class="sort-select">
+                <option>Date (Soonest)</option>
+                <option>Price (Low to High)</option>
+              </select>
+            </div>
+          </div>
+          <div class="ticket-table">
+            <div class="ticket-table-head">
+              <div class="th">Event</div>
+              <div class="th">Date & Time</div>
+              <div class="th">Venue</div>
+              <div class="th">Availability</div>
+              <div class="th">Price From</div>
+              <div class="th"></div>
+            </div>
+
+            <div class="ticket-row featured-row" onclick="openModal('Cheltenham Gold Cup','Horse Racing','National Hunt','Cheltenham, UK','15 Mar, 15:30','£55','🐎')">
+              <div class="row-event">
+                <div class="row-sport-icon">🐎</div>
+                <div>
+                  <div class="row-event-name">Cheltenham Gold Cup <span class="featured-badge">Hot</span></div>
+                  <div class="row-league">National Hunt Festival</div>
+                </div>
+              </div>
+              <div class="row-date">15 Mar<small>15:30 GMT</small></div>
+              <div class="row-venue">Cheltenham<small>Gloucestershire</small></div>
+              <div class="row-avail avail-low"><span class="avail-dot"></span> Limited</div>
+              <div class="row-price">£55 <small>per ticket</small></div>
+              <div class="row-action"><button class="btn-ticket">Get Tickets <span class="arrow">→</span></button></div>
+            </div>
+
+            <div class="ticket-row" onclick="openModal('Grand National','Horse Racing','Grand National','Aintree, Liverpool','5 Apr, 17:15','£35','🐎')">
+              <div class="row-event">
+                <div class="row-sport-icon">🐎</div>
+                <div>
+                  <div class="row-event-name">Grand National 2025</div>
+                  <div class="row-league">Grand National Festival</div>
+                </div>
+              </div>
+              <div class="row-date">5 Apr<small>17:15 GMT</small></div>
+              <div class="row-venue">Aintree<small>Liverpool</small></div>
+              <div class="row-avail avail-high"><span class="avail-dot"></span> Available</div>
+              <div class="row-price">£35 <small>per ticket</small></div>
+              <div class="row-action"><button class="btn-ticket">Get Tickets <span class="arrow">→</span></button></div>
+            </div>
+
+          </div>
+          <div class="load-more-wrap">
+            <button class="btn-load">Load More Horse Racing Events</button>
+          </div>
+        </div>
+
+        <!-- TENNIS -->
+        <div id="section-tennis">
+          <div class="section-head">
+            <div class="section-title">
+              <span class="section-icon">🎾</span>
+              <h2>Tennis</h2>
+              <span class="section-count">28 events</span>
+            </div>
+            <div class="section-sort">
+              <span class="sort-label">Sort:</span>
+              <select class="sort-select">
+                <option>Date (Soonest)</option>
+              </select>
+            </div>
+          </div>
+          <div class="ticket-table">
+            <div class="ticket-table-head">
+              <div class="th">Event</div>
+              <div class="th">Date & Time</div>
+              <div class="th">Venue</div>
+              <div class="th">Availability</div>
+              <div class="th">Price From</div>
+              <div class="th"></div>
+            </div>
+
+            <div class="ticket-row featured-row" onclick="openModal('Wimbledon 2025','Tennis','Grand Slam','All England Club','23 Jun, 11:00','£95','🎾')">
+              <div class="row-event">
+                <div class="row-sport-icon">🎾</div>
+                <div>
+                  <div class="row-event-name">Wimbledon Championships <span class="featured-badge">Grand Slam</span></div>
+                  <div class="row-league">ATP / WTA Grand Slam</div>
+                </div>
+              </div>
+              <div class="row-date">23 Jun<small>11:00 BST</small></div>
+              <div class="row-venue">All England Club<small>London</small></div>
+              <div class="row-avail avail-low"><span class="avail-dot"></span> Limited</div>
+              <div class="row-price">£95 <small>per ticket</small></div>
+              <div class="row-action"><button class="btn-ticket">Get Tickets <span class="arrow">→</span></button></div>
+            </div>
+
+          </div>
+          <div class="load-more-wrap">
+            <button class="btn-load">Load More Tennis Events</button>
+          </div>
+        </div>
+
+        <!-- BOXING -->
+        <div id="section-boxing">
+          <div class="section-head">
+            <div class="section-title">
+              <span class="section-icon">🥊</span>
+              <h2>Boxing</h2>
+              <span class="section-count">14 events</span>
+            </div>
+            <div class="section-sort">
+              <span class="sort-label">Sort:</span>
+              <select class="sort-select">
+                <option>Date (Soonest)</option>
+              </select>
+            </div>
+          </div>
+          <div class="ticket-table">
+            <div class="ticket-table-head">
+              <div class="th">Event</div>
+              <div class="th">Date & Time</div>
+              <div class="th">Venue</div>
+              <div class="th">Availability</div>
+              <div class="th">Price From</div>
+              <div class="th"></div>
+            </div>
+
+            <div class="ticket-row featured-row" onclick="openModal('Joshua vs Dubois','Boxing','Heavyweight','Wembley, London','22 Mar, 19:00','£120','🥊')">
+              <div class="row-event">
+                <div class="row-sport-icon">🥊</div>
+                <div>
+                  <div class="row-event-name">Joshua vs Dubois <span class="featured-badge">World Title</span></div>
+                  <div class="row-league">IBF Heavyweight Championship</div>
+                </div>
+              </div>
+              <div class="row-date">22 Mar<small>19:00 GMT</small></div>
+              <div class="row-venue">Wembley<small>London</small></div>
+              <div class="row-avail avail-low"><span class="avail-dot"></span> Limited</div>
+              <div class="row-price">£120 <small>per ticket</small></div>
+              <div class="row-action"><button class="btn-ticket">Get Tickets <span class="arrow">→</span></button></div>
+            </div>
+
+          </div>
+          <div class="load-more-wrap">
+            <button class="btn-load">Load More Boxing Events</button>
+          </div>
+        </div>
+
+        <!-- F1 -->
+        <div id="section-f1">
+          <div class="section-head">
+            <div class="section-title">
+              <span class="section-icon">🏎️</span>
+              <h2>Formula 1</h2>
+              <span class="section-count">22 events</span>
+            </div>
+            <div class="section-sort">
+              <span class="sort-label">Sort:</span>
+              <select class="sort-select">
+                <option>Date (Soonest)</option>
+              </select>
+            </div>
+          </div>
+          <div class="ticket-table">
+            <div class="ticket-table-head">
+              <div class="th">Event</div>
+              <div class="th">Date & Time</div>
+              <div class="th">Venue</div>
+              <div class="th">Availability</div>
+              <div class="th">Price From</div>
+              <div class="th"></div>
+            </div>
+
+            <div class="ticket-row featured-row" onclick="openModal('Australian GP','Formula 1','F1 2025','Melbourne','16 Mar, 06:00','£195','🏎️')">
+              <div class="row-event">
+                <div class="row-sport-icon">🏎️</div>
+                <div>
+                  <div class="row-event-name">Australian Grand Prix <span class="featured-badge">Round 1</span></div>
+                  <div class="row-league">Formula 1 World Championship</div>
+                </div>
+              </div>
+              <div class="row-date">16 Mar<small>06:00 AEDT</small></div>
+              <div class="row-venue">Melbourne GP<small>Melbourne</small></div>
+              <div class="row-avail avail-high"><span class="avail-dot"></span> Available</div>
+              <div class="row-price">£195 <small>per ticket</small></div>
+              <div class="row-action"><button class="btn-ticket">Get Tickets <span class="arrow">→</span></button></div>
+            </div>
+
+          </div>
+          <div class="load-more-wrap">
+            <button class="btn-load">Load More F1 Events</button>
+          </div>
+        </div>
+
+        <!-- RUGBY -->
+        <div id="section-rugby" style="display:none;">
+          <div class="section-head">
+            <div class="section-title">
+              <span class="section-icon">🏉</span>
+              <h2>Rugby</h2>
+              <span class="section-count">18 events</span>
+            </div>
+          </div>
+          <div class="ticket-table">
+            <div class="ticket-table-head">
+              <div class="th">Event</div>
+              <div class="th">Date & Time</div>
+              <div class="th">Venue</div>
+              <div class="th">Availability</div>
+              <div class="th">Price From</div>
+              <div class="th"></div>
+            </div>
+            <div class="ticket-row">
+              <div class="row-event">
+                <div class="row-sport-icon">🏉</div>
+                <div>
+                  <div class="row-event-name">England vs Ireland</div>
+                  <div class="row-league">Six Nations</div>
+                </div>
+              </div>
+              <div class="row-date">18 Mar<small>16:45 GMT</small></div>
+              <div class="row-venue">Twickenham<small>London</small></div>
+              <div class="row-avail avail-high"><span class="avail-dot"></span> Available</div>
+              <div class="row-price">£58 <small>per ticket</small></div>
+              <div class="row-action"><button class="btn-ticket">Get Tickets <span class="arrow">→</span></button></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEWS SECTION -->
+        <div class="news-section">
+          <div class="news-section-head">
+            <h2>Latest <span>Sports News</span></h2>
+            <a href="#" class="news-view-all" onclick="showPage('news');return false;">View All News →</a>
+          </div>
+          <div class="news-grid">
+
+            <div class="news-card" onclick="showPage('news')">
+              <div class="news-thumb">
+                <div class="news-thumb-icon">⚽</div>
+                <span class="news-cat cat-football">Football</span>
+              </div>
+              <div class="news-body">
+                <div class="news-meta"><span>Today</span><span class="news-meta-dot"></span><span>Premier League</span></div>
+                <div class="news-title">Arsenal Close Gap at Top After Dramatic Late Winner</div>
+                <div class="news-snip">The Gunners secured crucial three points with a 94th-minute header that reignites the title race.</div>
+              </div>
+            </div>
+
+            <div class="news-card" onclick="showPage('news')">
+              <div class="news-thumb">
+                <div class="news-thumb-icon">🐎</div>
+                <span class="news-cat cat-horserace">Horse Racing</span>
+              </div>
+              <div class="news-body">
+                <div class="news-meta"><span>Yesterday</span><span class="news-meta-dot"></span><span>Cheltenham</span></div>
+                <div class="news-title">Cheltenham Festival Day One: Shock Winner in Champion Hurdle</div>
+                <div class="news-snip">A 25/1 outsider took the Champion Hurdle by a neck in a breathtaking finish.</div>
+              </div>
+            </div>
+
+            <div class="news-card" onclick="showPage('news')">
+              <div class="news-thumb">
+                <div class="news-thumb-icon">🥊</div>
+                <span class="news-cat cat-boxing">Boxing</span>
+              </div>
+              <div class="news-body">
+                <div class="news-meta"><span>2 days ago</span><span class="news-meta-dot"></span><span>Boxing</span></div>
+                <div class="news-title">Joshua vs Dubois II Confirmed for Wembley Stadium</div>
+                <div class="news-snip">Anthony Joshua looks to avenge his September defeat in highly anticipated rematch.</div>
+              </div>
+            </div>
+
+            <div class="news-card" onclick="showPage('news')">
+              <div class="news-thumb">
+                <div class="news-thumb-icon">🏎️</div>
+                <span class="news-cat cat-f1">Formula 1</span>
+              </div>
+              <div class="news-body">
+                <div class="news-meta"><span>3 days ago</span><span class="news-meta-dot"></span><span>F1 2025</span></div>
+                <div class="news-title">Verstappen Sets Lap Record in Australian GP Qualifying</div>
+                <div class="news-snip">Max Verstappen demolished the track record at Albert Park by over half a second.</div>
+              </div>
+            </div>
+
+            <div class="news-card" onclick="showPage('news')">
+              <div class="news-thumb">
+                <div class="news-thumb-icon">🏏</div>
+                <span class="news-cat cat-cricket">Cricket</span>
+              </div>
+              <div class="news-body">
+                <div class="news-meta"><span>4 days ago</span><span class="news-meta-dot"></span><span>England Cricket</span></div>
+                <div class="news-title">Ben Stokes Named in Squad for India ODI Series</div>
+                <div class="news-snip">ECB confirmed Stokes passed fitness test and will lead batting against India at Lords.</div>
+              </div>
+            </div>
+
+            <div class="news-card" onclick="showPage('news')">
+              <div class="news-thumb">
+                <div class="news-thumb-icon">🎾</div>
+                <span class="news-cat cat-tennis">Tennis</span>
+              </div>
+              <div class="news-body">
+                <div class="news-meta"><span>5 days ago</span><span class="news-meta-dot"></span><span>Wimbledon</span></div>
+                <div class="news-title">Wimbledon 2025 Ticket Ballot Now Open</div>
+                <div class="news-snip">All England Club confirmed public ballot for centre court tickets is now open.</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- AFFILIATE PARTNERS -->
+  <div class="partners-strip">
+    <div class="partners-inner">
+      <div class="partners-label">Official Ticket Partners — Compare Prices Instantly</div>
+      <div class="partners-row">
+        <a href="https://www.ticketmaster.com" target="_blank" rel="noopener" class="partner-chip"><span class="chip-icon">🎟️</span> Ticketmaster</a>
+        <a href="https://www.stubhub.com" target="_blank" rel="noopener" class="partner-chip"><span class="chip-icon">🎫</span> StubHub</a>
+        <a href="https://www.viagogo.com" target="_blank" rel="noopener" class="partner-chip"><span class="chip-icon">🏟️</span> Viagogo</a>
+        <a href="https://www.seatgeek.com" target="_blank" rel="noopener" class="partner-chip"><span class="chip-icon">📍</span> SeatGeek</a>
+        <a href="https://www.axs.com" target="_blank" rel="noopener" class="partner-chip"><span class="chip-icon">⚡</span> AXS</a>
+        <a href="https://www.livenation.com" target="_blank" rel="noopener" class="partner-chip"><span class="chip-icon">🎪</span> Live Nation</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-home -->
+
+<!-- ══════════════════════════════════════════════
+     NEWS PAGE
+══════════════════════════════════════════════ -->
+<div id="page-news" class="page">
+  <div class="news-page-head">
+    <div class="news-page-head-inner">
+      <h1>Latest <span>Sports News</span></h1>
+      <p>Stay updated with the latest news, analysis, and insights from the world of sports.</p>
+      <div class="news-page-tabs">
+        <button class="active">🏆 All</button>
+        <button>⚽ Football</button>
+        <button>🏏 Cricket</button>
+        <button>🐎 Horse Racing</button>
+        <button>🥊 Boxing</button>
+        <button>🏎️ F1</button>
+        <button>🎾 Tennis</button>
+      </div>
+    </div>
+  </div>
+  <div class="page-wrap">
+    <div class="news-page-grid">
+      <div class="news-card"><div class="news-thumb"><div class="news-thumb-icon">⚽</div><span class="news-cat cat-football">Football</span></div><div class="news-body"><div class="news-meta"><span>Today</span><span class="news-meta-dot"></span><span>Premier League</span></div><div class="news-title">Arsenal Close Gap at Top After Dramatic Late Winner</div><div class="news-snip">The Gunners secured crucial three points with a 94th-minute header that reignites the title race.</div></div></div>
+      <div class="news-card"><div class="news-thumb"><div class="news-thumb-icon">🐎</div><span class="news-cat cat-horserace">Horse Racing</span></div><div class="news-body"><div class="news-meta"><span>Yesterday</span><span class="news-meta-dot"></span><span>Cheltenham</span></div><div class="news-title">Cheltenham Festival Day One: Shock Winner in Champion Hurdle</div><div class="news-snip">A 25/1 outsider took the Champion Hurdle by a neck in breathtaking finish.</div></div></div>
+      <div class="news-card"><div class="news-thumb"><div class="news-thumb-icon">🥊</div><span class="news-cat cat-boxing">Boxing</span></div><div class="news-body"><div class="news-meta"><span>2 days ago</span><span class="news-meta-dot"></span><span>Boxing</span></div><div class="news-title">Joshua vs Dubois II Confirmed for Wembley Stadium</div><div class="news-snip">Anthony Joshua looks to avenge his September defeat in highly anticipated rematch.</div></div></div>
+      <div class="news-card"><div class="news-thumb"><div class="news-thumb-icon">🏎️</div><span class="news-cat cat-f1">F1</span></div><div class="news-body"><div class="news-meta"><span>3 days ago</span><span class="news-meta-dot"></span><span>F1 2025</span></div><div class="news-title">Verstappen Sets Lap Record in Australian GP Qualifying</div><div class="news-snip">Max Verstappen demolished track record at Albert Park.</div></div></div>
+      <div class="news-card"><div class="news-thumb"><div class="news-thumb-icon">🏏</div><span class="news-cat cat-cricket">Cricket</span></div><div class="news-body"><div class="news-meta"><span>4 days ago</span><span class="news-meta-dot"></span><span>England Cricket</span></div><div class="news-title">Ben Stokes Named in Squad for India ODI Series</div><div class="news-snip">ECB confirmed Stokes passed fitness test and will lead batting at Lords.</div></div></div>
+      <div class="news-card"><div class="news-thumb"><div class="news-thumb-icon">🎾</div><span class="news-cat cat-tennis">Tennis</span></div><div class="news-body"><div class="news-meta"><span>5 days ago</span><span class="news-meta-dot"></span><span>Wimbledon</span></div><div class="news-title">Wimbledon 2025 Ticket Ballot Now Open</div><div class="news-snip">All England Club confirmed public ballot for centre court tickets is now open.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><span class="strike">Strike</span>Zone</div>
+      <div class="footer-tagline">Your independent guide to sports ticket prices. Compare prices across all major partners and secure the best seats for live sports events.</div>
+      <div class="footer-socials">
+        <div class="social-btn">𝕏</div>
+        <div class="social-btn">📘</div>
+        <div class="social-btn">📷</div>
+        <div class="social-btn">📱</div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Sports</div>
+      <div class="footer-links">
+        <a href="#" onclick="showPage('football')">Football Tickets</a>
+        <a href="#" onclick="showPage('cricket')">Cricket Tickets</a>
+        <a href="#" onclick="showPage('horse')">Horse Racing</a>
+        <a href="#" onclick="showPage('tennis')">Tennis Tickets</a>
+        <a href="#" onclick="showPage('boxing')">Boxing Tickets</a>
+        <a href="#" onclick="showPage('f1')">Formula 1 Tickets</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Partners</div>
+      <div class="footer-links">
+        <a href="https://www.ticketmaster.com" target="_blank" rel="noopener">Ticketmaster ↗</a>
+        <a href="https://www.stubhub.com" target="_blank" rel="noopener">StubHub ↗</a>
+        <a href="https://www.viagogo.com" target="_blank" rel="noopener">Viagogo ↗</a>
+        <a href="https://www.seatgeek.com" target="_blank" rel="noopener">SeatGeek ↗</a>
+        <a href="https://www.axs.com" target="_blank" rel="noopener">AXS ↗</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <div class="footer-links">
+        <a href="#about">About Us</a>
+        <a href="#careers">Careers</a>
+        <a href="#contact">Contact Us</a>
+        <a href="#press">Press</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Legal</div>
+      <div class="footer-links">
+        <a href="#terms">Terms & Conditions</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#cookies">Cookie Policy</a>
+        <a href="#accessibility">Accessibility</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-legal">
+      <strong>Affiliate Disclosure:</strong> StrikeZone is an independent ticket comparison platform. We earn commission when you purchase through our partner links at no extra cost to you. Prices displayed are provided by third parties and subject to change. Always verify final pricing on partner websites before purchase.<br><br>
+      <strong>© 2025 StrikeZone Tickets Ltd.</strong> Registered in England & Wales. Company No. 12345678.
+    </div>
+    <div class="footer-bottom-links">
+      <a href="#terms">Terms</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    Built with <span class="heart">♥</span> for sports fans worldwide
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════
+     MODAL
+══════════════════════════════════════════════ -->
+<div class="overlay" id="overlay" onclick="closeModalOnBg(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-head">
+      <div class="modal-sport" id="modalSport">⚽</div>
+      <div class="modal-event-name" id="modalName">Event Name</div>
+      <div class="modal-league" id="modalLeague">League</div>
+    </div>
+    <div class="modal-divider"></div>
+    <div class="modal-info-grid">
+      <div class="modal-info-item">
+        <div class="modal-info-label">📅 Date & Time</div>
+        <div class="modal-info-value" id="modalDate">—</div>
+      </div>
+      <div class="modal-info-item">
+        <div class="modal-info-label">🏟️ Venue</div>
+        <div class="modal-info-value" id="modalVenue">—</div>
+      </div>
+      <div class="modal-info-item">
+        <div class="modal-info-label">🏆 Category</div>
+        <div class="modal-info-value" id="modalCategory">—</div>
+      </div>
+      <div class="modal-info-item">
+        <div class="modal-info-label">🎟️ Status</div>
+        <div class="modal-info-value" style="color:var(--primary)">Available Now</div>
+      </div>
+    </div>
+    <div class="modal-price-row">
+      <div class="modal-price-label">Tickets from</div>
+      <div class="modal-price-val" id="modalPrice">£85 <small>per ticket</small></div>
+    </div>
+    <div class="modal-partners">
+      <div class="modal-partners-title">Compare Prices Across Partners</div>
+      <div class="modal-partner-list" id="modalPartnerList"></div>
+    </div>
+    <div class="modal-disclaimer">
+      ⚠️ <strong>Disclosure:</strong> StrikeZone earns commission via affiliate links. Prices shown are subject to availability. Visit partner site for final pricing. By clicking, you leave StrikeZone and accept the partner's <a href="#">Terms</a>.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════ -->
+<script>
+// Page navigation
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + page);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo(0, 0);
+  } else {
+    document.getElementById('page-home').classList.add('active');
+  }
+}
+
+function setActive(el) {
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Date filter
+function filterByDate(period, el) {
+  document.querySelectorAll('.date-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  console.log('Filtering by:', period);
+}
+
+// Sport filter
+function filterSport(sport, el) {
+  document.querySelectorAll('.sport-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const sections = ['football', 'cricket', 'horse', 'tennis', 'boxing', 'f1', 'rugby'];
+  sections.forEach(s => {
+    const sec = document.getElementById('section-' + s);
+    if (sec) sec.style.display = (sport === 'all' || sport === s) ? 'block' : 'none';
+  });
+}
+
+// Filter toggles
+function toggleFilter(el) {
+  el.classList.toggle('checked');
+}
+
+function resetFilters() {
+  document.querySelectorAll('.filter-option').forEach(o => o.classList.add('checked'));
+  document.querySelector('.price-slider').value = 300;
+  document.getElementById('priceVal').textContent = '£300';
+}
+
+// Modal
+const partners = [
+  { name: 'Ticketmaster', icon: '🎟️', tag: 'Official Partner', url: 'https://www.ticketmaster.com', offset: 0 },
+  { name: 'StubHub', icon: '🎫', tag: 'Best Seller', url: 'https://www.stubhub.com', offset: 8 },
+  { name: 'Viagogo', icon: '🏟️', tag: 'Wide Selection', url: 'https://www.viagogo.com', offset: 5 },
+  { name: 'SeatGeek', icon: '📍', tag: 'Buyer Guarantee', url: 'https://www.seatgeek.com', offset: 12 },
+  { name: 'AXS', icon: '⚡', tag: 'Mobile Tickets', url: 'https://www.axs.com', offset: -3 }
+];
+
+function openModal(name, category, league, venue, date, price, emoji) {
+  document.getElementById('modalName').textContent = name;
+  document.getElementById('modalLeague').textContent = league;
+  document.getElementById('modalVenue').textContent = venue;
+  document.getElementById('modalDate').textContent = date;
+  document.getElementById('modalCategory').textContent = category;
+  document.getElementById('modalSport').textContent = emoji;
+
+  const basePrice = parseInt(price.replace(/[^0-9]/g, ''));
+  document.getElementById('modalPrice').innerHTML = price + ' <small>per ticket</small>';
+
+  const list = document.getElementById('modalPartnerList');
+  list.innerHTML = '';
+  partners.forEach(p => {
+    const adjPrice = basePrice + p.offset;
+    const isBest = p.offset === Math.min(...partners.map(x => x.offset));
+    const btn = document.createElement('a');
+    btn.href = p.url;
+    btn.target = '_blank';
+    btn.rel = 'noopener noreferrer';
+    btn.className = 'modal-partner-btn';
+    btn.innerHTML = `
+      <div class="modal-partner-left">
+        <span class="modal-partner-icon">${p.icon}</span>
+        <div>
+          <div class="modal-partner-name">${p.name}</div>
+          <div class="modal-partner-tag">${p.tag}</div>
+        </div>
+      </div>
+      <div class="modal-partner-price ${isBest ? 'better' : ''}">£${adjPrice}</div>
+    `;
+    list.appendChild(btn);
+  });
+
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOnBg(e) {
+  if (e.target === document.getElementById('overlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// Sport page direct routing
+['football', 'cricket', 'horse', 'tennis', 'boxing', 'f1'].forEach(sport => {
+  const navLinks = document.querySelectorAll(`[onclick*="showPage('${sport}')"]`);
+  navLinks.forEach(el => {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      showPage('home');
+      setTimeout(() => {
+        const sportIndex = ['all', 'football', 'cricket', 'horse', 'tennis', 'boxing', 'f1', 'rugby'].indexOf(sport);
+        const sportTab = document.querySelectorAll('.sport-tab')[sportIndex];
+        if (sportTab) {
+          filterSport(sport, sportTab);
+          const sec = document.getElementById('section-' + sport);
+          if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    });
+  });
+});
+</script>
+
+</body>
+</html>
