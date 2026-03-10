@@ -34,6 +34,7 @@ export default function DateFilterBar({ onDateChange }: DateFilterBarProps) {
       }}
     >
       <div
+        className="date-filter-inner"
         style={{
           maxWidth: '1280px',
           margin: '0 auto',

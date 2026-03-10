@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import type { TicketEvent } from '@/lib/types';
 import { formatPrice, formatShortDate } from '@/lib/utils/format';
 import { getSportBySlug } from '@/lib/data/sports';
-import TicketModal from './TicketModal';
+import { toTicketSlug } from '@/lib/data/tickets';
 
 interface TicketTableProps {
   events: TicketEvent[];
@@ -21,7 +22,6 @@ export default function TicketTable({
   rounded = true,
   sortBy = 'date-soonest',
 }: TicketTableProps) {
-  const [selectedEvent, setSelectedEvent] = useState<TicketEvent | null>(null);
   const [visibleCount, setVisibleCount] = useState(8);
 
   // Sort events based on sortBy prop
@@ -106,6 +106,7 @@ export default function TicketTable({
           {['Event', 'Date & Time', 'Venue', 'Availability', 'Price From', ''].map((h) => (
             <div
               key={h}
+              className={h === 'Venue' ? 'ticket-venue' : undefined}
               style={{
                 fontSize: '11px',
                 fontWeight: 700,
@@ -133,11 +134,7 @@ export default function TicketTable({
           </div>
         ) : (
           visibleEvents.map((event) => (
-            <TicketRow
-              key={event.id}
-              event={event}
-              onSelect={() => setSelectedEvent(event)}
-            />
+            <TicketRow key={event.id} event={event} />
           ))
         )}
       </div>
@@ -164,24 +161,14 @@ export default function TicketTable({
         </div>
       )}
 
-      {/* Modal */}
-      {selectedEvent && (
-        <TicketModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
-      )}
-
     </>
   );
 }
 
-function TicketRow({
-  event,
-  onSelect,
-}: {
-  event: TicketEvent;
-  onSelect: () => void;
-}) {
+function TicketRow({ event }: { event: TicketEvent }) {
   const isSoldOut = event.availability === 'sold-out';
   const sportIcon = getSportBySlug(event.sport)?.icon ?? '🎫';
+  const ticketSlug = toTicketSlug(event);
 
   const availStyle = {
     high: { color: 'var(--primary)', dot: 'var(--primary)', label: 'Available' },
@@ -191,7 +178,6 @@ function TicketRow({
 
   return (
     <div
-      onClick={!isSoldOut ? onSelect : undefined}
       style={{
         display: 'grid',
         gridTemplateColumns: '2.5fr 1.3fr 1fr 1fr 1fr 1fr',
@@ -285,7 +271,7 @@ function TicketRow({
       </div>
 
       {/* Venue */}
-      <div style={{ fontSize: '13px', color: 'var(--text-gray)' }}>
+      <div className="ticket-venue" style={{ fontSize: '13px', color: 'var(--text-gray)' }}>
         {event.venue}
         <div style={{ fontSize: '11px', marginTop: '2px' }}>{event.city}</div>
       </div>
@@ -340,25 +326,41 @@ function TicketRow({
 
       {/* Action */}
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <button
-          style={{
-            background: isSoldOut ? 'var(--border-gray)' : 'var(--primary)',
-            color: isSoldOut ? 'var(--text-gray)' : 'var(--white)',
-            fontSize: '13px',
-            fontWeight: 600,
-            padding: '9px 18px',
-            borderRadius: '8px',
-            transition: 'all .2s',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            whiteSpace: 'nowrap',
-            cursor: isSoldOut ? 'not-allowed' : 'pointer',
-            border: 'none',
-          }}
-        >
-          {isSoldOut ? 'Sold Out' : 'Get Tickets'} {!isSoldOut && '→'}
-        </button>
+        {isSoldOut ? (
+          <span
+            style={{
+              background: 'var(--border-gray)',
+              color: 'var(--text-gray)',
+              fontSize: '13px',
+              fontWeight: 600,
+              padding: '9px 18px',
+              borderRadius: '8px',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Sold Out
+          </span>
+        ) : (
+          <Link
+            href={`/tickets/${ticketSlug}`}
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: 'var(--primary)',
+              color: 'var(--white)',
+              fontSize: '13px',
+              fontWeight: 600,
+              padding: '9px 18px',
+              borderRadius: '8px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              whiteSpace: 'nowrap',
+              textDecoration: 'none',
+            }}
+          >
+            Get Tickets →
+          </Link>
+        )}
       </div>
 
     </div>

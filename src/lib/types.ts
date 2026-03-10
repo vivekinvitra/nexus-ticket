@@ -39,6 +39,7 @@ export interface TicketEvent {
   sport: SportSlug;
   eventName: string;
   league: string;
+  leagueSlug?: string;  // subcategory slug e.g. 'fifa-world-cup'
   date: string;        // ISO date string
   time: string;
   venue: string;
@@ -46,7 +47,32 @@ export interface TicketEvent {
   availability: AvailabilityStatus;
   minPrice: number;
   featured?: boolean;
+  description?: string;
+  imageUrl?: string;
   partners: TicketPartnerPrice[];
+}
+
+export interface LeagueCategory {
+  slug: string;
+  name: string;
+  sportSlug: SportSlug;
+  sportName: string;
+  icon: string;
+  color: string;
+  bg: string;
+  imageUrl: string;
+  description: string;
+  longDescription: string;
+  count: number;
+  matchesLabel: string;
+  featured?: boolean;
+  country: string;
+  heroBg: string;
+  location: string;
+  date: string;
+  month: string;
+  day: string;
+  dayLabel: string;
 }
 
 export interface TicketPartnerPrice {
@@ -77,6 +103,11 @@ export interface Partner {
   website: string;
 }
 
+export interface NewsSection {
+  h2: string;
+  body: string;
+}
+
 export interface NewsArticle {
   id: string;
   slug: string;
@@ -85,8 +116,16 @@ export interface NewsArticle {
   category: SportSlug | 'general';
   icon: string;
   author: string;
+  authorAvatar: string;
   publishedAt: string;
   readTime: number;
+  imageUrl: string;
+  imageCaption: string;
+  keyPoints: string[];
+  featured?: boolean;
+  metaTitle: string;
+  metaDescription: string;
+  content: NewsSection[];
 }
 
 export interface SportCategory {

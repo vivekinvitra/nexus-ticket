@@ -1,204 +1,208 @@
+'use client';
+
 import Link from 'next/link';
-import Icon from '@/components/common/Icon';
+import { useState, useEffect, useRef } from 'react';
+import { getFeaturedLeagues } from '@/lib/data/leagues';
+
+const LEAGUES = getFeaturedLeagues();
 
 export default function Hero() {
+  const [active, setActive] = useState(0);
+  const paused = useRef(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (!paused.current) {
+        setActive((prev) => (prev + 1) % LEAGUES.length);
+      }
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleDotClick = (i: number) => {
+    setActive(i);
+    paused.current = true;
+    setTimeout(() => { paused.current = false; }, 10000);
+  };
+
+  const league = LEAGUES[active];
+  const href = `/category/${league.sportSlug}/${league.slug}`;
+
   return (
-    <section
-      style={{
-        background: 'var(--white)',
-        borderBottom: '1px solid var(--border-gray)',
-      }}
-    >
+    <section style={{ background: '#0f0f0f' }}>
+      {/* ── Slider ── */}
       <div
         style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          padding: '50px 40px',
-          display: 'grid',
-          gridTemplateColumns: '1fr 420px',
-          gap: '60px',
-          alignItems: 'center',
+          position: 'relative',
+          minHeight: '350px',
+          maxHeight: '400px',
+          background: league.heroBg,
+          transition: 'background 0.5s ease',
+          overflow: 'hidden',
         }}
-        className="hero-grid"
       >
-        {/* Left */}
-        <div>
+        {/* Accent top bar */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '3px',
+            background: league.color,
+            transition: 'background 0.5s ease',
+            zIndex: 3,
+          }}
+        />
+
+        {/* Background banner image — right side, transparent */}
+        <img
+          key={league.slug}
+          src={league.imageUrl}
+          alt={league.name}
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            width: '62%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center top',
+            opacity: 0.45,
+            maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 30%, black 70%)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 30%, black 70%)',
+            transition: 'opacity 0.5s ease',
+          }}
+        />
+
+        {/* Dark vignette overlay */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 55%, transparent 100%)',
+            zIndex: 1,
+          }}
+        />
+
+        {/* Content */}
+        <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+        <div
+          style={{
+            maxWidth: '760px',
+            padding: '56px 40px 48px',
+          }}
+          className="hero-content"
+        >
           <div
             style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              background: 'var(--primary-light)',
-              color: 'var(--primary-dark)',
+              background: 'rgba(255,255,255,0.08)',
+              color: league.color,
               borderRadius: '100px',
-              padding: '6px 14px',
+              padding: '5px 14px',
               fontSize: '12px',
               fontWeight: 600,
-              marginBottom: '20px',
+              marginBottom: '24px',
+              border: `1px solid ${league.color}40`,
+              transition: 'color 0.5s, border-color 0.5s',
             }}
           >
-            <span
-              style={{ fontSize: '8px' }}
-              className="animate-pulse-dot"
-            >
-              ●
-            </span>
-            Live prices updated every 5 minutes
+            <span style={{ fontSize: '8px' }} className="animate-pulse-dot">●</span>
+            {league.sportName} · Featured Event
           </div>
 
           <h1
             style={{
               fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
-              fontSize: '44px',
+              fontSize: 'clamp(26px, 3vw, 40px)',
               fontWeight: 800,
               lineHeight: 1.1,
-              color: 'var(--text-dark)',
+              color: '#ffffff',
               marginBottom: '16px',
+              whiteSpace: 'nowrap',
             }}
             className="hero-h1"
           >
-            Find the{' '}
-            <span style={{ color: 'var(--primary)' }}>Best Sports</span>
-            <br />
-            Ticket Prices
+            {league.name}
           </h1>
 
-          <p
-            style={{
-              fontSize: '17px',
-              color: 'var(--text-gray)',
-              lineHeight: 1.7,
-              marginBottom: '28px',
-              maxWidth: '520px',
-            }}
-          >
-            Compare ticket prices from Ticketmaster, StubHub, Viagogo and more — all in one
-            place. Never overpay for your favourite sport again.
+          <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.6)', marginBottom: '10px' }}>
+            📍 {league.location}
           </p>
 
-          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.45)', marginBottom: '36px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span style={{ color: league.color, fontSize: '13px' }}>📅</span>
+            {league.date}
+          </p>
+
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
             <Link
-              href="/category/football"
+              href={href}
               style={{
-                background: 'var(--primary)',
-                color: 'var(--white)',
+                background: league.color,
+                color: '#ffffff',
                 fontSize: '15px',
-                fontWeight: 600,
-                padding: '12px 28px',
+                fontWeight: 700,
+                padding: '14px 32px',
                 borderRadius: '8px',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                transition: 'all .2s',
+                letterSpacing: '0.5px',
+                transition: 'opacity .2s',
               }}
             >
-              Browse Tickets
-              <Icon name="arrow-right" size={16} />
+              BUY TICKETS NOW
             </Link>
             <Link
-              href="/partners"
+              href="/category/football"
               style={{
-                background: 'transparent',
-                color: 'var(--text-dark)',
-                fontSize: '15px',
+                background: 'rgba(255,255,255,0.08)',
+                color: 'rgba(255,255,255,0.8)',
+                fontSize: '14px',
                 fontWeight: 500,
-                padding: '11px 26px',
+                padding: '13px 24px',
                 borderRadius: '8px',
-                border: '1px solid var(--border-gray)',
+                border: '1px solid rgba(255,255,255,0.15)',
                 transition: 'all .2s',
               }}
             >
-              Our Partners
+              Browse All Events
             </Link>
           </div>
 
-          {/* Stats */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '32px',
-              marginTop: '36px',
-              paddingTop: '28px',
-              borderTop: '1px solid var(--border-gray)',
-            }}
-          >
-            {[
-              { val: '745+', label: 'Live Events' },
-              { val: '6', label: 'Partner Sites' },
-              { val: '£0', label: 'Booking Fee' },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <div
-                  style={{
-                    fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
-                    fontSize: '32px',
-                    fontWeight: 700,
-                    color: 'var(--text-dark)',
-                    lineHeight: 1,
-                  }}
-                >
-                  <span style={{ color: 'var(--primary)' }}>{stat.val}</span>
-                </div>
-                <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginTop: '4px' }}>
-                  {stat.label}
-                </div>
-              </div>
+          {/* Dot indicators */}
+          <div style={{ display: 'flex', gap: '8px', marginTop: '40px', alignItems: 'center' }}>
+            {LEAGUES.map((l, i) => (
+              <button
+                key={l.slug}
+                onClick={() => handleDotClick(i)}
+                title={l.name}
+                style={{
+                  width: i === active ? '32px' : '8px',
+                  height: '8px',
+                  borderRadius: '100px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  background: i === active ? league.color : 'rgba(255,255,255,0.3)',
+                  transition: 'all 0.3s ease',
+                  padding: 0,
+                }}
+              />
             ))}
           </div>
         </div>
-
-        {/* Right: decorative */}
-        <div
-          style={{
-            background: 'var(--light-gray)',
-            borderRadius: '12px',
-            overflow: 'hidden',
-            position: 'relative',
-            height: '360px',
-            boxShadow: 'var(--shadow-lg)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background:
-                'linear-gradient(135deg, var(--primary-light) 0%, var(--accent-light) 100%)',
-              opacity: 0.4,
-            }}
-          />
-          <div
-            style={{
-              position: 'relative',
-              zIndex: 2,
-              textAlign: 'center',
-              padding: '40px',
-            }}
-          >
-            <div style={{ fontSize: '80px', marginBottom: '16px', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.1))' }}>
-              🏟️
-            </div>
-            <div
-              style={{
-                fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
-                fontSize: '24px',
-                fontWeight: 700,
-                color: 'var(--text-dark)',
-                marginBottom: '8px',
-              }}
-            >
-              8 Sports Categories
-            </div>
-            <div style={{ fontSize: '14px', color: 'var(--text-gray)', fontWeight: 500 }}>
-              Football · Cricket · F1 · Tennis & more
-            </div>
-          </div>
         </div>
       </div>
 
+      <style>{`
+        @media (max-width: 900px) {
+          .hero-content { padding: 50px 20px 44px !important; max-width: 100% !important; }
+        }
+      `}</style>
     </section>
   );
 }

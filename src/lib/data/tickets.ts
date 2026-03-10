@@ -1,6 +1,19 @@
 import type { TicketEvent } from '@/lib/types';
 
+// ── Shared image URLs by sport ──────────────────────────────────────────────
+const IMG = {
+  football:    'https://images.unsplash.com/photo-1508098682722-e99c643e7f0b?w=1200&h=500&fit=crop&q=80',
+  tennis:      'https://images.unsplash.com/photo-1545809074-59472b3f5ecc?w=1200&h=500&fit=crop&q=80',
+  horseRacing: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&h=500&fit=crop&q=80',
+  cricket:     'https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=1200&h=500&fit=crop&q=80',
+  boxing:      'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1200&h=500&fit=crop&q=80',
+  f1:          'https://images.unsplash.com/photo-1541889413457-4aec9b418977?w=1200&h=500&fit=crop&q=80',
+  rugby:       'https://images.unsplash.com/photo-1540592793827-8f72c8fd7ce4?w=1200&h=500&fit=crop&q=80',
+  golf:        'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=1200&h=500&fit=crop&q=80',
+};
+
 export const TICKET_EVENTS: TicketEvent[] = [
+  // ── Premier League ──────────────────────────────────────────────────────
   {
     id: '1',
     sport: 'football',
@@ -13,6 +26,8 @@ export const TICKET_EVENTS: TicketEvent[] = [
     availability: 'high',
     minPrice: 89,
     featured: true,
+    imageUrl: IMG.football,
+    description: 'One of the Premier League\'s most iconic rivalries returns to Old Trafford as Manchester United host Arsenal in what promises to be a title-defining clash. Both sides arrive in exceptional form, with every point in the race for Champions League qualification carrying enormous weight. The Theatre of Dreams will be rocking under the floodlights as two of English football\'s most storied clubs go head to head in front of 74,000 passionate fans.',
     partners: [
       { partnerId: 'ticketmaster', partnerName: 'Ticketmaster', partnerIcon: '🎫', price: 89, tag: 'Best Price' },
       { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 94, isBest: false },
@@ -30,11 +45,358 @@ export const TICKET_EVENTS: TicketEvent[] = [
     city: 'London',
     availability: 'low',
     minPrice: 145,
+    imageUrl: IMG.football,
+    description: 'Chelsea welcome Liverpool to Stamford Bridge in a high-stakes Premier League encounter between two of England\'s most decorated clubs. This Saturday night showdown under the lights at the Bridge has all the makings of a classic — two technically brilliant sides, fierce individual battles across the pitch, and a sell-out atmosphere in west London. Seats are strictly limited for this fixture.',
     partners: [
       { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 145, tag: 'Best Price' },
       { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 162 },
     ],
   },
+
+  // ── FIFA World Cup ──────────────────────────────────────────────────────
+  {
+    id: '11',
+    sport: 'football',
+    leagueSlug: 'fifa-world-cup',
+    eventName: 'FIFA World Cup 2026 — Opening Match',
+    league: 'FIFA World Cup 2026',
+    date: '2026-06-11',
+    time: '20:00',
+    venue: 'SoFi Stadium',
+    city: 'Los Angeles, USA',
+    availability: 'low',
+    minPrice: 220,
+    featured: true,
+    imageUrl: IMG.football,
+    description: 'The greatest show on earth kicks off as the FIFA World Cup 2026 Opening Match lights up SoFi Stadium in Los Angeles. Hosted jointly by the USA, Canada and Mexico, this is the first 48-team World Cup in history. The Opening Ceremony and first match of the tournament will be watched by over a billion people worldwide. Be part of history in one of the world\'s most spectacular arenas — tickets are extremely limited.',
+    partners: [
+      { partnerId: 'ticketmaster', partnerName: 'Ticketmaster', partnerIcon: '🎫', price: 220, tag: 'Best Price' },
+      { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 245 },
+      { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 268 },
+    ],
+  },
+  {
+    id: '12',
+    sport: 'football',
+    leagueSlug: 'fifa-world-cup',
+    eventName: 'FIFA World Cup 2026 — Quarter Final',
+    league: 'FIFA World Cup 2026',
+    date: '2026-07-03',
+    time: '21:00',
+    venue: 'MetLife Stadium',
+    city: 'New York, USA',
+    availability: 'low',
+    minPrice: 385,
+    imageUrl: IMG.football,
+    description: 'The World Cup Quarter Finals are where legends are born. Eight nations remain in the fight for the Jules Rimet Trophy as the tournament reaches its crescendo at MetLife Stadium in New York. Every tackle, every save, every goal carries the weight of an entire nation. This is the stage where stars become icons — and you can be there in person.',
+    partners: [
+      { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 385, tag: 'Best Price' },
+      { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 420 },
+    ],
+  },
+  {
+    id: '13',
+    sport: 'football',
+    leagueSlug: 'fifa-world-cup',
+    eventName: 'FIFA World Cup 2026 — Semi Final',
+    league: 'FIFA World Cup 2026',
+    date: '2026-07-14',
+    time: '21:00',
+    venue: 'AT&T Stadium',
+    city: 'Dallas, USA',
+    availability: 'low',
+    minPrice: 520,
+    imageUrl: IMG.football,
+    description: 'Four teams, two tickets to the final — the FIFA World Cup Semi Finals are the ultimate test of nerve, skill and belief. AT&T Stadium in Dallas hosts one of the most dramatic nights in international football. Only two sides will advance to New York to compete for the greatest prize in sport. Experience the raw emotion of World Cup football at its most intense.',
+    partners: [
+      { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 520, tag: 'Best Price' },
+      { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 548 },
+    ],
+  },
+  {
+    id: '14',
+    sport: 'football',
+    leagueSlug: 'fifa-world-cup',
+    eventName: 'FIFA World Cup 2026 — Grand Final',
+    league: 'FIFA World Cup 2026',
+    date: '2026-07-19',
+    time: '21:00',
+    venue: 'MetLife Stadium',
+    city: 'New York, USA',
+    availability: 'sold-out',
+    minPrice: 1200,
+    featured: true,
+    imageUrl: IMG.football,
+    description: 'The pinnacle of world football — the FIFA World Cup Final at MetLife Stadium in New York. One match, two nations, one chance to lift the most coveted trophy in sport. The World Cup Final is the most-watched sporting event on the planet, drawing audiences of over 1.5 billion people. This is not just a football match; it is a moment in history. Demand far exceeds supply — join the waitlist now.',
+    partners: [],
+  },
+
+  // ── UEFA Champions League ──────────────────────────────────────────────
+  {
+    id: '10',
+    sport: 'football',
+    leagueSlug: 'champions-league',
+    eventName: 'Champions League Final',
+    league: 'UEFA Champions League',
+    date: '2025-05-31',
+    time: '21:00',
+    venue: 'Wembley Stadium',
+    city: 'London',
+    availability: 'sold-out',
+    minPrice: 450,
+    imageUrl: IMG.football,
+    description: 'The biggest club match in the world returns to Wembley Stadium as Europe\'s two finest clubs battle for the UEFA Champions League trophy under the iconic arch in north London. The Champions League Final is a night unlike any other in football — the anthem, the atmosphere, the theatre of 90,000 fans witnessing the crowning of European champions. This fixture is officially sold out via UEFA.',
+    partners: [],
+  },
+  {
+    id: '15',
+    sport: 'football',
+    leagueSlug: 'champions-league',
+    eventName: 'Champions League — Quarter Final 1st Leg',
+    league: 'UEFA Champions League',
+    date: '2025-04-08',
+    time: '20:00',
+    venue: 'Allianz Arena',
+    city: 'Munich',
+    availability: 'high',
+    minPrice: 145,
+    imageUrl: IMG.football,
+    description: 'The Allianz Arena pulses with European football\'s greatest atmosphere as the UEFA Champions League Quarter Finals begin. Bayern Munich\'s famous red arena is one of the most visually stunning stadiums in the world — a cauldron of noise and colour under the Munich sky. The first leg sets the tone for a two-match battle that will define who advances to the semi-finals.',
+    partners: [
+      { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 145, tag: 'Best Price' },
+      { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 158 },
+      { partnerId: 'ticketmaster', partnerName: 'Ticketmaster', partnerIcon: '🎫', price: 162 },
+    ],
+  },
+  {
+    id: '16',
+    sport: 'football',
+    leagueSlug: 'champions-league',
+    eventName: 'Champions League — Semi Final',
+    league: 'UEFA Champions League',
+    date: '2025-04-29',
+    time: '21:00',
+    venue: 'Santiago Bernabéu',
+    city: 'Madrid',
+    availability: 'low',
+    minPrice: 290,
+    imageUrl: IMG.football,
+    description: 'The Santiago Bernabéu — fortress of Real Madrid and the most storied venue in Champions League history — hosts one of the semi-final ties as Europe\'s elite four clubs fight for a place in the final. With its iconic retractable roof, the newly renovated Bernabéu creates an electric atmosphere that has witnessed more Champions League drama than any other ground on earth.',
+    partners: [
+      { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 290, tag: 'Best Price' },
+      { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 315 },
+    ],
+  },
+
+  // ── Wimbledon ──────────────────────────────────────────────────────────
+  {
+    id: '5',
+    sport: 'tennis',
+    leagueSlug: 'wimbledon',
+    eventName: "Wimbledon — Men's Final",
+    league: 'Grand Slam',
+    date: '2026-07-12',
+    time: '14:00',
+    venue: 'All England Club, Centre Court',
+    city: 'London',
+    availability: 'sold-out',
+    minPrice: 320,
+    imageUrl: IMG.tennis,
+    description: 'The most prestigious match in tennis — the Wimbledon Men\'s Singles Final on Centre Court. The green grass of SW19 hosts the culmination of two weeks of extraordinary competition as the world\'s best players compete for the most iconic trophy in the sport. The Wimbledon Final is synonymous with British summer tradition, attended by royalty and watched by millions. This event is officially sold out.',
+    partners: [],
+  },
+  {
+    id: '17',
+    sport: 'tennis',
+    leagueSlug: 'wimbledon',
+    eventName: "Wimbledon — Women's Final",
+    league: 'Grand Slam',
+    date: '2026-07-11',
+    time: '14:00',
+    venue: 'All England Club, Centre Court',
+    city: 'London',
+    availability: 'sold-out',
+    minPrice: 280,
+    imageUrl: IMG.tennis,
+    description: 'The Wimbledon Women\'s Singles Final brings the finest women\'s tennis on the planet to Centre Court for the most revered afternoon in the sport\'s calendar. Played on pristine grass under the famous Wimbledon skies, the Women\'s Final is a showcase of power, precision and nerve that has produced some of the sport\'s most memorable moments. Officially sold out — register interest for resale alerts.',
+    partners: [],
+  },
+  {
+    id: '18',
+    sport: 'tennis',
+    leagueSlug: 'wimbledon',
+    eventName: 'Wimbledon — Quarter Finals Day',
+    league: 'Grand Slam',
+    date: '2026-07-07',
+    time: '11:00',
+    venue: 'All England Club',
+    city: 'London',
+    availability: 'low',
+    minPrice: 185,
+    imageUrl: IMG.tennis,
+    description: 'Wimbledon Quarter Finals Day delivers full days of world-class tennis across all courts at the All England Club. With both the men\'s and women\'s quarter finals running simultaneously, you can watch multiple matches across Centre Court, Court 1 and the outside courts. Experience the unique Wimbledon atmosphere — strawberries and cream, perfectly manicured grass and the very best players on the planet battling for a semi-final spot.',
+    partners: [
+      { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 185, tag: 'Best Price' },
+      { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 198 },
+    ],
+  },
+  {
+    id: '19',
+    sport: 'tennis',
+    leagueSlug: 'wimbledon',
+    eventName: 'Wimbledon — First Week Ground Pass',
+    league: 'Grand Slam',
+    date: '2026-07-01',
+    time: '10:30',
+    venue: 'All England Club',
+    city: 'London',
+    availability: 'high',
+    minPrice: 75,
+    imageUrl: IMG.tennis,
+    description: 'Wimbledon Ground Passes grant access to the All England Club during the first week of the Championships, giving you the freedom to watch matches on the outside courts and soak up the world-famous atmosphere. Queuing for a ground pass is a quintessentially British Wimbledon tradition — and once inside, you\'ll experience the magic of the world\'s greatest tennis tournament as seeds and qualifiers battle it out on the show courts.',
+    partners: [
+      { partnerId: 'ticketmaster', partnerName: 'Ticketmaster', partnerIcon: '🎫', price: 75, tag: 'Best Price' },
+      { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 82 },
+      { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 88 },
+    ],
+  },
+
+  // ── Royal Ascot ────────────────────────────────────────────────────────
+  {
+    id: '4',
+    sport: 'horse-racing',
+    leagueSlug: 'royal-ascot',
+    eventName: 'Royal Ascot — Gold Cup Day',
+    league: 'Royal Ascot',
+    date: '2026-06-18',
+    time: '14:30',
+    venue: 'Ascot Racecourse',
+    city: 'Berkshire',
+    availability: 'low',
+    minPrice: 95,
+    imageUrl: IMG.horseRacing,
+    description: 'Gold Cup Day is the jewel of Royal Ascot — and the social highlight of the British racing calendar. The prestigious Gold Cup over two-and-a-half miles is the ultimate test of stamina for the staying division, with the world\'s finest racehorses competing in front of a capacity Ascot crowd in their finest race day attire. Hats, morning suits and the Royal Procession make this one of the most glamorous days in British sport.',
+    partners: [
+      { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 95, tag: 'Best Price' },
+      { partnerId: 'ticketmaster', partnerName: 'Ticketmaster', partnerIcon: '🎫', price: 108 },
+    ],
+  },
+  {
+    id: '20',
+    sport: 'horse-racing',
+    leagueSlug: 'royal-ascot',
+    eventName: 'Royal Ascot — Opening Day',
+    league: 'Royal Ascot',
+    date: '2026-06-16',
+    time: '14:00',
+    venue: 'Ascot Racecourse',
+    city: 'Berkshire',
+    availability: 'high',
+    minPrice: 75,
+    featured: true,
+    imageUrl: IMG.horseRacing,
+    description: 'Royal Ascot Opening Day sets the tone for five days of magnificent racing, fashion and pageantry at one of Britain\'s most prestigious sporting venues. The traditional Royal Procession down the track marks the arrival of the Royal Family, drawing thunderous applause from the grandstands. Opening Day features the Queen Anne Stakes — a Group 1 contest for the finest milers in Europe — as the season\'s highlight week gets underway.',
+    partners: [
+      { partnerId: 'ticketmaster', partnerName: 'Ticketmaster', partnerIcon: '🎫', price: 75, tag: 'Best Price' },
+      { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 82 },
+      { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 90 },
+    ],
+  },
+  {
+    id: '21',
+    sport: 'horse-racing',
+    leagueSlug: 'royal-ascot',
+    eventName: 'Royal Ascot — Diamond Jubilee Day',
+    league: 'Royal Ascot',
+    date: '2026-06-20',
+    time: '14:00',
+    venue: 'Ascot Racecourse',
+    city: 'Berkshire',
+    availability: 'low',
+    minPrice: 120,
+    imageUrl: IMG.horseRacing,
+    description: 'Diamond Jubilee Day — the final Saturday of Royal Ascot — brings the five-day festival to a spectacular conclusion with the Group 1 Diamond Jubilee Stakes, one of Europe\'s premier sprint races. Featuring the very best sprinters from across the globe, this closing day combines world-class racing with an electrifying atmosphere as the Ascot faithful bid farewell to another unforgettable Royal meeting.',
+    partners: [
+      { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 120, tag: 'Best Price' },
+      { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 138 },
+    ],
+  },
+
+  // ── T20 World Cup ──────────────────────────────────────────────────────
+  {
+    id: '22',
+    sport: 'cricket',
+    leagueSlug: 't20-world-cup',
+    eventName: 'T20 World Cup 2026 — Opening Match',
+    league: 'ICC T20 World Cup',
+    date: '2026-02-12',
+    time: '14:00',
+    venue: 'Narendra Modi Stadium',
+    city: 'Ahmedabad, India',
+    availability: 'high',
+    minPrice: 45,
+    featured: true,
+    imageUrl: IMG.cricket,
+    description: 'The ICC T20 World Cup 2026 gets underway at the world\'s largest cricket stadium — the magnificent Narendra Modi Stadium in Ahmedabad, home to 132,000 fans. Twenty20 cricket at its very best: explosive batting, stunning catches and nail-biting finishes as the finest white-ball cricketers on the planet compete for the global title. This opening match sets the stage for four weeks of unmissable cricket across the subcontinent.',
+    partners: [
+      { partnerId: 'ticketmaster', partnerName: 'Ticketmaster', partnerIcon: '🎫', price: 45, tag: 'Best Price' },
+      { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 52 },
+      { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 58 },
+    ],
+  },
+  {
+    id: '23',
+    sport: 'cricket',
+    leagueSlug: 't20-world-cup',
+    eventName: 'T20 World Cup 2026 — India vs Pakistan',
+    league: 'ICC T20 World Cup',
+    date: '2026-02-22',
+    time: '19:00',
+    venue: 'Eden Gardens',
+    city: 'Kolkata, India',
+    availability: 'sold-out',
+    minPrice: 180,
+    imageUrl: IMG.cricket,
+    description: 'The greatest rivalry in cricket — India vs Pakistan at the T20 World Cup. This match transcends sport. Played in front of 68,000 passionate fans at the iconic Eden Gardens in Kolkata, every India-Pakistan World Cup fixture produces moments that are talked about for decades. The intensity, the skill and the sheer weight of expectation make this the most anticipated match in the global cricketing calendar. Officially sold out.',
+    partners: [],
+  },
+  {
+    id: '24',
+    sport: 'cricket',
+    leagueSlug: 't20-world-cup',
+    eventName: 'T20 World Cup 2026 — Super 8 Match',
+    league: 'ICC T20 World Cup',
+    date: '2026-03-05',
+    time: '14:30',
+    venue: 'Wankhede Stadium',
+    city: 'Mumbai, India',
+    availability: 'low',
+    minPrice: 95,
+    imageUrl: IMG.cricket,
+    description: 'The T20 World Cup Super 8 stage raises the stakes as the tournament\'s top teams face off in a do-or-die format at Wankhede Stadium in Mumbai. Perched on the shores of the Arabian Sea, Wankhede is one of cricket\'s most iconic venues — the ground where India won the 2011 ODI World Cup. The Super 8 stage produces some of the most dramatic cricket imaginable as nations fight to reach the semi-finals.',
+    partners: [
+      { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 95, tag: 'Best Price' },
+      { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 108 },
+    ],
+  },
+  {
+    id: '25',
+    sport: 'cricket',
+    leagueSlug: 't20-world-cup',
+    eventName: 'T20 World Cup 2026 — Final',
+    league: 'ICC T20 World Cup',
+    date: '2026-03-15',
+    time: '19:00',
+    venue: 'Narendra Modi Stadium',
+    city: 'Ahmedabad, India',
+    availability: 'sold-out',
+    minPrice: 250,
+    imageUrl: IMG.cricket,
+    description: 'The ICC T20 World Cup Final returns to the Narendra Modi Stadium for a fitting conclusion to the greatest short-format tournament on earth. Two nations, 20 overs each, and one chance to be crowned world champions. The final of a T20 World Cup delivers drama, nerves and pure entertainment in equal measure — and with 132,000 fans creating an atmosphere that shakes the ground, this is the ultimate cricket experience. Sold out.',
+    partners: [],
+  },
+
+  // ── Other Sports ──────────────────────────────────────────────────────
   {
     id: '3',
     sport: 'cricket',
@@ -42,43 +404,16 @@ export const TICKET_EVENTS: TicketEvent[] = [
     league: 'Test Series',
     date: '2025-06-05',
     time: '11:00',
-    venue: 'Lord\'s Cricket Ground',
+    venue: "Lord's Cricket Ground",
     city: 'London',
     availability: 'high',
     minPrice: 55,
+    imageUrl: IMG.cricket,
+    description: 'The Home of Cricket welcomes India for the first Test of a five-match series that will define the summer. Lord\'s Cricket Ground — with its famous sloping outfield, the Long Room, and the Ashes Urn — is one of sport\'s most sacred venues. Test cricket at Lord\'s is an experience unlike any other: five days of chess at pace, where technique, temperament and application are rewarded and where the greatest players build innings that become legend.',
     partners: [
       { partnerId: 'ticketmaster', partnerName: 'Ticketmaster', partnerIcon: '🎫', price: 55, tag: 'Best Price' },
       { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 60 },
     ],
-  },
-  {
-    id: '4',
-    sport: 'horse-racing',
-    eventName: 'Cheltenham Festival — Champion Chase',
-    league: 'National Hunt',
-    date: '2025-03-12',
-    time: '14:20',
-    venue: 'Cheltenham Racecourse',
-    city: 'Cheltenham',
-    availability: 'low',
-    minPrice: 75,
-    partners: [
-      { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 75, tag: 'Best Price' },
-      { partnerId: 'ticketmaster', partnerName: 'Ticketmaster', partnerIcon: '🎫', price: 82 },
-    ],
-  },
-  {
-    id: '5',
-    sport: 'tennis',
-    eventName: 'Wimbledon — Men\'s Final',
-    league: 'Grand Slam',
-    date: '2025-07-13',
-    time: '14:00',
-    venue: 'All England Club',
-    city: 'London',
-    availability: 'sold-out',
-    minPrice: 320,
-    partners: [],
   },
   {
     id: '6',
@@ -91,6 +426,8 @@ export const TICKET_EVENTS: TicketEvent[] = [
     city: 'London',
     availability: 'high',
     minPrice: 125,
+    imageUrl: IMG.boxing,
+    description: 'The most powerful night in British boxing descends on The O2 Arena as the WBC World Heavyweight Championship comes to London. Two of the planet\'s hardest hitters square off under the brightest lights in sport for the most prestigious belt in heavyweight boxing. London has produced some of the sport\'s most memorable heavyweight nights, and this Saturday showdown is set to surpass them all. Knockout entertainment guaranteed.',
     partners: [
       { partnerId: 'ticketmaster', partnerName: 'Ticketmaster', partnerIcon: '🎫', price: 125, tag: 'Best Price' },
       { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 138 },
@@ -108,6 +445,8 @@ export const TICKET_EVENTS: TicketEvent[] = [
     city: 'Silverstone',
     availability: 'low',
     minPrice: 185,
+    imageUrl: IMG.f1,
+    description: 'The British Grand Prix at Silverstone is the jewel of the Formula 1 calendar — a race held at the birthplace of modern motor racing, where the sport\'s greatest names have forged their legacies at Copse, Maggotts and Becketts. Over 140,000 fans descend on the Northamptonshire countryside for a weekend of wheel-to-wheel racing, incredible fan experiences and world-class entertainment. The grandstands shake and the tyres scream — this is F1 at its British best.',
     partners: [
       { partnerId: 'ticketmaster', partnerName: 'Ticketmaster', partnerIcon: '🎫', price: 185, tag: 'Best Price' },
       { partnerId: 'viagogo', partnerName: 'Viagogo', partnerIcon: '🎪', price: 199 },
@@ -124,6 +463,8 @@ export const TICKET_EVENTS: TicketEvent[] = [
     city: 'London',
     availability: 'high',
     minPrice: 68,
+    imageUrl: IMG.rugby,
+    description: 'England face France in a crucial Six Nations Championship encounter at Twickenham — the Home of England Rugby and one of the great sporting stadiums on earth. The Anglo-French rivalry in rugby is one of sport\'s most compelling contests, featuring bruising forward exchanges, dazzling backline play and the kind of physicality that defines international rugby at its best. With 82,000 fans creating an ear-splitting atmosphere, Twickenham on Six Nations day is unmissable.',
     partners: [
       { partnerId: 'ticketmaster', partnerName: 'Ticketmaster', partnerIcon: '🎫', price: 68, tag: 'Best Price' },
       { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 74 },
@@ -140,31 +481,49 @@ export const TICKET_EVENTS: TicketEvent[] = [
     city: 'Portrush',
     availability: 'high',
     minPrice: 95,
+    imageUrl: IMG.golf,
+    description: 'The Open Championship — the oldest and most prestigious major in golf — returns to Royal Portrush on the stunning Causeway Coast of Northern Ireland. Day 1 sets the tone as the world\'s finest golfers tackle links golf in its purest form: wind-swept fairways, pot bunkers and the unpredictability of the Irish weather that makes The Open unlike any other major. Walk the course with the players, feel the atmosphere and witness golf history being written in the seaside air.',
     partners: [
       { partnerId: 'ticketmaster', partnerName: 'Ticketmaster', partnerIcon: '🎫', price: 95, tag: 'Best Price' },
       { partnerId: 'stubhub', partnerName: 'StubHub', partnerIcon: '🎟️', price: 108 },
     ],
-  },
-  {
-    id: '10',
-    sport: 'football',
-    eventName: 'Champions League Final',
-    league: 'UEFA Champions League',
-    date: '2025-05-31',
-    time: '21:00',
-    venue: 'Wembley Stadium',
-    city: 'London',
-    availability: 'sold-out',
-    minPrice: 450,
-    partners: [],
   },
 ];
 
 export const getEventsBySport = (sport: string): TicketEvent[] =>
   TICKET_EVENTS.filter((e) => e.sport === sport);
 
+export const getEventsByLeague = (leagueSlug: string): TicketEvent[] =>
+  TICKET_EVENTS.filter((e) => e.leagueSlug === leagueSlug);
+
 export const getFeaturedEvents = (): TicketEvent[] =>
   TICKET_EVENTS.filter((e) => e.featured);
 
 export const getEventById = (id: string): TicketEvent | undefined =>
   TICKET_EVENTS.find((e) => e.id === id);
+
+export function toTicketSlug(event: TicketEvent): string {
+  const name = event.eventName
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .trim()
+    .replace(/\s+/g, '-');
+  return `${name}-${event.date}`;
+}
+
+export const getEventBySlug = (slug: string): TicketEvent | undefined =>
+  TICKET_EVENTS.find((e) => toTicketSlug(e) === slug);
+
+export const getRelatedEvents = (event: TicketEvent, limit = 3): TicketEvent[] =>
+  TICKET_EVENTS
+    .filter((e) => e.id !== event.id && (
+      (event.leagueSlug && e.leagueSlug === event.leagueSlug) ||
+      e.sport === event.sport
+    ))
+    .sort((a, b) => {
+      // Same league first, then by date
+      const aLeague = event.leagueSlug && a.leagueSlug === event.leagueSlug ? 0 : 1;
+      const bLeague = event.leagueSlug && b.leagueSlug === event.leagueSlug ? 0 : 1;
+      return aLeague - bLeague || new Date(a.date).getTime() - new Date(b.date).getTime();
+    })
+    .slice(0, limit);

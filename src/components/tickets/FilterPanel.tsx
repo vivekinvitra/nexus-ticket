@@ -84,6 +84,7 @@ export default function FilterPanel({ selectedSports, onSportsChange }: FilterPa
 
   return (
     <aside
+      className="filter-sticky"
       style={{
         background: 'var(--white)',
         border: '1px solid var(--border-gray)',

@@ -47,23 +47,7 @@ export default function Header() {
             textDecoration: 'none',
           }}
         >
-          <span style={{ color: 'var(--primary)' }}>Ticket</span>Nexus
-          <sup
-            style={{
-              fontFamily: 'var(--font-inter, Inter, sans-serif)',
-              fontSize: '9px',
-              fontWeight: 700,
-              background: 'var(--primary)',
-              color: 'var(--white)',
-              padding: '3px 7px',
-              borderRadius: '4px',
-              letterSpacing: '0.04em',
-              marginLeft: '2px',
-              textTransform: 'uppercase',
-            }}
-          >
-            Tickets
-          </sup>
+          <span style={{ color: 'var(--primary)' }}>Ticket</span>Nexus          
         </Link>
 
         {/* Sports + News Navigation */}
@@ -107,24 +91,7 @@ export default function Header() {
                 width: '150px',
               }}
             />
-          </div>
-
-          <button
-            style={{
-              background: 'transparent',
-              color: 'var(--text-dark)',
-              fontSize: '13px',
-              fontWeight: 500,
-              padding: '9px 16px',
-              borderRadius: '8px',
-              border: '1px solid var(--border-gray)',
-              transition: 'all .2s',
-              flexShrink: 0,
-            }}
-            className="hidden md:block"
-          >
-            Sign In
-          </button>
+          </div>          
 
           <Link
             href="/category/football"

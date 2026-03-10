@@ -11,6 +11,7 @@ export default function PartnersStrip() {
         padding: '32px 40px',
         marginTop: '60px',
       }}
+      className="partners-strip"
     >
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         <div

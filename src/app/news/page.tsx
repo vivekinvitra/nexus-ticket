@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -97,7 +98,23 @@ export default function NewsPage() {
                       justifyContent: 'center',
                     }}
                   >
-                    <span style={{ fontSize: '48px', zIndex: 1 }}>{article.icon}</span>
+                    <Image
+                      src={article.imageUrl}
+                      alt={article.title}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                    />
+                    <span
+                      style={{
+                        fontSize: '48px',
+                        zIndex: 1,
+                        position: 'relative',
+                        opacity: 0.2,
+                        userSelect: 'none',
+                      }}
+                    >
+                      {article.icon}
+                    </span>
                     <div
                       style={{
                         position: 'absolute',

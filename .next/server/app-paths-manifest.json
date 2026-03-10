@@ -1,0 +1,6 @@
+{
+  "/category/[slug]/page": "app/category/[slug]/page.js",
+  "/tickets/[slug]/page": "app/tickets/[slug]/page.js",
+  "/category/[slug]/[league]/page": "app/category/[slug]/[league]/page.js",
+  "/page": "app/page.js"
+}

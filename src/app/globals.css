@@ -148,52 +148,140 @@ input, select {
 }
 
 /* ══════════════════════════════════════════════════
+   BASE GRID CLASSES
+══════════════════════════════════════════════════ */
+.footer-main-grid {
+  display: grid;
+  grid-template-columns: 340px repeat(4, 1fr);
+  gap: 48px;
+}
+
+/* ══════════════════════════════════════════════════
    RESPONSIVE LAYOUTS
 ══════════════════════════════════════════════════ */
+
+/* Large tablet */
 @media (max-width: 1024px) {
-  .footer-main-grid {
-    grid-template-columns: 1fr 1fr !important;
-  }
+  .footer-main-grid { grid-template-columns: 1fr 1fr 1fr !important; gap: 32px !important; }
 }
 
-@media (max-width: 640px) {
-  .page-px {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
-
+/* Tablet */
 @media (max-width: 900px) {
-  .content-grid      { grid-template-columns: 1fr !important; }
-  .hero-grid         { grid-template-columns: 1fr !important; }
-  .hero-h1           { font-size: 34px !important; }
-  .news-grid         { grid-template-columns: repeat(2, 1fr) !important; }
-  .news-page-grid    { grid-template-columns: repeat(2, 1fr) !important; }
-  .partners-grid     { grid-template-columns: repeat(2, 1fr) !important; }
+  .content-grid        { grid-template-columns: 1fr !important; }
+  .hero-grid           { grid-template-columns: 1fr !important; }
+  .hero-content        { padding: 50px 20px 44px !important; max-width: 100% !important; }
+  .hero-h1             { font-size: 36px !important; }
+  .news-grid           { grid-template-columns: repeat(2, 1fr) !important; }
+  .news-page-grid      { grid-template-columns: repeat(2, 1fr) !important; }
+  .partners-grid       { grid-template-columns: repeat(2, 1fr) !important; }
   .partner-detail-grid { grid-template-columns: 1fr !important; }
+  .main-content-pad    { padding: 24px 16px 48px !important; }
+  .filter-sticky       { position: static !important; }
+}
+
+/* Ticket table: hide venue column on tablet */
+@media (max-width: 860px) {
+  .ticket-table-head { grid-template-columns: 2.5fr 1.3fr 1fr 1fr 1fr !important; }
+  .ticket-row        { grid-template-columns: 2.5fr 1.3fr 1fr 1fr 1fr !important; }
+  .ticket-venue      { display: none !important; }
 }
 
 @media (max-width: 768px) {
-  .legal-grid          { grid-template-columns: 1fr !important; }
-  .ticket-table-head   { display: none !important; }
+  .legal-grid { grid-template-columns: 1fr !important; }
 }
 
+/* Mobile */
 @media (max-width: 640px) {
-  .footer-main-grid  { grid-template-columns: 1fr !important; }
+  .footer-main-grid   { grid-template-columns: 1fr 1fr !important; }
+  .page-px            { padding-left: 16px; padding-right: 16px; }
+  .date-filter-inner  { padding: 12px 16px !important; }
+  .partners-strip     { padding: 24px 16px !important; margin-top: 40px !important; }
 }
 
+/* Small mobile */
 @media (max-width: 600px) {
-  .news-grid         { grid-template-columns: 1fr !important; }
-  .news-page-grid    { grid-template-columns: 1fr !important; }
-  .partners-grid     { grid-template-columns: 1fr !important; }
+  .news-grid        { grid-template-columns: 1fr !important; }
+  .news-page-grid   { grid-template-columns: 1fr !important; }
+  .partners-grid    { grid-template-columns: 1fr !important; }
+  .footer-main-grid { grid-template-columns: 1fr !important; }
+}
+
+/* Mobile: ticket card layout */
+@media (max-width: 560px) {
+  .ticket-table-head { display: none !important; }
+  .ticket-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0 !important;
+    padding: 14px 16px !important;
+  }
+  .ticket-row > div:nth-child(2) { width: 100% !important; margin-bottom: 10px; }
+  .ticket-row > div:nth-child(3) { width: 50% !important; }
+  .ticket-row > div:nth-child(5) { width: 50% !important; justify-content: flex-end !important; }
+  .ticket-row > div:nth-child(6) { flex: 1 !important; margin-top: 10px; }
+  .ticket-row > div:nth-child(7) { margin-top: 10px; }
+  .ticket-row > div:nth-child(7) button { padding: 9px 14px !important; font-size: 12px !important; }
+  .hero-h1 { font-size: 28px !important; }
+}
+
+/* ══════════════════════════════════════════════════
+   TICKET DETAIL PAGE
+══════════════════════════════════════════════════ */
+@media (max-width: 860px) {
+  .ticket-page-grid       { grid-template-columns: 1fr !important; }
+  .ticket-page-inner      { padding-left: 20px !important; padding-right: 20px !important; }
+  .ticket-page-h1         { font-size: 24px !important; }
+  .overview-facts-grid    { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 480px) {
+  .overview-facts-grid    { grid-template-columns: 1fr 1fr !important; }
+}
+
+.related-match-row:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+  border-color: var(--primary) !important;
 }
 
 /* ══════════════════════════════════════════════════
    HOVER EFFECTS
 ══════════════════════════════════════════════════ */
+.partner-compare-row:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
 .news-card:hover {
   box-shadow: var(--shadow-lg);
   transform: translateY(-2px);
+}
+
+/* ── News article page ── */
+.news-article-grid {
+  grid-template-columns: 1fr 340px;
+}
+.related-news-card:hover {
+  background: #f8f9fa;
+}
+.related-ticket-card:hover {
+  border-color: var(--primary) !important;
+  background: #fff !important;
+  box-shadow: var(--shadow);
+}
+@media (max-width: 640px) {
+  .related-tickets-grid { grid-template-columns: 1fr !important; }
+}
+.article-h1 {
+  font-size: 30px;
+}
+@media (max-width: 1024px) {
+  .news-article-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+@media (max-width: 640px) {
+  .article-h1 {
+    font-size: 22px !important;
+  }
 }
 
 .partner-card:hover {

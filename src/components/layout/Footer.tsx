@@ -29,9 +29,6 @@ export default function Footer() {
         style={{
           maxWidth: '1280px',
           margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '340px repeat(4, 1fr)',
-          gap: '48px',
           paddingBottom: '40px',
           borderBottom: '1px solid var(--border-gray)',
         }}

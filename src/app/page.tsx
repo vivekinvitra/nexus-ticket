@@ -22,13 +22,7 @@ export default function HomePage() {
         <Hero />
         <DateFilterBar />
 
-        <div
-          style={{
-            maxWidth: '1280px',
-            margin: '0 auto',
-            padding: '32px 40px 60px',
-          }}
-        >
+        <div className="main-content-pad" style={{ maxWidth: '1280px', margin: '0 auto', padding: '32px 40px 60px' }}>
           <TicketsContainer />
         </div>
 

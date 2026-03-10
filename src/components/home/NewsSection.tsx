@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { NewsArticle } from '@/lib/types';
 
@@ -57,14 +58,7 @@ export default function NewsSection({ articles }: NewsSectionProps) {
         </Link>
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '24px',
-        }}
-        className="news-grid"
-      >
+      <div className="news-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
         {articles.map((article) => (
           <NewsCard key={article.id} article={article} />
         ))}
@@ -100,12 +94,15 @@ function NewsCard({ article }: { article: NewsArticle }) {
           height: '160px',
           background: 'var(--light-gray)',
           position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          overflow: 'hidden',
         }}
       >
-        <span style={{ fontSize: '48px', zIndex: 1 }}>{article.icon}</span>
+        <Image
+          src={article.imageUrl}
+          alt={article.title}
+          fill
+          style={{ objectFit: 'cover' }}
+        />
         <div
           style={{
             position: 'absolute',
