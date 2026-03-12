@@ -1,6 +1,12 @@
 {
-  "/category/[slug]/page": "app/category/[slug]/page.js",
-  "/tickets/[slug]/page": "app/tickets/[slug]/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/news/page": "app/news/page.js",
   "/category/[slug]/[league]/page": "app/category/[slug]/[league]/page.js",
-  "/page": "app/page.js"
+  "/category/[slug]/page": "app/category/[slug]/page.js",
+  "/legal/[slug]/page": "app/legal/[slug]/page.js",
+  "/page": "app/page.js",
+  "/news/[slug]/page": "app/news/[slug]/page.js",
+  "/partners/page": "app/partners/page.js",
+  "/partners/[slug]/page": "app/partners/[slug]/page.js",
+  "/tickets/[slug]/page": "app/tickets/[slug]/page.js"
 }

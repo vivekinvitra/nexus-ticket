@@ -11,11 +11,11 @@ export default function TicketsContainer() {
 
   return (
     <div className="content-grid" style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '32px', alignItems: 'start' }}>
-        <FilterPanel selectedSports={selectedSports} onSportsChange={setSelectedSports} />
-        <div>
-          <HomeTicketSection selectedSports={selectedSports} />
-          <NewsSection articles={getFeaturedNews()} />
-        </div>
+      <FilterPanel selectedSports={selectedSports} onSportsChange={setSelectedSports} />
+      <div>
+        <HomeTicketSection selectedSports={selectedSports} />
+        <NewsSection articles={getFeaturedNews()} />
       </div>
+    </div>
   );
 }

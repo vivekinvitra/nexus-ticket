@@ -13,36 +13,18 @@ type SortOption = 'date-soonest' | 'price-lowest' | 'price-highest' | 'availabil
 
 export default function HomeTicketSection({ selectedSports }: HomeTicketSectionProps) {
   const [sortBy, setSortBy] = useState<SortOption>('date-soonest');
-  // Determine which sports to display
-  let sportsToDisplay: string[] = [];
-  
-  if (selectedSports.includes('all')) {
-    // Show all sports
-    sportsToDisplay = SPORTS.map(s => s.slug);
-  } else if (selectedSports.length > 0) {
-    // Show only selected sports
-    sportsToDisplay = selectedSports;
-  }
 
-  const getFeaturedSportEvents = () => {
-    return sportsToDisplay.map((sportSlug) => {
-      const sport = SPORTS.find((s) => s.slug === sportSlug);
-      if (!sport) return null;
+  const sportsToDisplay: string[] = selectedSports.includes('all')
+    ? SPORTS.map((s) => s.slug)
+    : selectedSports;
 
-      const events = TICKET_EVENTS.filter((e) => e.sport === sportSlug);
-      
-      // Only include sports that have tickets
-      if (events.length === 0) return null;
-
-      return {
-        sport,
-        events,
-        icon: sport.icon,
-      };
-    }).filter(Boolean);
-  };
-
-  const sportSections = getFeaturedSportEvents();
+  const sportSections = sportsToDisplay.map((sportSlug) => {
+    const sport = SPORTS.find((s) => s.slug === sportSlug);
+    if (!sport) return null;
+    const events = TICKET_EVENTS.filter((e) => e.sport === sportSlug);
+    if (events.length === 0) return null;
+    return { sport, events, icon: sport.icon };
+  }).filter(Boolean);
 
   if (sportSections.length === 0) {
     return (
@@ -64,7 +46,6 @@ export default function HomeTicketSection({ selectedSports }: HomeTicketSectionP
 
   return (
     <>
-      {/* Global Sort Bar */}
       <div
         style={{
           display: 'flex',
@@ -100,7 +81,6 @@ export default function HomeTicketSection({ selectedSports }: HomeTicketSectionP
         </select>
       </div>
 
-      {/* Sport Wise Sections - Only showing sports with tickets */}
       {sportSections.map((section: any) => (
         <div key={section.sport.slug} style={{ marginBottom: '40px' }}>
           <TicketTable
@@ -115,4 +95,3 @@ export default function HomeTicketSection({ selectedSports }: HomeTicketSectionP
     </>
   );
 }
-

@@ -1,36 +1,23 @@
 'use client';
 
-import { useState } from 'react';
 import Icon from '@/components/common/Icon';
 
 const DATE_TABS = [
   { label: 'Today', value: 'today' },
   { label: 'Tomorrow', value: 'tomorrow' },
-  { label: 'This Week', value: 'week' },
-  { label: 'This Month', value: 'month' },
 ];
 
 interface DateFilterBarProps {
-  onDateChange?: (value: string) => void;
+  activeDate: string;
+  onDateChange: (value: string) => void;
 }
 
-export default function DateFilterBar({ onDateChange }: DateFilterBarProps) {
-  const [active, setActive] = useState('today');
-
-  const handleSelect = (value: string) => {
-    setActive(value);
-    onDateChange?.(value);
-  };
-
+export default function DateFilterBar({ activeDate, onDateChange }: DateFilterBarProps) {
   return (
     <div
       style={{
         background: 'var(--white)',
         borderBottom: '1px solid var(--border-gray)',
-        position: 'sticky',
-        top: 'var(--nav-h)',
-        zIndex: 800,
-        boxShadow: 'var(--shadow-sm)',
       }}
     >
       <div
@@ -62,14 +49,14 @@ export default function DateFilterBar({ onDateChange }: DateFilterBarProps) {
         {DATE_TABS.map((tab) => (
           <button
             key={tab.value}
-            onClick={() => handleSelect(tab.value)}
+            onClick={() => onDateChange(tab.value)}
             style={{
               padding: '8px 18px',
               fontSize: '14px',
               fontWeight: 500,
-              color: active === tab.value ? 'var(--white)' : 'var(--text-gray)',
-              background: active === tab.value ? 'var(--primary)' : 'transparent',
-              border: `1px solid ${active === tab.value ? 'var(--primary)' : 'var(--border-gray)'}`,
+              color: activeDate === tab.value ? 'var(--white)' : 'var(--text-gray)',
+              background: activeDate === tab.value ? 'var(--primary)' : 'transparent',
+              border: `1px solid ${activeDate === tab.value ? 'var(--primary)' : 'var(--border-gray)'}`,
               borderRadius: '8px',
               transition: 'all .2s',
               whiteSpace: 'nowrap',
