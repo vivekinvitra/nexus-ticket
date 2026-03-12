@@ -102,7 +102,7 @@ export default function Footer() {
             {SPORTS.slice(0, 6).map((sport) => (
               <Link
                 key={sport.slug}
-                href={`/category/${sport.slug}`}
+                href={`/${sport.slug}`}
                 style={{ fontSize: '14px', color: 'var(--text-gray)', transition: 'color .2s' }}
               >
                 {sport.icon} {sport.name}

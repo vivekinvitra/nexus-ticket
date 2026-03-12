@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * generate-sitemap.js
- * Generates sitemap.xml and sitemap-news.xml for StrikeZone Tickets
+ * Generates sitemap.xml and sitemap-news.xml for Ticket-nexus
  * Run: node scripts/generate-sitemap.js
  */
 
@@ -66,7 +66,7 @@ function generateNewsSitemap() {
     <loc>${SITE_URL}/news/${a.slug}</loc>
     <news:news>
       <news:publication>
-        <news:name>StrikeZone Tickets</news:name>
+        <news:name>Ticket-nexus</news:name>
         <news:language>en</news:language>
       </news:publication>
       <news:publication_date>${today}</news:publication_date>

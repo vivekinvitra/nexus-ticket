@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-const SITE_NAME = 'StrikeZone Tickets';
+const SITE_NAME = 'Ticket-nexus';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://strikezone-tickets.com';
 const SITE_DESC =
   'Compare sports ticket prices from the UK\'s top resale platforms. Find the best deals on football, cricket, horse racing, tennis, boxing, F1, rugby and golf tickets.';

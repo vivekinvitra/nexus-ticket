@@ -28,7 +28,7 @@ export default function Header() {
           padding: '0 32px',
           gap: '0',
           boxShadow: 'var(--shadow-sm)',
-          overflow: 'hidden',
+          overflow: 'visible',
         }}
       >
         {/* Logo — never shrinks */}
@@ -94,7 +94,7 @@ export default function Header() {
           </div>          
 
           <Link
-            href="/category/football"
+            href="/football"
             style={{
               background: 'var(--primary)',
               color: 'var(--white)',
@@ -171,7 +171,7 @@ export default function Header() {
             {SPORTS.map((sport) => (
               <Link
                 key={sport.slug}
-                href={`/category/${sport.slug}`}
+                href={`/${sport.slug}`}
                 onClick={() => setMobileOpen(false)}
                 style={{
                   display: 'flex',
@@ -254,7 +254,7 @@ export default function Header() {
               Sign In
             </button>
             <Link
-              href="/category/football"
+              href="/football"
               onClick={() => setMobileOpen(false)}
               style={{
                 flex: 1,

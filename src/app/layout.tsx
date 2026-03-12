@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_GB',
-    siteName: 'StrikeZone Tickets',
+    siteName: 'Ticket-nexus',
   },
 };
 

@@ -312,3 +312,17 @@ input, select {
 .ticket-row:hover .row-accent {
   background: var(--primary) !important;
 }
+
+
+@keyframes dropdownFadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.more-sports-item:hover {
+  background: #f1f5f9 !important;
+}
+
+.more-sports-item:hover > div:last-child > div:first-child {
+  color: var(--primary) !important;
+}

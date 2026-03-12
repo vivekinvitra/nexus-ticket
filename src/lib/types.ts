@@ -1,5 +1,5 @@
 // ══════════════════════════════════════════════════
-//  Core Types for StrikeZone Tickets
+//  Core Types for Ticket-nexus
 // ══════════════════════════════════════════════════
 
 export type SportSlug =
@@ -36,6 +36,7 @@ export type AvailabilityStatus = 'high' | 'low' | 'sold-out';
 
 export interface TicketEvent {
   id: string;
+  slug: string;        // URL slug e.g. 'manchester-united-vs-arsenal-2025-03-15'
   sport: SportSlug;
   eventName: string;
   league: string;

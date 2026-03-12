@@ -116,10 +116,10 @@ export default function TicketPage({ params }: Props) {
             <nav style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: 'var(--text-gray)', marginBottom: '20px', flexWrap: 'wrap' }}>
               <Link href="/" style={{ color: 'var(--text-gray)' }}>Home</Link>
               <span>›</span>
-              {sport && <Link href={`/category/${sport.slug}`} style={{ color: 'var(--text-gray)' }}>{sport.name}</Link>}
+              {sport && <Link href={`/${sport.slug}`} style={{ color: 'var(--text-gray)' }}>{sport.name}</Link>}
               {sport && <span>›</span>}
               {event.leagueSlug ? (
-                <Link href={`/category/${event.sport}/${event.leagueSlug}`} style={{ color: 'var(--text-gray)' }}>{event.league}</Link>
+                <Link href={`/${event.sport}/${event.leagueSlug}`} style={{ color: 'var(--text-gray)' }}>{event.league}</Link>
               ) : (
                 <span style={{ color: 'var(--text-gray)' }}>{event.league}</span>
               )}
@@ -583,7 +583,7 @@ export default function TicketPage({ params }: Props) {
                 {sport && (
                   <div style={{ padding: '16px 20px', borderTop: '1px solid var(--border-gray)' }}>
                     <Link
-                      href={`/category/${sport.slug}`}
+                      href={`/${sport.slug}`}
                       style={{
                         display: 'block',
                         textAlign: 'center',

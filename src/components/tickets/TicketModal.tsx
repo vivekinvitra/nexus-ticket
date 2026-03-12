@@ -246,7 +246,7 @@ export default function TicketModal({ event, onClose }: TicketModalProps) {
             lineHeight: 1.7,
           }}
         >
-          Prices shown are indicative and may change at any time. StrikeZone earns an affiliate
+          Prices shown are indicative and may change at any time. Ticket-nexus earns an affiliate
           commission when you purchase via partner links. See our{' '}
           <a href="/legal/affiliate-disclosure" style={{ color: 'var(--primary)' }}>
             Affiliate Disclosure

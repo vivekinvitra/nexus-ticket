@@ -1,1 +1,1 @@
-{"version":1,"functions":{"/category/[slug]":{},"/":{},"/legal/[slug]":{},"/news":{},"/category/[slug]/[league]":{},"/news/[slug]":{},"/partners":{},"/partners/[slug]":{},"/tickets/[slug]":{}}}
+{"version":1,"functions":{"/[slug]":{},"/category/[slug]":{},"/[slug]/[league]":{},"/category/[slug]/[league]":{},"/legal/[slug]":{},"/":{},"/news":{},"/news/[slug]":{},"/partners":{},"/partners/[slug]":{},"/tickets/[slug]":{}}}

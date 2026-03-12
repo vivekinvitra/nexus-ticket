@@ -1,4 +1,4 @@
-# StrikeZone Tickets
+# Ticket-nexus
 
 A production-ready sports ticket comparison platform built with **Next.js 14 App Router**, **TypeScript**, and **Tailwind CSS**.
 

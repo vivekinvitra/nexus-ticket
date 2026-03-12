@@ -66,7 +66,7 @@ export default function NewsArticlePage({ params }: Props) {
     datePublished: article.publishedAt,
     publisher: {
       '@type': 'Organization',
-      name: 'StrikeZone Tickets',
+      name: 'Ticket-nexus',
       logo: { '@type': 'ImageObject', url: '/logo.png' },
     },
   };
@@ -186,7 +186,7 @@ export default function NewsArticlePage({ params }: Props) {
                     }}>
                       Upcoming {catLabel} Tickets
                     </h3>
-                    <Link href={`/category/${article.category}`} style={{ fontSize: '13px', fontWeight: 600, color: 'var(--primary)', textDecoration: 'none' }}>
+                    <Link href={`/${article.category}`} style={{ fontSize: '13px', fontWeight: 600, color: 'var(--primary)', textDecoration: 'none' }}>
                       View all →
                     </Link>
                   </div>

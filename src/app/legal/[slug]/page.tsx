@@ -12,13 +12,13 @@ const LEGAL_PAGES: Record<string, { title: string; lastUpdated: string; content:
     content: `
 ## 1. Introduction
 
-Welcome to StrikeZone Tickets ("we", "our", "us"). By using this website you agree to these Terms & Conditions. Please read them carefully.
+Welcome to Ticket-nexus ("we", "our", "us"). By using this website you agree to these Terms & Conditions. Please read them carefully.
 
-StrikeZone Tickets is a ticket comparison service. We do not sell tickets directly — we compare prices from third-party partner platforms and link you to their websites.
+Ticket-nexus is a ticket comparison service. We do not sell tickets directly — we compare prices from third-party partner platforms and link you to their websites.
 
 ## 2. Use of the Service
 
-You may use StrikeZone Tickets for personal, non-commercial purposes only. You must not:
+You may use Ticket-nexus for personal, non-commercial purposes only. You must not:
 
 - Use our service for any unlawful purpose
 - Attempt to gain unauthorised access to our systems
@@ -35,11 +35,11 @@ Our website contains affiliate links to third-party ticket platforms. We are not
 
 ## 5. Intellectual Property
 
-All content on this website — including text, graphics, logos, and data — is owned by or licensed to StrikeZone Tickets and protected by copyright law.
+All content on this website — including text, graphics, logos, and data — is owned by or licensed to Ticket-nexus and protected by copyright law.
 
 ## 6. Limitation of Liability
 
-To the maximum extent permitted by law, StrikeZone Tickets shall not be liable for any indirect, incidental, or consequential damages arising from your use of this service.
+To the maximum extent permitted by law, Ticket-nexus shall not be liable for any indirect, incidental, or consequential damages arising from your use of this service.
 
 ## 7. Changes to Terms
 
@@ -156,13 +156,13 @@ For more about cookies generally: [aboutcookies.org](https://www.aboutcookies.or
     content: `
 ## Our Affiliate Relationships
 
-StrikeZone Tickets is a ticket comparison website. We earn revenue through **affiliate commissions** paid to us by our partner ticket platforms (Ticketmaster, StubHub, Viagogo, SeatGeek, GetMeIn, TicketSwap and others).
+Ticket-nexus is a ticket comparison website. We earn revenue through **affiliate commissions** paid to us by our partner ticket platforms (Ticketmaster, StubHub, Viagogo, SeatGeek, GetMeIn, TicketSwap and others).
 
 ## How It Works
 
-When you click a "Get Tickets" button or any link to a partner website on StrikeZone Tickets, a tracking cookie or referral code is set. If you subsequently make a purchase on that partner's website, we receive a commission — typically a percentage of the transaction value.
+When you click a "Get Tickets" button or any link to a partner website on Ticket-nexus, a tracking cookie or referral code is set. If you subsequently make a purchase on that partner's website, we receive a commission — typically a percentage of the transaction value.
 
-**This commission is paid by the partner, not by you.** The price you pay for your tickets is the same whether you arrived via StrikeZone or directly.
+**This commission is paid by the partner, not by you.** The price you pay for your tickets is the same whether you arrived via Ticket-nexus or directly.
 
 ## Effect on Our Rankings
 

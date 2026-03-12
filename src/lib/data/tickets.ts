@@ -16,6 +16,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   // ── Premier League ──────────────────────────────────────────────────────
   {
     id: '1',
+    slug: 'manchester-united-vs-arsenal-2025-03-15',
     sport: 'football',
     eventName: 'Manchester United vs Arsenal',
     league: 'Premier League',
@@ -36,6 +37,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '2',
+    slug: 'chelsea-vs-liverpool-2025-03-22',
     sport: 'football',
     eventName: 'Chelsea vs Liverpool',
     league: 'Premier League',
@@ -56,6 +58,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   // ── FIFA World Cup ──────────────────────────────────────────────────────
   {
     id: '11',
+    slug: 'fifa-world-cup-2026-opening-match',
     sport: 'football',
     leagueSlug: 'fifa-world-cup',
     eventName: 'FIFA World Cup 2026 — Opening Match',
@@ -77,6 +80,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '12',
+    slug: 'fifa-world-cup-2026-quarter-final',
     sport: 'football',
     leagueSlug: 'fifa-world-cup',
     eventName: 'FIFA World Cup 2026 — Quarter Final',
@@ -96,6 +100,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '13',
+    slug: 'fifa-world-cup-2026-semi-final',
     sport: 'football',
     leagueSlug: 'fifa-world-cup',
     eventName: 'FIFA World Cup 2026 — Semi Final',
@@ -115,6 +120,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '14',
+    slug: 'fifa-world-cup-2026-grand-final',
     sport: 'football',
     leagueSlug: 'fifa-world-cup',
     eventName: 'FIFA World Cup 2026 — Grand Final',
@@ -134,6 +140,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   // ── UEFA Champions League ──────────────────────────────────────────────
   {
     id: '10',
+    slug: 'champions-league-final-2025-05-31',
     sport: 'football',
     leagueSlug: 'champions-league',
     eventName: 'Champions League Final',
@@ -150,6 +157,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '15',
+    slug: 'champions-league-quarter-final-1st-leg-2025-04-08',
     sport: 'football',
     leagueSlug: 'champions-league',
     eventName: 'Champions League — Quarter Final 1st Leg',
@@ -170,6 +178,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '16',
+    slug: 'champions-league-semi-final-2025-04-29',
     sport: 'football',
     leagueSlug: 'champions-league',
     eventName: 'Champions League — Semi Final',
@@ -191,6 +200,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   // ── Wimbledon ──────────────────────────────────────────────────────────
   {
     id: '5',
+    slug: 'wimbledon-mens-final-2026-07-12',
     sport: 'tennis',
     leagueSlug: 'wimbledon',
     eventName: "Wimbledon — Men's Final",
@@ -207,6 +217,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '17',
+    slug: 'wimbledon-womens-final-2026-07-11',
     sport: 'tennis',
     leagueSlug: 'wimbledon',
     eventName: "Wimbledon — Women's Final",
@@ -223,6 +234,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '18',
+    slug: 'wimbledon-quarter-finals-day-2026-07-07',
     sport: 'tennis',
     leagueSlug: 'wimbledon',
     eventName: 'Wimbledon — Quarter Finals Day',
@@ -242,6 +254,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '19',
+    slug: 'wimbledon-first-week-ground-pass-2026-07-01',
     sport: 'tennis',
     leagueSlug: 'wimbledon',
     eventName: 'Wimbledon — First Week Ground Pass',
@@ -264,6 +277,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   // ── Royal Ascot ────────────────────────────────────────────────────────
   {
     id: '4',
+    slug: 'royal-ascot-gold-cup-day-2026-06-18',
     sport: 'horse-racing',
     leagueSlug: 'royal-ascot',
     eventName: 'Royal Ascot — Gold Cup Day',
@@ -283,6 +297,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '20',
+    slug: 'royal-ascot-opening-day-2026-06-16',
     sport: 'horse-racing',
     leagueSlug: 'royal-ascot',
     eventName: 'Royal Ascot — Opening Day',
@@ -304,6 +319,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '21',
+    slug: 'royal-ascot-diamond-jubilee-day-2026-06-20',
     sport: 'horse-racing',
     leagueSlug: 'royal-ascot',
     eventName: 'Royal Ascot — Diamond Jubilee Day',
@@ -325,6 +341,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   // ── T20 World Cup ──────────────────────────────────────────────────────
   {
     id: '22',
+    slug: 't20-world-cup-2026-opening-match',
     sport: 'cricket',
     leagueSlug: 't20-world-cup',
     eventName: 'T20 World Cup 2026 — Opening Match',
@@ -346,6 +363,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '23',
+    slug: 't20-world-cup-2026-india-vs-pakistan',
     sport: 'cricket',
     leagueSlug: 't20-world-cup',
     eventName: 'T20 World Cup 2026 — India vs Pakistan',
@@ -362,6 +380,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '24',
+    slug: 't20-world-cup-2026-super-8-match',
     sport: 'cricket',
     leagueSlug: 't20-world-cup',
     eventName: 'T20 World Cup 2026 — Super 8 Match',
@@ -381,6 +400,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '25',
+    slug: 't20-world-cup-2026-final',
     sport: 'cricket',
     leagueSlug: 't20-world-cup',
     eventName: 'T20 World Cup 2026 — Final',
@@ -399,6 +419,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   // ── Other Sports ──────────────────────────────────────────────────────
   {
     id: '3',
+    slug: 'england-vs-india-1st-test-2025-06-05',
     sport: 'cricket',
     eventName: 'England vs India — 1st Test',
     league: 'Test Series',
@@ -417,6 +438,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '6',
+    slug: 'world-heavyweight-championship-2025-04-05',
     sport: 'boxing',
     eventName: 'World Heavyweight Championship',
     league: 'WBC Title Fight',
@@ -436,6 +458,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '7',
+    slug: 'british-grand-prix-2025-07-06',
     sport: 'formula-1',
     eventName: 'British Grand Prix',
     league: 'Formula 1 World Championship',
@@ -454,6 +477,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '8',
+    slug: 'england-vs-france-six-nations-2025-03-08',
     sport: 'rugby',
     eventName: 'England vs France — Six Nations',
     league: 'Six Nations Championship',
@@ -472,6 +496,7 @@ export const TICKET_EVENTS: TicketEvent[] = [
   },
   {
     id: '9',
+    slug: 'the-open-championship-day-1-2025-07-17',
     sport: 'golf',
     eventName: 'The Open Championship — Day 1',
     league: 'The Open',
@@ -503,16 +528,11 @@ export const getEventById = (id: string): TicketEvent | undefined =>
   TICKET_EVENTS.find((e) => e.id === id);
 
 export function toTicketSlug(event: TicketEvent): string {
-  const name = event.eventName
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, '')
-    .trim()
-    .replace(/\s+/g, '-');
-  return `${name}-${event.date}`;
+  return event.slug;
 }
 
 export const getEventBySlug = (slug: string): TicketEvent | undefined =>
-  TICKET_EVENTS.find((e) => toTicketSlug(e) === slug);
+  TICKET_EVENTS.find((e) => e.slug === slug);
 
 export const getRelatedEvents = (event: TicketEvent, limit = 3): TicketEvent[] =>
   TICKET_EVENTS

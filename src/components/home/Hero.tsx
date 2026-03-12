@@ -26,7 +26,7 @@ export default function Hero() {
   };
 
   const league = LEAGUES[active];
-  const href = `/category/${league.sportSlug}/${league.slug}`;
+  const href = `/${league.sportSlug}/${league.slug}`;
 
   return (
     <section style={{ background: '#0f0f0f' }}>
@@ -158,7 +158,7 @@ export default function Hero() {
               BUY TICKETS NOW
             </Link>
             <Link
-              href="/category/football"
+              href="/football"
               style={{
                 background: 'rgba(255,255,255,0.08)',
                 color: 'rgba(255,255,255,0.8)',
