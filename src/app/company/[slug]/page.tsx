@@ -181,7 +181,7 @@ function ContactContent() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '40px' }}>
         {[
-          { icon: '📧', label: 'General Enquiries', value: 'hello@ticket-nexus.com' },
+          { icon: '📧', label: 'General Enquiries', value: 'info@ticket-nexus.com' },
           { icon: '🤝', label: 'Partner with Us', value: 'partners@ticket-nexus.com' },
           { icon: '📰', label: 'Press & Media', value: 'press@ticket-nexus.com' },
         ].map(({ icon, label, value }) => (
@@ -273,7 +273,7 @@ function LegalContent({ page }: { page: { title: string; lastUpdated?: string; c
         </h3>
         <p style={{ fontSize: '14px', color: 'var(--text-gray)', lineHeight: 1.6 }}>
           If you have questions about this policy, email us at{' '}
-          <a href="mailto:legal@ticket-nexus.com" style={{ color: 'var(--primary)', fontWeight: 600 }}>legal@ticket-nexus.com</a>.
+          <a href="mailto:info@ticket-nexus.com" style={{ color: 'var(--primary)', fontWeight: 600 }}>info@ticket-nexus.com</a>.
         </p>
       </div>
     </>

@@ -108,7 +108,7 @@ Under UK GDPR, you have the right to:
 - Object to processing
 - Data portability
 
-To exercise any of these rights, contact: privacy@ticket-nexus.com
+To exercise any of these rights, contact: info@ticket-nexus.com
 
 ## 5. Data Retention
 
@@ -120,7 +120,7 @@ See our separate Cookie Policy for full details on cookies we use.
 
 ## 7. Contact
 
-For privacy-related queries: privacy@ticket-nexus.com
+For privacy-related queries: info@ticket-nexus.com
     `,
   },
   {
