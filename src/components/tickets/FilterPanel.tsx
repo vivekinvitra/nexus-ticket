@@ -4,11 +4,8 @@ import { useState } from 'react';
 import { SPORTS } from '@/lib/data/sports';
 
 const PARTNER_FILTERS = [
-  { id: 'ticketmaster', label: 'Ticketmaster', count: 312 },
-  { id: 'stubhub', label: 'StubHub', count: 287 },
-  { id: 'viagogo', label: 'Viagogo', count: 245 },
-  { id: 'seatgeek', label: 'SeatGeek', count: 178 },
-  { id: 'ticketswap', label: 'TicketSwap', count: 132 },
+  { id: 'footballticketnet', label: 'FootballTicketNet', count: 312 },
+  { id: 'awin', label: 'Awin', count: 287 },
 ];
 
 const AVAILABILITY_FILTERS = [
@@ -475,10 +472,10 @@ export default function FilterPanel({ selectedSports, onSportsChange }: FilterPa
             marginBottom: '10px',
           }}
         >
-          🎫 Ticketmaster
+          🎫 FootballTicketNet
         </div>
         <a
-          href="https://ticketmaster.co.uk"
+          href="https://footballticketnet.co.uk"
           target="_blank"
           rel="noopener noreferrer nofollow"
           style={{

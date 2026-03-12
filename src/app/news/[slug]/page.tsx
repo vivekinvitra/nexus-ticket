@@ -66,7 +66,7 @@ export default function NewsArticlePage({ params }: Props) {
     datePublished: article.publishedAt,
     publisher: {
       '@type': 'Organization',
-      name: 'Ticket-nexus',
+      name: 'TicketNexus',
       logo: { '@type': 'ImageObject', url: '/logo.png' },
     },
   };

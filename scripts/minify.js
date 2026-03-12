@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * minify.js
- * Post-build CSS/JS minification helper for Ticket-nexus
+ * Post-build CSS/JS minification helper for TicketNexus
  * Run: node scripts/minify.js
  * (Next.js already minifies in production build — this adds extra passes)
  */

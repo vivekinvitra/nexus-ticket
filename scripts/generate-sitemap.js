@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /**
  * generate-sitemap.js
- * Generates sitemap.xml and sitemap-news.xml for Ticket-nexus
+ * Generates sitemap.xml and sitemap-news.xml for TicketNexus
  * Run: node scripts/generate-sitemap.js
  */
 
 const fs = require('fs');
 const path = require('path');
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://strikezone-tickets.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ticket-nexus.com';
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 
 const SPORTS = [
@@ -17,10 +17,10 @@ const SPORTS = [
 ];
 
 const PARTNERS = [
-  'ticketmaster', 'stubhub', 'viagogo', 'seatwave', 'getmein', 'ticketswap',
+  'footballticketnet', 'awin',
 ];
 
-const LEGAL = ['terms', 'privacy', 'cookies', 'affiliate-disclosure'];
+const COMPANY_PAGES = ['about', 'contact', 'terms', 'privacy', 'cookies', 'affiliate-disclosure'];
 
 function buildUrl(loc, changefreq = 'weekly', priority = '0.7', lastmod) {
   return `  <url>
@@ -36,9 +36,9 @@ function generateMainSitemap() {
     buildUrl(SITE_URL, 'daily', '1.0', today),
     buildUrl(`${SITE_URL}/partners`, 'weekly', '0.8', today),
     buildUrl(`${SITE_URL}/news`, 'daily', '0.8', today),
-    ...SPORTS.map((s) => buildUrl(`${SITE_URL}/category/${s}`, 'hourly', '0.9', today)),
+    ...SPORTS.map((s) => buildUrl(`${SITE_URL}/${s}`, 'hourly', '0.9', today)),
     ...PARTNERS.map((p) => buildUrl(`${SITE_URL}/partners/${p}`, 'weekly', '0.7', today)),
-    ...LEGAL.map((l) => buildUrl(`${SITE_URL}/legal/${l}`, 'monthly', '0.3', today)),
+    ...COMPANY_PAGES.map((p) => buildUrl(`${SITE_URL}/company/${p}`, 'monthly', '0.3', today)),
   ];
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -66,7 +66,7 @@ function generateNewsSitemap() {
     <loc>${SITE_URL}/news/${a.slug}</loc>
     <news:news>
       <news:publication>
-        <news:name>Ticket-nexus</news:name>
+        <news:name>TicketNexus</news:name>
         <news:language>en</news:language>
       </news:publication>
       <news:publication_date>${today}</news:publication_date>
@@ -83,6 +83,43 @@ ${items}
 </urlset>`;
 }
 
+const TICKET_SLUGS = [
+  'manchester-united-vs-arsenal-2025-03-15',
+  'chelsea-vs-liverpool-2025-03-22',
+  'fifa-world-cup-2026-opening-match',
+  'fifa-world-cup-2026-quarter-final',
+  'fifa-world-cup-2026-semi-final',
+  'fifa-world-cup-2026-grand-final',
+  'champions-league-final-2025-05-31',
+  'champions-league-quarter-final-1st-leg-2025-04-08',
+  'champions-league-semi-final-2025-04-29',
+  'wimbledon-mens-final-2026-07-12',
+  'wimbledon-womens-final-2026-07-11',
+  'wimbledon-quarter-finals-day-2026-07-07',
+  'wimbledon-first-week-ground-pass-2026-07-01',
+  'royal-ascot-gold-cup-day-2026-06-18',
+  'royal-ascot-opening-day-2026-06-16',
+  'royal-ascot-diamond-jubilee-day-2026-06-20',
+  't20-world-cup-2026-opening-match',
+  't20-world-cup-2026-india-vs-pakistan',
+  't20-world-cup-2026-super-8-match',
+  't20-world-cup-2026-final',
+  'england-vs-india-1st-test-2025-06-05',
+  'world-heavyweight-championship-2025-04-05',
+  'british-grand-prix-2025-07-06',
+  'england-vs-france-six-nations-2025-03-08',
+  'the-open-championship-day-1-2025-07-17',
+];
+
+function generateTicketsSitemap() {
+  const today = new Date().toISOString().split('T')[0];
+  const urls = TICKET_SLUGS.map((slug) => buildUrl(`${SITE_URL}/tickets/${slug}`, 'daily', '0.8', today));
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.join('\n')}
+</urlset>`;
+}
+
 // Write files
 fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), generateMainSitemap());
 console.log('✅ sitemap.xml generated');
@@ -90,18 +127,5 @@ console.log('✅ sitemap.xml generated');
 fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-news.xml'), generateNewsSitemap());
 console.log('✅ sitemap-news.xml generated');
 
-// Sitemap index
-const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>${SITE_URL}/sitemap.xml</loc>
-    <lastmod>${new Date().toISOString()}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>${SITE_URL}/sitemap-news.xml</loc>
-    <lastmod>${new Date().toISOString()}</lastmod>
-  </sitemap>
-</sitemapindex>`;
-
-fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-index.xml'), sitemapIndex);
-console.log('✅ sitemap-index.xml generated');
+fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-tickets.xml'), generateTicketsSitemap());
+console.log('✅ sitemap-tickets.xml generated');

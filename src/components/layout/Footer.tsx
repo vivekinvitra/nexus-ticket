@@ -1,19 +1,17 @@
 import Link from 'next/link';
 import { SPORTS } from '@/lib/data/sports';
+import { getPagesByGroup } from '@/lib/data/pages';
 
-const LEGAL_LINKS = [
-  { href: '/legal/terms', label: 'Terms & Conditions' },
-  { href: '/legal/privacy', label: 'Privacy Policy' },
-  { href: '/legal/cookies', label: 'Cookie Policy' },
-  { href: '/legal/affiliate-disclosure', label: 'Affiliate Disclosure' },
-];
+const companyPages = getPagesByGroup('company');
+const legalPages = getPagesByGroup('legal');
 
 const COMPANY_LINKS = [
-  { href: '/about', label: 'About Us' },
-  { href: '/contact', label: 'Contact' },
+  ...companyPages.map((p) => ({ href: `/company/${p.slug}`, label: p.title })),
   { href: '/news', label: 'News' },
   { href: '/sitemap.xml', label: 'Sitemap' },
 ];
+
+const LEGAL_LINKS = legalPages.map((p) => ({ href: `/company/${p.slug}`, label: p.title }));
 
 export default function Footer() {
   return (
@@ -130,34 +128,16 @@ export default function Footer() {
               All Partners
             </Link>
             <Link
-              href="/partners/ticketmaster"
+              href="/partners/footballticketnet"
               style={{ fontSize: '14px', color: 'var(--text-gray)' }}
             >
-              Ticketmaster
+              FootballTicketNet
             </Link>
             <Link
-              href="/partners/stubhub"
+              href="/partners/awin"
               style={{ fontSize: '14px', color: 'var(--text-gray)' }}
             >
-              StubHub
-            </Link>
-            <Link
-              href="/partners/viagogo"
-              style={{ fontSize: '14px', color: 'var(--text-gray)' }}
-            >
-              Viagogo
-            </Link>
-            <Link
-              href="/partners/seatgeek"
-              style={{ fontSize: '14px', color: 'var(--text-gray)' }}
-            >
-              SeatGeek
-            </Link>
-            <Link
-              href="/partners/ticketswap"
-              style={{ fontSize: '14px', color: 'var(--text-gray)' }}
-            >
-              TicketSwap
+              Awin
             </Link>
           </div>
         </div>

@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(rm -f \"d:/New-world/google-ai/nexus-tickets/src/app/legal/[slug]/page.tsx\")",
+      "Bash(rmdir \"d:/New-world/google-ai/nexus-tickets/src/app/legal/[slug]\")",
+      "Bash(node \"d:/New-world/google-ai/nexus-tickets/scripts/generate-sitemap.js\")"
     ]
   }
 }

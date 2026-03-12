@@ -1,5 +1,5 @@
 // ══════════════════════════════════════════════════
-//  Core Types for Ticket-nexus
+//  Core Types for TicketNexus
 // ══════════════════════════════════════════════════
 
 export type SportSlug =

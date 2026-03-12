@@ -128,7 +128,7 @@ export const LEAGUES: LeagueCategory[] = [
     heroBg: 'linear-gradient(135deg, #1e0022 0%, #0e0010 100%)',
     imageUrl: FOOTBALL_IMG,
     description: "The world's most-watched football league featuring 20 top English clubs.",
-    longDescription: "The Premier League is the top tier of English football and the most watched league in the world. Featuring 20 clubs competing across 38 matchweeks, it delivers unrivalled drama, world-class players, and iconic stadiums. Compare ticket prices from Ticketmaster, StubHub, and Viagogo to find the best deal for your match.",
+    longDescription: "The Premier League is the top tier of English football and the most watched league in the world. Featuring 20 clubs competing across 38 matchweeks, it delivers unrivalled drama, world-class players, and iconic stadiums. Compare ticket prices from FootballTicketNet and Awin to find the best deal for your match.",
     count: 380,
     matchesLabel: '380 matches',
     country: 'England',

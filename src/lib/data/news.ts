@@ -31,7 +31,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
       },
       {
         h2: 'Which Platforms Offer the Best Value Right Now',
-        body: 'Our latest price analysis across StubHub, Viagogo, Ticketmaster Resale, and SeatPick shows that prices for the same seat can differ by up to 35%. SeatPick consistently aggregates the lowest verified listings for mid-table fixtures, while StubHub tends to edge ahead on elite six-fixture games where its buyer-guarantee attracts premium sellers. For fans on a tighter budget, setting up price-drop alerts on Ticketmaster Resale for dates six to eight weeks out remains one of the most reliable strategies.',
+        body: 'Our latest price analysis across FootballTicketNet and Awin shows that prices for the same seat can differ by up to 35%. For fans on a tighter budget, setting up price-drop alerts on FootballTicketNet for dates six to eight weeks out remains one of the most reliable strategies.',
       },
       {
         h2: 'How to Time Your Purchase for Maximum Savings',
@@ -119,7 +119,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
       },
       {
         h2: 'When the Secondary Market Is Your Best Option',
-        body: 'If you miss the ballot, resale platforms become essential. The official Wimbledon Debenture Holders scheme releases a small number of Centre Court tickets through the official resale portal, and these carry a price premium but are guaranteed authentic. For broader availability, Viagogo and StubHub both list verified e-transfer tickets with buyer guarantees. Research shows that prices for Centre Court day sessions drop by an average of 18% in the 48 hours after a high-profile player is eliminated — so flexibility to watch the tournament rather than a specific match pays off handsomely.',
+        body: 'If you miss the ballot, resale platforms become essential. The official Wimbledon Debenture Holders scheme releases a small number of Centre Court tickets through the official resale portal, and these carry a price premium but are guaranteed authentic. For broader availability, FootballTicketNet and Awin both list verified e-transfer tickets with buyer guarantees. Research shows that prices for Centre Court day sessions drop by an average of 18% in the 48 hours after a high-profile player is eliminated — so flexibility to watch the tournament rather than a specific match pays off handsomely.',
       },
       {
         h2: 'Queue Tickets: The Hidden Gem Most Fans Miss',
@@ -201,7 +201,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
       },
       {
         h2: 'The Safest Platforms for Buying Boxing Tickets in the UK',
-        body: 'For major UK promotions (Matchroom, Queensberry), the safest starting point is always the official promoter\'s ticketing partner — typically AXS or Ticketmaster. Both operate verified transfer systems that link tickets to the buyer\'s account and are unduplicatable. For the secondary market, Viagogo and StubHub both offer money-back guarantees if tickets are invalid at entry. SeatPick aggregates listings from multiple verified resellers and displays a trust score for each seller based on previous successful deliveries — a useful additional filter.',
+        body: 'For major UK promotions (Matchroom, Queensberry), the safest starting point is always the official promoter\'s ticketing partner — typically AXS or FootballTicketNet. Both operate verified transfer systems that link tickets to the buyer\'s account and are unduplicatable. For the secondary market, FootballTicketNet and Awin both offer money-back guarantees if tickets are invalid at entry.',
       },
       {
         h2: 'Getting the Best Price: Timing and Strategy',
@@ -246,7 +246,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
       },
       {
         h2: 'How to Book England Cricket Tickets and Avoid Common Pitfalls',
-        body: 'England home Test tickets are sold exclusively through the ECB and the host county club. Membership of the host county (Middlesex for Lord\'s, Surrey for The Oval, Warwickshire for Edgbaston) provides priority booking windows of up to four weeks before general sale — for major series such as the Ashes, this is often the only viable route to sought-after seats. General sale dates are announced via the ECB website in the autumn. On the secondary market, Ticketmaster Resale and StubHub carry legitimate resale inventory, but premiums of 80–120% above face value are common for Ashes Tests. Prices tend to soften only in the final week before each Test day.',
+        body: 'England home Test tickets are sold exclusively through the ECB and the host county club. Membership of the host county (Middlesex for Lord\'s, Surrey for The Oval, Warwickshire for Edgbaston) provides priority booking windows of up to four weeks before general sale — for major series such as the Ashes, this is often the only viable route to sought-after seats. General sale dates are announced via the ECB website in the autumn. On the secondary market, FootballTicketNet and Awin carry legitimate resale inventory, but premiums of 80–120% above face value are common for Ashes Tests. Prices tend to soften only in the final week before each Test day.',
       },
     ],
   },
