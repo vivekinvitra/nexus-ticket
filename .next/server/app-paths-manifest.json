@@ -1,4 +1,12 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/[slug]/page": "app/[slug]/page.js",
+  "/[slug]/[league]/page": "app/[slug]/[league]/page.js",
   "/page": "app/page.js",
-  "/company/[slug]/page": "app/company/[slug]/page.js"
+  "/news/page": "app/news/page.js",
+  "/partners/[slug]/page": "app/partners/[slug]/page.js",
+  "/partners/page": "app/partners/page.js",
+  "/company/[slug]/page": "app/company/[slug]/page.js",
+  "/news/[slug]/page": "app/news/[slug]/page.js",
+  "/tickets/[slug]/page": "app/tickets/[slug]/page.js"
 }
