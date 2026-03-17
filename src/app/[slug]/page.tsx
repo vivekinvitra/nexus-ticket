@@ -42,10 +42,12 @@ export default function CategoryPage({ params }: Props) {
           }}
         >
           <div
+            className="page-px sport-hero-inner"
             style={{
               maxWidth: '1280px',
               margin: '0 auto',
-              padding: '40px 40px 32px',
+              paddingTop: '40px',
+              paddingBottom: '32px',
             }}
           >
             <div
@@ -83,6 +85,7 @@ export default function CategoryPage({ params }: Props) {
               </div>
               <div>
                 <h1
+                  className="sport-h1"
                   style={{
                     fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
                     fontSize: '36px',
@@ -124,10 +127,12 @@ export default function CategoryPage({ params }: Props) {
 
         {/* Content */}
         <div
+          className="page-px sport-content-inner"
           style={{
             maxWidth: '1280px',
             margin: '0 auto',
-            padding: '32px 40px 60px',
+            paddingTop: '32px',
+            paddingBottom: '60px',
           }}
         >
           <CategoryContent sport={sport} allEvents={getEventsBySport(sport.slug)} />

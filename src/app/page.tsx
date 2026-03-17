@@ -18,7 +18,7 @@ export default function HomePage() {
 
       <main>
         <Hero />
-        <div className="main-content-pad" style={{ maxWidth: '1280px', margin: '0 auto', padding: '32px 40px 60px' }}>
+        <div className="page-px" style={{ maxWidth: '1280px', margin: '0 auto', paddingTop: '32px', paddingBottom: '60px' }}>
           <TicketsContainer />
         </div>
 

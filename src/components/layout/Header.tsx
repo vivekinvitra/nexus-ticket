@@ -16,6 +16,7 @@ export default function Header() {
     <header>
       {/* ── Single sticky nav bar ── */}
       <nav
+        className="nav-bar-pad"
         style={{
           height: 'var(--nav-h)',
           background: 'var(--white)',
@@ -25,7 +26,6 @@ export default function Header() {
           zIndex: 900,
           display: 'flex',
           alignItems: 'center',
-          padding: '0 32px',
           gap: '0',
           boxShadow: 'var(--shadow-sm)',
           overflow: 'visible',

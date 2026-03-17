@@ -71,12 +71,14 @@ export default function LeaguePage({ params }: Props) {
             }}
           />
           <div
+            className="page-px league-inner league-hero-inner"
             style={{
               position: 'relative',
               zIndex: 1,
               maxWidth: '1280px',
               margin: '0 auto',
-              padding: '40px 40px 36px',
+              paddingTop: '40px',
+              paddingBottom: '36px',
             }}
           >
             {/* Breadcrumb */}
@@ -141,6 +143,7 @@ export default function LeaguePage({ params }: Props) {
                 </div>
 
                 <h1
+                  className="league-h1"
                   style={{
                     fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
                     fontSize: '34px',
@@ -222,10 +225,12 @@ export default function LeaguePage({ params }: Props) {
 
         {/* Events */}
         <div
+          className="page-px league-inner league-events-inner"
           style={{
             maxWidth: '1280px',
             margin: '0 auto',
-            padding: '36px 40px 60px',
+            paddingTop: '36px',
+            paddingBottom: '60px',
           }}
         >
           {events.length > 0 ? (
@@ -237,6 +242,7 @@ export default function LeaguePage({ params }: Props) {
             />
           ) : (
             <div
+              className="league-empty"
               style={{
                 background: 'var(--white)',
                 border: '1px solid var(--border-gray)',

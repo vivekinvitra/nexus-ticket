@@ -16,10 +16,10 @@ const LEGAL_LINKS = legalPages.map((p) => ({ href: `/company/${p.slug}`, label: 
 export default function Footer() {
   return (
     <footer
+      className="footer-outer"
       style={{
         background: 'var(--white)',
         borderTop: '1px solid var(--border-gray)',
-        padding: '60px 40px 32px',
       }}
     >
       {/* ── Main grid ── */}

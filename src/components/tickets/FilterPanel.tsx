@@ -1,19 +1,19 @@
 'use client';
 
 import { SPORTS } from '@/lib/data/sports';
-import { TICKET_EVENTS } from '@/lib/data/tickets';
+import { CLEAN_EVENTS } from '@/lib/data/tickets';
 
-// ── Derive counts from TICKET_EVENTS ────────────────────────────────────────
+// ── Derive counts from CLEAN_EVENTS (deduped) ───────────────────────────────
 
 const sportMatchCounts: Record<string, number> = {};
-TICKET_EVENTS.forEach((e) => {
+CLEAN_EVENTS.forEach((e) => {
   sportMatchCounts[e.sport] = (sportMatchCounts[e.sport] || 0) + 1;
 });
 
 const TICKET_MAX_PRICE = 1000;
 
 const partnerCounts: Record<string, number> = {};
-TICKET_EVENTS.forEach((e) => {
+CLEAN_EVENTS.forEach((e) => {
   const seen = new Set<string>();
   e.partners.forEach((p) => {
     if (!seen.has(p.partnerId)) {
@@ -51,7 +51,7 @@ export default function FilterPanel({
   onPartnersChange,
   onReset,
 }: FilterPanelProps) {
-  const totalCount = TICKET_EVENTS.length;
+  const totalCount = CLEAN_EVENTS.length;
   const allSportsSelected = selectedSports.includes('all');
 
   const toggleAllSports = () => {

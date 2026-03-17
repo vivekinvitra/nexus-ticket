@@ -33,10 +33,9 @@ export default function Hero() {
     <section style={{ background: '#0f0f0f' }}>
       {/* ── Slider ── */}
       <div
+        className="hero-slider"
         style={{
           position: 'relative',
-          minHeight: '350px',
-          maxHeight: '400px',
           background: league.heroBg,
           transition: 'background 0.5s ease',
           overflow: 'hidden',
@@ -61,11 +60,11 @@ export default function Hero() {
           key={league.slug}
           src={league.imageUrl}
           alt={league.name}
+          className="hero-bg-img"
           style={{
             position: 'absolute',
             top: 0,
             right: 0,
-            width: '62%',
             height: '100%',
             objectFit: 'cover',
             objectPosition: 'center top',
@@ -118,12 +117,11 @@ export default function Hero() {
           <h1
             style={{
               fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
-              fontSize: 'clamp(26px, 3vw, 40px)',
+              fontSize: 'clamp(22px, 3vw, 40px)',
               fontWeight: 800,
               lineHeight: 1.1,
               color: '#ffffff',
               marginBottom: '16px',
-              whiteSpace: 'nowrap',
             }}
             className="hero-h1"
           >
@@ -201,7 +199,11 @@ export default function Hero() {
 
       <style>{`
         @media (max-width: 900px) {
-          .hero-content { padding: 50px 20px 44px !important; max-width: 100% !important; }
+          .hero-content { padding: 40px 20px 36px !important; max-width: 100% !important; }
+        }
+        @media (max-width: 640px) {
+          .hero-content { padding: 24px 16px 28px !important; }
+          .hero-content a { padding: 11px 20px !important; font-size: 13px !important; }
         }
       `}</style>
     </section>

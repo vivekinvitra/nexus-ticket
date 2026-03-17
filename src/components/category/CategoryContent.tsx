@@ -41,7 +41,6 @@ export default function CategoryContent({ sport, allEvents }: CategoryContentPro
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: '280px 1fr',
         gap: '32px',
         alignItems: 'start',
       }}
