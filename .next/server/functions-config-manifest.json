@@ -1,1 +1,1 @@
-{"version":1,"functions":{"/[slug]":{},"/":{},"/[slug]/[league]":{},"/news":{},"/company/[slug]":{},"/news/[slug]":{},"/partners":{},"/partners/[slug]":{},"/tickets/[slug]":{}}}
+{"version":1,"functions":{"/":{},"/[slug]":{},"/news":{},"/[slug]/[league]":{},"/company/[slug]":{},"/news/[slug]":{},"/partners":{},"/partners/[slug]":{},"/tickets/[slug]":{}}}

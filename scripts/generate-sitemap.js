@@ -1,26 +1,75 @@
 #!/usr/bin/env node
 /**
  * generate-sitemap.js
- * Generates sitemap.xml and sitemap-news.xml for TicketNexus
+ * Generates sitemap.xml, sitemap-news.xml, sitemap-tickets.xml for TicketNexus.
+ * Reads slugs dynamically from source data files — always up to date.
  * Run: node scripts/generate-sitemap.js
  */
 
-const fs = require('fs');
+const fs   = require('fs');
 const path = require('path');
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ticket-nexus.com';
+const SITE_URL   = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ticket-nexus.com').replace(/\/$/, '');
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
+const SRC_DIR    = path.join(__dirname, '..', 'src', 'lib', 'data');
 
-const SPORTS = [
-  'football', 'cricket', 'horse-racing', 'tennis',
-  'boxing', 'formula-1', 'rugby', 'golf',
-];
+// ── data readers ──────────────────────────────────────────────────────────
 
-const PARTNERS = [
-  'footballticketnet', 'awin',
-];
+/** All sport slugs from sports.ts */
+function getSportSlugs() {
+  const src = fs.readFileSync(path.join(SRC_DIR, 'sports.ts'), 'utf-8');
+  return [...src.matchAll(/^\s+slug:\s*'([^']+)'/gm)].map(m => m[1]);
+}
 
-const COMPANY_PAGES = ['about', 'contact', 'terms', 'privacy', 'cookies', 'affiliate-disclosure'];
+/** All league { slug, sportSlug } pairs from leagues.ts */
+function getLeagues() {
+  const src    = fs.readFileSync(path.join(SRC_DIR, 'leagues.ts'), 'utf-8');
+  const leagues = [];
+  for (const block of src.split(/\n  \{/)) {
+    const slugM  = block.match(/slug:\s*'([^']+)'/);
+    const sportM = block.match(/sportSlug:\s*'([^']+)'/);
+    if (slugM && sportM) leagues.push({ slug: slugM[1], sportSlug: sportM[1] });
+  }
+  return leagues;
+}
+
+/** Upcoming (today+) clean ticket slugs from tickets.ts, sorted by date+time */
+function getTicketSlugs() {
+  const src   = fs.readFileSync(path.join(SRC_DIR, 'tickets.ts'), 'utf-8');
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const events = [];
+  const lines  = src.split('\n');
+
+  let currentSlug = null;
+  let currentDate = null;
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith('slug:')) {
+      const m = trimmed.match(/slug:\s*'([^']+)'/);
+      currentSlug = (m && !/-44\d{9,}$/.test(m[1])) ? m[1] : null;
+      currentDate = null;
+    } else if (trimmed.startsWith('date:') && currentSlug) {
+      const m = trimmed.match(/date:\s*'([^']+)'/);
+      if (m) currentDate = m[1];
+    } else if (trimmed.startsWith('time:') && currentSlug && currentDate) {
+      const m = trimmed.match(/time:\s*'([^']+)'/);
+      const time = m ? m[1] : '00:00';
+      if (new Date(currentDate) >= today) {
+        events.push({ slug: currentSlug, sortKey: `${currentDate}T${time}` });
+      }
+      currentSlug = null;
+      currentDate = null;
+    }
+  }
+
+  events.sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+  return events.map(e => e.slug);
+}
+
+// ── url builder ───────────────────────────────────────────────────────────
 
 function buildUrl(loc, changefreq = 'weekly', priority = '0.7', lastmod) {
   return `  <url>
@@ -30,15 +79,40 @@ function buildUrl(loc, changefreq = 'weekly', priority = '0.7', lastmod) {
   </url>`;
 }
 
-function generateMainSitemap() {
-  const today = new Date().toISOString().split('T')[0];
+// ── generators ────────────────────────────────────────────────────────────
+
+function generateMainSitemap(today) {
+  const sports  = getSportSlugs();
+  const leagues = getLeagues();
+
+  const companyPages = ['about', 'contact', 'terms', 'privacy', 'cookies', 'affiliate-disclosure'];
+  const partners     = ['footballticketnet', 'awin'];
+
   const urls = [
-    buildUrl(SITE_URL, 'daily', '1.0', today),
-    buildUrl(`${SITE_URL}/partners`, 'weekly', '0.8', today),
-    buildUrl(`${SITE_URL}/news`, 'daily', '0.8', today),
-    ...SPORTS.map((s) => buildUrl(`${SITE_URL}/${s}`, 'hourly', '0.9', today)),
-    ...PARTNERS.map((p) => buildUrl(`${SITE_URL}/partners/${p}`, 'weekly', '0.7', today)),
-    ...COMPANY_PAGES.map((p) => buildUrl(`${SITE_URL}/company/${p}`, 'monthly', '0.3', today)),
+    // Core pages
+    buildUrl(SITE_URL,                       'daily',  '1.0', today),
+    buildUrl(`${SITE_URL}/partners`,         'weekly', '0.8', today),
+    buildUrl(`${SITE_URL}/news`,             'daily',  '0.8', today),
+
+    // Sport category pages
+    ...sports.map(s =>
+      buildUrl(`${SITE_URL}/${s}`, 'hourly', '0.9', today)
+    ),
+
+    // League pages  /{sportSlug}/{leagueSlug}
+    ...leagues.map(l =>
+      buildUrl(`${SITE_URL}/${l.sportSlug}/${l.slug}`, 'daily', '0.8', today)
+    ),
+
+    // Partner pages
+    ...partners.map(p =>
+      buildUrl(`${SITE_URL}/partners/${p}`, 'weekly', '0.7', today)
+    ),
+
+    // Company / legal pages
+    ...companyPages.map(p =>
+      buildUrl(`${SITE_URL}/company/${p}`, 'monthly', '0.3', today)
+    ),
   ];
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -47,22 +121,17 @@ ${urls.join('\n')}
 </urlset>`;
 }
 
-function generateNewsSitemap() {
-  const today = new Date().toISOString().split('T')[0];
-
-  // In production, fetch from database
-  const newsArticles = [
+function generateNewsSitemap(today) {
+  const articles = [
     { slug: 'premier-league-ticket-prices-2025', title: 'Premier League 2024/25: How to Find the Best Ticket Deals' },
-    { slug: 'cheltenham-festival-guide-2025', title: 'Cheltenham Festival 2025: Complete Ticket Buying Guide' },
-    { slug: 'wimbledon-ballot-tips', title: '5 Tips for the Wimbledon Ballot' },
-    { slug: 'f1-silverstone-hospitality-guide', title: 'British GP 2025: Grandstand vs Paddock Club' },
-    { slug: 'boxing-ticket-buying-tips', title: 'How to Buy Boxing Tickets' },
-    { slug: 'cricket-test-match-best-seats', title: 'England Cricket 2025: Best Seats Guide' },
+    { slug: 'cheltenham-festival-guide-2025',    title: 'Cheltenham Festival 2025: Complete Ticket Buying Guide' },
+    { slug: 'wimbledon-ballot-tips',             title: '5 Tips for the Wimbledon Ballot' },
+    { slug: 'f1-silverstone-hospitality-guide',  title: 'British GP 2025: Grandstand vs Paddock Club' },
+    { slug: 'boxing-ticket-buying-tips',         title: 'How to Buy Boxing Tickets' },
+    { slug: 'cricket-test-match-best-seats',     title: 'England Cricket 2025: Best Seats Guide' },
   ];
 
-  const items = newsArticles
-    .map(
-      (a) => `  <url>
+  const items = articles.map(a => `  <url>
     <loc>${SITE_URL}/news/${a.slug}</loc>
     <news:news>
       <news:publication>
@@ -72,9 +141,7 @@ function generateNewsSitemap() {
       <news:publication_date>${today}</news:publication_date>
       <news:title>${a.title}</news:title>
     </news:news>
-  </url>`,
-    )
-    .join('\n');
+  </url>`).join('\n');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -83,49 +150,27 @@ ${items}
 </urlset>`;
 }
 
-const TICKET_SLUGS = [
-  'manchester-united-vs-arsenal-2025-03-15',
-  'chelsea-vs-liverpool-2025-03-22',
-  'fifa-world-cup-2026-opening-match',
-  'fifa-world-cup-2026-quarter-final',
-  'fifa-world-cup-2026-semi-final',
-  'fifa-world-cup-2026-grand-final',
-  'champions-league-final-2025-05-31',
-  'champions-league-quarter-final-1st-leg-2025-04-08',
-  'champions-league-semi-final-2025-04-29',
-  'wimbledon-mens-final-2026-07-12',
-  'wimbledon-womens-final-2026-07-11',
-  'wimbledon-quarter-finals-day-2026-07-07',
-  'wimbledon-first-week-ground-pass-2026-07-01',
-  'royal-ascot-gold-cup-day-2026-06-18',
-  'royal-ascot-opening-day-2026-06-16',
-  'royal-ascot-diamond-jubilee-day-2026-06-20',
-  't20-world-cup-2026-opening-match',
-  't20-world-cup-2026-india-vs-pakistan',
-  't20-world-cup-2026-super-8-match',
-  't20-world-cup-2026-final',
-  'england-vs-india-1st-test-2025-06-05',
-  'world-heavyweight-championship-2025-04-05',
-  'british-grand-prix-2025-07-06',
-  'england-vs-france-six-nations-2025-03-08',
-  'the-open-championship-day-1-2025-07-17',
-];
-
-function generateTicketsSitemap() {
-  const today = new Date().toISOString().split('T')[0];
-  const urls = TICKET_SLUGS.map((slug) => buildUrl(`${SITE_URL}/tickets/${slug}`, 'daily', '0.8', today));
+function generateTicketsSitemap(today) {
+  const slugs = getTicketSlugs();
+  const urls  = slugs.map(slug => buildUrl(`${SITE_URL}/tickets/${slug}`, 'daily', '0.8', today));
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.join('\n')}
 </urlset>`;
 }
 
-// Write files
-fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), generateMainSitemap());
-console.log('✅ sitemap.xml generated');
+// ── write ─────────────────────────────────────────────────────────────────
 
-fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-news.xml'), generateNewsSitemap());
-console.log('✅ sitemap-news.xml generated');
+const today   = new Date().toISOString().split('T')[0];
+const sports  = getSportSlugs();
+const leagues = getLeagues();
+const tickets = getTicketSlugs();
 
-fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-tickets.xml'), generateTicketsSitemap());
-console.log('✅ sitemap-tickets.xml generated');
+fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), generateMainSitemap(today));
+console.log(`✅  sitemap.xml        — ${sports.length} sports, ${leagues.length} leagues, 2 partners, 6 company pages`);
+
+fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-news.xml'), generateNewsSitemap(today));
+console.log(`✅  sitemap-news.xml   — 6 articles`);
+
+fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-tickets.xml'), generateTicketsSitemap(today));
+console.log(`✅  sitemap-tickets.xml — ${tickets.length} tickets`);
