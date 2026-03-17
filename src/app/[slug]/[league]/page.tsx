@@ -34,7 +34,12 @@ export default function LeaguePage({ params }: Props) {
 
   if (!sport || !league || league.sportSlug !== sport.slug) notFound();
 
-  const events = getEventsByLeague(league.slug);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const events = getEventsByLeague(league.slug).filter(
+    (e) => new Date(e.date) >= today
+  );
   const siblingLeagues = getLeaguesBySport(sport.slug).filter((l) => l.slug !== league.slug);
 
   return (
@@ -250,10 +255,10 @@ export default function LeaguePage({ params }: Props) {
                   marginBottom: '8px',
                 }}
               >
-                No {league.name} tickets listed yet
+                No upcoming {league.name} tickets
               </h2>
               <p style={{ color: 'var(--text-gray)', fontSize: '15px', marginBottom: '24px' }}>
-                Tickets go on sale closer to the event — check back soon or browse all {sport.name} events.
+                No upcoming fixtures found — check back soon or browse all {sport.name} events.
               </p>
               <Link
                 href={`/${sport.slug}`}

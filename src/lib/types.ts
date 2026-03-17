@@ -47,6 +47,7 @@ export interface TicketEvent {
   city: string;
   availability: AvailabilityStatus;
   minPrice: number;
+  currency?: string;           // e.g. 'USD' — from Awin feed currency field
   featured?: boolean;
   description?: string;
   imageUrl?: string;
@@ -83,6 +84,10 @@ export interface TicketPartnerPrice {
   price: number;
   tag?: string;
   isBest?: boolean;
+  awDeepLink?: string;    // aw_deep_link  — Awin affiliate tracking URL
+  awProductId?: string;   // aw_product_id — Awin product identifier
+  awImageUrl?: string;    // aw_image_url  — Awin-served product image URL
+  dataFeedId?: string;    // data_feed_id  — Awin data feed identifier
 }
 
 export interface Partner {
@@ -102,6 +107,8 @@ export interface Partner {
   deliveryOptions: string[];
   founded: number;
   website: string;
+  merchantId?: string;          // Awin merchant ID
+  merchantredirecturl?: string; // Awin merchant redirect URL
 }
 
 export interface NewsSection {

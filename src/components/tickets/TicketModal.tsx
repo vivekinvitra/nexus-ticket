@@ -160,7 +160,7 @@ export default function TicketModal({ event, onClose }: TicketModalProps) {
                 color: 'var(--primary)',
               }}
             >
-              {formatPrice(event.minPrice)}
+              {formatPrice(event.minPrice, event.currency)}
             </span>
             <small style={{ fontSize: '13px', color: 'var(--text-gray)', fontWeight: 400 }}>
               {' '}
@@ -186,8 +186,11 @@ export default function TicketModal({ event, onClose }: TicketModalProps) {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {event.partners.map((partner) => (
-                <button
+                <a
                   key={partner.partnerId}
+                  href={partner.awDeepLink ?? `/partners/${partner.partnerId}`}
+                  target={partner.awDeepLink ? '_blank' : undefined}
+                  rel={partner.awDeepLink ? 'noopener noreferrer sponsored' : undefined}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -198,12 +201,22 @@ export default function TicketModal({ event, onClose }: TicketModalProps) {
                     padding: '14px 16px',
                     cursor: 'pointer',
                     transition: 'all .2s',
-                    textAlign: 'left',
+                    textDecoration: 'none',
                     width: '100%',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <span style={{ fontSize: '22px' }}>{partner.partnerIcon}</span>
+                    {partner.awImageUrl ? (
+                      <img
+                        src={partner.awImageUrl}
+                        alt={partner.partnerName}
+                        width={36}
+                        height={36}
+                        style={{ borderRadius: '6px', objectFit: 'cover', border: '1px solid var(--border-gray)', flexShrink: 0 }}
+                      />
+                    ) : (
+                      <span style={{ fontSize: '22px' }}>{partner.partnerIcon}</span>
+                    )}
                     <div>
                       <div
                         style={{
@@ -229,9 +242,9 @@ export default function TicketModal({ event, onClose }: TicketModalProps) {
                       color: partner.isBest ? 'var(--orange)' : 'var(--primary)',
                     }}
                   >
-                    {formatPrice(partner.price)}
+                    {formatPrice(partner.price, event.currency)}
                   </span>
-                </button>
+                </a>
               ))}
             </div>
           </div>
@@ -248,7 +261,7 @@ export default function TicketModal({ event, onClose }: TicketModalProps) {
         >
           Prices shown are indicative and may change at any time. TicketNexus earns an affiliate
           commission when you purchase via partner links. See our{' '}
-          <a href="/legal/affiliate-disclosure" style={{ color: 'var(--primary)' }}>
+          <a href="/company/affiliate-disclosure" style={{ color: 'var(--primary)' }}>
             Affiliate Disclosure
           </a>{' '}
           for details.

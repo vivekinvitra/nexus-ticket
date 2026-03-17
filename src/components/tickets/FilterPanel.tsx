@@ -1,30 +1,57 @@
 'use client';
 
-import { useState } from 'react';
 import { SPORTS } from '@/lib/data/sports';
+import { TICKET_EVENTS } from '@/lib/data/tickets';
 
-const PARTNER_FILTERS = [
-  { id: 'footballticketnet', label: 'FootballTicketNet', count: 312 },
-  { id: 'awin', label: 'Awin', count: 287 },
-];
+// ── Derive counts from TICKET_EVENTS ────────────────────────────────────────
 
-const AVAILABILITY_FILTERS = [
-  { id: 'high', label: 'Available', count: 512 },
-  { id: 'low', label: 'Limited Seats', count: 148 },
-  { id: 'sold-out', label: 'Sold Out', count: 85 },
-];
+const sportMatchCounts: Record<string, number> = {};
+TICKET_EVENTS.forEach((e) => {
+  sportMatchCounts[e.sport] = (sportMatchCounts[e.sport] || 0) + 1;
+});
+
+const TICKET_MAX_PRICE = 1000;
+
+const partnerCounts: Record<string, number> = {};
+TICKET_EVENTS.forEach((e) => {
+  const seen = new Set<string>();
+  e.partners.forEach((p) => {
+    if (!seen.has(p.partnerId)) {
+      partnerCounts[p.partnerId] = (partnerCounts[p.partnerId] || 0) + 1;
+      seen.add(p.partnerId);
+    }
+  });
+});
+
+const PARTNER_FILTERS = Object.entries(partnerCounts).map(([id, count]) => ({
+  id,
+  label: id === 'footballticketnet' ? 'FootballTicketNet' : id === 'awin' ? 'Awin' : id,
+  icon: id === 'footballticketnet' ? '⚽' : '🌐',
+  count,
+}));
+
+// ── Props ────────────────────────────────────────────────────────────────────
 
 interface FilterPanelProps {
   selectedSports: string[];
   onSportsChange: (sports: string[]) => void;
+  maxPrice: number;
+  onMaxPriceChange: (price: number) => void;
+  selectedPartners: string[];
+  onPartnersChange: (partners: string[]) => void;
+  onReset: () => void;
 }
 
-export default function FilterPanel({ selectedSports, onSportsChange }: FilterPanelProps) {
-  const [selectedPartners, setSelectedPartners] = useState<string[]>([]);
-  const [selectedAvail, setSelectedAvail] = useState<string[]>(['high', 'low']);
-  const [maxPrice, setMaxPrice] = useState(300);
-
-  const TOTAL_SPORTS_COUNT = SPORTS.reduce((sum, s) => sum + s.count, 0);
+export default function FilterPanel({
+  selectedSports,
+  onSportsChange,
+  maxPrice,
+  onMaxPriceChange,
+  selectedPartners,
+  onPartnersChange,
+  onReset,
+}: FilterPanelProps) {
+  const totalCount = TICKET_EVENTS.length;
   const allSportsSelected = selectedSports.includes('all');
 
   const toggleAllSports = () => {
@@ -35,49 +62,30 @@ export default function FilterPanel({ selectedSports, onSportsChange }: FilterPa
     }
   };
 
-  const toggleSports = (slug: string) => {
-    let newSelected: string[];
-    
+  const toggleSport = (slug: string) => {
+    let next: string[];
     if (selectedSports.includes('all')) {
-      // If "All" is selected, deselect it and select only this sport
-      newSelected = [slug];
+      next = [slug];
     } else if (selectedSports.includes(slug)) {
-      // If this sport is selected, deselect it
-      newSelected = selectedSports.filter((s) => s !== slug);
-      // If no sports left, select all
-      if (newSelected.length === 0) {
-        newSelected = ['all'];
-      }
+      next = selectedSports.filter((s) => s !== slug);
+      if (next.length === 0) next = ['all'];
     } else {
-      // If this sport is not selected, add it
-      newSelected = [...selectedSports, slug];
-      // Check if all individual sports are selected, if so select "all"
-      if (newSelected.length === SPORTS.length) {
-        newSelected = ['all'];
+      next = [...selectedSports, slug];
+      if (next.length === SPORTS.filter((s) => (sportMatchCounts[s.slug] ?? 0) > 0).length) {
+        next = ['all'];
       }
     }
-    
-    onSportsChange(newSelected);
+    onSportsChange(next);
   };
 
   const togglePartner = (id: string) => {
-    setSelectedPartners((prev) =>
-      prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id]
-    );
+    const next = selectedPartners.includes(id)
+      ? selectedPartners.filter((p) => p !== id)
+      : [...selectedPartners, id];
+    onPartnersChange(next);
   };
 
-  const toggleAvail = (id: string) => {
-    setSelectedAvail((prev) =>
-      prev.includes(id) ? prev.filter((a) => a !== id) : [...prev, id]
-    );
-  };
-
-  const resetAll = () => {
-    onSportsChange(['all']);
-    setSelectedPartners([]);
-    setSelectedAvail(['high', 'low']);
-    setMaxPrice(300);
-  };
+  const pct = (maxPrice / TICKET_MAX_PRICE) * 100;
 
   return (
     <aside
@@ -106,7 +114,7 @@ export default function FilterPanel({ selectedSports, onSportsChange }: FilterPa
           Filters
         </h3>
         <button
-          onClick={resetAll}
+          onClick={onReset}
           style={{
             background: 'none',
             border: 'none',
@@ -181,33 +189,28 @@ export default function FilterPanel({ selectedSports, onSportsChange }: FilterPa
               borderRadius: '100px',
             }}
           >
-            {TOTAL_SPORTS_COUNT}
+            {totalCount}
           </span>
         </div>
 
         {/* Scrollable Sports List */}
         <div
           className="sports-filter-scroll"
-          style={{
-            maxHeight: '280px',
-            overflowY: 'auto',
-            paddingRight: '8px',
-          }}
+          style={{ maxHeight: '280px', overflowY: 'auto', paddingRight: '8px' }}
         >
-          {/* Individual Sports */}
-          {SPORTS.map((sport, index) => {
+          {SPORTS.filter((s) => (sportMatchCounts[s.slug] ?? 0) > 0).map((sport) => {
             const checked = selectedSports.includes(sport.slug) && !allSportsSelected;
+            const matchCount = sportMatchCounts[sport.slug] ?? 0;
             return (
               <div
                 key={sport.slug}
-                onClick={() => toggleSports(sport.slug)}
+                onClick={() => toggleSport(sport.slug)}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   gap: '10px',
                   padding: '8px 0',
                   cursor: 'pointer',
-                  opacity: index < 10 ? 1 : 0.9,
                 }}
               >
                 <div
@@ -243,7 +246,7 @@ export default function FilterPanel({ selectedSports, onSportsChange }: FilterPa
                     borderRadius: '100px',
                   }}
                 >
-                  {sport.count}
+                  {matchCount}
                 </span>
               </div>
             );
@@ -251,23 +254,14 @@ export default function FilterPanel({ selectedSports, onSportsChange }: FilterPa
         </div>
 
         <style>{`
-          .sports-filter-scroll::-webkit-scrollbar {
-            width: 4px;
-          }
-          .sports-filter-scroll::-webkit-scrollbar-track {
-            background: transparent;
-          }
-          .sports-filter-scroll::-webkit-scrollbar-thumb {
-            background: var(--border-gray);
-            border-radius: 100px;
-          }
-          .sports-filter-scroll::-webkit-scrollbar-thumb:hover {
-            background: var(--text-gray);
-          }
+          .sports-filter-scroll::-webkit-scrollbar { width: 4px; }
+          .sports-filter-scroll::-webkit-scrollbar-track { background: transparent; }
+          .sports-filter-scroll::-webkit-scrollbar-thumb { background: var(--border-gray); border-radius: 100px; }
+          .sports-filter-scroll::-webkit-scrollbar-thumb:hover { background: var(--text-gray); }
         `}</style>
       </div>
 
-      {/* Price Range */}
+      {/* Max Price */}
       <div style={{ borderBottom: '1px solid var(--border-gray)', padding: '18px 20px' }}>
         <div
           style={{
@@ -284,11 +278,12 @@ export default function FilterPanel({ selectedSports, onSportsChange }: FilterPa
         <input
           type="range"
           min={0}
-          max={500}
+          max={TICKET_MAX_PRICE}
+          step={10}
           value={maxPrice}
-          onChange={(e) => setMaxPrice(Number(e.target.value))}
+          onChange={(e) => onMaxPriceChange(Number(e.target.value))}
           className="price-slider"
-          style={{ '--pct': `${(maxPrice / 500) * 100}%` } as React.CSSProperties}
+          style={{ '--pct': `${pct}%` } as React.CSSProperties}
         />
         <div
           style={{
@@ -300,80 +295,15 @@ export default function FilterPanel({ selectedSports, onSportsChange }: FilterPa
             fontWeight: 500,
           }}
         >
-          <span>£0</span>
-          <span style={{ color: 'var(--primary)', fontWeight: 700 }}>£{maxPrice}</span>
-          <span>£500+</span>
+          <span>0</span>
+          <span style={{ color: 'var(--primary)', fontWeight: 700 }}>
+            {maxPrice >= TICKET_MAX_PRICE ? `${TICKET_MAX_PRICE}+` : `${maxPrice}`}
+          </span>
+          <span>{TICKET_MAX_PRICE}+</span>
         </div>
       </div>
 
-      {/* Availability */}
-      <div style={{ borderBottom: '1px solid var(--border-gray)', padding: '18px 20px' }}>
-        <div
-          style={{
-            fontSize: '12px',
-            fontWeight: 700,
-            color: 'var(--text-dark)',
-            marginBottom: '12px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.04em',
-          }}
-        >
-          Availability
-        </div>
-        {AVAILABILITY_FILTERS.map((opt) => {
-          const checked = selectedAvail.includes(opt.id);
-          return (
-            <div
-              key={opt.id}
-              onClick={() => toggleAvail(opt.id)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                padding: '8px 0',
-                cursor: 'pointer',
-              }}
-            >
-              <div
-                style={{
-                  width: '18px',
-                  height: '18px',
-                  borderRadius: '4px',
-                  border: `2px solid ${checked ? 'var(--primary)' : 'var(--border-gray)'}`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  background: checked ? 'var(--primary)' : 'var(--white)',
-                  flexShrink: 0,
-                  transition: 'all .15s',
-                  color: 'var(--white)',
-                  fontSize: '11px',
-                  fontWeight: 700,
-                }}
-              >
-                {checked && '✓'}
-              </div>
-              <span style={{ fontSize: '14px', color: 'var(--text-gray)', flex: 1 }}>
-                {opt.label}
-              </span>
-              <span
-                style={{
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  color: 'var(--text-gray)',
-                  background: 'var(--light-gray)',
-                  padding: '2px 8px',
-                  borderRadius: '100px',
-                }}
-              >
-                {opt.count}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Partners */}
+      {/* Platform Partners */}
       <div style={{ borderBottom: '1px solid var(--border-gray)', padding: '18px 20px' }}>
         <div
           style={{
@@ -420,6 +350,7 @@ export default function FilterPanel({ selectedSports, onSportsChange }: FilterPa
               >
                 {checked && '✓'}
               </div>
+              <span style={{ fontSize: '16px', marginRight: '4px' }}>{opt.icon}</span>
               <span style={{ fontSize: '14px', color: 'var(--text-gray)', flex: 1 }}>
                 {opt.label}
               </span>

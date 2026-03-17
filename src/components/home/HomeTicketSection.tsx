@@ -7,12 +7,17 @@ import TicketTable from '@/components/tickets/TicketTable';
 
 interface HomeTicketSectionProps {
   selectedSports: string[];
+  maxPrice: number;
+  selectedPartners: string[];
 }
 
 type SortOption = 'date-soonest' | 'price-lowest' | 'price-highest' | 'availability';
 
-export default function HomeTicketSection({ selectedSports }: HomeTicketSectionProps) {
+export default function HomeTicketSection({ selectedSports, maxPrice, selectedPartners }: HomeTicketSectionProps) {
   const [sortBy, setSortBy] = useState<SortOption>('date-soonest');
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
   const sportsToDisplay: string[] = selectedSports.includes('all')
     ? SPORTS.map((s) => s.slug)
@@ -21,9 +26,20 @@ export default function HomeTicketSection({ selectedSports }: HomeTicketSectionP
   const sportSections = sportsToDisplay.map((sportSlug) => {
     const sport = SPORTS.find((s) => s.slug === sportSlug);
     if (!sport) return null;
-    const events = TICKET_EVENTS.filter((e) => e.sport === sportSlug);
+    let events = TICKET_EVENTS.filter(
+      (e) => e.sport === sportSlug && new Date(e.date) >= today
+    );
+    // Apply max price filter
+    events = events.filter((e) => e.minPrice <= maxPrice);
+    // Apply partner filter — keep event if it has at least one selected partner (or no filter active)
+    if (selectedPartners.length > 0) {
+      events = events.filter((e) =>
+        e.partners.some((p) => selectedPartners.includes(p.partnerId))
+      );
+    }
     if (events.length === 0) return null;
-    return { sport, events, icon: sport.icon };
+    const currencies = [...new Set(events.map((e) => e.currency).filter(Boolean))];
+    return { sport, events, icon: sport.icon, currencies };
   }).filter(Boolean);
 
   if (sportSections.length === 0) {
@@ -89,6 +105,7 @@ export default function HomeTicketSection({ selectedSports }: HomeTicketSectionP
             sportIcon={section.icon}
             rounded={true}
             sortBy={sortBy}
+            currencies={section.currencies}
           />
         </div>
       ))}

@@ -292,9 +292,9 @@ export default function PartnerDetailPage({ params }: Props) {
                   Visit their official site to browse tickets:
                 </div>
                 <a
-                  href={partner.website}
+                  href={partner.merchantredirecturl ?? partner.website}
                   target="_blank"
-                  rel="noopener noreferrer nofollow"
+                  rel="noopener noreferrer nofollow sponsored"
                   style={{
                     display: 'block',
                     width: '100%',

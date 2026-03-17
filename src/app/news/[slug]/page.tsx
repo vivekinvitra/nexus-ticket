@@ -6,7 +6,8 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { NEWS_ARTICLES, getNewsBySlug } from '@/lib/data/news';
 import { getEventsBySport, toTicketSlug } from '@/lib/data/tickets';
-import { buildMetadata } from '@/lib/utils/seo';
+import { buildMetadata, buildArticleJsonLd, SITE_URL } from '@/lib/utils/seo';
+import { formatPrice } from '@/lib/utils/format';
 
 interface Props {
   params: { slug: string };
@@ -24,6 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: article.metaDescription,
     path: `/news/${article.slug}`,
     image: article.imageUrl,
+    type: 'article',
+    publishedTime: article.publishedAt,
   });
 }
 
@@ -56,20 +59,14 @@ export default function NewsArticlePage({ params }: Props) {
   const catColor = CAT_COLORS[article.category] || '#6b7280';
   const catLabel = article.category.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'NewsArticle',
-    headline: article.title,
+  const jsonLd = buildArticleJsonLd({
+    title: article.title,
     description: article.metaDescription,
+    publishedAt: article.publishedAt,
+    author: article.author,
+    url: `${SITE_URL}/news/${article.slug}`,
     image: article.imageUrl,
-    author: { '@type': 'Person', name: article.author },
-    datePublished: article.publishedAt,
-    publisher: {
-      '@type': 'Organization',
-      name: 'TicketNexus',
-      logo: { '@type': 'ImageObject', url: '/logo.png' },
-    },
-  };
+  });
 
   return (
     <>
@@ -221,7 +218,7 @@ export default function NewsArticlePage({ params }: Props) {
                           </div>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '8px', borderTop: '1px solid #e2e8f0' }}>
                             <span style={{ fontSize: '12px', color: '#64748b' }}>From</span>
-                            <span style={{ fontSize: '16px', fontWeight: 800, color: 'var(--primary)' }}>£{event.minPrice}</span>
+                            <span style={{ fontSize: '16px', fontWeight: 800, color: 'var(--primary)' }}>{formatPrice(event.minPrice, event.currency)}</span>
                           </div>
                         </Link>
                       );

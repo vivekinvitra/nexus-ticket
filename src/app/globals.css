@@ -305,6 +305,11 @@ input, select {
   display: none;
 }
 
+.league-link:hover {
+  color: var(--primary) !important;
+  text-decoration: underline !important;
+}
+
 .ticket-row:hover {
   background: var(--light-gray);
 }

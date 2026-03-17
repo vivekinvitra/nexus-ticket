@@ -2,9 +2,10 @@
 
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import { getFeaturedLeagues } from '@/lib/data/leagues';
+import { LEAGUES as ALL_LEAGUES } from '@/lib/data/leagues';
 
-const LEAGUES = getFeaturedLeagues();
+const HERO_SLUGS = ['premier-league', 'fifa-world-cup', 'champions-league', 'europa-league', 'la-liga'];
+const LEAGUES = HERO_SLUGS.map((slug) => ALL_LEAGUES.find((l) => l.slug === slug)).filter(Boolean) as typeof ALL_LEAGUES;
 
 export default function Hero() {
   const [active, setActive] = useState(0);

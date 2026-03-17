@@ -4,7 +4,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CategoryContent from '@/components/category/CategoryContent';
 import { SPORTS, getSportBySlug } from '@/lib/data/sports';
-import { TICKET_EVENTS } from '@/lib/data/tickets';
+import { getEventsBySport } from '@/lib/data/tickets';
 import { buildMetadata } from '@/lib/utils/seo';
 
 interface Props {
@@ -130,7 +130,7 @@ export default function CategoryPage({ params }: Props) {
             padding: '32px 40px 60px',
           }}
         >
-          <CategoryContent sport={sport} allEvents={TICKET_EVENTS} />
+          <CategoryContent sport={sport} allEvents={getEventsBySport(sport.slug)} />
         </div>
       </main>
 

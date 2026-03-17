@@ -1,5 +1,6 @@
 export function formatPrice(amount: number, currency = 'GBP'): string {
-  return new Intl.NumberFormat('en-GB', {
+  const locale = currency === 'USD' ? 'en-US' : currency === 'EUR' ? 'en-IE' : 'en-GB';
+  return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency,
     minimumFractionDigits: 0,

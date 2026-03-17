@@ -4,7 +4,8 @@ export const PARTNERS: Partner[] = [
   {
     id: 'footballticketnet',
     slug: 'footballticketnet',
-    name: 'FootballTicketNet',
+    name: 'Football TicketNet US',
+    merchantId: '109004',
     icon: '⚽',
     rating: 4.2,
     reviewCount: 48200,
@@ -19,7 +20,7 @@ export const PARTNERS: Partner[] = [
       'Price alerts and waitlists',
       'Accessible seating options',
     ],
-    specialties: ['football', 'cricket', 'tennis', 'formula-1', 'rugby'],
+    specialties: ['football'],
     pros: [
       'Specialist football inventory',
       'Strong buyer protection',
@@ -34,6 +35,7 @@ export const PARTNERS: Partner[] = [
     deliveryOptions: ['E-ticket', 'Mobile app', 'Print at home'],
     founded: 2004,
     website: 'https://footballticketnet.com',
+    merchantredirecturl: 'https://www.awin1.com/cread.php?awinmid=109004&awinaffid=90270',
   },
   {
     id: 'awin',

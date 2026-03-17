@@ -4,13 +4,12 @@ import Footer from '@/components/layout/Footer';
 import Hero from '@/components/home/Hero';
 import TicketsContainer from '@/components/home/TicketsContainer';
 import PartnersStrip from '@/components/home/PartnersStrip';
+import { buildMetadata } from '@/lib/utils/seo';
 
-export const metadata: Metadata = {
-  title: 'Tickets nexus — Sports Ticket Comparison',
-  description:
-    'Compare sports ticket prices from the UK\'s top resale platforms. Find the best deals on football, cricket, horse racing, tennis, boxing, F1, rugby and golf tickets.',
-  alternates: { canonical: 'https://www.ticket-nexus.com' },
-};
+export const metadata: Metadata = buildMetadata({
+  title: 'Sports Ticket Comparison',
+  path: '/',
+});
 
 export default function HomePage() {
   return (

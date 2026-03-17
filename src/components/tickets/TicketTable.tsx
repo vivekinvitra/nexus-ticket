@@ -13,6 +13,7 @@ interface TicketTableProps {
   sportIcon?: string;
   rounded?: boolean;
   sortBy?: 'date-soonest' | 'price-lowest' | 'price-highest' | 'availability';
+  currencies?: string[];
 }
 
 export default function TicketTable({
@@ -21,8 +22,9 @@ export default function TicketTable({
   sportIcon = '🎫',
   rounded = true,
   sortBy = 'date-soonest',
+  currencies = [],
 }: TicketTableProps) {
-  const [visibleCount, setVisibleCount] = useState(8);
+  const [visibleCount, setVisibleCount] = useState(20);
 
   // Sort events based on sortBy prop
   const sortedEvents = [...events].sort((a, b) => {
@@ -77,6 +79,22 @@ export default function TicketTable({
           >
             {events.length} events
           </span>
+          {currencies.length > 0 && currencies.map((c) => (
+            <span
+              key={c}
+              style={{
+                background: 'var(--light-gray)',
+                color: 'var(--text-gray)',
+                fontSize: '11px',
+                fontWeight: 700,
+                padding: '4px 8px',
+                borderRadius: '100px',
+                border: '1px solid var(--border-gray)',
+              }}
+            >
+              {c}
+            </span>
+          ))}
         </div>
       </div>
 
@@ -143,7 +161,7 @@ export default function TicketTable({
       {visibleCount < sortedEvents.length && (
         <div style={{ padding: '20px 0', textAlign: 'center' }}>
           <button
-            onClick={() => setVisibleCount((c) => c + 8)}
+            onClick={() => setVisibleCount((c) => c + 20)}
             style={{
               background: 'var(--white)',
               border: '1px solid var(--border-gray)',
@@ -255,7 +273,18 @@ function TicketRow({ event }: { event: TicketEvent }) {
             )}
           </div>
           <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginTop: '2px' }}>
-            {event.league}
+            {event.leagueSlug ? (
+              <Link
+                href={`/${event.sport}/${event.leagueSlug}`}
+                onClick={(e) => e.stopPropagation()}
+                style={{ color: 'var(--text-gray)', textDecoration: 'none' }}
+                className="league-link"
+              >
+                {event.league}
+              </Link>
+            ) : (
+              event.league
+            )}
           </div>
         </div>
       </div>
@@ -273,7 +302,9 @@ function TicketRow({ event }: { event: TicketEvent }) {
       {/* Venue */}
       <div className="ticket-venue" style={{ fontSize: '13px', color: 'var(--text-gray)' }}>
         {event.venue}
-        <div style={{ fontSize: '11px', marginTop: '2px' }}>{event.city}</div>
+        {event.city && event.city !== event.venue && (
+          <div style={{ fontSize: '11px', marginTop: '2px' }}>{event.city}</div>
+        )}
       </div>
 
       {/* Availability */}
@@ -310,7 +341,7 @@ function TicketRow({ event }: { event: TicketEvent }) {
             lineHeight: 1,
           }}
         >
-          {formatPrice(event.minPrice)}
+          {formatPrice(event.minPrice, event.currency)}
         </div>
         <div
           style={{
@@ -320,7 +351,7 @@ function TicketRow({ event }: { event: TicketEvent }) {
             marginTop: '3px',
           }}
         >
-          per ticket
+          per ticket{event.currency ? ` · ${event.currency}` : ''}
         </div>
       </div>
 

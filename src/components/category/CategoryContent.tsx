@@ -6,6 +6,8 @@ import TicketTable from '@/components/tickets/TicketTable';
 import type { TicketEvent } from '@/lib/types';
 import type { SportCategory } from '@/lib/types';
 
+const TICKET_MAX_PRICE = 1000;
+
 interface CategoryContentProps {
   sport: SportCategory;
   allEvents: TicketEvent[];
@@ -13,9 +15,27 @@ interface CategoryContentProps {
 
 export default function CategoryContent({ sport, allEvents }: CategoryContentProps) {
   const [selectedSports, setSelectedSports] = useState<string[]>(['all']);
+  const [maxPrice, setMaxPrice] = useState<number>(TICKET_MAX_PRICE);
+  const [selectedPartners, setSelectedPartners] = useState<string[]>([]);
 
-  // Filter events based on this category
-  const categoryEvents = allEvents.filter((e) => e.sport === sport.slug);
+  const handleReset = () => {
+    setSelectedSports(['all']);
+    setMaxPrice(TICKET_MAX_PRICE);
+    setSelectedPartners([]);
+  };
+
+  // Filter upcoming events only
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Filter events based on this category + active filters
+  let categoryEvents = allEvents.filter((e) => new Date(e.date) >= today);
+  categoryEvents = categoryEvents.filter((e) => e.minPrice <= maxPrice);
+  if (selectedPartners.length > 0) {
+    categoryEvents = categoryEvents.filter((e) =>
+      e.partners.some((p) => selectedPartners.includes(p.partnerId))
+    );
+  }
 
   return (
     <div
@@ -27,7 +47,15 @@ export default function CategoryContent({ sport, allEvents }: CategoryContentPro
       }}
       className="content-grid"
     >
-      <FilterPanel selectedSports={selectedSports} onSportsChange={setSelectedSports} />
+      <FilterPanel
+        selectedSports={selectedSports}
+        onSportsChange={setSelectedSports}
+        maxPrice={maxPrice}
+        onMaxPriceChange={setMaxPrice}
+        selectedPartners={selectedPartners}
+        onPartnersChange={setSelectedPartners}
+        onReset={handleReset}
+      />
       <div>
         {categoryEvents.length > 0 ? (
           <TicketTable

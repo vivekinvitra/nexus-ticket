@@ -4,7 +4,12 @@
       "Bash(npx tsc:*)",
       "Bash(rm -f \"d:/New-world/google-ai/nexus-tickets/src/app/legal/[slug]/page.tsx\")",
       "Bash(rmdir \"d:/New-world/google-ai/nexus-tickets/src/app/legal/[slug]\")",
-      "Bash(node \"d:/New-world/google-ai/nexus-tickets/scripts/generate-sitemap.js\")"
+      "Bash(node \"d:/New-world/google-ai/nexus-tickets/scripts/generate-sitemap.js\")",
+      "WebFetch(domain:103.97.166.202)",
+      "Bash(python3 -c \":*)",
+      "Bash(node -e \":*)",
+      "Bash(node scripts/generate-from-csv.js)",
+      "Bash(git checkout:*)"
     ]
   }
 }

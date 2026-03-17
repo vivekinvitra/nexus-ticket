@@ -3,9 +3,9 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { TICKET_EVENTS, getEventBySlug, getRelatedEvents, toTicketSlug } from '@/lib/data/tickets';
+import { CLEAN_EVENTS, getEventBySlug, getRelatedEvents, toTicketSlug } from '@/lib/data/tickets';
 import { getSportBySlug } from '@/lib/data/sports';
-import { buildMetadata } from '@/lib/utils/seo';
+import { buildMetadata, SITE_URL } from '@/lib/utils/seo';
 import { formatPrice, formatDate, formatShortDate } from '@/lib/utils/format';
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return TICKET_EVENTS.map((e) => ({ slug: toTicketSlug(e) }));
+  return CLEAN_EVENTS.map((e) => ({ slug: toTicketSlug(e) }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!event) return {};
   const metaDesc = event.description
     ? event.description.slice(0, 160)
-    : `Buy ${event.eventName} tickets at ${event.venue}, ${event.city} on ${formatDate(event.date)}. Compare prices from top platforms. From ${formatPrice(event.minPrice)}.`;
+    : `Buy ${event.eventName} tickets at ${event.venue}, ${event.city} on ${formatDate(event.date)}. Compare prices from top platforms. From ${formatPrice(event.minPrice, event.currency)}.`;
   return buildMetadata({
     title: `${event.eventName} Tickets — ${formatDate(event.date)}`,
     description: metaDesc,
@@ -45,12 +45,17 @@ export default function TicketPage({ params }: Props) {
   }[event.availability];
 
   // Schema.org Event JSON-LD
+  const eventPageUrl = `${SITE_URL}/tickets/${params.slug}`;
+  const absoluteImage = event.imageUrl
+    ? event.imageUrl.startsWith('http') ? event.imageUrl : `${SITE_URL}${event.imageUrl}`
+    : undefined;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: event.eventName,
     description: event.description,
-    image: event.imageUrl,
+    ...(absoluteImage ? { image: absoluteImage } : {}),
     startDate: `${event.date}T${event.time}:00`,
     location: {
       '@type': 'Place',
@@ -59,14 +64,14 @@ export default function TicketPage({ params }: Props) {
     },
     organizer: { '@type': 'Organization', name: event.league },
     offers: isSoldOut
-      ? [{ '@type': 'Offer', availability: 'https://schema.org/SoldOut', price: event.minPrice, priceCurrency: 'GBP' }]
+      ? [{ '@type': 'Offer', availability: 'https://schema.org/SoldOut', price: event.minPrice, priceCurrency: event.currency ?? 'GBP' }]
       : event.partners.map((p) => ({
           '@type': 'Offer',
           seller: { '@type': 'Organization', name: p.partnerName },
           price: p.price,
-          priceCurrency: 'GBP',
+          priceCurrency: event.currency ?? 'GBP',
           availability: 'https://schema.org/InStock',
-          url: `https://www.ticket-nexus.com/tickets/${params.slug}`,
+          url: p.awDeepLink ?? eventPageUrl,
         })),
   };
 
@@ -74,7 +79,7 @@ export default function TicketPage({ params }: Props) {
   const overviewPara1 = event.description ??
     `${event.eventName} is a highly anticipated ${event.league} fixture taking place at ${event.venue} in ${event.city} on ${formatDate(event.date)}.`;
   const overviewPara2 = `${event.venue} is one of the premier sporting venues in ${event.city}, offering fans an unforgettable atmosphere. This ${sport?.name ?? 'sporting'} event is part of the ${event.league} season and attracts supporters from across the country.`;
-  const overviewPara3 = `Tickets for ${event.eventName} are ${isSoldOut ? 'currently sold out' : `available from ${formatPrice(event.minPrice)} per ticket`}. We compare prices across all major resale and official platforms so you can find the best deal without the hassle.`;
+  const overviewPara3 = `Tickets for ${event.eventName} are ${isSoldOut ? 'currently sold out' : `available from ${formatPrice(event.minPrice, event.currency)} per ticket`}. We compare prices across all major resale and official platforms so you can find the best deal without the hassle.`;
 
   // Build FAQ items
   const faqs = [
@@ -86,7 +91,7 @@ export default function TicketPage({ params }: Props) {
       q: `How much do tickets cost?`,
       a: isSoldOut
         ? `Unfortunately all tickets for this event have sold out. Check back for any resale listings.`
-        : `Tickets start from ${formatPrice(event.minPrice)} per person. Prices vary by seat category and platform — use our comparison tool above to find the best available price.`,
+        : `Tickets start from ${formatPrice(event.minPrice, event.currency)} per person. Prices vary by seat category and platform — use our comparison tool above to find the best available price.`,
     },
     {
       q: `Are the tickets guaranteed?`,
@@ -207,7 +212,7 @@ export default function TicketPage({ params }: Props) {
                       lineHeight: 1,
                     }}
                   >
-                    {formatPrice(event.minPrice)}
+                    {formatPrice(event.minPrice, event.currency)}
                   </span>
                 </div>
               )}
@@ -263,7 +268,9 @@ export default function TicketPage({ params }: Props) {
                       .map((partner, idx) => (
                         <a
                           key={partner.partnerId}
-                          href={`/partners/${partner.partnerId}`}
+                          href={partner.awDeepLink ?? `/partners/${partner.partnerId}`}
+                          target={partner.awDeepLink ? '_blank' : undefined}
+                          rel={partner.awDeepLink ? 'noopener noreferrer sponsored' : undefined}
                           style={{
                             display: 'flex',
                             alignItems: 'center',
@@ -298,7 +305,17 @@ export default function TicketPage({ params }: Props) {
                             </div>
                           )}
                           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                            <span style={{ fontSize: '28px' }}>{partner.partnerIcon}</span>
+                            {partner.awImageUrl ? (
+                              <img
+                                src={partner.awImageUrl}
+                                alt={partner.partnerName}
+                                width={44}
+                                height={44}
+                                style={{ borderRadius: '8px', objectFit: 'cover', border: '1px solid var(--border-gray)', flexShrink: 0 }}
+                              />
+                            ) : (
+                              <span style={{ fontSize: '28px' }}>{partner.partnerIcon}</span>
+                            )}
                             <div>
                               <div style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-dark)' }}>
                                 {partner.partnerName}
@@ -321,9 +338,11 @@ export default function TicketPage({ params }: Props) {
                                   lineHeight: 1,
                                 }}
                               >
-                                {formatPrice(partner.price)}
+                                {formatPrice(partner.price, event.currency)}
                               </div>
-                              <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '3px' }}>per ticket</div>
+                              <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '3px' }}>
+                                per ticket{event.currency ? ` · ${event.currency}` : ''}
+                              </div>
                             </div>
                             <div
                               style={{
@@ -344,7 +363,7 @@ export default function TicketPage({ params }: Props) {
                   </div>
                   <p style={{ fontSize: '12px', color: 'var(--text-gray)', marginBottom: '40px', lineHeight: 1.7 }}>
                     Prices are indicative and may change. TicketNexus earns an affiliate commission on purchases via partner links. See our{' '}
-                    <Link href="/legal/affiliate-disclosure" style={{ color: 'var(--primary)' }}>Affiliate Disclosure</Link>.
+                    <Link href="/company/affiliate-disclosure" style={{ color: 'var(--primary)' }}>Affiliate Disclosure</Link>.
                   </p>
                 </>
               )}
@@ -399,7 +418,7 @@ export default function TicketPage({ params }: Props) {
                     { label: 'Venue', value: event.venue },
                     { label: 'City', value: event.city },
                     { label: 'Competition', value: event.league },
-                    { label: 'From', value: isSoldOut ? 'Sold Out' : formatPrice(event.minPrice) },
+                    { label: 'From', value: isSoldOut ? 'Sold Out' : formatPrice(event.minPrice, event.currency) },
                   ].map(({ label, value }) => (
                     <div key={label}>
                       <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '4px' }}>
@@ -481,7 +500,7 @@ export default function TicketPage({ params }: Props) {
                           </div>
                           <div style={{ flexShrink: 0, textAlign: 'right' }}>
                             <div style={{ fontSize: '13px', fontWeight: 700, color: relSoldOut ? 'var(--text-gray)' : 'var(--primary)' }}>
-                              {relSoldOut ? 'Sold Out' : formatPrice(rel.minPrice)}
+                              {relSoldOut ? 'Sold Out' : formatPrice(rel.minPrice, rel.currency)}
                             </div>
                             <div style={{ fontSize: '11px', color: relAvail.color, marginTop: '2px', fontWeight: 600 }}>
                               {relAvail.label}
@@ -559,7 +578,7 @@ export default function TicketPage({ params }: Props) {
                         marginBottom: '12px',
                       }}
                     >
-                      {formatPrice(event.minPrice)}
+                      {formatPrice(event.minPrice, event.currency)}
                     </div>
                     <a
                       href="#compare"
