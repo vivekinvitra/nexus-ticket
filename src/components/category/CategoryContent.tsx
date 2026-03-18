@@ -36,7 +36,7 @@ export default function CategoryContent({ sport, allEvents, newsArticles }: Cate
 
   // Filter upcoming events only
   const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  today.setUTCHours(0, 0, 0, 0);
 
   // Filter events based on this category + active filters
   let categoryEvents = allEvents.filter((e) => new Date(e.date) >= today);

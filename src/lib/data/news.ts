@@ -48,7 +48,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
   },
   {
     id: '2',
-    featured: true,
+    featured: false,
     slug: 'cheltenham-festival-guide-2025',
     title: 'Cheltenham Festival 2025: Complete Ticket Buying Guide',
     snippet:
@@ -266,6 +266,62 @@ export const NEWS_ARTICLES: NewsArticle[] = [
       },
     ],
   },
+  {
+  id: '7',
+  featured: true,
+  slug: 'brighton-vs-liverpool-epl-2026',
+  title: 'Brighton vs Liverpool Tickets - EPL 2026 Match at Amex Stadium',
+  snippet: 'Football fans are set for another exciting <a href="https://www.ticket-nexus.com/football/premier-league" class="news-snippet-link">Premier League</a> encounter as Brighton take on Liverpool FC on Saturday, 21 March 2026 at 12:30 at the iconic Amex Stadium in Brighton, United Kingdom.',
+  category: 'football',
+  icon: '⚽',
+  author: 'Liam Hargreaves',
+  authorAvatar: '/images/aaf6ebbc67a56008.jpg',
+  publishedAt: '2026-03-18',
+  addedon: '2026-03-18',
+  leagueSlug: 'premier-league',
+  readTime: 5,
+  imageUrl: '/images/b89644d5e21dcf24.jpg',
+  imageCaption: 'Brighton vs Liverpool FC - Premier League 2026 at Amex Stadium.',
+  keyPoints: [
+    'Brighton  face Liverpool FC on 21 March 2026 at Amex Stadium',
+    'High demand for EPL 2026 tickets online - early booking recommended',
+    'Liverpool bring attacking strength while Brighton rely on possession and home advantage'
+  ],
+  metaTitle: 'Brighton vs Liverpool Tickets | EPL 2026 Tickets Online - Amex Stadium',
+  metaDescription: 'Buy EPL 2026 tickets online for Brighton vs Liverpool on 21 March at Amex Stadium. Book online English Premier League 2026 tickets and find cheap EPL football tickets.',
+  metaKeywords: 'EPL 2026 tickets online, Brighton vs Liverpool tickets 2026, online English Premier League 2026 tickets, cheap EPL football tickets, buy EPL 2026 tickets online, Liverpool away match tickets, Amex Stadium tickets',
+content: [
+    {
+      h2: 'Brighton vs Liverpool - Premier League Match Preview',
+      body: '<p>The <a class="news-snippet-link" href="https://www.ticket-nexus.com/tickets/brighton-hove-albion-vs-liverpool-fc-20260321">Brighton vs Liverpool</a> Premier League match is known for its fast-paced gameplay and tactical battles. Brighton, playing at home, will aim to control possession and dictate the tempo, while Liverpool will look to use their attacking strength to dominate despite being the away side.</p><p>Demand for <strong>online English Premier League 2026 tickets</strong> is rising as fans anticipate a thrilling contest between these two competitive teams.</p>'
+    },
+    {
+      h2: 'Amex Stadium - A Premier League Matchday Experience',
+      body: '<p>The <strong>Amex Stadium Brighton England</strong> is one of the most modern and fan-friendly venues in the league, offering a fantastic atmosphere for live football.</p><p><strong>Fans attending this match can enjoy:</strong></p><ul><li>Excellent sightlines from all seating areas</li><li>Energetic and passionate home support</li><li>Modern facilities and easy access</li><li>A vibrant Premier League matchday experience</li></ul><p>Watching a live match here is perfect for fans who want to experience the excitement of English football using <strong>EPL 2026 tickets online</strong> platforms.</p>'
+    },
+    {
+      h2: 'Team Insights - Strengths and Match Dynamics',
+      body: '<h3> Brighton (Home Team)</h3><p><strong>Strengths:</strong></p><ul><li>Strong possession-based playing style</li><li>Tactical discipline and organized defence</li><li>Home advantage with strong crowd support</li><li>Ability to control midfield play</li></ul><p><strong>Challenges:</strong></p><ul><li>Converting possession into goals consistently</li><li>Handling high-pressure attacks from top teams</li></ul><h3> Liverpool FC (Away Team)</h3><p><strong>Strengths:</strong></p><ul><li>High-intensity pressing and attacking gameplay</li><li>Quick transitions and strong finishing ability</li><li>Experience in big Premier League matches</li><li>Ability to score from multiple attacking options</li></ul><p><strong>Challenges:</strong></p><ul><li>Defensive vulnerabilities against counter-attacks</li><li>Managing pressure in away fixtures</li></ul>'
+    },
+    {
+      h2: 'Buy EPL 2026 Tickets Online - Secure Your Seats',
+      "body": '<p>Tickets for high-profile matches like <strong>Brighton vs Liverpool</strong> are in high demand. Fans are encouraged to <strong>buy EPL 2026 tickets online early</strong> to avoid disappointment.</p><p><strong>Benefits of booking online English Premier League 2026 tickets:</strong></p><ul><li>Fast and secure ticket booking</li><li>Multiple seating categories</li><li>Instant confirmation</li><li>Access to cheap EPL football tickets</li></ul><p>Booking early gives you the best chance to secure preferred seats.</p>'
+    },
+    {
+      h2: 'How to Find Cheap EPL Football Tickets',
+      "body": '<p>If you"re searching for <strong>cheap EPL football tickets</strong>, consider these tips:</p><ul><li>Book tickets in advance before demand spikes</li><li>Compare different seating sections</li><li>Look for early deals and discounts</li><li>Avoid last-minute purchases</li></ul><p>These strategies can help you find <strong>EPL 2026 tickets online</strong> at competitive prices.</p>'
+    },
+    {
+      h2: 'Match Details - Brighton vs Liverpool',
+      body: '<ul><li><strong>Match:</strong> Brighton &amp; Hove Albion vs Liverpool FC</li><li><strong>Competition:</strong> English Premier League</li><li><strong>Date:</strong> Saturday, 21 March 2026</li><li><strong>Time:</strong> 12:30</li><li><strong>Venue:</strong> Amex Stadium, Brighton, England</li></ul><p>This match is expected to attract fans from across the UK and international football enthusiasts.</p>'
+    },
+    {
+      h2: 'Secure Your EPL Tickets Today',
+      body: '<p>The <strong>Brighton vs Liverpool</strong> Premier League match is set to deliver top-quality football action. With Brighton aiming to defend their home ground and Liverpool pushing for an away victory, fans can expect an exciting contest.</p><p>To avoid missing out, supporters should <strong>buy EPL 2026 tickets online early</strong> and explore options for <strong>cheap EPL football tickets</strong>. Early booking ensures better seating options and a seamless matchday experience.</p><p>Be part of the action and enjoy live football at the <strong>Amex Stadium</strong>.</p>'
+    }
+  ]
+},
+
 ];
 
 export const getNewsBySlug = (slug: string): NewsArticle | undefined =>

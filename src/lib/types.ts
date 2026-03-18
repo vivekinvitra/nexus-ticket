@@ -142,6 +142,10 @@ export interface NewsArticle {
   keyPoints: string[];
   featured?: boolean;
   leagueSlug?: string;
+  ticketSlug?: string;   // slug of the matching TicketEvent — links news to /tickets/[slug]
+  sportUrl?: string;     // explicit sport page path e.g. '/sports/football'
+  leagueUrl?: string;    // explicit league page path e.g. '/leagues/premier-league'
+  ticketUrl?: string;    // explicit ticket page path e.g. '/tickets/bournemouth-vs-manchester-united-20260320'
   metaTitle: string;
   metaDescription: string;
   metaKeywords?: string;

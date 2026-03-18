@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { SPORTS } from '@/lib/data/sports';
+import { SPORT_EVENT_COUNTS } from '@/lib/data/tickets';
 
 export default function SportsNav() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -200,7 +201,7 @@ export default function SportsNav() {
                         {sport.name}
                       </div>
                       <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '1px' }}>
-                        {sport.count} events
+                        {SPORT_EVENT_COUNTS[sport.slug] ?? 0} events
                       </div>
                     </div>
                   </Link>

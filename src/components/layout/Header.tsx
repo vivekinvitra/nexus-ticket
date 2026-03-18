@@ -5,7 +5,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import Icon from '@/components/common/Icon';
 import { SPORTS } from '@/lib/data/sports';
-import { CLEAN_EVENTS, toTicketSlug } from '@/lib/data/tickets';
+import { CLEAN_EVENTS, SPORT_EVENT_COUNTS, toTicketSlug } from '@/lib/data/tickets';
 import { getSportBySlug } from '@/lib/data/sports';
 import { formatPrice, formatShortDate } from '@/lib/utils/format';
 import SportsNav from './SportsNav';
@@ -412,7 +412,7 @@ export default function Header() {
                     borderRadius: '100px',
                   }}
                 >
-                  {sport.count}
+                  {SPORT_EVENT_COUNTS[sport.slug] ?? 0}
                 </span>
               </Link>
             ))}

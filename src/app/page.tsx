@@ -4,17 +4,30 @@ import Footer from '@/components/layout/Footer';
 import Hero from '@/components/home/Hero';
 import TicketsContainer from '@/components/home/TicketsContainer';
 import PartnersStrip from '@/components/home/PartnersStrip';
-import { buildMetadata, SITE_keywords } from '@/lib/utils/seo';
+import { buildMetadata, buildFootballEventsListJsonLd, SITE_keywords } from '@/lib/utils/seo';
+import { getEventsBySport } from '@/lib/data/tickets';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Compare Sports Ticket Prices | Football, Tennis, F1 & cricket Tickets | Ticket Nexus',
+  title: 'Compare Sports Ticket Prices | Football, Tennis, F1 & Cricket Tickets | Ticket Nexus',
   path: '/',
   keywords: SITE_keywords,
 });
 
 export default function HomePage() {
+  const today = new Date().toISOString().split('T')[0];
+  const footballEvents = getEventsBySport('football')
+    .filter((e) => e.date >= today)
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .slice(0, 12);
+
+  const footballEventsJsonLd = buildFootballEventsListJsonLd(footballEvents);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(footballEventsJsonLd) }}
+      />
       <Header />
 
       <main>

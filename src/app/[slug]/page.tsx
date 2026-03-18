@@ -6,7 +6,7 @@ import CategoryContent from '@/components/category/CategoryContent';
 import { SPORTS, getSportBySlug } from '@/lib/data/sports';
 import { getEventsBySport } from '@/lib/data/tickets';
 import { getNewsByCategory } from '@/lib/data/news';
-import { buildMetadata } from '@/lib/utils/seo';
+import { buildMetadata, buildSportsEventsListJsonLd, SITE_URL } from '@/lib/utils/seo';
 
 interface Props {
   params: { slug: string };
@@ -27,12 +27,41 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
+const SPORT_WIKI_URLS: Record<string, string> = {
+  football: 'https://en.wikipedia.org/wiki/Association_football',
+  tennis: 'https://en.wikipedia.org/wiki/Tennis',
+  cricket: 'https://en.wikipedia.org/wiki/Cricket',
+  'horse-racing': 'https://en.wikipedia.org/wiki/Horse_racing',
+  boxing: 'https://en.wikipedia.org/wiki/Boxing',
+  'formula-1': 'https://en.wikipedia.org/wiki/Formula_One',
+  rugby: 'https://en.wikipedia.org/wiki/Rugby_union',
+  golf: 'https://en.wikipedia.org/wiki/Golf',
+};
+
 export default function CategoryPage({ params }: Props) {
   const sport = getSportBySlug(params.slug);
   if (!sport) notFound();
 
+  const today = new Date().toISOString().split('T')[0];
+  const upcomingEvents = getEventsBySport(sport.slug)
+    .filter((e) => e.date >= today)
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .slice(0, 12);
+
+  const eventsJsonLd = buildSportsEventsListJsonLd({
+    listName: `Upcoming ${sport.name} Events`,
+    description: sport.metaDescription ?? sport.description,
+    pageUrl: `${SITE_URL}/${sport.slug}`,
+    sportWikiUrl: SPORT_WIKI_URLS[sport.slug],
+    events: upcomingEvents,
+  });
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsJsonLd) }}
+      />
       <Header />
 
       <main>

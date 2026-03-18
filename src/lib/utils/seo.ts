@@ -173,4 +173,129 @@ export function buildArticleJsonLd(opts: {
   };
 }
 
+export function buildSportsEventsListJsonLd(opts: {
+  listName: string;
+  description: string;
+  pageUrl: string;
+  sportWikiUrl?: string;
+  events: Array<{
+    slug: string;
+    eventName: string;
+    description?: string;
+    date: string;
+    time?: string;
+    venue: string;
+    city?: string;
+    imageUrl?: string;
+    minPrice?: number;
+    currency?: string;
+  }>;
+}) {
+  const { listName, description, pageUrl, sportWikiUrl, events } = opts;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: listName,
+    description,
+    url: pageUrl,
+    numberOfItems: events.length,
+    itemListElement: events.map((event, index) => {
+      const eventUrl = `${SITE_URL}/tickets/${event.slug}`;
+      const startDate = event.time ? `${event.date}T${event.time}:00` : event.date;
+      const image = event.imageUrl
+        ? event.imageUrl.startsWith('http') ? event.imageUrl : `${SITE_URL}${event.imageUrl}`
+        : undefined;
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'SportsEvent',
+          name: event.eventName,
+          description: event.description || `${event.eventName} at ${event.venue}`,
+          startDate,
+          location: {
+            '@type': 'Place',
+            name: event.venue,
+            address: { '@type': 'PostalAddress', addressLocality: event.city || event.venue },
+          },
+          url: eventUrl,
+          ...(image ? { image } : {}),
+          ...(sportWikiUrl ? { sport: sportWikiUrl } : {}),
+          ...(event.minPrice != null
+            ? {
+                offers: {
+                  '@type': 'AggregateOffer',
+                  lowPrice: event.minPrice,
+                  priceCurrency: event.currency || 'USD',
+                  availability: 'https://schema.org/InStock',
+                  url: eventUrl,
+                },
+              }
+            : {}),
+        },
+      };
+    }),
+  };
+}
+
+export function buildFootballEventsListJsonLd(
+  events: Array<{
+    slug: string;
+    eventName: string;
+    description?: string;
+    date: string;
+    time?: string;
+    venue: string;
+    city?: string;
+    imageUrl?: string;
+    minPrice?: number;
+    currency?: string;
+  }>
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Upcoming Football Events',
+    description: 'Buy tickets for upcoming Premier League and football events. Compare prices from trusted resale platforms.',
+    url: SITE_URL,
+    numberOfItems: events.length,
+    itemListElement: events.map((event, index) => {
+      const eventUrl = `${SITE_URL}/tickets/${event.slug}`;
+      const startDate = event.time ? `${event.date}T${event.time}:00` : event.date;
+      const image = event.imageUrl
+        ? event.imageUrl.startsWith('http') ? event.imageUrl : `${SITE_URL}${event.imageUrl}`
+        : undefined;
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'SportsEvent',
+          name: event.eventName,
+          description: event.description || `${event.eventName} at ${event.venue}`,
+          startDate,
+          location: {
+            '@type': 'Place',
+            name: event.venue,
+            address: { '@type': 'PostalAddress', addressLocality: event.city || event.venue },
+          },
+          url: eventUrl,
+          ...(image ? { image } : {}),
+          sport: 'https://en.wikipedia.org/wiki/Association_football',
+          ...(event.minPrice != null
+            ? {
+                offers: {
+                  '@type': 'AggregateOffer',
+                  lowPrice: event.minPrice,
+                  priceCurrency: event.currency || 'USD',
+                  availability: 'https://schema.org/InStock',
+                  url: eventUrl,
+                },
+              }
+            : {}),
+        },
+      };
+    }),
+  };
+}
+
 export { SITE_URL, SITE_NAME };

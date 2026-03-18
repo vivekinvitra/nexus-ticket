@@ -16,7 +16,7 @@ interface HomeTicketSectionProps {
 export default function HomeTicketSection({ selectedSports, maxPrice, selectedPartners, sortBy }: HomeTicketSectionProps) {
 
   const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  today.setUTCHours(0, 0, 0, 0);
 
   const sportsToDisplay: string[] = selectedSports.includes('all')
     ? SPORTS.map((s) => s.slug)

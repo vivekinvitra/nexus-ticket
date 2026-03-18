@@ -540,3 +540,14 @@ input, select {
 .more-sports-item:hover > div:last-child > div:first-child {
   color: var(--primary) !important;
 }
+
+.news-snippet-link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.news-snippet-link:hover {
+  opacity: 0.8;
+  text-decoration: none;
+}

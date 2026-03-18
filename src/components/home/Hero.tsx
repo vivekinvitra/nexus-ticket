@@ -96,7 +96,7 @@ export default function Hero() {
             }}
             className="hero-h1"
           >
-            {league.name}
+            {league.name} Tickets
           </h1>
 
           <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.6)', marginBottom: '10px' }}>

@@ -9,7 +9,7 @@ import { SPORTS, getSportBySlug } from '@/lib/data/sports';
 import { getEventsByLeague } from '@/lib/data/tickets';
 import { NEWS_ARTICLES } from '@/lib/data/news';
 import NewsSection from '@/components/home/NewsSection';
-import { buildMetadata } from '@/lib/utils/seo';
+import { buildMetadata, buildSportsEventsListJsonLd, SITE_URL } from '@/lib/utils/seo';
 
 interface Props {
   params: { slug: string; league: string };
@@ -50,8 +50,20 @@ export default function LeaguePage({ params }: Props) {
     ? leagueNews
     : NEWS_ARTICLES.filter((a) => a.category === sport.slug).slice(0, 3);
 
+  const eventsJsonLd = buildSportsEventsListJsonLd({
+    listName: `${league.name} Events`,
+    description: league.metaDescription ?? league.description,
+    pageUrl: `${SITE_URL}/${sport.slug}/${league.slug}`,
+    sportWikiUrl: sport.slug === 'football' ? 'https://en.wikipedia.org/wiki/Association_football' : undefined,
+    events: events.slice(0, 12),
+  });
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsJsonLd) }}
+      />
       <Header />
 
       <main>

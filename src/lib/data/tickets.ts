@@ -68678,6 +68678,20 @@ export const TICKET_EVENTS: TicketEvent[] = [
 const isDuplicateFeed = (slug: string) => /-44\d{9,}$/.test(slug);
 export const CLEAN_EVENTS = TICKET_EVENTS.filter((e) => !isDuplicateFeed(e.slug));
 
+// Pre-computed sport event counts derived from real ticket data
+export const SPORT_EVENT_COUNTS: Record<string, number> = {};
+CLEAN_EVENTS.forEach((e) => {
+  SPORT_EVENT_COUNTS[e.sport] = (SPORT_EVENT_COUNTS[e.sport] || 0) + 1;
+});
+
+// Pre-computed league event counts derived from real ticket data
+export const LEAGUE_EVENT_COUNTS: Record<string, number> = {};
+CLEAN_EVENTS.forEach((e) => {
+  if (e.leagueSlug) {
+    LEAGUE_EVENT_COUNTS[e.leagueSlug] = (LEAGUE_EVENT_COUNTS[e.leagueSlug] || 0) + 1;
+  }
+});
+
 export const getEventsBySport = (sport: string): TicketEvent[] =>
   CLEAN_EVENTS.filter((e) => e.sport === sport);
 

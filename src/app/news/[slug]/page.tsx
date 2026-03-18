@@ -159,8 +159,8 @@ export default function NewsArticlePage({ params }: Props) {
               </p>
 
               {/* Lead paragraph */}
-              <p style={{ fontSize: '17px', lineHeight: 1.85, color: '#1e293b', marginBottom: '36px', fontWeight: 600 }}>
-                {article.snippet}
+              <p style={{ fontSize: '17px', lineHeight: 1.85, color: '#1e293b', marginBottom: '36px', fontWeight: 600 }}>                
+                <div dangerouslySetInnerHTML={{ __html: article?.snippet ?? "" }} />
               </p>
 
               {/* Body sections */}
@@ -175,8 +175,8 @@ export default function NewsArticlePage({ params }: Props) {
                     }}>
                       {section.h2}
                     </h2>
-                    <p style={{ fontSize: '15px', lineHeight: 1.9, color: '#475569', margin: 0 }}>
-                      {section.body}
+                    <p style={{ fontSize: '15px', lineHeight: 1.9, color: '#475569', margin: 0 }}>                      
+                      <div dangerouslySetInnerHTML={{ __html: section?.body ?? "" }} />
                     </p>
                   </section>
                 ))}
