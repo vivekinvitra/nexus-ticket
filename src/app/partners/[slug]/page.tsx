@@ -18,8 +18,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const partner = getPartnerBySlug(params.slug);
   if (!partner) return {};
   return buildMetadata({
-    title: `${partner.name} Review`,
-    description: partner.shortDesc,
+    title: partner.metaTitle ?? `${partner.name} Review | TicketNexus`,
+    description: partner.metaDescription ?? partner.shortDesc,
+    keywords: partner.metaKeywords,
     path: `/partners/${partner.slug}`,
   });
 }

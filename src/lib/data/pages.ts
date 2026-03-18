@@ -6,6 +6,9 @@ export interface PageDef {
   group: PageGroup;
   lastUpdated?: string;
   content?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  metaKeywords?: string;
 }
 
 export const PAGES: PageDef[] = [
@@ -14,11 +17,17 @@ export const PAGES: PageDef[] = [
     slug: 'about',
     title: 'About Us',
     group: 'company',
+    metaTitle: 'About TicketNexus | Sports Ticket Price Comparison',
+    metaDescription: 'Learn about TicketNexus — the UK\'s sports ticket comparison service. We compare prices from trusted resale platforms so you always find the best deal.',
+    metaKeywords: 'about TicketNexus, sports ticket comparison, ticket price comparison UK, who we are, TicketNexus team',
   },
   {
     slug: 'contact',
     title: 'Contact Us',
     group: 'company',
+    metaTitle: 'Contact TicketNexus | Get in Touch',
+    metaDescription: 'Get in touch with the TicketNexus team. We\'re here to help with questions about ticket comparisons, partnerships or general enquiries.',
+    metaKeywords: 'contact TicketNexus, TicketNexus support, ticket comparison help, get in touch, TicketNexus enquiries',
   },
 
   // ── Legal ─────────────────────────────────────────────────────────────────
@@ -27,6 +36,9 @@ export const PAGES: PageDef[] = [
     title: 'Terms & Conditions',
     group: 'legal',
     lastUpdated: '1 January 2025',
+    metaTitle: 'Terms & Conditions | TicketNexus',
+    metaDescription: 'Read the TicketNexus Terms & Conditions. Understand your rights when using our sports ticket comparison service and our affiliate partner links.',
+    metaKeywords: 'TicketNexus terms and conditions, ticket comparison terms, TicketNexus legal, terms of service',
     content: `
 ## 1. Introduction
 
@@ -73,6 +85,9 @@ These terms are governed by the laws of England and Wales.
     title: 'Privacy Policy',
     group: 'legal',
     lastUpdated: '1 January 2025',
+    metaTitle: 'Privacy Policy | TicketNexus',
+    metaDescription: 'Read the TicketNexus Privacy Policy. Learn how we collect, use and protect your personal data in compliance with UK GDPR.',
+    metaKeywords: 'TicketNexus privacy policy, data protection, GDPR, personal data, TicketNexus cookies',
     content: `
 ## 1. What We Collect
 
@@ -128,6 +143,9 @@ For privacy-related queries: info@ticket-nexus.com
     title: 'Cookie Policy',
     group: 'legal',
     lastUpdated: '1 January 2025',
+    metaTitle: 'Cookie Policy | TicketNexus',
+    metaDescription: 'Read the TicketNexus Cookie Policy. Find out which cookies we use, why we use them, and how you can manage your cookie preferences.',
+    metaKeywords: 'TicketNexus cookie policy, cookies, analytics cookies, manage cookies, GDPR cookies',
     content: `
 ## What Are Cookies?
 
@@ -177,6 +195,9 @@ For more about cookies generally: aboutcookies.org
     title: 'Affiliate Disclosure',
     group: 'legal',
     lastUpdated: '1 January 2025',
+    metaTitle: 'Affiliate Disclosure | TicketNexus',
+    metaDescription: 'Read the TicketNexus Affiliate Disclosure. We earn commissions from partner ticket platforms — learn how this works and how it affects our service.',
+    metaKeywords: 'TicketNexus affiliate disclosure, affiliate commission, ticket comparison transparency, partner links',
     content: `
 ## Our Affiliate Relationships
 

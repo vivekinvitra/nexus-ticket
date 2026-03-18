@@ -7,6 +7,8 @@ import TicketTable from '@/components/tickets/TicketTable';
 import { LEAGUES, getLeagueBySlug, getLeaguesBySport } from '@/lib/data/leagues';
 import { SPORTS, getSportBySlug } from '@/lib/data/sports';
 import { getEventsByLeague } from '@/lib/data/tickets';
+import { NEWS_ARTICLES } from '@/lib/data/news';
+import NewsSection from '@/components/home/NewsSection';
 import { buildMetadata } from '@/lib/utils/seo';
 
 interface Props {
@@ -22,8 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const sport = getSportBySlug(params.slug);
   if (!league || !sport) return {};
   return buildMetadata({
-    title: `${league.name} Tickets`,
-    description: league.description,
+    title: league.metaTitle ?? `${league.name} Tickets`,
+    description: league.metaDescription ?? league.description,
+    keywords: league.metaKeywords,
     path: `/${sport.slug}/${league.slug}`,
   });
 }
@@ -41,6 +44,11 @@ export default function LeaguePage({ params }: Props) {
     (e) => new Date(e.date) >= today
   );
   const siblingLeagues = getLeaguesBySport(sport.slug).filter((l) => l.slug !== league.slug);
+
+  const leagueNews = NEWS_ARTICLES.filter((a) => a.leagueSlug === league.slug).slice(0, 3);
+  const relatedNews = leagueNews.length > 0
+    ? leagueNews
+    : NEWS_ARTICLES.filter((a) => a.category === sport.slug).slice(0, 3);
 
   return (
     <>
@@ -284,6 +292,12 @@ export default function LeaguePage({ params }: Props) {
               >
                 Browse All {sport.name} Tickets
               </Link>
+            </div>
+          )}
+
+          {relatedNews.length > 0 && (
+            <div style={{ marginTop: '48px' }}>
+              <NewsSection articles={relatedNews} />
             </div>
           )}
         </div>

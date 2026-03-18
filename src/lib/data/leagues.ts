@@ -26,6 +26,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'JUN',
     day: '11',
     dayLabel: 'WED',
+    metaTitle: 'FIFA World Cup 2026 Tickets | Football | TicketNexus',
+    metaDescription: 'Buy FIFA World Cup 2026 tickets for matches across USA, Canada & Mexico. Compare prices for group stage, knockout rounds and the Grand Final.',
+    metaKeywords: 'FIFA World Cup 2026 tickets, World Cup tickets, football World Cup tickets, buy World Cup tickets, USA Canada Mexico 2026, World Cup group stage tickets, World Cup Final tickets',
   },
   {
     slug: 'champions-league',
@@ -48,6 +51,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'MAY',
     day: '30',
     dayLabel: 'SAT',
+    metaTitle: 'UEFA Champions League Tickets | Football | TicketNexus',
+    metaDescription: "Buy UEFA Champions League tickets for all rounds including the 2026 Final in Munich. Compare prices across major resellers for Europe's greatest club nights.",
+    metaKeywords: 'Champions League tickets, UEFA Champions League tickets, buy Champions League tickets, UCL Final tickets, Munich 2026, European football tickets, Champions League Final',
   },
   {
     slug: 'wimbledon',
@@ -70,6 +76,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'JUN',
     day: '30',
     dayLabel: 'TUE',
+    metaTitle: 'Wimbledon Championships Tickets | Tennis | TicketNexus',
+    metaDescription: 'Buy Wimbledon 2026 tickets for Centre Court, Court 1 and all rounds at the All England Club, London. Compare prices for the world\'s most prestigious Grand Slam.',
+    metaKeywords: 'Wimbledon tickets, Wimbledon 2026 tickets, Centre Court tickets, tennis Grand Slam tickets, All England Club tickets, buy Wimbledon tickets, Wimbledon Finals tickets',
   },
   {
     slug: 'royal-ascot',
@@ -92,6 +101,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'JUN',
     day: '16',
     dayLabel: 'TUE',
+    metaTitle: 'Royal Ascot 2026 Tickets | Horse Racing | TicketNexus',
+    metaDescription: 'Buy Royal Ascot 2026 tickets for all five days at Ascot Racecourse, Berkshire. Compare enclosure passes, hospitality packages and grandstand seats.',
+    metaKeywords: 'Royal Ascot tickets, Royal Ascot 2026, Ascot Racecourse tickets, horse racing tickets, Royal Ascot hospitality, buy Royal Ascot tickets, flat racing tickets Berkshire',
   },
   {
     slug: 't20-world-cup',
@@ -114,6 +126,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'FEB',
     day: '12',
     dayLabel: 'THU',
+    metaTitle: 'ICC T20 World Cup 2026 Tickets | Cricket | TicketNexus',
+    metaDescription: 'Buy ICC T20 World Cup 2026 tickets for matches across India & Sri Lanka. Compare prices for group stage, Super 8s, Semi-Finals and the Final.',
+    metaKeywords: 'T20 World Cup 2026 tickets, ICC T20 tickets, cricket World Cup tickets, buy T20 World Cup tickets, India Sri Lanka cricket 2026, T20 Final tickets, international cricket tickets',
   },
 
   // ── ENGLAND ─────────────────────────────────────────────────────────────
@@ -137,6 +152,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '16',
     dayLabel: 'SAT',
+    metaTitle: 'English Premier League Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Premier League tickets for all 20 clubs across England. Compare prices for every matchweek fixture and secure seats at iconic stadiums nationwide.',
+    metaKeywords: 'Premier League tickets, EPL tickets, buy Premier League tickets, English football tickets, Premier League match tickets, football tickets England, Premier League 2025-26',
   },
   {
     slug: 'efl-championship',
@@ -158,6 +176,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '9',
     dayLabel: 'SAT',
+    metaTitle: 'EFL Championship Tickets | Football | TicketNexus',
+    metaDescription: 'Buy EFL Championship tickets for all 24 clubs competing for Premier League promotion. Compare prices for every fixture across England\'s second tier.',
+    metaKeywords: 'EFL Championship tickets, Championship football tickets, buy Championship tickets, English second division tickets, promotion playoff tickets, football tickets England, EFL tickets',
   },
   {
     slug: 'efl-league-one',
@@ -179,6 +200,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '9',
     dayLabel: 'SAT',
+    metaTitle: 'EFL League One Tickets | Football | TicketNexus',
+    metaDescription: 'Buy EFL League One tickets for all 24 clubs in England\'s third tier. Compare prices for fixtures featuring promotion battles and cup giant-killings.',
+    metaKeywords: 'EFL League One tickets, League One football tickets, buy League One tickets, English third division tickets, EFL tickets England, football tickets League One, third tier football',
   },
   {
     slug: 'efl-league-two',
@@ -200,6 +224,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '9',
     dayLabel: 'SAT',
+    metaTitle: 'EFL League Two Tickets | Football | TicketNexus',
+    metaDescription: 'Buy EFL League Two tickets for all 24 clubs in England\'s fourth professional tier. Compare prices and find seats at grounds across the country.',
+    metaKeywords: 'EFL League Two tickets, League Two football tickets, buy League Two tickets, English fourth division tickets, EFL tickets, professional football England, League Two fixtures',
   },
   {
     slug: 'fa-cup',
@@ -221,6 +248,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'MAY',
     day: '16',
     dayLabel: 'SAT',
+    metaTitle: 'FA Cup Tickets | Football | TicketNexus',
+    metaDescription: 'Buy FA Cup tickets from early rounds to the Wembley Final. The world\'s oldest cup competition — compare prices for all fixtures across England.',
+    metaKeywords: 'FA Cup tickets, FA Cup Final tickets, Wembley tickets, buy FA Cup tickets, English cup football, FA Cup 2026, football cup tickets England',
   },
 
   // ── SPAIN ────────────────────────────────────────────────────────────────
@@ -244,6 +274,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '15',
     dayLabel: 'FRI',
+    metaTitle: 'Spanish La Liga Tickets | Football | TicketNexus',
+    metaDescription: 'Buy La Liga tickets for Real Madrid, Barcelona, Atletico Madrid and all 20 clubs across Spain. Compare prices including El Clasico and top fixtures.',
+    metaKeywords: 'La Liga tickets, Spanish football tickets, El Clasico tickets, Real Madrid tickets, Barcelona tickets, buy La Liga tickets, Spanish Primera Division tickets',
   },
   {
     slug: 'copa-del-rey',
@@ -265,6 +298,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'MAY',
     day: '23',
     dayLabel: 'SAT',
+    metaTitle: 'Copa del Rey Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Copa del Rey tickets including the 2026 Final at Estadio de La Cartuja, Seville. Compare prices for all rounds of Spain\'s premier knockout cup.',
+    metaKeywords: 'Copa del Rey tickets, Spanish cup tickets, Copa del Rey Final tickets, buy Copa del Rey tickets, Spanish football cup, Seville football tickets, RFEF cup tickets',
   },
   {
     slug: 'segunda-division',
@@ -286,6 +322,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '16',
     dayLabel: 'SAT',
+    metaTitle: 'Spanish Segunda Division Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Spanish Segunda División tickets for all 22 clubs battling for La Liga promotion. Compare prices for every fixture across Spain\'s second tier.',
+    metaKeywords: 'Segunda Division tickets, Spanish second division tickets, buy Segunda tickets, La Liga promotion tickets, Spanish football tickets, Segunda División 2026, Spain football second tier',
   },
   {
     slug: 'primera-division-rfef',
@@ -307,6 +346,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'SEP',
     day: '1',
     dayLabel: 'SUN',
+    metaTitle: 'Spanish Primera Division RFEF Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Primera Federación tickets for Spain\'s third-tier RFEF league. Compare prices for all fixtures and follow clubs chasing promotion to Segunda División.',
+    metaKeywords: 'Primera Federacion tickets, RFEF football tickets, Spanish third division tickets, buy Primera RFEF tickets, Spanish football tickets, Primera Federación 2026, Spain semi-pro football',
   },
   {
     slug: 'segunda-division-rfef',
@@ -328,6 +370,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'SEP',
     day: '7',
     dayLabel: 'SAT',
+    metaTitle: 'Spanish Segunda Division RFEF Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Segunda Federación tickets for Spain\'s fourth-tier RFEF national league. Compare prices for all fixtures across clubs from every region of Spain.',
+    metaKeywords: 'Segunda Federacion tickets, RFEF fourth division tickets, Spanish football tickets, buy Segunda RFEF tickets, Spain fourth tier football, Segunda Federación 2026, Spanish regional football',
   },
 
   // ── GERMANY ──────────────────────────────────────────────────────────────
@@ -351,6 +396,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '22',
     dayLabel: 'FRI',
+    metaTitle: 'Bundesliga Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Bundesliga tickets for Bayern Munich, Borussia Dortmund and all 18 clubs. Compare prices for every fixture in Germany\'s top-flight football league.',
+    metaKeywords: 'Bundesliga tickets, German football tickets, Bayern Munich tickets, Borussia Dortmund tickets, buy Bundesliga tickets, German Bundesliga 2025-26, football tickets Germany',
   },
   {
     slug: 'dfb-pokal',
@@ -372,6 +420,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'MAY',
     day: '23',
     dayLabel: 'SAT',
+    metaTitle: 'DFB Pokal Tickets | Football | TicketNexus',
+    metaDescription: 'Buy DFB Pokal tickets from early rounds to the Final at Olympiastadion Berlin. Compare prices for all matches in Germany\'s premier knockout cup competition.',
+    metaKeywords: 'DFB Pokal tickets, German Cup tickets, DFB Pokal Final tickets, Olympiastadion Berlin tickets, buy DFB Pokal tickets, German football cup, Germany cup competition tickets',
   },
   {
     slug: 'bundesliga-2',
@@ -393,6 +444,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '22',
     dayLabel: 'FRI',
+    metaTitle: 'German Bundesliga 2 Tickets | Football | TicketNexus',
+    metaDescription: 'Buy 2. Bundesliga tickets for all 18 clubs competing for Bundesliga promotion. Compare prices for every fixture in Germany\'s second division football league.',
+    metaKeywords: '2 Bundesliga tickets, German second division tickets, Bundesliga 2 tickets, buy Bundesliga 2 tickets, German football tickets, promotion football Germany, 2. Bundesliga 2025-26',
   },
   {
     slug: 'bundesliga-3',
@@ -414,6 +468,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '1',
     dayLabel: 'FRI',
+    metaTitle: 'German 3. Liga Tickets | Football | TicketNexus',
+    metaDescription: 'Buy 3. Liga tickets for all 20 clubs in Germany\'s third professional division. Compare prices for fixtures across the lowest tier of professional German football.',
+    metaKeywords: '3 Liga tickets, German third division tickets, buy 3 Liga tickets, German football tickets, 3. Liga 2025-26, professional football Germany, third tier Germany football',
   },
   {
     slug: 'bundesliga-5',
@@ -435,6 +492,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '9',
     dayLabel: 'SAT',
+    metaTitle: 'German Bundesliga 5 Tickets | Football | TicketNexus',
+    metaDescription: 'Buy German Oberliga tickets for regional fifth-tier football leagues across Germany. Compare prices for clubs competing for promotion to the Regionalliga.',
+    metaKeywords: 'Oberliga tickets, German fifth division tickets, German regional football tickets, buy Bundesliga 5 tickets, German amateur football, Oberliga 2025-26, regional football Germany',
   },
 
   // ── FRANCE ───────────────────────────────────────────────────────────────
@@ -458,6 +518,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '16',
     dayLabel: 'FRI',
+    metaTitle: 'French Ligue 1 Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Ligue 1 tickets for PSG, Marseille, Lyon and all 18 clubs. Compare prices for every fixture in France\'s top-flight football league.',
+    metaKeywords: 'Ligue 1 tickets, French football tickets, PSG tickets, Marseille tickets, buy Ligue 1 tickets, France football tickets, Ligue 1 2025-26',
   },
   {
     slug: 'ligue-2',
@@ -479,6 +542,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '8',
     dayLabel: 'FRI',
+    metaTitle: 'French Ligue 2 Tickets | Football | TicketNexus',
+    metaDescription: 'Buy French Ligue 2 tickets for all 20 clubs battling for Ligue 1 promotion. Compare prices for every fixture in France\'s competitive second division.',
+    metaKeywords: 'Ligue 2 tickets, French second division tickets, buy Ligue 2 tickets, France football tickets, Ligue 2 promotion tickets, French football second tier, Ligue 2 2025-26',
   },
   {
     slug: 'coupe-de-france',
@@ -500,6 +566,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'MAY',
     day: '9',
     dayLabel: 'SAT',
+    metaTitle: 'Coupe de France Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Coupe de France tickets including the 2026 Final at Stade de France, Paris. Compare prices for all rounds of France\'s national football cup.',
+    metaKeywords: 'Coupe de France tickets, French Cup tickets, Coupe de France Final tickets, Stade de France tickets, buy Coupe de France tickets, French football cup, Paris football tickets',
   },
   {
     slug: 'ligue-coupe',
@@ -521,6 +590,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'APR',
     day: '18',
     dayLabel: 'SAT',
+    metaTitle: 'French Ligue Coupe Tickets | Football | TicketNexus',
+    metaDescription: 'Buy French Ligue Coupe tickets for the League Cup contested between Ligue 1 and Ligue 2 clubs. Compare prices for all rounds of this domestic cup competition.',
+    metaKeywords: 'Coupe de la Ligue tickets, French League Cup tickets, Ligue Coupe tickets, buy French cup tickets, French football cup, Ligue 1 cup tickets, French domestic cup',
   },
   {
     slug: 'championnat-national',
@@ -542,6 +614,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '9',
     dayLabel: 'SAT',
+    metaTitle: 'French Championnat National Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Championnat National tickets for France\'s third-tier national football league. Compare prices for all 18 clubs competing for Ligue 2 promotion.',
+    metaKeywords: 'Championnat National tickets, French third division tickets, buy Championnat National tickets, France third tier football, French football tickets, National 1 France, Ligue 2 promotion tickets',
   },
 
   // ── ITALY ────────────────────────────────────────────────────────────────
@@ -565,6 +640,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '17',
     dayLabel: 'SAT',
+    metaTitle: 'Italian Serie A Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Serie A tickets for Juventus, Inter Milan, AC Milan, AS Roma and all 20 clubs. Compare prices for every fixture in Italy\'s top-flight football league.',
+    metaKeywords: 'Serie A tickets, Italian football tickets, Juventus tickets, Inter Milan tickets, buy Serie A tickets, Italian football 2025-26, AC Milan tickets',
   },
   {
     slug: 'coppa-italia',
@@ -586,6 +664,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'MAY',
     day: '13',
     dayLabel: 'WED',
+    metaTitle: 'Coppa Italia Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Coppa Italia tickets including the 2026 Final at Stadio Olimpico, Rome. Compare prices for all rounds of Italy\'s premier domestic cup competition.',
+    metaKeywords: 'Coppa Italia tickets, Italian Cup tickets, Coppa Italia Final tickets, Stadio Olimpico tickets, buy Coppa Italia tickets, Italian football cup, Rome football tickets',
   },
   {
     slug: 'serie-b',
@@ -607,6 +688,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '23',
     dayLabel: 'SAT',
+    metaTitle: 'Italian Serie B Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Serie B tickets for all 20 clubs in Italy\'s second tier competing for Serie A promotion. Compare prices for every fixture across the Italian second division.',
+    metaKeywords: 'Serie B tickets, Italian second division tickets, buy Serie B tickets, Italian football tickets, Serie A promotion tickets, Serie B 2025-26, Italy second tier football',
   },
   {
     slug: 'serie-c',
@@ -628,6 +712,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'AUG',
     day: '24',
     dayLabel: 'SUN',
+    metaTitle: 'Italian Serie C Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Serie C tickets for all three regional groups in Italy\'s third tier. Compare prices for clubs across Girone A, B and C competing for Serie B promotion.',
+    metaKeywords: 'Serie C tickets, Italian third division tickets, buy Serie C tickets, Italian football tickets, Serie C Girone tickets, Serie B promotion Italy, third tier Italian football',
   },
   {
     slug: 'serie-c2',
@@ -649,6 +736,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'SEP',
     day: '1',
     dayLabel: 'SUN',
+    metaTitle: 'Italian Serie C2 Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Italian Serie C2 (Serie D) tickets for fourth-tier regional football across Italy. Compare prices for clubs in nine regional groups at the top level of amateur Italian football.',
+    metaKeywords: 'Serie C2 tickets, Serie D Italy tickets, Italian fourth division tickets, buy Serie C2 tickets, Italian amateur football, Italy regional football tickets, fourth tier Italy',
   },
 
   // ── CSV-imported leagues ──────────────────────────────────────────────────
@@ -672,6 +762,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Scottish Premiership Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Scottish Premiership tickets for Celtic, Rangers and all top-flight clubs across Scotland. Compare prices for every fixture in the Scottish top division.',
+    metaKeywords: 'Scottish Premiership tickets, Scottish football tickets, Celtic tickets, Rangers tickets, buy Scottish Premiership tickets, Scotland top division tickets, Scottish football 2025-26',
   },
   {
     slug: 'carabao-cup',
@@ -693,6 +786,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Carabao Cup Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Carabao Cup tickets for English football\'s League Cup including the Wembley Final. Compare prices for all rounds of this knockout cup competition.',
+    metaKeywords: 'Carabao Cup tickets, EFL Cup tickets, League Cup tickets, buy Carabao Cup tickets, English League Cup, Carabao Cup Final tickets, football cup England',
   },
   {
     slug: 'turkish-cup',
@@ -714,6 +810,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Turkish Cup Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Turkish Cup tickets for all rounds of Turkey\'s domestic knockout cup competition. Compare prices for fixtures featuring clubs from the Süper Lig and lower divisions.',
+    metaKeywords: 'Turkish Cup tickets, Türkiye Kupası tickets, buy Turkish Cup tickets, Turkey football cup, Turkish domestic cup, Süper Lig cup, Turkish football tickets',
   },
   {
     slug: 'taca-de-portugal',
@@ -735,6 +834,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Taça de Portugal Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Taça de Portugal tickets for all rounds of Portugal\'s national cup competition. Compare prices for fixtures featuring Portuguese clubs from all divisions.',
+    metaKeywords: 'Taca de Portugal tickets, Portuguese Cup tickets, buy Taca de Portugal tickets, Portugal football cup, Portuguese football tickets, Portugal domestic cup, Benfica Porto cup',
   },
   {
     slug: 'saudi-pro-league',
@@ -756,6 +858,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Saudi Pro League Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Saudi Pro League tickets for matches featuring Ronaldo, Benzema and top stars across Saudi Arabia. Compare prices for all fixtures in the SPL.',
+    metaKeywords: 'Saudi Pro League tickets, SPL tickets, Saudi football tickets, buy Saudi Pro League tickets, Al-Hilal tickets, Al-Nassr tickets, Saudi Arabia football tickets',
   },
   {
     slug: 'scottish-cup',
@@ -777,6 +882,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Scottish Cup Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Scottish Cup tickets for all rounds of Scotland\'s oldest domestic knockout cup. Compare prices for fixtures from early rounds to the Hampden Park Final.',
+    metaKeywords: 'Scottish Cup tickets, buy Scottish Cup tickets, Scotland football cup, Hampden Park tickets, Scottish football tickets, Scottish FA Cup, Celtic Rangers cup',
   },
   {
     slug: 'czech-first-league',
@@ -798,6 +906,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Czech First League Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Czech First League tickets for top-flight football across the Czech Republic. Compare prices for all fixtures in the Fortuna Liga, Czech football\'s premier division.',
+    metaKeywords: 'Czech First League tickets, Fortuna Liga tickets, Czech football tickets, buy Czech league tickets, Czech Republic football, Prague football tickets, Czech top division tickets',
   },
   {
     slug: 'belgian-first-division-a',
@@ -819,6 +930,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Belgian First Division A Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Belgian First Division A tickets for Club Brugge, Anderlecht and all top-flight clubs. Compare prices for every fixture in the Belgian Pro League.',
+    metaKeywords: 'Belgian First Division A tickets, Belgian Pro League tickets, Club Brugge tickets, Anderlecht tickets, buy Belgian football tickets, Belgium top division, Belgian football tickets',
   },
   {
     slug: 'turkish-super-league',
@@ -840,6 +954,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Turkish Süper Lig Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Turkish Süper Lig tickets for Galatasaray, Fenerbahce, Besiktas and all top-flight clubs. Compare prices for every fixture in Turkey\'s premier football league.',
+    metaKeywords: 'Turkish Super Lig tickets, Süper Lig tickets, Galatasaray tickets, Fenerbahce tickets, buy Turkish football tickets, Turkey football tickets, Besiktas tickets',
   },
   {
     slug: 'afc-champions-league-elite',
@@ -861,6 +978,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'AFC Champions League Elite Tickets | Football | TicketNexus',
+    metaDescription: 'Buy AFC Champions League Elite tickets for Asia\'s top club football competition. Compare prices for all fixtures from the group stage through to the Final.',
+    metaKeywords: 'AFC Champions League tickets, Asian Champions League tickets, ACL Elite tickets, buy AFC Champions League tickets, Asian club football, AFC Champions League Elite, Asian football tickets',
   },
   {
     slug: 'dutch-eredivisie',
@@ -882,6 +1002,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Dutch Eredivisie Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Dutch Eredivisie tickets for Ajax, PSV, Feyenoord and all 18 clubs. Compare prices for every fixture in the Netherlands\' top-flight football league.',
+    metaKeywords: 'Dutch Eredivisie tickets, Eredivisie tickets, Ajax tickets, PSV tickets, buy Dutch football tickets, Netherlands football tickets, Feyenoord tickets',
   },
   {
     slug: 'europa-league',
@@ -903,6 +1026,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'UEFA Europa League Tickets | Football | TicketNexus',
+    metaDescription: 'Buy UEFA Europa League tickets for all rounds of Europe\'s second-tier club competition. Compare prices from group stage through to the Europa League Final.',
+    metaKeywords: 'Europa League tickets, UEFA Europa League tickets, buy Europa League tickets, UEL tickets, European football tickets, Europa League Final tickets, UEFA club competition tickets',
   },
   {
     slug: 'europa-conference-league',
@@ -924,6 +1050,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'UEFA Conference League Tickets | Football | TicketNexus',
+    metaDescription: 'Buy UEFA Conference League tickets for Europe\'s third-tier club competition. Compare prices for all fixtures from the league phase through to the UECL Final.',
+    metaKeywords: 'Conference League tickets, UEFA Conference League tickets, UECL tickets, buy Conference League tickets, European football tickets, Conference League Final, UEFA third tier tickets',
   },
   {
     slug: 'danish-superliga',
@@ -945,6 +1074,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Danish Superliga Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Danish Superliga tickets for FC Copenhagen, Brondby and all top-flight clubs across Denmark. Compare prices for fixtures in Denmark\'s premier football division.',
+    metaKeywords: 'Danish Superliga tickets, Denmark football tickets, FC Copenhagen tickets, Brondby tickets, buy Danish football tickets, Danish top division, Superliga Denmark tickets',
   },
   {
     slug: 'world-cup-2026-european-qualifiers',
@@ -966,6 +1098,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'World Cup 2026 European Qualifiers Tickets | Football | TicketNexus',
+    metaDescription: 'Buy World Cup 2026 European Qualifier tickets and watch your national team compete for a place at the 2026 FIFA World Cup. Compare prices for all UEFA qualifying matches.',
+    metaKeywords: 'World Cup 2026 qualifiers tickets, European qualifiers tickets, UEFA World Cup qualifier tickets, buy qualifier tickets, 2026 World Cup qualifying, national team football tickets, FIFA qualifier tickets',
   },
   {
     slug: 'international-friendly-matches',
@@ -987,6 +1122,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'International Friendly Match Tickets | Football | TicketNexus',
+    metaDescription: 'Buy international friendly match tickets and watch your national team in action. Compare prices for football friendlies featuring top nations from around the world.',
+    metaKeywords: 'international friendly tickets, football friendly tickets, buy international match tickets, national team friendly tickets, football international tickets, friendly football match, international friendly 2026',
   },
   {
     slug: 'friendly-matches',
@@ -1008,6 +1146,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Friendly Match Tickets | Football | TicketNexus',
+    metaDescription: 'Buy football friendly match tickets for club and international pre-season games. Compare prices for all friendly fixtures and secure your seat through our partner network.',
+    metaKeywords: 'friendly match tickets, football friendly tickets, pre-season match tickets, club friendly tickets, buy friendly tickets, football pre-season, friendly football 2026',
   },
   {
     slug: 'finalissima-2025',
@@ -1029,6 +1170,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Finalissima 2025 Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Finalissima 2025 tickets for the prestigious international showdown between the European and South American champions. Compare prices for this one-off fixture.',
+    metaKeywords: 'Finalissima 2025 tickets, Finalissima tickets, buy Finalissima tickets, UEFA CONMEBOL Finalissima, champions cup tickets, international football final tickets, Finalissima 2025',
   },
   {
     slug: 'argentina-primera-division',
@@ -1050,6 +1194,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Argentine Primera División Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Argentine Primera División tickets for River Plate, Boca Juniors and all top clubs. Compare prices for fixtures in Argentina\'s premier football league.',
+    metaKeywords: 'Argentine Primera Division tickets, Argentina football tickets, Boca Juniors tickets, River Plate tickets, buy Argentine football tickets, Argentine league tickets, Argentina top division',
   },
   {
     slug: 'women-world-cup-european-qualifiers',
@@ -1071,6 +1218,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: "Women's World Cup Qualifiers Tickets | Football | TicketNexus",
+    metaDescription: "Buy Women's World Cup Qualifier tickets and support your national team as they compete for a place at the FIFA Women's World Cup. Compare prices for all qualifying matches.",
+    metaKeywords: "Women's World Cup qualifiers tickets, women's football tickets, FIFA Women's World Cup qualifier, buy women's football tickets, women's international football, UEFA women's qualifiers, women's national team tickets",
   },
   {
     slug: '2019-africa-cup-of-nations',
@@ -1092,6 +1242,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Africa Cup of Nations Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Africa Cup of Nations tickets for the premier international football tournament on the African continent. Compare prices for all group stage and knockout fixtures.',
+    metaKeywords: 'Africa Cup of Nations tickets, AFCON tickets, buy AFCON tickets, African football tickets, CAN tickets, Africa Cup tickets, international African football',
   },
   {
     slug: 'women-fa-cup',
@@ -1113,6 +1266,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: "Women's FA Cup Tickets | Football | TicketNexus",
+    metaDescription: "Buy Women's FA Cup tickets from early rounds to the Wembley Final. Compare prices for England's premier women's knockout cup competition.",
+    metaKeywords: "Women's FA Cup tickets, women's football tickets, buy Women's FA Cup tickets, women's cup Final tickets, Wembley women's football, England women's cup, women's football England",
   },
   {
     slug: 'fa-community-shield',
@@ -1134,6 +1290,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'FA Community Shield Tickets | Football | TicketNexus',
+    metaDescription: 'Buy FA Community Shield tickets for the traditional curtain-raiser at Wembley Stadium. Compare prices for this showpiece match between the Premier League and FA Cup champions.',
+    metaKeywords: 'FA Community Shield tickets, Community Shield tickets, Wembley Stadium tickets, buy Community Shield tickets, Premier League season opener, FA Shield tickets, England football Wembley',
   },
   {
     slug: 'nations-league',
@@ -1155,6 +1314,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'UEFA Nations League Tickets | Football | TicketNexus',
+    metaDescription: 'Buy UEFA Nations League tickets for competitive international football across Europe. Compare prices for group stage and Finals tournament fixtures.',
+    metaKeywords: 'Nations League tickets, UEFA Nations League tickets, buy Nations League tickets, international football tickets, UNL tickets, European nations football, Nations League Final',
   },
   {
     slug: 'finalissima-2026',
@@ -1176,6 +1338,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Finalissima 2026 Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Finalissima 2026 tickets for the international showdown between the European and South American champions. Compare prices for this prestigious one-off fixture.',
+    metaKeywords: 'Finalissima 2026 tickets, Finalissima tickets, buy Finalissima 2026 tickets, UEFA CONMEBOL Finalissima, champions cup tickets, international football final, Finalissima 2026',
   },
   {
     slug: 'world-cup-2026-qualifiers',
@@ -1197,6 +1362,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'World Cup 2026 Qualifier Tickets | Football | TicketNexus',
+    metaDescription: 'Buy World Cup 2026 Qualifier tickets and watch national teams battle for a spot at USA, Canada & Mexico 2026. Compare prices for all qualifying fixtures worldwide.',
+    metaKeywords: 'World Cup 2026 qualifier tickets, FIFA qualifier tickets, buy World Cup qualifier tickets, 2026 World Cup qualifying, national team tickets, World Cup playoff tickets, FIFA 2026 qualifiers',
   },
   {
     slug: 'women-champions-league',
@@ -1218,6 +1386,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: "Women's Champions League Tickets | Football | TicketNexus",
+    metaDescription: "Buy Women's Champions League tickets for Europe's premier women's club competition. Compare prices for all rounds from the group stage to the UWCL Final.",
+    metaKeywords: "Women's Champions League tickets, UWCL tickets, buy Women's Champions League tickets, women's European football, women's club football tickets, UWCL Final tickets, UEFA women's club",
   },
   {
     slug: 'swiss-super-league',
@@ -1239,6 +1410,9 @@ export const LEAGUES: LeagueCategory[] = [
     month: 'TBC',
     day: '1',
     dayLabel: 'TBC',
+    metaTitle: 'Swiss Super League Tickets | Football | TicketNexus',
+    metaDescription: 'Buy Swiss Super League tickets for FC Basel, Young Boys and all top-flight clubs. Compare prices for every fixture in Switzerland\'s premier football division.',
+    metaKeywords: 'Swiss Super League tickets, Swiss football tickets, FC Basel tickets, Young Boys tickets, buy Swiss football tickets, Switzerland top division, Swiss football 2025-26',
   },
 
 ];

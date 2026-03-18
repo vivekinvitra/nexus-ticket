@@ -18,7 +18,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = getPageBySlug(params.slug);
   if (!page) return {};
-  return buildMetadata({ title: page.title, path: `/company/${params.slug}` });
+  return buildMetadata({
+    title: page.metaTitle ?? `${page.title} | TicketNexus`,
+    description: page.metaDescription,
+    keywords: page.metaKeywords,
+    path: `/company/${params.slug}`,
+  });
 }
 
 // ── Sidebar ───────────────────────────────────────────────────────────────────

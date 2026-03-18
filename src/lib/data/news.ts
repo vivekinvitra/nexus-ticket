@@ -26,6 +26,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     metaTitle: 'Premier League 2024/25: Best Ticket Deals & Buying Guide',
     metaDescription:
       'Discover where to find the best Premier League ticket deals this season. We compare prices across the top UK resale platforms for every big fixture.',
+    metaKeywords: 'Premier League tickets, Premier League ticket deals, buy Premier League tickets, football ticket prices, best Premier League ticket platforms, 2024/25 season tickets',
     content: [
       {
         h2: 'Why Premier League Ticket Prices Are at Record Highs',
@@ -70,6 +71,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     metaTitle: 'Cheltenham Festival 2025: Complete Ticket Buying Guide',
     metaDescription:
       'Your complete guide to buying Cheltenham Festival 2025 tickets. Compare Champion Day, Gold Cup Day and hospitality packages to get the best price.',
+    metaKeywords: 'Cheltenham Festival tickets, Cheltenham 2025 tickets, Gold Cup Day tickets, Champion Day tickets, Cheltenham hospitality, buy Cheltenham tickets',
     content: [
       {
         h2: 'Understanding the Four Days of the Festival',
@@ -114,6 +116,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     metaTitle: 'Wimbledon Ballot Tips 2025 & Best Resale Sites Compared',
     metaDescription:
       'Learn how to maximise your chances in the Wimbledon public ballot and discover the best resale platforms to use if you miss out on official tickets.',
+    metaKeywords: 'Wimbledon ballot tips, Wimbledon tickets 2025, buy Wimbledon tickets, Wimbledon resale sites, Centre Court tickets, Wimbledon queue tips',
     content: [
       {
         h2: 'How the Wimbledon Public Ballot Actually Works',
@@ -156,6 +159,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     metaTitle: 'British GP 2025: Silverstone Grandstand vs Paddock Club Guide',
     metaDescription:
       'Is the Silverstone Paddock Club worth the price? We break down every ticket category for the 2025 British Grand Prix to help you choose wisely.',
+    metaKeywords: 'British GP tickets, Silverstone tickets 2025, Paddock Club tickets, F1 grandstand tickets, British Grand Prix hospitality, buy Silverstone tickets',
     content: [
       {
         h2: 'Breaking Down Every Silverstone Ticket Category',
@@ -198,6 +202,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     metaTitle: 'Boxing Ticket Buying Guide 2025: Avoid Scams & Find Best Prices',
     metaDescription:
       'Stay safe when buying boxing tickets in 2025. Our expert guide covers the top platforms, red flags to watch for, and how to find the best-value seats.',
+    metaKeywords: 'boxing tickets 2025, buy boxing tickets safely, boxing ticket scams, boxing ticket prices, best boxing ticket platforms, verified boxing tickets',
     content: [
       {
         h2: 'Why Boxing Is the Sport Most Targeted by Ticket Fraudsters',
@@ -241,6 +246,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     metaTitle: 'Best Seats for Test Cricket 2025: Lord\'s, The Oval & Edgbaston Guide',
     metaDescription:
       'Find the best seats for England Test cricket at Lord\'s, The Oval, and Edgbaston in 2025. Ground-by-ground breakdown with booking tips and pricing.',
+    metaKeywords: "cricket tickets 2025, Lord's cricket tickets, The Oval tickets, Edgbaston tickets, England Test match tickets, best cricket seats, buy cricket tickets",
     content: [
       {
         h2: 'Lord\'s Cricket Ground: Where to Sit for the Full Experience',

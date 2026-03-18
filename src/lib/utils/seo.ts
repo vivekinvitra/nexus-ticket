@@ -3,12 +3,14 @@ import type { Metadata } from 'next';
 const SITE_NAME = 'TicketNexus';
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ticket-nexus.com').replace(/\/$/, '');
 const SITE_DESC =
-  "Compare sports ticket prices from the UK's top resale platforms. Find the best deals on football, cricket, horse racing, tennis, boxing, F1, rugby and golf tickets.";
-const TWITTER_HANDLE = '@ticketnexus';
+  "Compare sports ticket prices from trusted sellers. Find Premier League, Champions League, FIFA World Cup, Tennis, F1, Cricket World Cup and cricket tickets at the best prices with Ticket Nexus.";
+export const SITE_keywords = "sports tickets, football tickets, tennis tickets, F1 tickets, cricket tickets, ticket comparison, buy sports tickets, best ticket prices";
+  const TWITTER_HANDLE = '@ticketnexus';
 
 interface MetadataOpts {
   title: string;
   description?: string;
+  keywords?: string;
   /** Relative path, e.g. "/football/premier-league" */
   path?: string;
   /** Local path (/images/...) or absolute URL */
@@ -27,6 +29,7 @@ export function buildMetadata(opts: MetadataOpts): Metadata {
   const {
     title,
     description = SITE_DESC,
+    keywords,
     path = '',
     image,
     type = 'website',
@@ -45,19 +48,27 @@ export function buildMetadata(opts: MetadataOpts): Metadata {
     : undefined;
 
   return {
+    // ── 1. Title ──────────────────────────────────────────────────────────
     title: `${title} | ${SITE_NAME}`,
-    description,
-    metadataBase: new URL(SITE_URL),
 
-    // ── Canonical ─────────────────────────────────────────────────────────
+    // ── 2. Meta description ───────────────────────────────────────────────
+    description,
+
+    // ── 3. Meta keywords ──────────────────────────────────────────────────
+    ...(keywords ? { keywords } : {}),
+
+    // ── 4. Canonical ──────────────────────────────────────────────────────
     alternates: { canonical: canonicalUrl },
 
-    // ── Robots ────────────────────────────────────────────────────────────
+    // ── 5. Robots ─────────────────────────────────────────────────────────
     robots: noIndex
       ? { index: false, follow: false }
       : { index: true, follow: true, 'max-image-preview': 'large' },
 
-    // ── OpenGraph ─────────────────────────────────────────────────────────
+    // ── 6. Base URL (required for resolving relative OG image paths) ───────
+    metadataBase: new URL(SITE_URL),
+
+    // ── 7. OpenGraph ──────────────────────────────────────────────────────
     openGraph: {
       title: `${title} | ${SITE_NAME}`,
       description,
@@ -72,7 +83,7 @@ export function buildMetadata(opts: MetadataOpts): Metadata {
       ...(type === 'article' && modifiedTime ? { modifiedTime } : {}),
     },
 
-    // ── Twitter / X ────────────────────────────────────────────────────────
+    // ── 8. Twitter / X ────────────────────────────────────────────────────
     twitter: {
       card: 'summary_large_image',
       site: TWITTER_HANDLE,

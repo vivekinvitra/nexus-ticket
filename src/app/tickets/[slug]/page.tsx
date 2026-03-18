@@ -20,12 +20,24 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const event = getEventBySlug(params.slug);
   if (!event) return {};
-  const metaDesc = event.description
+
+  const autoTitle = `${event.eventName} Tickets — ${formatDate(event.date)} | TicketNexus`;
+  const autoDesc = event.description
     ? event.description.slice(0, 160)
-    : `Buy ${event.eventName} tickets at ${event.venue}, ${event.city} on ${formatDate(event.date)}. Compare prices from top platforms. From ${formatPrice(event.minPrice, event.currency)}.`;
+    : `Buy ${event.eventName} tickets at ${event.venue}, ${event.city} on ${formatDate(event.date)}. Compare prices from trusted platforms. From ${formatPrice(event.minPrice, event.currency)}.`;
+  const autoKeywords = [
+    `${event.eventName} tickets`,
+    `buy ${event.eventName} tickets`,
+    `${event.league} tickets`,
+    `${event.venue} tickets`,
+    `${event.city} sports tickets`,
+    `${event.league} ${formatDate(event.date)}`,
+  ].join(', ');
+
   return buildMetadata({
-    title: `${event.eventName} Tickets — ${formatDate(event.date)}`,
-    description: metaDesc,
+    title: event.metaTitle ?? autoTitle,
+    description: event.metaDescription ?? autoDesc,
+    keywords: event.metaKeywords ?? autoKeywords,
     path: `/tickets/${params.slug}`,
     image: event.imageUrl,
   });
@@ -115,11 +127,11 @@ export default function TicketPage({ params }: Props) {
       />
       <Header />
 
-      <main style={{ background: 'var(--off-white)', minHeight: '100vh' }}>
+      <main style={{ background: 'var(--off-white)', minHeight: '100vh', overflowX: 'hidden' }}>
 
         {/* ── Page header ── */}
         <div style={{ background: 'var(--white)', borderBottom: '1px solid var(--border-gray)' }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '24px 40px 28px' }} className="ticket-page-inner">
+          <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '24px 40px 28px' }} className="ticket-page-inner ticket-page-header-inner">
 
             {/* Breadcrumb */}
             <nav style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: 'var(--text-gray)', marginBottom: '20px', flexWrap: 'wrap' }}>
@@ -139,6 +151,7 @@ export default function TicketPage({ params }: Props) {
             {/* Icon + badge + H1 */}
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px', marginBottom: '20px' }}>
               <div
+                className="ticket-hero-icon"
                 style={{
                   width: '72px',
                   height: '72px',
@@ -189,6 +202,8 @@ export default function TicketPage({ params }: Props) {
                     color: 'var(--text-dark)',
                     lineHeight: 1.2,
                     margin: 0,
+                    wordBreak: 'break-word',
+                    overflowWrap: 'anywhere',
                   }}
                   className="ticket-page-h1"
                 >
@@ -198,14 +213,14 @@ export default function TicketPage({ params }: Props) {
             </div>
 
             {/* Meta row */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', fontSize: '14px', color: 'var(--text-gray)', alignItems: 'center' }}>
-                <span>📅 {formatDate(event.date)} · {event.time}</span>
-                <span>📍 {event.venue}, {event.city}</span>
-                <span>🏆 {event.league}</span>
+            <div className="ticket-meta-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '8px 16px', flexWrap: 'wrap', fontSize: '14px', color: 'var(--text-gray)', alignItems: 'center', minWidth: 0 }}>
+                <span style={{ whiteSpace: 'nowrap' }}>📅 {formatDate(event.date)} · {event.time}</span>
+                <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100%' }}>📍 {event.venue}, {event.city}</span>
+                <span style={{ whiteSpace: 'nowrap' }}>🏆 {event.league}</span>
               </div>
               {!isSoldOut && (
-                <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div className="ticket-meta-price" style={{ flexShrink: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <span style={{ fontSize: '13px', color: 'var(--text-gray)' }}>Tickets from</span>
                   <span
                     style={{
@@ -308,7 +323,7 @@ export default function TicketPage({ params }: Props) {
                               Best Price
                             </div>
                           )}
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                          <div className="partner-compare-left" style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                             {partner.awImageUrl ? (
                               <img
                                 src={partner.awImageUrl}
@@ -331,9 +346,10 @@ export default function TicketPage({ params }: Props) {
                               )}
                             </div>
                           </div>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                            <div style={{ textAlign: 'right' }}>
+                          <div className="partner-compare-right" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                            <div className="partner-price-wrap" style={{ textAlign: 'right' }}>
                               <div
+                                className="partner-compare-price"
                                 style={{
                                   fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
                                   fontSize: '28px',
@@ -349,6 +365,7 @@ export default function TicketPage({ params }: Props) {
                               </div>
                             </div>
                             <div
+                              className="partner-buy-btn"
                               style={{
                                 background: idx === 0 ? 'var(--primary)' : 'var(--light-gray)',
                                 color: idx === 0 ? '#fff' : 'var(--text-dark)',
@@ -374,6 +391,7 @@ export default function TicketPage({ params }: Props) {
 
               {/* ── Event Overview ── */}
               <div
+                className="ticket-overview-panel"
                 style={{
                   background: 'var(--white)',
                   border: '1px solid var(--border-gray)',
@@ -591,6 +609,7 @@ export default function TicketPage({ params }: Props) {
             {/* ── Right: sticky event card ── */}
             <div>
               <div
+                className="ticket-sidebar-card"
                 style={{
                   background: 'var(--white)',
                   border: '1px solid var(--border-gray)',

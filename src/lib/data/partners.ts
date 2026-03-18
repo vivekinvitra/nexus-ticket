@@ -36,6 +36,9 @@ export const PARTNERS: Partner[] = [
     founded: 2004,
     website: 'https://footballticketnet.com',
     merchantredirecturl: 'https://www.awin1.com/cread.php?awinmid=109004&awinaffid=90270',
+    metaTitle: 'FootballTicketNet Review 2025 | Trusted Football Tickets | TicketNexus',
+    metaDescription: 'Read our FootballTicketNet review. A specialist football ticket marketplace offering verified tickets for Premier League, Champions League and more with buyer guarantee.',
+    metaKeywords: 'FootballTicketNet review, FootballTicketNet tickets, buy football tickets, Premier League tickets, Champions League tickets, verified football tickets',
   },
   {
     id: 'awin',
@@ -70,6 +73,9 @@ export const PARTNERS: Partner[] = [
     deliveryOptions: ['E-ticket', 'Mobile app', 'Print at home', 'Registered mail'],
     founded: 2000,
     website: 'https://awin.com',
+    metaTitle: 'Awin Review 2025 | Trusted Sports Ticket Network | TicketNexus',
+    metaDescription: 'Read our Awin review. A global affiliate network connecting fans with verified ticket sellers for football, tennis, horse racing, cricket and Formula 1 events.',
+    metaKeywords: 'Awin review, Awin tickets, buy sports tickets, verified ticket sellers, football tennis cricket F1 tickets, Awin affiliate network',
   },
 ];
 

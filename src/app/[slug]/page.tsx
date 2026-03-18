@@ -20,8 +20,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const sport = getSportBySlug(params.slug);
   if (!sport) return {};
   return buildMetadata({
-    title: `${sport.name} Tickets`,
-    description: sport.description,
+    title: sport.metaTitle ?? `${sport.name} Tickets`,
+    description: sport.metaDescription ?? sport.description,
+    keywords: sport.metaKeywords,
     path: `/${sport.slug}`,
   });
 }

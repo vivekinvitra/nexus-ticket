@@ -10,6 +10,9 @@ export const SPORTS: SportCategory[] = [
     description: 'Premier League, Champions League, World Cup and more. Find the best football ticket deals.',
     color: '#3b82f6',
     isFeatured: true,
+    metaTitle: 'Football Tickets | Premier League, Champions League & World Cup | TicketNexus',
+    metaDescription: 'Buy football tickets for Premier League, UEFA Champions League, FIFA World Cup and more. Compare prices from trusted UK resale platforms and find the best deal.',
+    metaKeywords: 'football tickets, Premier League tickets, Champions League tickets, World Cup tickets, buy football tickets, football ticket comparison',
   },
   {
     slug: 'tennis',
@@ -19,6 +22,9 @@ export const SPORTS: SportCategory[] = [
     description: 'Wimbledon, US Open, Roland Garros, Australian Open. Book Grand Slam tickets early.',
     color: '#ef4444',
     isFeatured: true,
+    metaTitle: 'Tennis Tickets | Wimbledon, Grand Slams & ATP Tour | TicketNexus',
+    metaDescription: 'Find and compare tennis tickets for Wimbledon, US Open, Roland Garros and Australian Open. Get the best prices on Grand Slam and ATP/WTA Tour tickets.',
+    metaKeywords: 'tennis tickets, Wimbledon tickets, Grand Slam tickets, US Open tickets, Roland Garros tickets, ATP tickets, buy tennis tickets',
   },
   {
     slug: 'cricket',
@@ -28,6 +34,9 @@ export const SPORTS: SportCategory[] = [
     description: 'Test matches, ODIs, T20s — from the Ashes to the IPL. Compare cricket ticket prices.',
     color: '#10b981',
     isFeatured: true,
+    metaTitle: 'Cricket Tickets | Ashes, T20 World Cup & Test Matches | TicketNexus',
+    metaDescription: 'Compare cricket ticket prices for the Ashes, T20 World Cup, IPL and England Test matches. Find the best deals on cricket tickets from trusted platforms.',
+    metaKeywords: 'cricket tickets, Ashes tickets, T20 World Cup tickets, IPL tickets, Test match tickets, buy cricket tickets, cricket ticket comparison',
   },
   {
     slug: 'horse-racing',
@@ -37,6 +46,9 @@ export const SPORTS: SportCategory[] = [
     description: 'Cheltenham, Royal Ascot, Grand National. Get the best prices on racing hospitality.',
     color: '#f59e0b',
     isFeatured: true,
+    metaTitle: 'Horse Racing Tickets | Cheltenham, Royal Ascot & Grand National | TicketNexus',
+    metaDescription: 'Buy horse racing tickets for Cheltenham Festival, Royal Ascot and the Grand National. Compare hospitality packages and general admission prices.',
+    metaKeywords: 'horse racing tickets, Cheltenham tickets, Royal Ascot tickets, Grand National tickets, racing hospitality, buy horse racing tickets',
   },
   {
     slug: 'boxing',
@@ -46,6 +58,9 @@ export const SPORTS: SportCategory[] = [
     description: 'World championship bouts, undercard fights and big arena events. Compare boxing tickets.',
     color: '#8b5cf6',
     isFeatured: true,
+    metaTitle: 'Boxing Tickets | World Championship Bouts & Arena Events | TicketNexus',
+    metaDescription: 'Find and compare boxing tickets for world championship fights and major arena events. Buy verified boxing tickets from trusted UK resale platforms.',
+    metaKeywords: 'boxing tickets, world championship boxing tickets, boxing arena tickets, buy boxing tickets, boxing ticket comparison',
   },
 
   // Other Sports
@@ -56,6 +71,9 @@ export const SPORTS: SportCategory[] = [
     count: 38,
     description: 'NFL games, Super Bowl, college football. Compare prices on American football tickets.',
     color: '#3b82f6',
+    metaTitle: 'American Football Tickets | NFL & Super Bowl | TicketNexus',
+    metaDescription: 'Compare American football ticket prices for NFL games, the Super Bowl and college football. Find the best deals from trusted resale platforms.',
+    metaKeywords: 'American football tickets, NFL tickets, Super Bowl tickets, college football tickets, buy NFL tickets',
   },
   {
     slug: 'athletics',
@@ -64,6 +82,9 @@ export const SPORTS: SportCategory[] = [
     count: 28,
     description: 'Olympic athletics, track and field events. Get tickets to world-class athletics competitions.',
     color: '#dc2626',
+    metaTitle: 'Athletics Tickets | Track & Field Events | TicketNexus',
+    metaDescription: 'Buy athletics tickets for Olympic track and field events and world-class competitions. Compare prices and find the best athletics ticket deals.',
+    metaKeywords: 'athletics tickets, track and field tickets, Olympic athletics tickets, buy athletics tickets',
   },
   {
     slug: 'badminton',
@@ -72,6 +93,9 @@ export const SPORTS: SportCategory[] = [
     count: 15,
     description: 'Badminton tournaments and championships.',
     color: '#059669',
+    metaTitle: 'Badminton Tickets | Tournaments & Championships | TicketNexus',
+    metaDescription: 'Find badminton tickets for top tournaments and championships. Compare prices and buy verified badminton tickets.',
+    metaKeywords: 'badminton tickets, badminton tournament tickets, buy badminton tickets',
   },
   {
     slug: 'baseball',
@@ -80,6 +104,9 @@ export const SPORTS: SportCategory[] = [
     count: 52,
     description: 'MLB games, World Series, baseball championships.',
     color: '#dc2626',
+    metaTitle: 'Baseball Tickets | MLB, World Series & Championships | TicketNexus',
+    metaDescription: 'Compare baseball ticket prices for MLB games, the World Series and major championships. Find the best deals on baseball tickets.',
+    metaKeywords: 'baseball tickets, MLB tickets, World Series tickets, buy baseball tickets',
   },
   {
     slug: 'basketball',
@@ -88,6 +115,9 @@ export const SPORTS: SportCategory[] = [
     count: 95,
     description: 'NBA games, Euroleague, basketball tournaments and finals.',
     color: '#ea580c',
+    metaTitle: 'Basketball Tickets | NBA, EuroLeague & Tournaments | TicketNexus',
+    metaDescription: 'Buy basketball tickets for NBA games, EuroLeague and major tournaments. Compare prices from trusted platforms and find the best basketball ticket deals.',
+    metaKeywords: 'basketball tickets, NBA tickets, EuroLeague tickets, buy basketball tickets, basketball ticket comparison',
   },
   {
     slug: 'beach-volleyball',
@@ -96,6 +126,9 @@ export const SPORTS: SportCategory[] = [
     count: 18,
     description: 'Beach volleyball tournaments and championships.',
     color: '#06b6d4',
+    metaTitle: 'Beach Volleyball Tickets | Tournaments & Championships | TicketNexus',
+    metaDescription: 'Find beach volleyball tickets for top tournaments and championships. Compare prices and buy verified beach volleyball tickets.',
+    metaKeywords: 'beach volleyball tickets, beach volleyball tournament tickets, buy beach volleyball tickets',
   },
   {
     slug: 'cycling',
@@ -104,6 +137,9 @@ export const SPORTS: SportCategory[] = [
     count: 65,
     description: 'Tour de France, cycling races and championships.',
     color: '#eab308',
+    metaTitle: 'Cycling Tickets | Tour de France & Road Race Events | TicketNexus',
+    metaDescription: 'Compare cycling tickets for Tour de France and major cycling races. Find the best prices on cycling event tickets.',
+    metaKeywords: 'cycling tickets, Tour de France tickets, cycling race tickets, buy cycling tickets',
   },
   {
     slug: 'darts',
@@ -112,6 +148,9 @@ export const SPORTS: SportCategory[] = [
     count: 42,
     description: 'Professional darts tournaments like PDC World Championship.',
     color: '#dc2626',
+    metaTitle: 'Darts Tickets | PDC World Championship & Tournaments | TicketNexus',
+    metaDescription: 'Buy darts tickets for the PDC World Championship and other professional darts tournaments. Compare prices and find the best deals.',
+    metaKeywords: 'darts tickets, PDC World Championship tickets, professional darts tickets, buy darts tickets',
   },
   {
     slug: 'equestrian',
@@ -120,6 +159,9 @@ export const SPORTS: SportCategory[] = [
     count: 34,
     description: 'Horse jumping, dressage, equestrian events.',
     color: '#92400e',
+    metaTitle: 'Equestrian Tickets | Show Jumping & Dressage Events | TicketNexus',
+    metaDescription: 'Find equestrian tickets for show jumping, dressage and major equestrian events. Compare prices and buy verified tickets.',
+    metaKeywords: 'equestrian tickets, show jumping tickets, dressage tickets, buy equestrian tickets',
   },
   {
     slug: 'esports',
@@ -128,6 +170,9 @@ export const SPORTS: SportCategory[] = [
     count: 67,
     description: 'Gaming tournaments, esports championships and competitions.',
     color: '#7c3aed',
+    metaTitle: 'Esports Tickets | Gaming Tournaments & Championships | TicketNexus',
+    metaDescription: 'Buy esports tickets for top gaming tournaments and championships. Compare prices and find the best esports event ticket deals.',
+    metaKeywords: 'esports tickets, gaming tournament tickets, esports championship tickets, buy esports tickets',
   },
   {
     slug: 'figure-skating',
@@ -136,6 +181,9 @@ export const SPORTS: SportCategory[] = [
     count: 22,
     description: 'Figure skating championships and ice skating events.',
     color: '#06b6d4',
+    metaTitle: 'Figure Skating Tickets | Championships & Ice Events | TicketNexus',
+    metaDescription: 'Find figure skating tickets for world championships and major ice skating events. Compare prices and buy verified figure skating tickets.',
+    metaKeywords: 'figure skating tickets, ice skating tickets, figure skating championship tickets, buy figure skating tickets',
   },
   {
     slug: 'formula-1',
@@ -144,6 +192,9 @@ export const SPORTS: SportCategory[] = [
     count: 63,
     description: 'British GP, Monaco, Silverstone — pit lane, grandstand and paddock club packages.',
     color: '#ef4444',
+    metaTitle: 'Formula 1 Tickets | British GP, Monaco & Paddock Club | TicketNexus',
+    metaDescription: 'Compare Formula 1 ticket prices for the British GP, Monaco Grand Prix and Silverstone. Find grandstand, pit lane and Paddock Club packages at the best prices.',
+    metaKeywords: 'Formula 1 tickets, F1 tickets, British GP tickets, Monaco Grand Prix tickets, Silverstone tickets, Paddock Club tickets, buy F1 tickets',
   },
   {
     slug: 'golf',
@@ -152,6 +203,9 @@ export const SPORTS: SportCategory[] = [
     count: 39,
     description: 'The Open, Ryder Cup, US Masters hospitality packages. Compare golf event tickets.',
     color: '#10b981',
+    metaTitle: 'Golf Tickets | The Open, Ryder Cup & US Masters | TicketNexus',
+    metaDescription: 'Buy golf tickets for The Open Championship, Ryder Cup and US Masters. Compare hospitality packages and general admission prices from trusted platforms.',
+    metaKeywords: 'golf tickets, The Open tickets, Ryder Cup tickets, US Masters tickets, golf hospitality, buy golf tickets',
   },
   {
     slug: 'gymnastics',
@@ -160,6 +214,9 @@ export const SPORTS: SportCategory[] = [
     count: 19,
     description: 'Artistic gymnastics, rhythmic gymnastics competitions.',
     color: '#06b6d4',
+    metaTitle: 'Gymnastics Tickets | Artistic & Rhythmic Championships | TicketNexus',
+    metaDescription: 'Find gymnastics tickets for artistic and rhythmic gymnastics championships. Compare prices and buy verified gymnastics event tickets.',
+    metaKeywords: 'gymnastics tickets, artistic gymnastics tickets, rhythmic gymnastics tickets, buy gymnastics tickets',
   },
   {
     slug: 'ice-hockey',
@@ -168,6 +225,9 @@ export const SPORTS: SportCategory[] = [
     count: 58,
     description: 'NHL games, ice hockey championships and tournaments.',
     color: '#0ea5e9',
+    metaTitle: 'Ice Hockey Tickets | NHL Games & Championships | TicketNexus',
+    metaDescription: 'Compare ice hockey ticket prices for NHL games and major championships. Find the best deals on ice hockey tickets from trusted resale platforms.',
+    metaKeywords: 'ice hockey tickets, NHL tickets, hockey championship tickets, buy ice hockey tickets',
   },
   {
     slug: 'motorsports',
@@ -176,6 +236,9 @@ export const SPORTS: SportCategory[] = [
     count: 48,
     description: 'Racing events, motorsport championships and races.',
     color: '#dc2626',
+    metaTitle: 'Motorsports Tickets | Racing Events & Championships | TicketNexus',
+    metaDescription: 'Buy motorsports tickets for racing events and major championships. Compare prices from trusted platforms and find the best motorsport ticket deals.',
+    metaKeywords: 'motorsports tickets, racing event tickets, motorsport championship tickets, buy motorsports tickets',
   },
   {
     slug: 'moto-gp',
@@ -184,6 +247,9 @@ export const SPORTS: SportCategory[] = [
     count: 36,
     description: 'MotoGP racing, motorcycle championships.',
     color: '#dc2626',
+    metaTitle: 'MotoGP Tickets | Grand Prix & Championship Races | TicketNexus',
+    metaDescription: 'Find MotoGP tickets for Grand Prix races and the MotoGP World Championship. Compare prices and buy verified MotoGP tickets.',
+    metaKeywords: 'MotoGP tickets, motorcycle race tickets, MotoGP Grand Prix tickets, buy MotoGP tickets',
   },
   {
     slug: 'rugby',
@@ -192,6 +258,9 @@ export const SPORTS: SportCategory[] = [
     count: 58,
     description: 'Six Nations, Premiership, World Cup. Find the best rugby ticket deals from trusted sellers.',
     color: '#10b981',
+    metaTitle: 'Rugby Tickets | Six Nations, Premiership & World Cup | TicketNexus',
+    metaDescription: 'Compare rugby ticket prices for the Six Nations, Premiership Rugby and Rugby World Cup. Find the best deals from trusted UK resale platforms.',
+    metaKeywords: 'rugby tickets, Six Nations tickets, Premiership Rugby tickets, Rugby World Cup tickets, buy rugby tickets, rugby ticket comparison',
   },
   {
     slug: 'swimming',
@@ -200,6 +269,9 @@ export const SPORTS: SportCategory[] = [
     count: 25,
     description: 'Swimming competitions and aquatics championships.',
     color: '#06b6d4',
+    metaTitle: 'Swimming Tickets | Aquatics Championships & Competitions | TicketNexus',
+    metaDescription: 'Find swimming tickets for aquatics championships and major competitions. Compare prices and buy verified swimming event tickets.',
+    metaKeywords: 'swimming tickets, aquatics tickets, swimming championship tickets, buy swimming tickets',
   },
   {
     slug: 'table-tennis',
@@ -208,6 +280,9 @@ export const SPORTS: SportCategory[] = [
     count: 20,
     description: 'Table tennis tournaments and championships.',
     color: '#ef4444',
+    metaTitle: 'Table Tennis Tickets | Tournaments & Championships | TicketNexus',
+    metaDescription: 'Buy table tennis tickets for top tournaments and world championships. Compare prices and find the best table tennis ticket deals.',
+    metaKeywords: 'table tennis tickets, table tennis tournament tickets, buy table tennis tickets',
   },
   {
     slug: 'volleyball',
@@ -216,6 +291,9 @@ export const SPORTS: SportCategory[] = [
     count: 30,
     description: 'Volleyball championships and tournaments.',
     color: '#eab308',
+    metaTitle: 'Volleyball Tickets | Championships & Tournaments | TicketNexus',
+    metaDescription: 'Find volleyball tickets for world championships and major tournaments. Compare prices and buy verified volleyball tickets.',
+    metaKeywords: 'volleyball tickets, volleyball championship tickets, buy volleyball tickets',
   },
   {
     slug: 'winter-sports',
@@ -224,6 +302,9 @@ export const SPORTS: SportCategory[] = [
     count: 44,
     description: 'Skiing, snowboarding, winter sports events.',
     color: '#06b6d4',
+    metaTitle: 'Winter Sports Tickets | Skiing, Snowboarding & Events | TicketNexus',
+    metaDescription: 'Compare winter sports tickets for skiing, snowboarding and major winter events. Find the best deals from trusted platforms.',
+    metaKeywords: 'winter sports tickets, skiing tickets, snowboarding tickets, buy winter sports tickets',
   },
   {
     slug: 'wrestling',
@@ -232,6 +313,9 @@ export const SPORTS: SportCategory[] = [
     count: 23,
     description: 'Wrestling matches and wrestling championships.',
     color: '#92400e',
+    metaTitle: 'Wrestling Tickets | Matches & Championships | TicketNexus',
+    metaDescription: 'Buy wrestling tickets for major matches and championships. Compare prices and find the best wrestling ticket deals.',
+    metaKeywords: 'wrestling tickets, wrestling match tickets, wrestling championship tickets, buy wrestling tickets',
   },
 ];
 

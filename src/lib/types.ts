@@ -52,6 +52,9 @@ export interface TicketEvent {
   description?: string;
   imageUrl?: string;
   partners: TicketPartnerPrice[];
+  metaTitle?: string;
+  metaDescription?: string;
+  metaKeywords?: string;
 }
 
 export interface LeagueCategory {
@@ -75,6 +78,9 @@ export interface LeagueCategory {
   month: string;
   day: string;
   dayLabel: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  metaKeywords?: string;
 }
 
 export interface TicketPartnerPrice {
@@ -109,6 +115,9 @@ export interface Partner {
   website: string;
   merchantId?: string;          // Awin merchant ID
   merchantredirecturl?: string; // Awin merchant redirect URL
+  metaTitle?: string;
+  metaDescription?: string;
+  metaKeywords?: string;
 }
 
 export interface NewsSection {
@@ -135,6 +144,7 @@ export interface NewsArticle {
   leagueSlug?: string;
   metaTitle: string;
   metaDescription: string;
+  metaKeywords?: string;
   content: NewsSection[];
 }
 
@@ -146,6 +156,9 @@ export interface SportCategory {
   description: string;
   color: string;
   isFeatured?: boolean;
+  metaTitle?: string;
+  metaDescription?: string;
+  metaKeywords?: string;
 }
 
 export interface LegalPage {
