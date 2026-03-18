@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer';
 import CategoryContent from '@/components/category/CategoryContent';
 import { SPORTS, getSportBySlug } from '@/lib/data/sports';
 import { getEventsBySport } from '@/lib/data/tickets';
+import { getNewsByCategory } from '@/lib/data/news';
 import { buildMetadata } from '@/lib/utils/seo';
 
 interface Props {
@@ -67,7 +68,8 @@ export default function CategoryPage({ params }: Props) {
               </span>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <div className="sport-hero-body">
+              {/* Icon */}
               <div
                 style={{
                   width: '72px',
@@ -83,7 +85,9 @@ export default function CategoryPage({ params }: Props) {
               >
                 {sport.icon}
               </div>
-              <div>
+
+              {/* Title + description */}
+              <div style={{ flex: 1, minWidth: 0 }}>
                 <h1
                   className="sport-h1"
                   style={{
@@ -91,22 +95,19 @@ export default function CategoryPage({ params }: Props) {
                     fontSize: '36px',
                     fontWeight: 700,
                     color: 'var(--text-dark)',
-                    marginBottom: '8px',
+                    marginBottom: '6px',
+                    marginTop: 0,
                   }}
                 >
                   {sport.name} Tickets
                 </h1>
-                <p style={{ fontSize: '16px', color: 'var(--text-gray)', maxWidth: '600px' }}>
+                <p className="sport-hero-desc" style={{ fontSize: '16px', color: 'var(--text-gray)', maxWidth: '600px', margin: 0 }}>
                   {sport.description}
                 </p>
               </div>
-              <div
-                style={{
-                  marginLeft: 'auto',
-                  textAlign: 'right',
-                  flexShrink: 0,
-                }}
-              >
+
+              {/* Badge */}
+              <div className="sport-hero-badge">
                 <div
                   style={{
                     background: 'var(--primary-light)',
@@ -135,7 +136,11 @@ export default function CategoryPage({ params }: Props) {
             paddingBottom: '60px',
           }}
         >
-          <CategoryContent sport={sport} allEvents={getEventsBySport(sport.slug)} />
+          <CategoryContent
+            sport={sport}
+            allEvents={getEventsBySport(sport.slug)}
+            newsArticles={getNewsByCategory(sport.slug)}
+          />
         </div>
       </main>
 

@@ -126,11 +126,13 @@ export interface NewsArticle {
   author: string;
   authorAvatar: string;
   publishedAt: string;
+  addedon: string;
   readTime: number;
   imageUrl: string;
   imageCaption: string;
   keyPoints: string[];
   featured?: boolean;
+  leagueSlug?: string;
   metaTitle: string;
   metaDescription: string;
   content: NewsSection[];

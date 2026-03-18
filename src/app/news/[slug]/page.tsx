@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { NEWS_ARTICLES, getNewsBySlug } from '@/lib/data/news';
+import { LEAGUES } from '@/lib/data/leagues';
 import { getEventsBySport, toTicketSlug } from '@/lib/data/tickets';
 import { buildMetadata, buildArticleJsonLd, SITE_URL } from '@/lib/utils/seo';
 import { formatPrice } from '@/lib/utils/format';
@@ -58,6 +59,7 @@ export default function NewsArticlePage({ params }: Props) {
   const relatedTickets = getEventsBySport(article.category).slice(0, 4);
   const catColor = CAT_COLORS[article.category] || '#6b7280';
   const catLabel = article.category.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  const league = article.leagueSlug ? LEAGUES.find((l) => l.slug === article.leagueSlug) : null;
 
   const jsonLd = buildArticleJsonLd({
     title: article.title,
@@ -86,7 +88,13 @@ export default function NewsArticlePage({ params }: Props) {
               <span style={{ color: '#cbd5e1' }}>›</span>
               <Link href="/news" style={{ color: '#64748b', textDecoration: 'none' }}>News</Link>
               <span style={{ color: '#cbd5e1' }}>›</span>
-              <span style={{ color: catColor, fontWeight: 600 }}>{catLabel}</span>
+              <Link href={`/${article.category}`} style={{ color: '#64748b', textDecoration: 'none' }}>{catLabel}</Link>
+              {league && (
+                <>
+                  <span style={{ color: '#cbd5e1' }}>›</span>
+                  <span style={{ color: catColor, fontWeight: 600 }}>{league.name}</span>
+                </>
+              )}
             </div>
           </div>
         </div>

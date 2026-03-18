@@ -55,35 +55,6 @@ export default function Hero() {
           }}
         />
 
-        {/* Background banner image — right side, transparent */}
-        <img
-          key={league.slug}
-          src={league.imageUrl}
-          alt={league.name}
-          className="hero-bg-img"
-          style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center top',
-            opacity: 0.45,
-            maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 30%, black 70%)',
-            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 30%, black 70%)',
-            transition: 'opacity 0.5s ease',
-          }}
-        />
-
-        {/* Dark vignette overlay */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 55%, transparent 100%)',
-            zIndex: 1,
-          }}
-        />
 
         {/* Content */}
         <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 2 }}>

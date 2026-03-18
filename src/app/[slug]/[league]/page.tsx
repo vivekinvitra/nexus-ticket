@@ -56,20 +56,6 @@ export default function LeaguePage({ params }: Props) {
             overflow: 'hidden',
           }}
         >
-          {/* Banner image with dark overlay */}
-          <img
-            src={league.imageUrl}
-            alt={league.name}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center',
-              opacity: 0.25,
-            }}
-          />
           <div
             className="page-px league-inner league-hero-inner"
             style={{
@@ -105,8 +91,10 @@ export default function LeaguePage({ params }: Props) {
             </div>
 
             {/* Header row */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '24px', flexWrap: 'wrap' }}>
+            <div className="league-hero-body">
+              {/* Icon */}
               <div
+                className="league-hero-icon"
                 style={{
                   width: '80px',
                   height: '80px',
@@ -123,7 +111,8 @@ export default function LeaguePage({ params }: Props) {
                 {league.icon}
               </div>
 
-              <div style={{ flex: 1 }}>
+              {/* Title + description */}
+              <div className="league-hero-title-col">
                 <div
                   style={{
                     display: 'inline-flex',
@@ -157,18 +146,21 @@ export default function LeaguePage({ params }: Props) {
                 </h1>
 
                 <p
+                  className="league-hero-desc"
                   style={{
                     fontSize: '15px',
                     color: 'rgba(255,255,255,0.6)',
                     maxWidth: '680px',
                     lineHeight: 1.7,
+                    margin: 0,
                   }}
                 >
                   {league.longDescription}
                 </p>
               </div>
 
-              <div style={{ flexShrink: 0, textAlign: 'right' }}>
+              {/* Badge */}
+              <div className="league-hero-badge">
                 <div
                   style={{
                     background: `${league.color}20`,
@@ -193,31 +185,43 @@ export default function LeaguePage({ params }: Props) {
             {/* Sibling leagues */}
             {siblingLeagues.length > 0 && (
               <div style={{ marginTop: '28px', paddingTop: '24px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginRight: '12px' }}>
+                <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginRight: '12px', flexShrink: 0 }}>
                   Also in {sport.name}:
                 </span>
-                {siblingLeagues.map((sl) => (
-                  <Link
-                    key={sl.slug}
-                    href={`/${sport.slug}/${sl.slug}`}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      background: 'rgba(255,255,255,0.06)',
-                      color: 'rgba(255,255,255,0.7)',
-                      fontSize: '12px',
-                      fontWeight: 500,
-                      padding: '5px 12px',
-                      borderRadius: '100px',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                      marginRight: '8px',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    {sl.icon} {sl.name}
-                  </Link>
-                ))}
+                <div
+                  className="sibling-leagues-scroll"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                    gap: '8px',
+                    marginTop: '10px',
+                  }}
+                >
+                  {siblingLeagues.map((sl) => (
+                    <Link
+                      key={sl.slug}
+                      href={`/${sport.slug}/${sl.slug}`}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        background: 'rgba(255,255,255,0.06)',
+                        color: 'rgba(255,255,255,0.7)',
+                        fontSize: '12px',
+                        fontWeight: 500,
+                        padding: '5px 12px',
+                        borderRadius: '100px',
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        textDecoration: 'none',
+                        whiteSpace: 'nowrap',
+                        flexShrink: 0,
+                      }}
+                    >
+                      {sl.icon} {sl.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
             )}
           </div>

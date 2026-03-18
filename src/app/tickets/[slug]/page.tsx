@@ -5,6 +5,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { CLEAN_EVENTS, getEventBySlug, getRelatedEvents, toTicketSlug } from '@/lib/data/tickets';
 import { getSportBySlug } from '@/lib/data/sports';
+import { NEWS_ARTICLES } from '@/lib/data/news';
 import { buildMetadata, SITE_URL } from '@/lib/utils/seo';
 import { formatPrice, formatDate, formatShortDate } from '@/lib/utils/format';
 
@@ -37,6 +38,9 @@ export default function TicketPage({ params }: Props) {
   const sport = getSportBySlug(event.sport);
   const isSoldOut = event.availability === 'sold-out';
   const relatedEvents = getRelatedEvents(event, 3);
+  const relatedNews = event.leagueSlug
+    ? NEWS_ARTICLES.filter((a) => a.leagueSlug === event.leagueSlug).slice(0, 3)
+    : NEWS_ARTICLES.filter((a) => a.category === event.sport).slice(0, 3);
 
   const availStyle = {
     high: { label: 'Available', color: 'var(--primary)', bg: 'var(--primary-light)' },
@@ -509,6 +513,75 @@ export default function TicketPage({ params }: Props) {
                         </Link>
                       );
                     })}
+                  </div>
+                </div>
+              )}
+
+              {/* ── Related News ── */}
+              {relatedNews.length > 0 && (
+                <div style={{ marginTop: '40px' }}>
+                  <h2
+                    style={{
+                      fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
+                      fontSize: '20px',
+                      fontWeight: 700,
+                      color: 'var(--text-dark)',
+                      marginBottom: '16px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                    }}
+                  >
+                    <span>📰</span> Related News
+                  </h2>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {relatedNews.map((article) => (
+                      <Link
+                        key={article.id}
+                        href={`/news/${article.slug}`}
+                        style={{
+                          display: 'flex',
+                          gap: '16px',
+                          alignItems: 'flex-start',
+                          background: 'var(--white)',
+                          border: '1px solid var(--border-gray)',
+                          borderRadius: '10px',
+                          padding: '16px',
+                          textDecoration: 'none',
+                          transition: 'all .2s',
+                        }}
+                        className="related-news-row"
+                      >
+                        <div
+                          style={{
+                            width: '80px',
+                            height: '60px',
+                            borderRadius: '8px',
+                            overflow: 'hidden',
+                            flexShrink: 0,
+                            position: 'relative',
+                            background: 'var(--light-gray)',
+                          }}
+                        >
+                          <img
+                            src={article.imageUrl}
+                            alt={article.title}
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          />
+                        </div>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '4px' }}>
+                            {article.readTime} min read
+                          </div>
+                          <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-dark)', lineHeight: 1.4, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+                            {article.title}
+                          </div>
+                          <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginTop: '4px' }}>
+                            {article.author}
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
                 </div>
               )}

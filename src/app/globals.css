@@ -245,30 +245,109 @@ input, select {
 }
 
 /* League hero + events section */
+
+/* Desktop: icon | title+desc | badge in one row */
+.league-hero-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+.league-hero-title-col { flex: 1; min-width: 0; }
+.league-hero-badge     { flex-shrink: 0; text-align: right; }
+
 @media (max-width: 768px) {
-  .league-inner       { padding-left: 20px !important; padding-right: 20px !important; }
-  .league-hero-inner  { padding-top: 24px !important; padding-bottom: 24px !important; }
-  .league-events-inner{ padding-top: 24px !important; padding-bottom: 40px !important; }
-  .league-icon        { width: 60px !important; height: 60px !important; font-size: 30px !important; }
-  .league-h1          { font-size: 24px !important; }
-  .league-empty       { padding: 40px 20px !important; }
+  .league-inner        { padding-left: 20px !important; padding-right: 20px !important; }
+  .league-hero-inner   { padding-top: 24px !important; padding-bottom: 24px !important; }
+  .league-events-inner { padding-top: 24px !important; padding-bottom: 40px !important; }
+  .league-h1           { font-size: 24px !important; }
+  .league-empty        { padding: 40px 20px !important; }
+
+  /* Stack: icon+title row → desc row → badge row */
+  .league-hero-body {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  /* Icon stays left, title-col fills remaining width beside it */
+  .league-hero-icon {
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 30px !important;
+    flex-shrink: 0;
+  }
+  .league-hero-title-col {
+    flex: 1;
+    min-width: 0;
+  }
+  /* Description wraps to its own full-width row */
+  .league-hero-desc {
+    width: 100%;
+    font-size: 14px !important;
+  }
+  /* Badge drops below, left-aligned */
+  .league-hero-badge {
+    width: 100%;
+    text-align: left;
+  }
 }
 @media (max-width: 640px) {
-  .league-inner       { padding-left: 16px !important; padding-right: 16px !important; }
-  .league-hero-inner  { padding-top: 20px !important; padding-bottom: 16px !important; }
-  .league-h1          { font-size: 20px !important; }
+  .league-inner      { padding-left: 16px !important; padding-right: 16px !important; }
+  .league-hero-inner { padding-top: 20px !important; padding-bottom: 16px !important; }
+  .league-h1         { font-size: 20px !important; }
+
+  .sibling-leagues-scroll {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .sibling-leagues-scroll::-webkit-scrollbar { display: none; }
 }
 
 /* Sport category page hero */
+/* Desktop: icon | title+desc | badge in one row */
+.sport-hero-body {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.sport-hero-badge {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Mobile: stack into rows */
 @media (max-width: 768px) {
-  .sport-hero-inner   { padding: 24px 20px !important; }
-  .sport-content-inner{ padding: 24px 20px 40px !important; }
-  .sport-h1           { font-size: 26px !important; }
+  .sport-hero-inner    { padding: 24px 20px !important; }
+  .sport-content-inner { padding: 24px 20px 40px !important; }
+  .sport-h1            { font-size: 26px !important; }
+
+  .sport-hero-body {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  /* Icon + title div stay side by side (full width row) */
+  .sport-hero-body > div:first-child {
+    flex-shrink: 0;
+  }
+  .sport-hero-body > div:nth-child(2) {
+    flex: 1;
+    min-width: 0;
+  }
+  /* Badge drops to its own row */
+  .sport-hero-badge {
+    margin-left: 0;
+    width: 100%;
+  }
+  .sport-hero-desc {
+    font-size: 14px !important;
+  }
 }
 @media (max-width: 640px) {
-  .sport-hero-inner   { padding: 20px 16px !important; }
-  .sport-content-inner{ padding: 20px 16px 32px !important; }
-  .sport-h1           { font-size: 22px !important; }
+  .sport-hero-inner    { padding: 20px 16px !important; }
+  .sport-content-inner { padding: 20px 16px 32px !important; }
+  .sport-h1            { font-size: 22px !important; }
 }
 
 /* Small mobile */
