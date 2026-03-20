@@ -8,8 +8,8 @@
         <news:name>TicketNexus</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-03-18</news:publication_date>
-      <news:title>Premier League 2024/25: How to Find the Best Ticket Deals</news:title>
+      <news:publication_date>2025-02-18</news:publication_date>
+      <news:title>Premier League 2024/25: How to Find the Best Ticket Deals This Season</news:title>
     </news:news>
   </url>
   <url>
@@ -19,7 +19,7 @@
         <news:name>TicketNexus</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-03-18</news:publication_date>
+      <news:publication_date>2025-02-15</news:publication_date>
       <news:title>Cheltenham Festival 2025: Complete Ticket Buying Guide</news:title>
     </news:news>
   </url>
@@ -30,8 +30,8 @@
         <news:name>TicketNexus</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-03-18</news:publication_date>
-      <news:title>5 Tips for the Wimbledon Ballot</news:title>
+      <news:publication_date>2025-02-12</news:publication_date>
+      <news:title>5 Tips for the Wimbledon Ballot and When to Use Resale Sites</news:title>
     </news:news>
   </url>
   <url>
@@ -41,8 +41,8 @@
         <news:name>TicketNexus</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-03-18</news:publication_date>
-      <news:title>British GP 2025: Grandstand vs Paddock Club</news:title>
+      <news:publication_date>2025-02-10</news:publication_date>
+      <news:title>British GP 2025: Grandstand vs Paddock Club — Is the Upgrade Worth It?</news:title>
     </news:news>
   </url>
   <url>
@@ -52,8 +52,8 @@
         <news:name>TicketNexus</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-03-18</news:publication_date>
-      <news:title>How to Buy Boxing Tickets</news:title>
+      <news:publication_date>2025-02-08</news:publication_date>
+      <news:title>How to Buy Boxing Tickets: Avoiding Scams and Finding Real Value</news:title>
     </news:news>
   </url>
   <url>
@@ -63,8 +63,19 @@
         <news:name>TicketNexus</news:name>
         <news:language>en</news:language>
       </news:publication>
+      <news:publication_date>2025-02-05</news:publication_date>
+      <news:title>England Cricket 2025: The Best Seats at Lord\</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/brighton-vs-liverpool-epl-2026</loc>
+    <news:news>
+      <news:publication>
+        <news:name>TicketNexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
       <news:publication_date>2026-03-18</news:publication_date>
-      <news:title>England Cricket 2025: Best Seats Guide</news:title>
+      <news:title>Brighton vs Liverpool Tickets - EPL 2026 Match at Amex Stadium</news:title>
     </news:news>
   </url>
 </urlset>

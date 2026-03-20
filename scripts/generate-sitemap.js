@@ -33,6 +33,25 @@ function getLeagues() {
   return leagues;
 }
 
+/** All news articles { slug, title, publishedAt } from news.ts */
+function getNewsArticles() {
+  const src      = fs.readFileSync(path.join(SRC_DIR, 'news.ts'), 'utf-8');
+  const articles = [];
+  for (const block of src.split(/\n\s*\{/)) {
+    const slugM      = block.match(/slug:\s*'([^']+)'/);
+    const titleM     = block.match(/title:\s*'([^']+)'/);
+    const publishedM = block.match(/publishedAt:\s*'([^']+)'/);
+    if (slugM && titleM && publishedM) {
+      articles.push({
+        slug:        slugM[1],
+        title:       titleM[1].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'),
+        publishedAt: publishedM[1],
+      });
+    }
+  }
+  return articles;
+}
+
 /** Upcoming (today+) clean ticket slugs from tickets.ts, sorted by date+time */
 function getTicketSlugs() {
   const src   = fs.readFileSync(path.join(SRC_DIR, 'tickets.ts'), 'utf-8');
@@ -121,15 +140,8 @@ ${urls.join('\n')}
 </urlset>`;
 }
 
-function generateNewsSitemap(today) {
-  const articles = [
-    { slug: 'premier-league-ticket-prices-2025', title: 'Premier League 2024/25: How to Find the Best Ticket Deals' },
-    { slug: 'cheltenham-festival-guide-2025',    title: 'Cheltenham Festival 2025: Complete Ticket Buying Guide' },
-    { slug: 'wimbledon-ballot-tips',             title: '5 Tips for the Wimbledon Ballot' },
-    { slug: 'f1-silverstone-hospitality-guide',  title: 'British GP 2025: Grandstand vs Paddock Club' },
-    { slug: 'boxing-ticket-buying-tips',         title: 'How to Buy Boxing Tickets' },
-    { slug: 'cricket-test-match-best-seats',     title: 'England Cricket 2025: Best Seats Guide' },
-  ];
+function generateNewsSitemap() {
+  const articles = getNewsArticles();
 
   const items = articles.map(a => `  <url>
     <loc>${SITE_URL}/news/${a.slug}</loc>
@@ -138,7 +150,7 @@ function generateNewsSitemap(today) {
         <news:name>TicketNexus</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>${today}</news:publication_date>
+      <news:publication_date>${a.publishedAt}</news:publication_date>
       <news:title>${a.title}</news:title>
     </news:news>
   </url>`).join('\n');
@@ -169,8 +181,9 @@ const tickets = getTicketSlugs();
 fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), generateMainSitemap(today));
 console.log(`✅  sitemap.xml        — ${sports.length} sports, ${leagues.length} leagues, 2 partners, 6 company pages`);
 
-fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-news.xml'), generateNewsSitemap(today));
-console.log(`✅  sitemap-news.xml   — 6 articles`);
+const newsArticles = getNewsArticles();
+fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-news.xml'), generateNewsSitemap());
+console.log(`✅  sitemap-news.xml   — ${newsArticles.length} articles`);
 
 fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-tickets.xml'), generateTicketsSitemap(today));
 console.log(`✅  sitemap-tickets.xml — ${tickets.length} tickets`);

@@ -113,7 +113,7 @@ export default function TicketTable({
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '2.5fr 1.3fr 1fr 1fr 1fr 1fr',
+            gridTemplateColumns: '3.5fr 1.1fr 1fr 1fr 1fr 1fr',
             gap: '16px',
             padding: '14px 24px',
             background: 'var(--light-gray)',
@@ -198,7 +198,7 @@ function TicketRow({ event }: { event: TicketEvent }) {
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: '2.5fr 1.3fr 1fr 1fr 1fr 1fr',
+        gridTemplateColumns: '3.5fr 1.1fr 1fr 1fr 1fr 1fr',
         gap: '16px',
         padding: '18px 24px',
         borderBottom: '1px solid var(--border-gray)',
@@ -248,9 +248,7 @@ function TicketRow({ event }: { event: TicketEvent }) {
               fontSize: '14px',
               fontWeight: 600,
               color: 'var(--text-dark)',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
+              wordBreak: 'break-word',
             }}
           >
             {event.eventName}
@@ -290,7 +288,7 @@ function TicketRow({ event }: { event: TicketEvent }) {
       </div>
 
       {/* Date */}
-      <div>
+      <div style={{ whiteSpace: 'nowrap' }}>
         <div style={{ fontSize: '14px', color: 'var(--text-dark)', fontWeight: 500 }}>
           {formatShortDate(event.date)}
         </div>

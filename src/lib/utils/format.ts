@@ -14,6 +14,7 @@ export function formatDate(dateStr: string): string {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
+    timeZone: 'UTC',
   });
 }
 
@@ -21,6 +22,7 @@ export function formatShortDate(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'short',
+    timeZone: 'UTC',
   });
 }
 
