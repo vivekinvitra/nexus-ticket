@@ -93,6 +93,7 @@ function mapApiItem(item: ApiNewsItem): NewsArticle {
 async function fetchAllNews(): Promise<NewsArticle[]> {
   try {
     const res = await fetch(NEWS_API, {
+      next: { revalidate: 300 },
       headers: { 'x-api-key': NEWS_API_KEY },
     });
     if (!res.ok) return [];

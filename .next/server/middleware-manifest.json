@@ -1,6 +1,122 @@
 {
   "version": 3,
   "middleware": {},
-  "functions": {},
+  "functions": {
+    "/news/page": {
+      "files": [
+        "server/server-reference-manifest.js",
+        "server/app/news/page_client-reference-manifest.js",
+        "server/middleware-build-manifest.js",
+        "server/middleware-react-loadable-manifest.js",
+        "server/next-font-manifest.js",
+        "server/interception-route-rewrite-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/app/news/page.js"
+      ],
+      "name": "app/news/page",
+      "page": "/news/page",
+      "matchers": [
+        {
+          "regexp": "^/news$",
+          "originalSource": "/news"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "environments": {}
+    },
+    "/page": {
+      "files": [
+        "server/server-reference-manifest.js",
+        "server/app/page_client-reference-manifest.js",
+        "server/middleware-build-manifest.js",
+        "server/middleware-react-loadable-manifest.js",
+        "server/next-font-manifest.js",
+        "server/interception-route-rewrite-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/app/page.js"
+      ],
+      "name": "app/page",
+      "page": "/page",
+      "matchers": [
+        {
+          "regexp": "^/$",
+          "originalSource": "/"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "environments": {}
+    },
+    "/news/[slug]/page": {
+      "files": [
+        "server/server-reference-manifest.js",
+        "server/app/news/[slug]/page_client-reference-manifest.js",
+        "server/middleware-build-manifest.js",
+        "server/middleware-react-loadable-manifest.js",
+        "server/next-font-manifest.js",
+        "server/interception-route-rewrite-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/app/news/[slug]/page.js"
+      ],
+      "name": "app/news/[slug]/page",
+      "page": "/news/[slug]/page",
+      "matchers": [
+        {
+          "regexp": "^/news/(?<slug>[^/]+?)$",
+          "originalSource": "/news/[slug]"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "environments": {}
+    },
+    "/tickets/[slug]/page": {
+      "files": [
+        "server/server-reference-manifest.js",
+        "server/app/tickets/[slug]/page_client-reference-manifest.js",
+        "server/middleware-build-manifest.js",
+        "server/middleware-react-loadable-manifest.js",
+        "server/next-font-manifest.js",
+        "server/interception-route-rewrite-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/app/tickets/[slug]/page.js"
+      ],
+      "name": "app/tickets/[slug]/page",
+      "page": "/tickets/[slug]/page",
+      "matchers": [
+        {
+          "regexp": "^/tickets/(?<slug>[^/]+?)$",
+          "originalSource": "/tickets/[slug]"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "environments": {}
+    },
+    "/[slug]/page": {
+      "files": [
+        "server/server-reference-manifest.js",
+        "server/app/[slug]/page_client-reference-manifest.js",
+        "server/middleware-build-manifest.js",
+        "server/middleware-react-loadable-manifest.js",
+        "server/next-font-manifest.js",
+        "server/interception-route-rewrite-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/app/[slug]/page.js"
+      ],
+      "name": "app/[slug]/page",
+      "page": "/[slug]/page",
+      "matchers": [
+        {
+          "regexp": "^/(?<slug>[^/]+?)$",
+          "originalSource": "/[slug]"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "environments": {}
+    }
+  },
   "sortedMiddleware": []
 }

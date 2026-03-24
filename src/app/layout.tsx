@@ -15,6 +15,8 @@ const poppins = Poppins({
   display: 'swap',
 });
 
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: {
     default: 'Ticket Nexus — Sports Ticket Comparison',

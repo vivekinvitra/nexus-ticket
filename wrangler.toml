@@ -1,3 +1,11 @@
 name = "nexus-tickets"
 compatibility_date = "2024-09-23"
-pages_build_output_dir = "out"
+compatibility_flags = ["nodejs_compat"]
+
+pages_build_output_dir = ".vercel/output/static"
+
+[vars]
+NEXT_PUBLIC_SITE_URL = "https://www.ticket-nexus.com"
+
+# Secrets — set via Cloudflare Pages dashboard or:
+# npx wrangler secret put NEWS_API_KEY
