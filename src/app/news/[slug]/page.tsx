@@ -163,24 +163,12 @@ export default function NewsArticlePage({ params }: Props) {
                 <div dangerouslySetInnerHTML={{ __html: article?.snippet ?? "" }} />
               </p>
 
-              {/* Body sections */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '36px', marginBottom: '52px' }}>
-                {article.content.map((section, idx) => (
-                  <section key={idx}>
-                    <h2 style={{
-                      fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
-                      fontSize: '20px', fontWeight: 700, color: '#0f172a',
-                      marginBottom: '12px', lineHeight: 1.3,
-                      paddingBottom: '10px', borderBottom: '2px solid #f1f5f9',
-                    }}>
-                      {section.h2}
-                    </h2>
-                    <p style={{ fontSize: '15px', lineHeight: 1.9, color: '#475569', margin: 0 }}>                      
-                      <div dangerouslySetInnerHTML={{ __html: section?.body ?? "" }} />
-                    </p>
-                  </section>
-                ))}
-              </div>
+              {/* Body content */}
+              <div
+                className="news-article-body"
+                style={{ marginBottom: '52px' }}
+                dangerouslySetInnerHTML={{ __html: article.content }}
+              />
 
               {/* Related Tickets */}
               {relatedTickets.length > 0 && (
@@ -310,21 +298,68 @@ export default function NewsArticlePage({ params }: Props) {
 
       <style>{`
         @media (max-width: 768px) {
-          .news-page-grid {
-            grid-template-columns: 1fr !important;
-          }
-          .related-tickets-grid {
-            grid-template-columns: 1fr !important;
-          }
+          .news-page-grid { grid-template-columns: 1fr !important; }
+          .related-tickets-grid { grid-template-columns: 1fr !important; }
         }
         .related-ticket-card:hover {
           border-color: #cbd5e1 !important;
           box-shadow: 0 4px 16px rgba(0,0,0,0.08) !important;
           transform: translateY(-2px);
         }
-        .sidebar-news-card:hover p {
-          color: var(--primary) !important;
+        .sidebar-news-card:hover p { color: var(--primary) !important; }
+
+        .news-article-body h2 {
+          font-family: var(--font-poppins, Poppins, sans-serif);
+          font-size: 20px; font-weight: 700; color: #0f172a;
+          margin: 36px 0 12px; line-height: 1.3;
+          padding-bottom: 10px; border-bottom: 2px solid #f1f5f9;
         }
+        .news-article-body h2:first-child { margin-top: 0; }
+        .news-article-body h3 {
+          font-size: 16px; font-weight: 700; color: #1e293b; margin: 20px 0 8px;
+        }
+        .news-article-body p {
+          font-size: 15px; line-height: 1.9; color: #475569; margin: 0 0 16px;
+        }
+        .news-article-body ul {
+          list-style: none;
+          padding-left: 0;
+          margin: 0 0 20px;
+        }
+        .news-article-body ol {
+          list-style: decimal;
+          padding-left: 24px;
+          margin: 0 0 20px;
+          color: #475569;
+        }
+        .news-article-body ul li {
+          position: relative;
+          padding-left: 20px;
+          font-size: 15px;
+          line-height: 1.85;
+          color: #475569;
+          margin-bottom: 8px;
+        }
+        .news-article-body ul li::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 11px;
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: var(--primary, #3b82f6);
+          flex-shrink: 0;
+        }
+        .news-article-body ol li {
+          font-size: 15px;
+          line-height: 1.85;
+          color: #475569;
+          margin-bottom: 8px;
+          padding-left: 4px;
+        }
+        .news-article-body a { color: var(--primary); text-decoration: underline; }
+        .news-article-body strong { color: #1e293b; }
       `}</style>
     </>
   );

@@ -8,7 +8,7 @@ import { buildMetadata, buildFootballEventsListJsonLd, SITE_keywords } from '@/l
 import { getEventsBySport } from '@/lib/data/tickets';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Compare Sports Ticket Prices | Football, Tennis, F1 & Cricket Tickets | Ticket Nexus',
+  title: 'Buy FIFA World Cup 2026 Tickets Online | Football 2026 Tickets Online  - Ticket-Nexus',
   path: '/',
   keywords: SITE_keywords,
 });

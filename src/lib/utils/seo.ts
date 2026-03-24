@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 const SITE_NAME = 'TicketNexus';
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ticket-nexus.com').replace(/\/$/, '');
 const SITE_DESC =
-  "Compare sports ticket prices from trusted sellers. Find Premier League, Champions League, FIFA World Cup, Tennis, F1, Cricket World Cup and cricket tickets at the best prices with Ticket Nexus.";
-export const SITE_keywords = "sports tickets, football tickets, tennis tickets, F1 tickets, cricket tickets, ticket comparison, buy sports tickets, best ticket prices";
+  "Book sports tickets online for FIFA World Cup 2026, Champions League, Premier League & cricket matches. Secure checkout, best deals and Best prices, secure booking & instant confirmation on Ticket Nexus.";
+export const SITE_keywords = "FIFA World Cup 2026 tickets, UEFA Champions League 2026 tickets, Premier League 2026 tickets online, cricket match 2026 tickets, football match tickets, sports tickets, buy FIFA 2026 tickets online, international sports tickets, sports event tickets, premium sports tickets, online ticket booking sports, global sports tickets, secure sports tickets";
   const TWITTER_HANDLE = '@ticketnexus';
 
 interface MetadataOpts {

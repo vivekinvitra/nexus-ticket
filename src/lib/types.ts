@@ -120,11 +120,6 @@ export interface Partner {
   metaKeywords?: string;
 }
 
-export interface NewsSection {
-  h2: string;
-  body: string;
-}
-
 export interface NewsArticle {
   id: string;
   slug: string;
@@ -149,7 +144,7 @@ export interface NewsArticle {
   metaTitle: string;
   metaDescription: string;
   metaKeywords?: string;
-  content: NewsSection[];
+  content: string;
 }
 
 export interface SportCategory {
