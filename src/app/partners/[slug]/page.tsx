@@ -7,7 +7,7 @@ import { PARTNERS, getPartnerBySlug } from '@/lib/data/partners';
 import { buildMetadata } from '@/lib/utils/seo';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -15,7 +15,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const partner = getPartnerBySlug(params.slug);
+  const { slug } = await params;
+  const partner = getPartnerBySlug(slug);
   if (!partner) return {};
   return buildMetadata({
     title: partner.metaTitle ?? `${partner.name} Review`,
@@ -25,8 +26,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export default function PartnerDetailPage({ params }: Props) {
-  const partner = getPartnerBySlug(params.slug);
+export default async function PartnerDetailPage({ params }: Props) {
+  const { slug } = await params;
+  const partner = getPartnerBySlug(slug);
   if (!partner) notFound();
 
   return (

@@ -12,7 +12,7 @@ import NewsSection from '@/components/home/NewsSection';
 import { buildMetadata, buildSportsEventsListJsonLd, SITE_URL } from '@/lib/utils/seo';
 
 interface Props {
-  params: { slug: string; league: string };
+  params: Promise<{ slug: string; league: string }>;
 }
 
 export async function generateStaticParams() {
@@ -20,8 +20,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const league = getLeagueBySlug(params.league);
-  const sport = getSportBySlug(params.slug);
+  const { slug, league: leagueSlug } = await params;
+  const league = getLeagueBySlug(leagueSlug);
+  const sport = getSportBySlug(slug);
   if (!league || !sport) return {};
   return buildMetadata({
     title: league.metaTitle ?? `${league.name} Tickets`,
@@ -32,8 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function LeaguePage({ params }: Props) {
-  const sport = getSportBySlug(params.slug);
-  const league = getLeagueBySlug(params.league);
+  const { slug, league: leagueSlug } = await params;
+  const sport = getSportBySlug(slug);
+  const league = getLeagueBySlug(leagueSlug);
 
   if (!sport || !league || league.sportSlug !== sport.slug) notFound();
 

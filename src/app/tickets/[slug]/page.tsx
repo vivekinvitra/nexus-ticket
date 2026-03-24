@@ -10,7 +10,7 @@ import { buildMetadata, SITE_URL } from '@/lib/utils/seo';
 import { formatPrice, formatDate, formatShortDate } from '@/lib/utils/format';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -18,7 +18,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const event = getEventBySlug(params.slug);
+  const { slug } = await params;
+  const event = getEventBySlug(slug);
   if (!event) return {};
 
   const autoTitle = `${event.eventName} - ${event.league} Tickets — ${formatDate(event.date)}`;
@@ -38,13 +39,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: event.metaTitle ?? autoTitle,
     description: event.metaDescription ?? autoDesc,
     keywords: event.metaKeywords ?? autoKeywords,
-    path: `/tickets/${params.slug}`,
+    path: `/tickets/${slug}`,
     image: event.imageUrl,
   });
 }
 
 export default async function TicketPage({ params }: Props) {
-  const event = getEventBySlug(params.slug);
+  const { slug } = await params;
+  const event = getEventBySlug(slug);
   if (!event) notFound();
 
   const sport = getSportBySlug(event.sport);
@@ -62,7 +64,7 @@ export default async function TicketPage({ params }: Props) {
   }[event.availability];
 
   // Schema.org Event JSON-LD
-  const eventPageUrl = `${SITE_URL}/tickets/${params.slug}`;
+  const eventPageUrl = `${SITE_URL}/tickets/${slug}`;
   const absoluteImage = event.imageUrl
     ? event.imageUrl.startsWith('http') ? event.imageUrl : `${SITE_URL}${event.imageUrl}`
     : undefined;

@@ -11,7 +11,7 @@ import { buildMetadata, buildArticleJsonLd, SITE_URL } from '@/lib/utils/seo';
 import { formatPrice } from '@/lib/utils/format';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -20,7 +20,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const article = await getNewsBySlug(params.slug);
+  const { slug } = await params;
+  const article = await getNewsBySlug(slug);
   if (!article) return {};
   return buildMetadata({
     title: article.metaTitle,
@@ -54,8 +55,9 @@ function formatDate(iso: string) {
 }
 
 export default async function NewsArticlePage({ params }: Props) {
+  const { slug } = await params;
   const [article, allArticles] = await Promise.all([
-    getNewsBySlug(params.slug),
+    getNewsBySlug(slug),
     getAllNews(),
   ]);
   if (!article) notFound();

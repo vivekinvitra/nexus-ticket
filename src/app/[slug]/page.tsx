@@ -9,7 +9,7 @@ import { getNewsByCategory } from '@/lib/data/news';
 import { buildMetadata, buildSportJsonLd, buildSportsEventsListJsonLd, SITE_URL } from '@/lib/utils/seo';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -17,7 +17,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const sport = getSportBySlug(params.slug);
+  const { slug } = await params;
+  const sport = getSportBySlug(slug);
   if (!sport) return {};
   return buildMetadata({
     title: sport.metaTitle ?? `${sport.name} Tickets`,
@@ -39,7 +40,8 @@ const SPORT_WIKI_URLS: Record<string, string> = {
 };
 
 export default async function CategoryPage({ params }: Props) {
-  const sport = getSportBySlug(params.slug);
+  const { slug } = await params;
+  const sport = getSportBySlug(slug);
   if (!sport) notFound();
 
   const today = new Date().toISOString().split('T')[0];

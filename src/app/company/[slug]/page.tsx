@@ -8,7 +8,7 @@ import { PAGES, getPageBySlug, getPagesByGroup } from '@/lib/data/pages';
 import ContactForm from '@/components/company/ContactForm';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -16,13 +16,14 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const page = getPageBySlug(params.slug);
+  const { slug } = await params;
+  const page = getPageBySlug(slug);
   if (!page) return {};
   return buildMetadata({
     title: page.metaTitle ?? page.title,
     description: page.metaDescription,
     keywords: page.metaKeywords,
-    path: `/company/${params.slug}`,
+    path: `/company/${slug}`,
   });
 }
 
@@ -237,8 +238,9 @@ function LegalContent({ page }: { page: { title: string; lastUpdated?: string; c
 }
 
 // ── Page ──────────────────────────────────────────────────────────────────────
-export default function CompanyPage({ params }: Props) {
-  const page = getPageBySlug(params.slug);
+export default async function CompanyPage({ params }: Props) {
+  const { slug } = await params;
+  const page = getPageBySlug(slug);
   if (!page) notFound();
 
   return (
@@ -262,11 +264,11 @@ export default function CompanyPage({ params }: Props) {
           style={{ maxWidth: '1280px', margin: '0 auto', padding: '40px 40px 80px', display: 'grid', gridTemplateColumns: '220px 1fr', gap: '40px' }}
           className="legal-grid"
         >
-          <Sidebar currentSlug={params.slug} />
+          <Sidebar currentSlug={slug} />
 
           <div>
-            {params.slug === 'about' && <AboutContent />}
-            {params.slug === 'contact' && <ContactContent />}
+            {slug === 'about' && <AboutContent />}
+            {slug === 'contact' && <ContactContent />}
             {page.group === 'legal' && <LegalContent page={page} />}
           </div>
         </div>
