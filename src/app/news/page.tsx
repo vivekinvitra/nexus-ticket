@@ -162,13 +162,13 @@ export default async function NewsPage() {
                       {article.title}
                     </h3>
                     <p
-                     dangerouslySetInnerHTML={{ __html: article.snippet }}
                       style={{
                         fontSize: '13px',
                         color: 'var(--text-gray)',
                         lineHeight: 1.6,
                       }}
-                    >                     
+                    >
+                      {article.snippet.replace(/<[^>]*>/g, '')}
                     </p>
                   </div>
                 </Link>

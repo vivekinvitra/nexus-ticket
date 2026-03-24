@@ -163,7 +163,6 @@ function NewsCard({ article }: { article: NewsArticle }) {
           {article.title}
         </h3>
         <p
-          dangerouslySetInnerHTML={{ __html: article.snippet }}
           style={{
             fontSize: '13px',
             color: 'var(--text-gray)',
@@ -173,7 +172,9 @@ function NewsCard({ article }: { article: NewsArticle }) {
             WebkitBoxOrient: 'vertical',
             overflow: 'hidden',
           }}
-        />
+        >
+          {article.snippet.replace(/<[^>]*>/g, '')}
+        </p>
       </div>
 
     </Link>
