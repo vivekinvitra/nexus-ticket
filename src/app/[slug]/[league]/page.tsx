@@ -7,7 +7,7 @@ import TicketTable from '@/components/tickets/TicketTable';
 import { LEAGUES, getLeagueBySlug, getLeaguesBySport } from '@/lib/data/leagues';
 import { SPORTS, getSportBySlug } from '@/lib/data/sports';
 import { getEventsByLeague } from '@/lib/data/tickets';
-import { NEWS_ARTICLES } from '@/lib/data/news';
+import { getNewsByCategory } from '@/lib/data/news';
 import NewsSection from '@/components/home/NewsSection';
 import { buildMetadata, buildSportsEventsListJsonLd, SITE_URL } from '@/lib/utils/seo';
 
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export default function LeaguePage({ params }: Props) {
+export default async function LeaguePage({ params }: Props) {
   const sport = getSportBySlug(params.slug);
   const league = getLeagueBySlug(params.league);
 
@@ -44,10 +44,11 @@ export default function LeaguePage({ params }: Props) {
   );
   const siblingLeagues = getLeaguesBySport(sport.slug).filter((l) => l.slug !== league.slug);
 
-  const leagueNews = NEWS_ARTICLES.filter((a) => a.leagueSlug === league.slug).slice(0, 3);
+  const allCategoryNews = await getNewsByCategory(sport.slug);
+  const leagueNews = allCategoryNews.filter((a) => a.leagueSlug === league.slug).slice(0, 3);
   const relatedNews = leagueNews.length > 0
     ? leagueNews
-    : NEWS_ARTICLES.filter((a) => a.category === sport.slug).slice(0, 3);
+    : allCategoryNews.slice(0, 3);
 
   const eventsJsonLd = buildSportsEventsListJsonLd({
     listName: `${league.name} Events`,

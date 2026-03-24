@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { NEWS_ARTICLES } from '@/lib/data/news';
+import { getAllNews } from '@/lib/data/news';
 import { buildMetadata } from '@/lib/utils/seo';
 
 export const metadata: Metadata = buildMetadata({
@@ -25,7 +25,8 @@ const CAT_COLORS: Record<string, string> = {
   general: '#6b7280',
 };
 
-export default function NewsPage() {
+export default async function NewsPage() {
+  const articles = await getAllNews();
   return (
     <>
       <Header />
@@ -67,7 +68,7 @@ export default function NewsPage() {
             }}
             className="news-page-grid"
           >
-            {NEWS_ARTICLES.map((article) => {
+            {articles.map((article) => {
               const catColor = CAT_COLORS[article.category] || '#6b7280';
               const catLabel = article.category
                 .replace('-', ' ')
@@ -161,13 +162,13 @@ export default function NewsPage() {
                       {article.title}
                     </h3>
                     <p
+                     dangerouslySetInnerHTML={{ __html: article.snippet }}
                       style={{
                         fontSize: '13px',
                         color: 'var(--text-gray)',
                         lineHeight: 1.6,
                       }}
-                    >
-                      {article.snippet}
+                    >                     
                     </p>
                   </div>
                 </Link>

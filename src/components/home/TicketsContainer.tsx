@@ -4,11 +4,11 @@ import { useState } from 'react';
 import FilterPanel from '@/components/tickets/FilterPanel';
 import HomeTicketSection from '@/components/home/HomeTicketSection';
 import NewsSection from '@/components/home/NewsSection';
-import { getFeaturedNews } from '@/lib/data/news';
+import type { NewsArticle } from '@/lib/types';
 
 const TICKET_MAX_PRICE = 1000;
 
-export default function TicketsContainer({ today }: { today: string }) {
+export default function TicketsContainer({ today, featuredNews }: { today: string; featuredNews: NewsArticle[] }) {
   const [selectedSports, setSelectedSports] = useState<string[]>(['all']);
   const [maxPrice, setMaxPrice] = useState<number>(TICKET_MAX_PRICE);
   const [selectedPartners, setSelectedPartners] = useState<string[]>([]);
@@ -226,7 +226,7 @@ export default function TicketsContainer({ today }: { today: string }) {
             sortBy={sortBy}
             today={today}
           />
-          <NewsSection articles={getFeaturedNews()} />
+          <NewsSection articles={featuredNews} />
         </div>
       </div>
     </>

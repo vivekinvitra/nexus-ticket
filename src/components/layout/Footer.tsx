@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { SPORTS } from '@/lib/data/sports';
+import { SITE_NAME } from '@/lib/utils/seo';
 import { getPagesByGroup } from '@/lib/data/pages';
 
 const companyPages = getPagesByGroup('company');
@@ -219,7 +220,7 @@ export default function Footer() {
           }}
         >
           <strong style={{ color: 'var(--text-dark)' }}>Affiliate Disclosure:</strong>{' '}
-          TicketNexus Tickets earns a commission when you purchase tickets through links on this site.
+          {SITE_NAME} earns a commission when you purchase tickets through links on this site.
           This does not affect the price you pay. We only partner with reputable, verified ticket
           sellers. Prices shown are indicative and may change at any time.
         </p>
@@ -249,7 +250,7 @@ export default function Footer() {
           textAlign: 'center',
         }}
       >
-        © {new Date().getFullYear()} Tickets nexus. All rights reserved. Made with{' '}
+        © {new Date().getFullYear()} {SITE_NAME}. All rights reserved. Made with{' '}
         <span style={{ color: 'var(--red)' }}>♥</span> for sports fans.
       </div>
 

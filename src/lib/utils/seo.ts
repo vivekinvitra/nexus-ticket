@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-const SITE_NAME = 'TicketNexus';
+const SITE_NAME = 'Ticket-Nexus';
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ticket-nexus.com').replace(/\/$/, '');
 const SITE_DESC =
   "Book sports tickets online for FIFA World Cup 2026, Champions League, Premier League & cricket matches. Secure checkout, best deals and Best prices, secure booking & instant confirmation on Ticket Nexus.";
@@ -191,7 +191,7 @@ export function buildSportsEventsListJsonLd(opts: {
     currency?: string;
   }>;
 }) {
-  const { listName, description, pageUrl, sportWikiUrl, events } = opts;
+  const { listName, description, pageUrl, events } = opts;
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -199,42 +199,12 @@ export function buildSportsEventsListJsonLd(opts: {
     description,
     url: pageUrl,
     numberOfItems: events.length,
-    itemListElement: events.map((event, index) => {
-      const eventUrl = `${SITE_URL}/tickets/${event.slug}`;
-      const startDate = event.time ? `${event.date}T${event.time}:00` : event.date;
-      const image = event.imageUrl
-        ? event.imageUrl.startsWith('http') ? event.imageUrl : `${SITE_URL}${event.imageUrl}`
-        : undefined;
-      return {
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'SportsEvent',
-          name: event.eventName,
-          description: event.description || `${event.eventName} at ${event.venue}`,
-          startDate,
-          location: {
-            '@type': 'Place',
-            name: event.venue,
-            address: { '@type': 'PostalAddress', addressLocality: event.city || event.venue },
-          },
-          url: eventUrl,
-          ...(image ? { image } : {}),
-          ...(sportWikiUrl ? { sport: sportWikiUrl } : {}),
-          ...(event.minPrice != null
-            ? {
-                offers: {
-                  '@type': 'AggregateOffer',
-                  lowPrice: event.minPrice,
-                  priceCurrency: event.currency || 'USD',
-                  availability: 'https://schema.org/InStock',
-                  url: eventUrl,
-                },
-              }
-            : {}),
-        },
-      };
-    }),
+    itemListElement: events.map((event, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: `${SITE_URL}/tickets/${event.slug}`,
+      name: event.eventName,
+    })),
   };
 }
 
@@ -259,42 +229,12 @@ export function buildFootballEventsListJsonLd(
     description: 'Buy tickets for upcoming Premier League and football events. Compare prices from trusted resale platforms.',
     url: SITE_URL,
     numberOfItems: events.length,
-    itemListElement: events.map((event, index) => {
-      const eventUrl = `${SITE_URL}/tickets/${event.slug}`;
-      const startDate = event.time ? `${event.date}T${event.time}:00` : event.date;
-      const image = event.imageUrl
-        ? event.imageUrl.startsWith('http') ? event.imageUrl : `${SITE_URL}${event.imageUrl}`
-        : undefined;
-      return {
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'SportsEvent',
-          name: event.eventName,
-          description: event.description || `${event.eventName} at ${event.venue}`,
-          startDate,
-          location: {
-            '@type': 'Place',
-            name: event.venue,
-            address: { '@type': 'PostalAddress', addressLocality: event.city || event.venue },
-          },
-          url: eventUrl,
-          ...(image ? { image } : {}),
-          sport: 'https://en.wikipedia.org/wiki/Association_football',
-          ...(event.minPrice != null
-            ? {
-                offers: {
-                  '@type': 'AggregateOffer',
-                  lowPrice: event.minPrice,
-                  priceCurrency: event.currency || 'USD',
-                  availability: 'https://schema.org/InStock',
-                  url: eventUrl,
-                },
-              }
-            : {}),
-        },
-      };
-    }),
+    itemListElement: events.map((event, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: `${SITE_URL}/tickets/${event.slug}`,
+      name: event.eventName,
+    })),
   };
 }
 

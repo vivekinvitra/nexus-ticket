@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import type { TicketEvent } from '@/lib/types';
 import { formatPrice, formatDate } from '@/lib/utils/format';
+import { SITE_NAME } from '@/lib/utils/seo';
 
 interface TicketModalProps {
   event: TicketEvent;
@@ -259,7 +260,7 @@ export default function TicketModal({ event, onClose }: TicketModalProps) {
             lineHeight: 1.7,
           }}
         >
-          Prices shown are indicative and may change at any time. TicketNexus earns an affiliate
+          Prices shown are indicative and may change at any time. {SITE_NAME} earns an affiliate
           commission when you purchase via partner links. See our{' '}
           <a href="/company/affiliate-disclosure" style={{ color: 'var(--primary)' }}>
             Affiliate Disclosure

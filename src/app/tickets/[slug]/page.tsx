@@ -5,7 +5,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { CLEAN_EVENTS, getEventBySlug, getRelatedEvents, toTicketSlug } from '@/lib/data/tickets';
 import { getSportBySlug } from '@/lib/data/sports';
-import { NEWS_ARTICLES } from '@/lib/data/news';
+import { getNewsByCategory } from '@/lib/data/news';
 import { buildMetadata, SITE_URL } from '@/lib/utils/seo';
 import { formatPrice, formatDate, formatShortDate } from '@/lib/utils/format';
 
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const event = getEventBySlug(params.slug);
   if (!event) return {};
 
-  const autoTitle = `${event.eventName} Tickets — ${formatDate(event.date)} | TicketNexus`;
+  const autoTitle = `${event.eventName} - ${event.league} Tickets — ${formatDate(event.date)}`;
   const autoDesc = event.description
     ? event.description.slice(0, 160)
     : `Buy ${event.eventName} tickets at ${event.venue}, ${event.city} on ${formatDate(event.date)}. Compare prices from trusted platforms. From ${formatPrice(event.minPrice, event.currency)}.`;
@@ -43,16 +43,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export default function TicketPage({ params }: Props) {
+export default async function TicketPage({ params }: Props) {
   const event = getEventBySlug(params.slug);
   if (!event) notFound();
 
   const sport = getSportBySlug(event.sport);
   const isSoldOut = event.availability === 'sold-out';
   const relatedEvents = getRelatedEvents(event, 3);
+  const allCategoryNews = await getNewsByCategory(event.sport);
   const relatedNews = event.leagueSlug
-    ? NEWS_ARTICLES.filter((a) => a.leagueSlug === event.leagueSlug).slice(0, 3)
-    : NEWS_ARTICLES.filter((a) => a.category === event.sport).slice(0, 3);
+    ? allCategoryNews.filter((a) => a.leagueSlug === event.leagueSlug).slice(0, 3)
+    : allCategoryNews.slice(0, 3);
 
   const availStyle = {
     high: { label: 'Available', color: 'var(--primary)', bg: 'var(--primary-light)' },

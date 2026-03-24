@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = getPageBySlug(params.slug);
   if (!page) return {};
   return buildMetadata({
-    title: page.metaTitle ?? `${page.title} | TicketNexus`,
+    title: page.metaTitle ?? page.title,
     description: page.metaDescription,
     keywords: page.metaKeywords,
     path: `/company/${params.slug}`,
@@ -111,7 +111,7 @@ function AboutContent() {
             marginBottom: '12px',
           }}
         >
-          About TicketNexus
+          About Ticket-Nexus
         </h1>
         <p style={{ fontSize: '17px', color: 'rgba(255,255,255,0.85)', lineHeight: 1.6, maxWidth: '560px', margin: '0 auto' }}>
           We help sports fans find the best ticket prices — comparing trusted sellers in one place.
@@ -123,7 +123,7 @@ function AboutContent() {
           Our Mission
         </h2>
         <p style={{ fontSize: '15px', color: 'var(--text-gray)', lineHeight: 1.8, marginBottom: '14px' }}>
-          TicketNexus was built with a simple goal: make it easy for fans to find the best price for the events they love. Live sport is one of life{"'"}s great experiences — but navigating dozens of ticketing platforms to find a fair deal can be exhausting.
+          Ticket-Nexus was built with a simple goal: make it easy for fans to find the best price for the events they love. Live sport is one of life{"'"}s great experiences — but navigating dozens of ticketing platforms to find a fair deal can be exhausting.
         </p>
         <p style={{ fontSize: '15px', color: 'var(--text-gray)', lineHeight: 1.8 }}>
           We aggregate listings from trusted partners, surface the best prices, and link you directly to the seller — so you can spend less time searching and more time in the stands.
@@ -167,7 +167,7 @@ function AboutContent() {
       </section>
 
       <div style={{ background: 'var(--light-gray)', borderRadius: '12px', padding: '20px', fontSize: '14px', color: 'var(--text-gray)', lineHeight: 1.6 }}>
-        <strong style={{ color: 'var(--text-dark)' }}>Affiliate Disclosure:</strong> TicketNexus earns a commission when you purchase through our partner links. This never affects the price you pay.{' '}
+        <strong style={{ color: 'var(--text-dark)' }}>Affiliate Disclosure:</strong> Ticket-Nexus earns a commission when you purchase through our partner links. This never affects the price you pay.{' '}
         <Link href="/company/affiliate-disclosure" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>Learn more</Link>.
       </div>
     </>

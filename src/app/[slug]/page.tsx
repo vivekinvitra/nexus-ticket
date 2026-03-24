@@ -6,7 +6,7 @@ import CategoryContent from '@/components/category/CategoryContent';
 import { SPORTS, getSportBySlug } from '@/lib/data/sports';
 import { getEventsBySport } from '@/lib/data/tickets';
 import { getNewsByCategory } from '@/lib/data/news';
-import { buildMetadata, buildSportsEventsListJsonLd, SITE_URL } from '@/lib/utils/seo';
+import { buildMetadata, buildSportJsonLd, buildSportsEventsListJsonLd, SITE_URL } from '@/lib/utils/seo';
 
 interface Props {
   params: { slug: string };
@@ -38,7 +38,7 @@ const SPORT_WIKI_URLS: Record<string, string> = {
   golf: 'https://en.wikipedia.org/wiki/Golf',
 };
 
-export default function CategoryPage({ params }: Props) {
+export default async function CategoryPage({ params }: Props) {
   const sport = getSportBySlug(params.slug);
   if (!sport) notFound();
 
@@ -48,16 +48,23 @@ export default function CategoryPage({ params }: Props) {
     .sort((a, b) => a.date.localeCompare(b.date))
     .slice(0, 12);
 
+  const newsArticles = await getNewsByCategory(sport.slug);
+  const pageUrl = `${SITE_URL}/${sport.slug}`;
+  const webPageJsonLd = buildSportJsonLd(sport.name, sport.metaDescription ?? sport.description, pageUrl);
   const eventsJsonLd = buildSportsEventsListJsonLd({
     listName: `Upcoming ${sport.name} Events`,
     description: sport.metaDescription ?? sport.description,
-    pageUrl: `${SITE_URL}/${sport.slug}`,
+    pageUrl,
     sportWikiUrl: SPORT_WIKI_URLS[sport.slug],
     events: upcomingEvents,
   });
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsJsonLd) }}
@@ -169,7 +176,7 @@ export default function CategoryPage({ params }: Props) {
           <CategoryContent
             sport={sport}
             allEvents={getEventsBySport(sport.slug)}
-            newsArticles={getNewsByCategory(sport.slug)}
+            newsArticles={newsArticles}
             today={today}
           />
         </div>

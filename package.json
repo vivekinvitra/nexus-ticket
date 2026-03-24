@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/generate-sitemap.js && next build",
+    "build": "node scripts/generate-sitemap.mjs && next build",
     "start": "next start",
     "lint": "next lint",
-    "sitemap": "node scripts/generate-sitemap.js",
+    "sitemap": "node scripts/generate-sitemap.mjs",
     "minify": "node scripts/minify.js",
     "optimize:images": "node scripts/optimize-images.js"
   },

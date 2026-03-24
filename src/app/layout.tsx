@@ -17,8 +17,8 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Tickets nexus — Sports Ticket Comparison',
-    template: '%s | Tickets nexus',
+    default: 'Ticket Nexus — Sports Ticket Comparison',
+    template: '%s',
   },
   description:
     'Compare sports ticket prices from the UK\'s top resale platforms. Find the best deals on football, cricket, horse racing, tennis, boxing, F1, rugby and golf tickets.',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_GB',
-    siteName: 'TicketNexus',
+    siteName: 'Ticket-Nexus',
   },
 };
 

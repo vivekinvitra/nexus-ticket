@@ -34,7 +34,7 @@ export const PARTNERS: Partner[] = [
     paymentMethods: ['Visa', 'Mastercard', 'PayPal', 'Apple Pay', 'Google Pay'],
     deliveryOptions: ['E-ticket', 'Mobile app', 'Print at home'],
     founded: 2004,
-    website: 'https://footballticketnet.com',
+    website: 'https://footballticketnet.com/?utm_source=nexus_tickets&utm_medium=https://ticket-nexus.com/&utm_campaign=90270',
     merchantredirecturl: 'https://www.awin1.com/cread.php?awinmid=109004&awinaffid=90270',
     metaTitle: 'FootballTicketNet Review 2025 | Trusted Football Tickets | TicketNexus',
     metaDescription: 'Read our FootballTicketNet review. A specialist football ticket marketplace offering verified tickets for Premier League, Champions League and more with buyer guarantee.',
