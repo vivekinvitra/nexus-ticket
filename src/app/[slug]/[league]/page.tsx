@@ -37,11 +37,10 @@ export default function LeaguePage({ params }: Props) {
 
   if (!sport || !league || league.sportSlug !== sport.slug) notFound();
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const today = new Date().toISOString().split('T')[0];
 
   const events = getEventsByLeague(league.slug).filter(
-    (e) => new Date(e.date) >= today
+    (e) => e.date >= today
   );
   const siblingLeagues = getLeaguesBySport(sport.slug).filter((l) => l.slug !== league.slug);
 

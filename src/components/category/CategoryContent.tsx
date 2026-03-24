@@ -13,9 +13,10 @@ interface CategoryContentProps {
   sport: SportCategory;
   allEvents: TicketEvent[];
   newsArticles: NewsArticle[];
+  today: string;
 }
 
-export default function CategoryContent({ sport, allEvents, newsArticles }: CategoryContentProps) {
+export default function CategoryContent({ sport, allEvents, newsArticles, today }: CategoryContentProps) {
   const [selectedSports, setSelectedSports] = useState<string[]>(['all']);
   const [maxPrice, setMaxPrice] = useState<number>(TICKET_MAX_PRICE);
   const [selectedPartners, setSelectedPartners] = useState<string[]>([]);
@@ -34,12 +35,8 @@ export default function CategoryContent({ sport, allEvents, newsArticles }: Cate
     (maxPrice < TICKET_MAX_PRICE ? 1 : 0) +
     selectedPartners.length;
 
-  // Filter upcoming events only
-  const today = new Date();
-  today.setUTCHours(0, 0, 0, 0);
-
   // Filter events based on this category + active filters
-  let categoryEvents = allEvents.filter((e) => new Date(e.date) >= today);
+  let categoryEvents = allEvents.filter((e) => e.date >= today);
   categoryEvents = categoryEvents.filter((e) => e.minPrice <= maxPrice);
   if (selectedPartners.length > 0) {
     categoryEvents = categoryEvents.filter((e) =>

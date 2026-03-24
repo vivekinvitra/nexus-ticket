@@ -170,6 +170,7 @@ export default function CategoryPage({ params }: Props) {
             sport={sport}
             allEvents={getEventsBySport(sport.slug)}
             newsArticles={getNewsByCategory(sport.slug)}
+            today={today}
           />
         </div>
       </main>

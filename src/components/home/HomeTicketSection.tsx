@@ -11,12 +11,10 @@ interface HomeTicketSectionProps {
   maxPrice: number;
   selectedPartners: string[];
   sortBy: SortOption;
+  today: string;
 }
 
-export default function HomeTicketSection({ selectedSports, maxPrice, selectedPartners, sortBy }: HomeTicketSectionProps) {
-
-  const today = new Date();
-  today.setUTCHours(0, 0, 0, 0);
+export default function HomeTicketSection({ selectedSports, maxPrice, selectedPartners, sortBy, today }: HomeTicketSectionProps) {
 
   const sportsToDisplay: string[] = selectedSports.includes('all')
     ? SPORTS.map((s) => s.slug)
@@ -26,7 +24,7 @@ export default function HomeTicketSection({ selectedSports, maxPrice, selectedPa
     const sport = SPORTS.find((s) => s.slug === sportSlug);
     if (!sport) return null;
     let events = CLEAN_EVENTS.filter(
-      (e) => e.sport === sportSlug && new Date(e.date) >= today
+      (e) => e.sport === sportSlug && e.date >= today
     );
     // Apply max price filter
     events = events.filter((e) => e.minPrice <= maxPrice);

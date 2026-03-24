@@ -33,7 +33,7 @@ export default function HomePage() {
       <main>
         <Hero />
         <div className="page-px" style={{ maxWidth: '1280px', margin: '0 auto', paddingTop: '32px', paddingBottom: '60px' }}>
-          <TicketsContainer />
+          <TicketsContainer today={today} />
         </div>
 
         <PartnersStrip />

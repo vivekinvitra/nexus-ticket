@@ -8,7 +8,7 @@ import { getFeaturedNews } from '@/lib/data/news';
 
 const TICKET_MAX_PRICE = 1000;
 
-export default function TicketsContainer() {
+export default function TicketsContainer({ today }: { today: string }) {
   const [selectedSports, setSelectedSports] = useState<string[]>(['all']);
   const [maxPrice, setMaxPrice] = useState<number>(TICKET_MAX_PRICE);
   const [selectedPartners, setSelectedPartners] = useState<string[]>([]);
@@ -224,6 +224,7 @@ export default function TicketsContainer() {
             maxPrice={maxPrice}
             selectedPartners={selectedPartners}
             sortBy={sortBy}
+            today={today}
           />
           <NewsSection articles={getFeaturedNews()} />
         </div>
