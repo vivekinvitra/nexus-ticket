@@ -91,11 +91,15 @@ function mapApiItem(item: ApiNewsItem): NewsArticle {
 }
 
 async function fetchAllNews(): Promise<NewsArticle[]> {
+  if (!NEWS_API_KEY) return [];
   try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 4000);
     const res = await fetch(NEWS_API, {
-      next: { revalidate: 300 },
+      signal: controller.signal,
       headers: { 'x-api-key': NEWS_API_KEY },
     });
+    clearTimeout(timer);
     if (!res.ok) return [];
     const data: ApiNewsItem[] = await res.json();
     return data.filter((item) => item.isactive === 'Y').map(mapApiItem);
