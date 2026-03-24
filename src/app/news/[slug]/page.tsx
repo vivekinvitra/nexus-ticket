@@ -165,9 +165,9 @@ export default async function NewsArticlePage({ params }: Props) {
               </p>
 
               {/* Lead paragraph */}
-              <p style={{ fontSize: '17px', lineHeight: 1.85, color: '#1e293b', marginBottom: '36px', fontWeight: 600 }}>                
-                <div dangerouslySetInnerHTML={{ __html: article?.snippet ?? "" }} />
-              </p>
+              <div style={{ fontSize: '17px', lineHeight: 1.85, color: '#1e293b', marginBottom: '36px', fontWeight: 600 }}
+                dangerouslySetInnerHTML={{ __html: article?.snippet ?? "" }}
+              />
 
               {/* Body content */}
               <div

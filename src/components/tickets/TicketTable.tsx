@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import type { TicketEvent } from '@/lib/types';
 import { formatPrice, formatShortDate } from '@/lib/utils/format';
 import { getSportBySlug } from '@/lib/data/sports';
@@ -187,6 +188,7 @@ function TicketRow({ event }: { event: TicketEvent }) {
   const isSoldOut = event.availability === 'sold-out';
   const sportIcon = getSportBySlug(event.sport)?.icon ?? '🎫';
   const ticketSlug = toTicketSlug(event);
+  const router = useRouter();
 
   const availStyle = {
     high: { color: 'var(--primary)', dot: 'var(--primary)', label: 'Available' },
@@ -196,6 +198,7 @@ function TicketRow({ event }: { event: TicketEvent }) {
 
   return (
     <div
+      onClick={() => !isSoldOut && router.push(`/tickets/${ticketSlug}`)}
       style={{
         display: 'grid',
         gridTemplateColumns: '3.5fr 1.1fr 1fr 1fr 1fr 1fr',
