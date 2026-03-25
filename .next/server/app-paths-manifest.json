@@ -1,8 +1,5 @@
 {
-  "/page": "app/page.js",
-  "/news/[slug]/page": "app/news/[slug]/page.js",
-  "/tickets/[slug]/page": "app/tickets/[slug]/page.js",
   "/_not-found/page": "app/_not-found/page.js",
-  "/[slug]/page": "app/[slug]/page.js",
-  "/[slug]/[league]/page": "static/webpack/app/[slug]/[league]/page.78870787c7dd3700.hot-update.js"
+  "/page": "app/page.js",
+  "/tickets/[slug]/page": "static/webpack/app/tickets/[slug]/page.96fd3c833c7f199f.hot-update.js"
 }

@@ -102,32 +102,57 @@ export default async function TicketPage({ params }: Props) {
   const overviewPara3 = `Tickets for ${event.eventName} are ${isSoldOut ? 'currently sold out' : `available from ${formatPrice(event.minPrice, event.currency)} per ticket`}. We compare prices across all major resale and official platforms so you can find the best deal without the hassle.`;
 
   // Build FAQ items
+  const [homeTeam, awayTeam] = event.eventName.includes(' vs ')
+    ? event.eventName.split(' vs ').map((t) => t.trim())
+    : [event.eventName, ''];
+  const sportLabel = sport?.name ?? event.sport;
+
   const faqs = [
     {
-      q: `When and where is ${event.eventName}?`,
-      a: `${event.eventName} takes place on ${formatDate(event.date)} at ${event.time}, held at ${event.venue}, ${event.city}.`,
+      q: `Where can I buy ${event.eventName} tickets?`,
+      a: `You can buy ${homeTeam} vs ${awayTeam} tickets through the verified resale platforms listed on this page. TicketNexus compares prices across all major ticket sellers so you can find the best deal for the ${event.league} match in one place.`,
     },
     {
-      q: `How much do tickets cost?`,
+      q: `How much are ${homeTeam} tickets?`,
       a: isSoldOut
-        ? `Unfortunately all tickets for this event have sold out. Check back for any resale listings.`
-        : `Tickets start from ${formatPrice(event.minPrice, event.currency)} per person. Prices vary by seat category and platform — use our comparison tool above to find the best available price.`,
+        ? `Tickets for this ${homeTeam} match are currently sold out. Check back regularly as resale listings can appear at any time.`
+        : `${homeTeam} tickets for this ${event.league} fixture start from ${formatPrice(event.minPrice, event.currency)}. Prices vary by seat category, platform, and how close to the event date you purchase.`,
     },
     {
-      q: `Are the tickets guaranteed?`,
-      a: `Yes. All partner platforms listed on TicketNexus are verified and guarantee 100% authentic tickets. You will receive your tickets via email or mobile app ahead of the event.`,
+      q: `How much are ${awayTeam} tickets?`,
+      a: isSoldOut
+        ? `Tickets for this ${awayTeam} away match are currently sold out. Check back regularly as resale listings can appear at any time.`
+        : `${awayTeam} away tickets for this ${event.league} fixture start from ${formatPrice(event.minPrice, event.currency)}. Away ticket prices can vary — compare across our listed platforms to secure the best available deal.`,
     },
     {
-      q: `Can I get a refund if the event is cancelled?`,
-      a: `If the event is officially cancelled, most partner platforms offer a full refund to your original payment method. Postponed events may vary by platform — always check the seller's terms at time of purchase.`,
+      q: `Is it safe to buy resale ${sportLabel} tickets?`,
+      a: `Yes — when purchased through reputable resale platforms. Every partner listed on TicketNexus is a verified seller that guarantees 100% authentic tickets and buyer protection. Always purchase through trusted platforms and avoid private sellers or social media listings.`,
+    },
+    {
+      q: `Can I get a refund if ${event.eventName} is cancelled?`,
+      a: `If the event is officially cancelled, most partner platforms offer a full refund to your original payment method. For postponed events, policies vary by platform — always check the seller's terms at the time of purchase.`,
     },
   ];
+
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  };
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Header />
 
@@ -416,7 +441,7 @@ export default async function TicketPage({ params }: Props) {
                     gap: '10px',
                   }}
                 >
-                  <span>📋</span> Event Overview
+                  <span>📋</span> How to buy {event.eventName} {event.league} tickets
                 </h2>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                   {[overviewPara1, overviewPara2, overviewPara3].map((para, i) => (
@@ -426,39 +451,142 @@ export default async function TicketPage({ params }: Props) {
                   ))}
                 </div>
 
-                {/* Quick facts grid */}
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    gap: '16px',
-                    marginTop: '24px',
-                    paddingTop: '24px',
-                    borderTop: '1px solid var(--border-gray)',
-                  }}
-                  className="overview-facts-grid"
-                >
-                  {[
-                    { label: 'Date', value: formatDate(event.date) },
-                    { label: 'Kick-off', value: event.time },
-                    { label: 'Venue', value: event.venue },
-                    { label: 'City', value: event.city },
-                    { label: 'Competition', value: event.league },
-                    { label: 'From', value: isSoldOut ? 'Sold Out' : formatPrice(event.minPrice, event.currency) },
-                  ].map(({ label, value }) => (
-                    <div key={label}>
-                      <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '4px' }}>
-                        {label}
-                      </div>
-                      <div style={{ fontSize: '14px', color: 'var(--text-dark)', fontWeight: 600 }}>
-                        {value}
-                      </div>
-                    </div>
-                  ))}
+                {/* Event date table */}
+                <div style={{ marginTop: '28px', paddingTop: '24px' }}>
+                  <h2
+                    style={{
+                      fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
+                      fontSize: '18px',
+                      fontWeight: 700,
+                      color: 'var(--text-dark)',
+                      marginBottom: '16px',
+                    }}
+                  >
+                    When is the {event.eventName} {event.league}?
+                  </h2>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
+                    <tbody>
+                      {[
+                        { label: 'Date', value: formatDate(event.date) },
+                        { label: 'Kick-off', value: event.time },
+                        { label: 'Venue', value: event.venue },
+                        { label: 'City', value: event.city },
+                        { label: 'Competition', value: event.league },
+                        { label: 'Tickets from', value: isSoldOut ? 'Sold Out' : formatPrice(event.minPrice, event.currency) },
+                      ].map(({ label, value }) => (
+                        <tr
+                          key={label}
+                          style={{ borderBottom: '1px solid var(--border-gray)' }}
+                        >
+                          <td
+                            style={{
+                              padding: '10px 12px 10px 0',
+                              fontWeight: 700,
+                              color: 'var(--text-gray)',
+                              textTransform: 'uppercase',
+                              fontSize: '11px',
+                              letterSpacing: '0.05em',
+                              width: '140px',
+                              whiteSpace: 'nowrap',
+                            }}
+                          >
+                            {label}
+                          </td>
+                          <td
+                            style={{
+                              padding: '10px 0',
+                              fontWeight: 600,
+                              color: 'var(--text-dark)',
+                            }}
+                          >
+                            {value}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
 
+              {/* ── Buy Tickets CTA ── */}
+              {!isSoldOut && (() => {
+                const bestP = [...event.partners].sort((a, b) => a.price - b.price)[0];
+                if (!bestP) return null;
+                return (
+                  <div style={{ marginBottom: '32px' }}>
+                    <a
+                      href={bestP.awDeepLink ?? `/partners/${bestP.partnerId}`}
+                      target={bestP.awDeepLink ? '_blank' : undefined}
+                      rel={bestP.awDeepLink ? 'noopener noreferrer sponsored' : undefined}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '20px',
+                        background: 'var(--primary-dark)',
+                        borderRadius: '12px',
+                        padding: '20px 24px',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: '52px',
+                          height: '52px',
+                          borderRadius: '10px',
+                          background: 'var(--primary)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '24px',
+                          flexShrink: 0,
+                        }}
+                      >
+                        {sport?.icon ?? '🎫'}
+                      </div>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div
+                          style={{
+                            fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
+                            fontSize: '15px',
+                            fontWeight: 700,
+                            color: '#ffffff',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                          }}
+                        >
+                          {event.eventName}
+                        </div>
+                        <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)', marginTop: '2px', fontWeight: 500 }}>
+                          {event.league}
+                        </div>
+                        <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.85)', marginTop: '4px', fontWeight: 600 }}>
+                          tickets starts from {formatPrice(bestP.price, event.currency)}
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          flexShrink: 0,
+                          background: 'transparent',
+                          border: '2px solid var(--primary)',
+                          borderRadius: '50px',
+                          padding: '10px 24px',
+                          fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
+                          fontSize: '14px',
+                          fontWeight: 700,
+                          color: '#ffffff',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        Buy now
+                      </div>
+                    </a>
+                  </div>
+                );
+              })()}
+
               {/* ── Related Matches ── */}
+
               {relatedEvents.length > 0 && (
                 <div>
                   <h2
@@ -538,6 +666,63 @@ export default async function TicketPage({ params }: Props) {
                   </div>
                 </div>
               )}
+
+              {/* ── FAQs ── */}
+              <div style={{ marginTop: '40px' }}>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
+                    fontSize: '20px',
+                    fontWeight: 700,
+                    color: 'var(--text-dark)',
+                    marginBottom: '20px',
+                  }}
+                >
+                  Frequently Asked Questions
+                </h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  {faqs.map((faq, i) => (
+                    <details
+                      key={i}
+                      style={{
+                        background: 'var(--white)',
+                        border: '1px solid var(--border-gray)',
+                        borderRadius: '10px',
+                        padding: '16px 20px',
+                      }}
+                    >
+                      <summary
+                        style={{
+                          fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
+                          fontSize: '15px',
+                          fontWeight: 600,
+                          color: 'var(--text-dark)',
+                          cursor: 'pointer',
+                          listStyle: 'none',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          gap: '12px',
+                        }}
+                      >
+                        {faq.q}
+                        <span style={{ fontSize: '18px', flexShrink: 0, color: 'var(--text-gray)' }}>+</span>
+                      </summary>
+                      <p
+                        style={{
+                          marginTop: '12px',
+                          fontSize: '14px',
+                          color: 'var(--text-gray)',
+                          lineHeight: '1.65',
+                          marginBottom: 0,
+                        }}
+                      >
+                        {faq.a}
+                      </p>
+                    </details>
+                  ))}
+                </div>
+              </div>
 
               {/* ── Related News ── */}
               {relatedNews.length > 0 && (
