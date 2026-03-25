@@ -144,6 +144,51 @@ export default async function TicketPage({ params }: Props) {
     })),
   };
 
+  // SportsEvent schema
+  const sportsEventJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SportsEvent',
+    name: event.eventName,
+    description: event.description ?? overviewPara1,
+    ...(absoluteImage ? { image: absoluteImage } : {}),
+    startDate: `${event.date}T${event.time}:00`,
+    url: eventPageUrl,
+    location: {
+      '@type': 'Place',
+      name: event.venue,
+      address: { '@type': 'PostalAddress', addressLocality: event.city },
+    },
+    organizer: { '@type': 'Organization', name: event.league },
+    competitor: [
+      { '@type': 'SportsTeam', name: homeTeam },
+      ...(awayTeam ? [{ '@type': 'SportsTeam', name: awayTeam }] : []),
+    ],
+    offers: isSoldOut
+      ? [{ '@type': 'Offer', availability: 'https://schema.org/SoldOut', price: event.minPrice, priceCurrency: event.currency ?? 'GBP' }]
+      : event.partners.map((p) => ({
+          '@type': 'Offer',
+          seller: { '@type': 'Organization', name: p.partnerName },
+          price: p.price,
+          priceCurrency: event.currency ?? 'GBP',
+          availability: 'https://schema.org/InStock',
+          url: p.awDeepLink ?? eventPageUrl,
+        })),
+  };
+
+  // BreadcrumbList schema
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      ...(sport ? [{ '@type': 'ListItem', position: 2, name: sport.name, item: `${SITE_URL}/${sport.slug}` }] : []),
+      ...(event.leagueSlug
+        ? [{ '@type': 'ListItem', position: sport ? 3 : 2, name: event.league, item: `${SITE_URL}/${event.sport}/${event.leagueSlug}` }]
+        : [{ '@type': 'ListItem', position: sport ? 3 : 2, name: event.league }]),
+      { '@type': 'ListItem', position: sport ? 4 : 3, name: event.eventName, item: eventPageUrl },
+    ],
+  };
+
   return (
     <>
       <script
@@ -153,6 +198,14 @@ export default async function TicketPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(sportsEventJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <Header />
 
@@ -236,7 +289,7 @@ export default async function TicketPage({ params }: Props) {
                   }}
                   className="ticket-page-h1"
                 >
-                  {event.eventName}
+                  {event.eventName} Tickets
                 </h1>
               </div>
             </div>
@@ -277,7 +330,7 @@ export default async function TicketPage({ params }: Props) {
             <div>
 
               {/* Compare Prices */}
-              <h2
+              {/* <h2
                 style={{
                   fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
                   fontSize: '20px',
@@ -287,7 +340,7 @@ export default async function TicketPage({ params }: Props) {
                 }}
               >
                 Compare Ticket Prices
-              </h2>
+              </h2> */}
 
               {isSoldOut ? (
                 <div
@@ -456,7 +509,7 @@ export default async function TicketPage({ params }: Props) {
                   <h2
                     style={{
                       fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
-                      fontSize: '18px',
+                      fontSize: '20px',
                       fontWeight: 700,
                       color: 'var(--text-dark)',
                       marginBottom: '16px',
