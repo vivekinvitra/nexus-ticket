@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { getAllNews, getNewsBySlug } from '@/lib/data/news';
+import { newsImageVariant } from '@/lib/config/api';
 import { LEAGUES } from '@/lib/data/leagues';
 import { getEventsBySport, toTicketSlug } from '@/lib/data/tickets';
 import { buildMetadata, buildArticleJsonLd, SITE_URL } from '@/lib/utils/seo';
@@ -158,7 +159,7 @@ export default async function NewsArticlePage({ params }: Props) {
 
               {/* Hero image */}
               <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', borderRadius: '10px', overflow: 'hidden', background: '#e2e8f0' }}>
-                <Image src={article.imageUrl} alt={article.title} fill style={{ objectFit: 'cover' }} priority />
+                <Image src={newsImageVariant(article.imageUrl, 'w=800')} alt={article.title} fill style={{ objectFit: 'cover' }} priority />
               </div>
               <p style={{ fontSize: '12px', color: '#94a3b8', fontStyle: 'italic', margin: '8px 0 32px', lineHeight: 1.5 }}>
                 {article.imageCaption}
@@ -270,7 +271,7 @@ export default async function NewsArticlePage({ params }: Props) {
                       width: '88px', height: '66px', borderRadius: '6px',
                       overflow: 'hidden', flexShrink: 0, position: 'relative', background: '#f1f5f9',
                     }}>
-                      <Image src={rel.imageUrl} alt={rel.title} fill style={{ objectFit: 'cover' }} />
+                      <Image src={newsImageVariant(rel.imageUrl, 'w=90')} alt={rel.title} fill style={{ objectFit: 'cover' }} />
                     </div>
                     {/* Text */}
                     <p style={{

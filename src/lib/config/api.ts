@@ -4,6 +4,18 @@
  * API keys are loaded from environment variables only.
  */
 
+/** Base URL for Cloudflare Image Delivery CDN (news images). */
+export const IMAGE_DELIVERY_BASE_URL = 'https://imagedelivery.net/d30Eru8iw5r9nF8rk-OkDw/';
+
+/**
+ * Returns a news image URL with the specified Cloudflare variant.
+ * e.g. newsImageVariant(article.imageUrl, 'w=280')
+ * Replaces the trailing variant segment (e.g. /public → /w=280).
+ */
+export function newsImageVariant(imageUrl: string, variant: string): string {
+  return imageUrl.replace(/\/[^/]+$/, `/${variant}`);
+}
+
 export const API_CONFIG = {
   // ── Base URL ────────────────────────────────────────────────────────────
   AUTH_URL: 'https://ticketapi.avi-kh.workers.dev',

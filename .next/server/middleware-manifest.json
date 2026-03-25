@@ -2,29 +2,6 @@
   "version": 3,
   "middleware": {},
   "functions": {
-    "/news/page": {
-      "files": [
-        "server/server-reference-manifest.js",
-        "server/app/news/page_client-reference-manifest.js",
-        "server/middleware-build-manifest.js",
-        "server/middleware-react-loadable-manifest.js",
-        "server/next-font-manifest.js",
-        "server/interception-route-rewrite-manifest.js",
-        "server/edge-runtime-webpack.js",
-        "server/app/news/page.js"
-      ],
-      "name": "app/news/page",
-      "page": "/news/page",
-      "matchers": [
-        {
-          "regexp": "^/news$",
-          "originalSource": "/news"
-        }
-      ],
-      "wasm": [],
-      "assets": [],
-      "environments": {}
-    },
     "/page": {
       "files": [
         "server/server-reference-manifest.js",
@@ -46,7 +23,10 @@
       ],
       "wasm": [],
       "assets": [],
-      "environments": {}
+      "env": {
+        "__NEXT_BUILD_ID": "development",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "hmzvViyViEKhY2TjV83LTpvRdR0fwCXnVJdE/GGPnVw="
+      }
     },
     "/news/[slug]/page": {
       "files": [
@@ -69,7 +49,10 @@
       ],
       "wasm": [],
       "assets": [],
-      "environments": {}
+      "env": {
+        "__NEXT_BUILD_ID": "development",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "hmzvViyViEKhY2TjV83LTpvRdR0fwCXnVJdE/GGPnVw="
+      }
     },
     "/tickets/[slug]/page": {
       "files": [
@@ -92,7 +75,36 @@
       ],
       "wasm": [],
       "assets": [],
-      "environments": {}
+      "env": {
+        "__NEXT_BUILD_ID": "development",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "hmzvViyViEKhY2TjV83LTpvRdR0fwCXnVJdE/GGPnVw="
+      }
+    },
+    "/_not-found/page": {
+      "files": [
+        "server/server-reference-manifest.js",
+        "server/app/_not-found/page_client-reference-manifest.js",
+        "server/middleware-build-manifest.js",
+        "server/middleware-react-loadable-manifest.js",
+        "server/next-font-manifest.js",
+        "server/interception-route-rewrite-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/app/_not-found/page.js"
+      ],
+      "name": "app/_not-found/page",
+      "page": "/_not-found/page",
+      "matchers": [
+        {
+          "regexp": "^/_not\\-found$",
+          "originalSource": "/_not-found"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "development",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "hmzvViyViEKhY2TjV83LTpvRdR0fwCXnVJdE/GGPnVw="
+      }
     },
     "/[slug]/page": {
       "files": [
@@ -115,7 +127,36 @@
       ],
       "wasm": [],
       "assets": [],
-      "environments": {}
+      "env": {
+        "__NEXT_BUILD_ID": "development",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "hmzvViyViEKhY2TjV83LTpvRdR0fwCXnVJdE/GGPnVw="
+      }
+    },
+    "/[slug]/[league]/page": {
+      "files": [
+        "server/server-reference-manifest.js",
+        "server/app/[slug]/[league]/page_client-reference-manifest.js",
+        "server/middleware-build-manifest.js",
+        "server/middleware-react-loadable-manifest.js",
+        "server/next-font-manifest.js",
+        "server/interception-route-rewrite-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/app/[slug]/[league]/page.js"
+      ],
+      "name": "app/[slug]/[league]/page",
+      "page": "/[slug]/[league]/page",
+      "matchers": [
+        {
+          "regexp": "^/(?<slug>[^/]+?)/(?<league>[^/]+?)$",
+          "originalSource": "/[slug]/[league]"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "development",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "hmzvViyViEKhY2TjV83LTpvRdR0fwCXnVJdE/GGPnVw="
+      }
     }
   },
   "sortedMiddleware": []

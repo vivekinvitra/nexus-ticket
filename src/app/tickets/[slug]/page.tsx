@@ -7,6 +7,7 @@ import { CLEAN_EVENTS, getEventBySlug, getRelatedEvents, toTicketSlug } from '@/
 import { getSportBySlug } from '@/lib/data/sports';
 import { getNewsByCategory } from '@/lib/data/news';
 import { buildMetadata, SITE_URL } from '@/lib/utils/seo';
+import { newsImageVariant } from '@/lib/config/api';
 import { formatPrice, formatDate, formatShortDate } from '@/lib/utils/format';
 
 interface Props {
@@ -585,7 +586,7 @@ export default async function TicketPage({ params }: Props) {
                           }}
                         >
                           <img
-                            src={article.imageUrl}
+                            src={newsImageVariant(article.imageUrl, 'w=80')}
                             alt={article.title}
                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                           />

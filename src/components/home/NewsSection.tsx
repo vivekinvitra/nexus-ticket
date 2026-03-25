@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { NewsArticle } from '@/lib/types';
+import { newsImageVariant } from '@/lib/config/api';
 
 const CAT_COLORS: Record<string, string> = {
   football: '#3b82f6',
@@ -16,9 +17,10 @@ const CAT_COLORS: Record<string, string> = {
 
 interface NewsSectionProps {
   articles: NewsArticle[];
+  imageVariant?: string;
 }
 
-export default function NewsSection({ articles }: NewsSectionProps) {
+export default function NewsSection({ articles, imageVariant = 'w=280' }: NewsSectionProps) {
   return (
     <section
       style={{
@@ -60,7 +62,7 @@ export default function NewsSection({ articles }: NewsSectionProps) {
 
       <div className="news-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
         {articles.map((article) => (
-          <NewsCard key={article.id} article={article} />
+          <NewsCard key={article.id} article={article} imageVariant={imageVariant} />
         ))}
       </div>
 
@@ -68,7 +70,7 @@ export default function NewsSection({ articles }: NewsSectionProps) {
   );
 }
 
-function NewsCard({ article }: { article: NewsArticle }) {
+function NewsCard({ article, imageVariant }: { article: NewsArticle; imageVariant: string }) {
   const catColor = CAT_COLORS[article.category] || '#6b7280';
   const catLabel = article.category.replace('-', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
@@ -98,7 +100,7 @@ function NewsCard({ article }: { article: NewsArticle }) {
         }}
       >
         <Image
-          src={article.imageUrl}
+          src={newsImageVariant(article.imageUrl, imageVariant)}
           alt={article.title}
           fill
           style={{ objectFit: 'cover' }}

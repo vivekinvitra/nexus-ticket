@@ -1,5 +1,5 @@
 import type { NewsArticle } from '@/lib/types';
-import { API_CONFIG, buildApiUrl } from '@/lib/config/api';
+import { API_CONFIG, IMAGE_DELIVERY_BASE_URL, buildApiUrl } from '@/lib/config/api';
 
 const NEWS_API     = buildApiUrl(API_CONFIG.ENDPOINTS.NEWS, { page: API_CONFIG.DEFAULTS.NEWS_PAGE, limit: API_CONFIG.DEFAULTS.NEWS_LIMIT });
 const NEWS_API_KEY = process.env.NEWS_API_KEY ?? '';
@@ -78,7 +78,7 @@ function mapApiItem(item: ApiNewsItem): NewsArticle {
     publishedAt,
     addedon,
     readTime: item.readTime,
-    imageUrl: item.imageUrl,
+    imageUrl: `${IMAGE_DELIVERY_BASE_URL}${item.imageUrl}/public`,
     imageCaption: item.imageCaption,
     keyPoints,
     featured: item.featured === 1,

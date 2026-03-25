@@ -5,6 +5,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { getAllNews } from '@/lib/data/news';
 import { buildMetadata } from '@/lib/utils/seo';
+import { newsImageVariant } from '@/lib/config/api';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Sports Ticket News & Guides',
@@ -100,7 +101,7 @@ export default async function NewsPage() {
                     }}
                   >
                     <Image
-                      src={article.imageUrl}
+                      src={newsImageVariant(article.imageUrl, 'w=380')}
                       alt={article.title}
                       fill
                       style={{ objectFit: 'cover' }}

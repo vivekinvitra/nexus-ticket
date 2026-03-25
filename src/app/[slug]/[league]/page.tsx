@@ -311,7 +311,7 @@ export default async function LeaguePage({ params }: Props) {
 
           {relatedNews.length > 0 && (
             <div style={{ marginTop: '48px' }}>
-              <NewsSection articles={relatedNews} />
+              <NewsSection articles={relatedNews} imageVariant="w=380" />
             </div>
           )}
         </div>
