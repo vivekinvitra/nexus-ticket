@@ -483,6 +483,7 @@ export default async function TicketPage({ params }: Props) {
                 }}
               >
                 <h2
+                  className="ticket-section-h2"
                   style={{
                     fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
                     fontSize: '20px',
@@ -494,7 +495,7 @@ export default async function TicketPage({ params }: Props) {
                     gap: '10px',
                   }}
                 >
-                  <span>📋</span> How to buy {event.eventName} {event.league} tickets
+                  <span style={{ flexShrink: 0 }}>📋</span> How to buy {event.eventName} {event.league} tickets
                 </h2>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                   {[overviewPara1, overviewPara2, overviewPara3].map((para, i) => (
@@ -507,6 +508,7 @@ export default async function TicketPage({ params }: Props) {
                 {/* Event date table */}
                 <div style={{ marginTop: '28px', paddingTop: '24px' }}>
                   <h2
+                    className="ticket-section-h2"
                     style={{
                       fontFamily: 'var(--font-poppins, Poppins, sans-serif)',
                       fontSize: '20px',
@@ -571,6 +573,7 @@ export default async function TicketPage({ params }: Props) {
                       href={bestP.awDeepLink ?? `/partners/${bestP.partnerId}`}
                       target={bestP.awDeepLink ? '_blank' : undefined}
                       rel={bestP.awDeepLink ? 'noopener noreferrer sponsored' : undefined}
+                      className="ticket-cta-link"
                       style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -618,6 +621,7 @@ export default async function TicketPage({ params }: Props) {
                         </div>
                       </div>
                       <div
+                        className="ticket-cta-btn"
                         style={{
                           flexShrink: 0,
                           background: 'transparent',
@@ -824,7 +828,7 @@ export default async function TicketPage({ params }: Props) {
                           }}
                         >
                           <img
-                            src={newsImageVariant(article.imageUrl, 'w=80')}
+                            src={newsImageVariant(article.imageUrl, 'w=400')}
                             alt={article.title}
                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                           />

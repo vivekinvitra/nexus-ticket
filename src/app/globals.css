@@ -387,6 +387,22 @@ input, select {
   box-sizing: border-box;
 }
 
+/* Long H2 titles (How to buy / When is the) */
+.ticket-section-h2 {
+  flex-wrap: wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  line-height: 1.35 !important;
+}
+
+/* Buy tickets CTA banner */
+.ticket-cta-link {
+  flex-wrap: nowrap;
+}
+.ticket-cta-btn {
+  text-align: center;
+}
+
 @media (max-width: 860px) {
   .ticket-page-grid         { grid-template-columns: 1fr !important; gap: 20px !important; }
   .ticket-page-inner        { padding: 20px 16px 48px !important; }
@@ -415,6 +431,12 @@ input, select {
   /* Related rows */
   .related-match-row        { padding: 12px 14px !important; gap: 10px !important; }
   .related-news-row         { gap: 12px !important; }
+
+  /* CTA banner — slightly reduce gap */
+  .ticket-cta-link          { gap: 16px !important; padding: 18px 20px !important; }
+
+  /* Section H2 — reduce size slightly on tablet */
+  .ticket-section-h2        { font-size: 18px !important; }
 }
 
 @media (max-width: 640px) {
@@ -436,14 +458,46 @@ input, select {
   .ticket-overview-panel    { padding: 16px 12px !important; }
   .overview-facts-grid      { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
 
-  /* Related news stacked */
-  .related-news-row         { flex-direction: column !important; gap: 0 !important; }
-  .related-news-row > div:first-child { width: 100% !important; height: 140px !important; border-radius: 8px 8px 0 0 !important; }
-  .related-news-row img     { width: 100% !important; height: 140px !important; }
-  .related-news-row > div:last-child  { padding-top: 10px !important; }
+  /* Related news — stack card vertically on mobile */
+  .related-news-row {
+    flex-direction: column !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  .related-news-row > div:first-child {
+    width: 100% !important;
+    height: 160px !important;
+    border-radius: 0 !important;
+    flex-shrink: 0 !important;
+  }
+  .related-news-row img {
+    width: 100% !important;
+    height: 160px !important;
+    object-fit: cover !important;
+  }
+  .related-news-row > div:last-child {
+    padding: 12px 14px 14px !important;
+    min-width: 0 !important;
+  }
 
   /* Sticky sidebar — remove sticky on mobile (it's at bottom) */
   .ticket-sidebar-card      { position: static !important; }
+
+  /* CTA banner — stack info + button vertically */
+  .ticket-cta-link          { flex-wrap: wrap !important; gap: 14px !important; padding: 16px !important; }
+  .ticket-cta-btn           { flex: 1 1 100% !important; text-align: center !important;
+                              padding: 12px 20px !important; font-size: 15px !important; }
+
+  /* Section H2 long titles */
+  .ticket-section-h2        { font-size: 16px !important; }
+
+  /* FAQ accordion */
+  details[style]            { padding: 14px 14px !important; }
+  details summary           { font-size: 14px !important; }
+
+  /* Event date table */
+  table td                  { font-size: 13px !important; padding: 9px 8px 9px 0 !important; }
 }
 
 .related-match-row:hover {
