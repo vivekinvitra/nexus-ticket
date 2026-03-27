@@ -39,44 +39,7 @@ export const PARTNERS: Partner[] = [
     metaTitle: 'FootballTicketNet Review 2025 | Trusted Football Tickets | TicketNexus',
     metaDescription: 'Read our FootballTicketNet review. A specialist football ticket marketplace offering verified tickets for Premier League, Champions League and more with buyer guarantee.',
     metaKeywords: 'FootballTicketNet review, FootballTicketNet tickets, buy football tickets, Premier League tickets, Champions League tickets, verified football tickets',
-  },
-  {
-    id: 'awin',
-    slug: 'awin',
-    name: 'Awin',
-    icon: '🌐',
-    rating: 4.4,
-    reviewCount: 21500,
-    shortDesc: 'Leading affiliate network connecting fans with top ticket sellers.',
-    description:
-      'Awin is a global affiliate marketing network that partners with the world\'s leading ticket retailers, sports clubs, and event organisers. Through Awin\'s trusted network, fans can discover competitive ticket deals from verified sellers with full purchase protection.',
-    features: [
-      'Verified affiliate partner network',
-      'Exclusive partner deals and discounts',
-      'Price comparison across top sellers',
-      'Secure payment via trusted retailers',
-      'Wide coverage of sports and events',
-      'Real-time inventory updates',
-    ],
-    specialties: ['football', 'tennis', 'horse-racing', 'cricket', 'formula-1'],
-    pros: [
-      'Access to exclusive partner discounts',
-      'Verified and trusted sellers only',
-      'Broad event and sport coverage',
-      'Competitive pricing through network',
-    ],
-    cons: [
-      'Redirects to partner sites for purchase',
-      'Availability varies by partner',
-    ],
-    paymentMethods: ['Visa', 'Mastercard', 'PayPal', 'Apple Pay', 'American Express'],
-    deliveryOptions: ['E-ticket', 'Mobile app', 'Print at home', 'Registered mail'],
-    founded: 2000,
-    website: 'https://awin.com',
-    metaTitle: 'Awin Review 2025 | Trusted Sports Ticket Network | TicketNexus',
-    metaDescription: 'Read our Awin review. A global affiliate network connecting fans with verified ticket sellers for football, tennis, horse racing, cricket and Formula 1 events.',
-    metaKeywords: 'Awin review, Awin tickets, buy sports tickets, verified ticket sellers, football tennis cricket F1 tickets, Awin affiliate network',
-  },
+  },  
 ];
 
 export const getPartnerBySlug = (slug: string): Partner | undefined =>

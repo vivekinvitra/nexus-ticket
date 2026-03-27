@@ -2,127 +2,23 @@
   "version": 3,
   "middleware": {},
   "functions": {
-    "/page": {
+    "/partners/[slug]/page": {
       "files": [
         "server/server-reference-manifest.js",
-        "server/app/page_client-reference-manifest.js",
+        "server/app/partners/[slug]/page_client-reference-manifest.js",
         "server/middleware-build-manifest.js",
         "server/middleware-react-loadable-manifest.js",
         "server/next-font-manifest.js",
         "server/interception-route-rewrite-manifest.js",
         "server/edge-runtime-webpack.js",
-        "server/app/page.js"
+        "server/app/partners/[slug]/page.js"
       ],
-      "name": "app/page",
-      "page": "/page",
+      "name": "app/partners/[slug]/page",
+      "page": "/partners/[slug]/page",
       "matchers": [
         {
-          "regexp": "^/$",
-          "originalSource": "/"
-        }
-      ],
-      "wasm": [],
-      "assets": [],
-      "env": {
-        "__NEXT_BUILD_ID": "development",
-        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "hmzvViyViEKhY2TjV83LTpvRdR0fwCXnVJdE/GGPnVw="
-      }
-    },
-    "/tickets/[slug]/page": {
-      "files": [
-        "server/server-reference-manifest.js",
-        "server/app/tickets/[slug]/page_client-reference-manifest.js",
-        "server/middleware-build-manifest.js",
-        "server/middleware-react-loadable-manifest.js",
-        "server/next-font-manifest.js",
-        "server/interception-route-rewrite-manifest.js",
-        "server/edge-runtime-webpack.js",
-        "server/app/tickets/[slug]/page.js"
-      ],
-      "name": "app/tickets/[slug]/page",
-      "page": "/tickets/[slug]/page",
-      "matchers": [
-        {
-          "regexp": "^/tickets/(?<slug>[^/]+?)$",
-          "originalSource": "/tickets/[slug]"
-        }
-      ],
-      "wasm": [],
-      "assets": [],
-      "env": {
-        "__NEXT_BUILD_ID": "development",
-        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "hmzvViyViEKhY2TjV83LTpvRdR0fwCXnVJdE/GGPnVw="
-      }
-    },
-    "/[slug]/[league]/page": {
-      "files": [
-        "server/server-reference-manifest.js",
-        "server/app/[slug]/[league]/page_client-reference-manifest.js",
-        "server/middleware-build-manifest.js",
-        "server/middleware-react-loadable-manifest.js",
-        "server/next-font-manifest.js",
-        "server/interception-route-rewrite-manifest.js",
-        "server/edge-runtime-webpack.js",
-        "server/app/[slug]/[league]/page.js"
-      ],
-      "name": "app/[slug]/[league]/page",
-      "page": "/[slug]/[league]/page",
-      "matchers": [
-        {
-          "regexp": "^/(?<slug>[^/]+?)/(?<league>[^/]+?)$",
-          "originalSource": "/[slug]/[league]"
-        }
-      ],
-      "wasm": [],
-      "assets": [],
-      "env": {
-        "__NEXT_BUILD_ID": "development",
-        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "hmzvViyViEKhY2TjV83LTpvRdR0fwCXnVJdE/GGPnVw="
-      }
-    },
-    "/_not-found/page": {
-      "files": [
-        "server/server-reference-manifest.js",
-        "server/app/_not-found/page_client-reference-manifest.js",
-        "server/middleware-build-manifest.js",
-        "server/middleware-react-loadable-manifest.js",
-        "server/next-font-manifest.js",
-        "server/interception-route-rewrite-manifest.js",
-        "server/edge-runtime-webpack.js",
-        "server/app/_not-found/page.js"
-      ],
-      "name": "app/_not-found/page",
-      "page": "/_not-found/page",
-      "matchers": [
-        {
-          "regexp": "^/_not\\-found$",
-          "originalSource": "/_not-found"
-        }
-      ],
-      "wasm": [],
-      "assets": [],
-      "env": {
-        "__NEXT_BUILD_ID": "development",
-        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "hmzvViyViEKhY2TjV83LTpvRdR0fwCXnVJdE/GGPnVw="
-      }
-    },
-    "/news/[slug]/page": {
-      "files": [
-        "server/server-reference-manifest.js",
-        "server/app/news/[slug]/page_client-reference-manifest.js",
-        "server/middleware-build-manifest.js",
-        "server/middleware-react-loadable-manifest.js",
-        "server/next-font-manifest.js",
-        "server/interception-route-rewrite-manifest.js",
-        "server/edge-runtime-webpack.js",
-        "server/app/news/[slug]/page.js"
-      ],
-      "name": "app/news/[slug]/page",
-      "page": "/news/[slug]/page",
-      "matchers": [
-        {
-          "regexp": "^/news/(?<slug>[^/]+?)$",
-          "originalSource": "/news/[slug]"
+          "regexp": "^/partners/(?<slug>[^/]+?)$",
+          "originalSource": "/partners/[slug]"
         }
       ],
       "wasm": [],
@@ -158,23 +54,23 @@
         "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "hmzvViyViEKhY2TjV83LTpvRdR0fwCXnVJdE/GGPnVw="
       }
     },
-    "/news/page": {
+    "/page": {
       "files": [
         "server/server-reference-manifest.js",
-        "server/app/news/page_client-reference-manifest.js",
+        "server/app/page_client-reference-manifest.js",
         "server/middleware-build-manifest.js",
         "server/middleware-react-loadable-manifest.js",
         "server/next-font-manifest.js",
         "server/interception-route-rewrite-manifest.js",
         "server/edge-runtime-webpack.js",
-        "server/app/news/page.js"
+        "server/app/page.js"
       ],
-      "name": "app/news/page",
-      "page": "/news/page",
+      "name": "app/page",
+      "page": "/page",
       "matchers": [
         {
-          "regexp": "^/news$",
-          "originalSource": "/news"
+          "regexp": "^/$",
+          "originalSource": "/"
         }
       ],
       "wasm": [],

@@ -9,7 +9,7 @@ import { getEventsBySport } from '@/lib/data/tickets';
 import { getFeaturedNews } from '@/lib/data/news';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Buy FIFA World Cup 2026 Tickets Online | Football 2026 Tickets Online  - Ticket-Nexus',
+  title: 'Buy FIFA World Cup 2026 Tickets Online | Football 2026 Tickets Online ',
   path: '/',
   keywords: SITE_keywords,
 });
