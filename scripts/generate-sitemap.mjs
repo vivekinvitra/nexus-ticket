@@ -31,10 +31,15 @@ const NEWS_API_KEY = process.env.NEWS_API_KEY || '';
 
 // ── data readers ──────────────────────────────────────────────────────────
 
-/** All sport slugs from sports.ts */
+/** All active sport slugs from sports.ts (isActive: 'Y' only) */
 function getSportSlugs() {
   const src = fs.readFileSync(path.join(SRC_DIR, 'sports.ts'), 'utf-8');
-  return [...src.matchAll(/^\s+slug:\s*'([^']+)'/gm)].map(m => m[1]);
+  // Split into per-sport blocks and only keep those with isActive: 'Y'
+  return src
+    .split(/\n  \{/)
+    .filter(block => /isActive:\s*'Y'/.test(block))
+    .map(block => { const m = block.match(/slug:\s*'([^']+)'/); return m ? m[1] : null; })
+    .filter(Boolean);
 }
 
 /** All league { slug, sportSlug } pairs from leagues.ts */
