@@ -13,13 +13,13 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return SPORTS.map((sport) => ({ slug: sport.slug }));
+  return SPORTS.filter((sport) => sport.isActive === 'Y').map((sport) => ({ slug: sport.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const sport = getSportBySlug(slug);
-  if (!sport) return {};
+  if (!sport || sport.isActive !== 'Y') return {};
   return buildMetadata({
     title: sport.metaTitle ?? `${sport.name} Tickets`,
     description: sport.metaDescription ?? sport.description,
@@ -42,7 +42,7 @@ const SPORT_WIKI_URLS: Record<string, string> = {
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
   const sport = getSportBySlug(slug);
-  if (!sport) notFound();
+  if (!sport || sport.isActive !== 'Y') notFound();
 
   const today = new Date().toISOString().split('T')[0];
   const upcomingEvents = getEventsBySport(sport.slug)

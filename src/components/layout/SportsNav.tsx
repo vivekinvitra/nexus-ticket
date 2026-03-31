@@ -11,8 +11,8 @@ export default function SportsNav() {
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
 
-  const featuredSports = SPORTS.filter((s) => s.isFeatured);
-  const otherSports = SPORTS.filter((s) => !s.isFeatured);
+  const featuredSports = SPORTS.filter((s) => s.isFeatured && s.isActive === 'Y');
+  const otherSports = SPORTS.filter((s) => !s.isFeatured && s.isActive === 'Y');
 
   const openDropdown = () => {
     if (hideTimer.current) clearTimeout(hideTimer.current);

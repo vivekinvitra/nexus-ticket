@@ -16,15 +16,25 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
-    "/company/[slug]/page": [
+    "/[slug]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/company/[slug]/page.js"
+      "static/chunks/app/[slug]/page.js"
     ],
-    "/api/contact/route": [
+    "/news/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/contact/route.js"
+      "static/chunks/app/news/page.js"
+    ],
+    "/news/[slug]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/news/[slug]/page.js"
+    ],
+    "/[slug]/[league]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[slug]/[league]/page.js"
     ]
   }
 }

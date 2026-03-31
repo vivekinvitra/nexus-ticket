@@ -381,7 +381,7 @@ export default function Header() {
           </div>
 
           <nav style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-            {SPORTS.map((sport) => (
+            {SPORTS.filter((s) => s.isActive === 'Y').map((sport) => (
               <Link
                 key={sport.slug}
                 href={`/${sport.slug}`}

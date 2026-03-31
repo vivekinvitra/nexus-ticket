@@ -155,6 +155,7 @@ export interface SportCategory {
   description: string;
   color: string;
   isFeatured?: boolean;
+  isActive?: 'Y' | 'N';
   metaTitle?: string;
   metaDescription?: string;
   metaKeywords?: string;
