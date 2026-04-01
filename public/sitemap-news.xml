@@ -2,14 +2,146 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
-    <loc>https://www.ticket-nexus.com/news/formula-1-paddock-club-silverstone-race-tickets</loc>
+    <loc>https://www.ticket-nexus.com/news/queens-park-rangers-vs-watford-20260403</loc>
     <news:news>
       <news:publication>
         <news:name>Ticket-Nexus</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-05-26</news:publication_date>
-      <news:title>Formula 1 Paddock Club Silverstone Race Tickets</news:title>
+      <news:publication_date>2026-04-03</news:publication_date>
+      <news:title>Queens Park Rangers vs Watford: Championship Clash – Friday 3 April</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/coventry-city-vs-derby-county-20260403</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Ticket-Nexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-03</news:publication_date>
+      <news:title>Coventry City vs Derby County: Championship Clash on Friday 3 April – Form, Odds &amp; Ticket Guide</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/west-bromwich-albion-vs-wrexham-fc-20260403</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Ticket-Nexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-03</news:publication_date>
+      <news:title>West Brom vs Wrexham: Championship Clash at The Hawthorns – Friday 3 April</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/leicester-city-vs-preston-north-end-20260403</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Ticket-Nexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-03</news:publication_date>
+      <news:title>Leicester City vs Preston North End: Championship Clash – Friday 3 April</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/charlton-athletic-vs-bristol-city-20260403</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Ticket-Nexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-03</news:publication_date>
+      <news:title>Charlton Athletic vs Bristol City: Championship Clash at The Valley on Friday 3 April</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/norwich-city-vs-portsmouth-20260403</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Ticket-Nexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-03</news:publication_date>
+      <news:title>Norwich City vs Portsmouth: Championship Form, Odds &amp; Why Friday Matters</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/middlesbrough-vs-millwall-20260403</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Ticket-Nexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-03</news:publication_date>
+      <news:title>Middlesbrough vs Millwall: Championship Friday – Form, Odds &amp; Riverside Intensity</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/birmingham-city-vs-blackburn-rovers-20260403</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Ticket-Nexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-03</news:publication_date>
+      <news:title>Birmingham City vs Blackburn Rovers: Championship Clash at St Andrews – Friday 3 April</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/southampton-vs-ipswich-town-20260403</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Ticket-Nexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-03</news:publication_date>
+      <news:title>Southampton vs Ipswich Town: Championship Clash – Friday 3 April</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/sheffield-united-vs-swansea-city-20260403</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Ticket-Nexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-03</news:publication_date>
+      <news:title>Sheffield United vs Swansea City: Championship Clash at Bramall Lane – Friday 3 April</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/al-ittihad-vs-al-hazem-20260403</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Ticket-Nexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-03</news:publication_date>
+      <news:title>Al Ittihad vs Al Hazem: Saudi Pro League Friday – Form, Odds &amp; Betting Edge</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/al-nassr-vs-al-najma-20260403</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Ticket-Nexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-03</news:publication_date>
+      <news:title>Al Nassr vs Al Najma: Saudi Pro League Friday – Form, Odds &amp; Tickets</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/paris-saint-germain-vs-toulouse-fc-20260403</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Ticket-Nexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-03</news:publication_date>
+      <news:title>Paris Saint-Germain vs Toulouse FC – Ligue 1 Friday 3 April</news:title>
     </news:news>
   </url>
   <url>
@@ -24,190 +156,14 @@
     </news:news>
   </url>
   <url>
-    <loc>https://www.ticket-nexus.com/news/brighton-vs-liverpool-tickets---epl-2026-match-at-amex-stadium</loc>
+    <loc>https://www.ticket-nexus.com/news/formula-1-paddock-club-silverstone-race-tickets</loc>
     <news:news>
       <news:publication>
         <news:name>Ticket-Nexus</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2026-03-25</news:publication_date>
-      <news:title>Brighton vs Liverpool Tickets - EPL 2026 Match at Amex Stadium</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/premier-league-ticket-prices-2025</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-02-18</news:publication_date>
-      <news:title>Premier League 2024/25: How to Find the Best Ticket Deals This Season</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/cheltenham-festival-guide-2025</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-02-15</news:publication_date>
-      <news:title>Cheltenham Festival 2025: Complete Ticket Buying Guide</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/wimbledon-ballot-tips</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-02-12</news:publication_date>
-      <news:title>5 Tips for the Wimbledon Ballot and When to Use Resale Sites</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/cricket-test-match-best-seats</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-02-05</news:publication_date>
-      <news:title>England Cricket 2025: The Best Seats at Lord's, The Oval, and Edgbaston</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/queens-park-rangers-vs-watford-20260403</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01</news:publication_date>
-      <news:title>Queens Park Rangers vs Watford on Friday 3 April — EFL Championship Clash at Loftus Road</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/coventry-city-vs-derby-county-20260403</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01</news:publication_date>
-      <news:title>Coventry City vs Derby County on Friday, 3 April — Championship Clash at the Arena</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/west-bromwich-albion-vs-wrexham-fc-20260403</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01</news:publication_date>
-      <news:title>West Bromwich Albion vs Wrexham FC: Championship Clash on Friday, 3 April</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/leicester-city-vs-preston-north-end-20260403</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01</news:publication_date>
-      <news:title>Leicester City vs Preston North End on Friday 3 April: Championship Clash at King Power</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/charlton-athletic-vs-bristol-city-20260403</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01</news:publication_date>
-      <news:title>Charlton Athletic vs Bristol City on Friday 3 April: Championship Battle at The Valley</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/norwich-city-vs-portsmouth-20260403</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01</news:publication_date>
-      <news:title>Norwich City vs Portsmouth on Friday 3 April — Championship Clash at Carrow Road</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/middlesbrough-vs-millwall-20260403</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01</news:publication_date>
-      <news:title>Middlesbrough vs Millwall on Friday 3 April — Championship Clash at the Riverside</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/birmingham-city-vs-blackburn-rovers-20260403</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01</news:publication_date>
-      <news:title>Birmingham City vs Blackburn Rovers on Friday, 3 April — Championship Clash at St Andrews</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/southampton-vs-ipswich-town-20260403</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01</news:publication_date>
-      <news:title>Southampton vs Ipswich Town on Friday 3 April — Championship Clash at St Mary Stadium</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/sheffield-united-vs-swansea-city-20260403</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01</news:publication_date>
-      <news:title>Sheffield United vs Swansea City on Friday 3 April: Championship Clash at Bramall Lane</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/al-ittihad-vs-al-hazem-20260403</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01</news:publication_date>
-      <news:title>Al Ittihad vs Al Hazem on Friday 3 April — Saudi Pro League Clash at King Abdullah Sports City</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/news/al-nassr-vs-al-najma-20260403</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Ticket-Nexus</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-04-01</news:publication_date>
-      <news:title>Al Nassr vs Al Najma on Friday 3 April — Saudi Pro League Clash at King Saud University Stadium</news:title>
+      <news:publication_date>2026-05-26</news:publication_date>
+      <news:title>Formula 1 Paddock Club Silverstone Race Tickets</news:title>
     </news:news>
   </url>
 </urlset>
