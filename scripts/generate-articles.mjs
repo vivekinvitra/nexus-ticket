@@ -2,23 +2,24 @@
 /**
  * generate-articles.mjs
  *
- * Uses Claude AI + the configurable prompt in scripts/news-template.json to
- * generate ESPN-style sports articles for upcoming ticket events, then POSTs
- * each article directly to the Cloudflare Worker / D1 database API.
+ * Generates ESPN-style articles for upcoming ticket events via Claude AI,
+ * then POSTs each article to the Cloudflare Worker / D1 database.
  *
- * Target date : today + schedule.articleDaysAhead  (default: 2 days ahead)
- *               Falls back to the next date that has tickets if that day is empty.
+ * Payload uses numeric IDs resolved from:
+ *   GET /api/sports   → sport  ID
+ *   GET /api/leagues  → league ID
+ *   GET /api/authors  → author ID (random)
  *
- * Usage:
- *   node scripts/generate-articles.mjs
+ * Target date: today + schedule.articleDaysAhead (default 2).
+ *              Falls back to the next date that has tickets.
  *
- * Requires (in .env.local or GitHub Actions secrets):
- *   ANTHROPIC_API_KEY   — Claude API key for article generation
- *   NEWS_API_KEY        — Worker API key (same key used by the GET news endpoint)
+ * Requires:
+ *   ANTHROPIC_API_KEY  — Claude API key
+ *   NEWS_API_KEY       — Worker API key (x-api-key header)
  *
  * Optional:
- *   NEWS_INSERT_ENDPOINT — Full POST URL (default: https://ticketapi.avi-kh.workers.dev/api/ticket/news)
- *   NEXT_PUBLIC_SITE_URL — Site base URL for ticket links
+ *   NEWS_INSERT_ENDPOINT — defaults to https://ticketapi.avi-kh.workers.dev/api/news
+ *   NEXT_PUBLIC_SITE_URL — site base URL for ticket links
  */
 
 import fs   from 'fs';
@@ -28,6 +29,7 @@ const ROOT_DIR      = path.join(import.meta.dirname, '..');
 const SRC_DATA_DIR  = path.join(ROOT_DIR, 'src', 'lib', 'data');
 const TICKETS_FILE  = path.join(SRC_DATA_DIR, 'tickets.ts');
 const TEMPLATE_FILE = path.join(import.meta.dirname, 'news-template.json');
+const API_BASE      = 'https://ticketapi.avi-kh.workers.dev';
 
 // ── load env from .env.local (skipped in CI where secrets are injected) ────
 const envLocalPath = path.join(ROOT_DIR, '.env.local');
@@ -38,33 +40,10 @@ if (fs.existsSync(envLocalPath)) {
   }
 }
 
-const ANTHROPIC_API_KEY  = process.env.ANTHROPIC_API_KEY  || '';
-const NEWS_API_KEY       = process.env.NEWS_API_KEY       || '';
-const NEWS_INSERT_ENDPOINT = process.env.NEWS_INSERT_ENDPOINT
-  || 'https://ticketapi.avi-kh.workers.dev/api/news';
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ticket-nexus.com').replace(/\/$/, '');
-
-// ── sport slug → display category (mirrors normalizeCategory in news.ts) ──
-const SPORT_TO_CATEGORY = {
-  'football':          'Football',
-  'tennis':            'Tennis',
-  'cricket':           'Cricket',
-  'horse-racing':      'Horse Racing',
-  'boxing':            'Boxing',
-  'formula-1':         'Formula 1',
-  'rugby':             'Rugby',
-  'golf':              'Golf',
-  'american-football': 'American Football',
-  'athletics':         'Athletics',
-  'basketball':        'Basketball',
-  'ice-hockey':        'Ice Hockey',
-  'motorsports':       'Motorsports',
-  'moto-gp':           'Moto GP',
-  'cycling':           'Cycling',
-  'darts':             'Darts',
-  'esports':           'Esports',
-  'swimming':          'Swimming',
-};
+const ANTHROPIC_API_KEY    = process.env.ANTHROPIC_API_KEY || '';
+const NEWS_API_KEY         = process.env.NEWS_API_KEY      || '';
+const NEWS_INSERT_ENDPOINT = process.env.NEWS_INSERT_ENDPOINT || `${API_BASE}/api/news`;
+const SITE_URL             = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ticket-nexus.com').replace(/\/$/, '');
 
 // ── date helpers ───────────────────────────────────────────────────────────
 
@@ -81,41 +60,75 @@ function formatDate(dateStr) {
   });
 }
 
+// ── API lookup tables ──────────────────────────────────────────────────────
+// Fetches sports, leagues, and authors once at startup.
+// Returns maps for fast ID resolution during article generation.
+
+async function fetchLookups() {
+  const headers = { 'x-api-key': NEWS_API_KEY };
+
+  const [sportsRes, leaguesRes, authorsRes] = await Promise.all([
+    fetch(`${API_BASE}/api/sports`,  { headers }),
+    fetch(`${API_BASE}/api/leagues`, { headers }),
+    fetch(`${API_BASE}/api/authors`, { headers }),
+  ]);
+
+  const sports  = sportsRes.ok  ? await sportsRes.json()  : [];
+  const leagues = leaguesRes.ok ? await leaguesRes.json() : [];
+  const authors = authorsRes.ok ? await authorsRes.json() : [];
+
+  // Build fast-lookup maps  — try slug first, then lowercase name
+  const sportBySlug = new Map(sports.map(s  => [String(s.slug  || '').toLowerCase(), s.id]));
+  const sportByName = new Map(sports.map(s  => [String(s.name  || '').toLowerCase(), s.id]));
+  const leagueBySlug = new Map(leagues.map(l => [String(l.slug || '').toLowerCase(), l.id]));
+  const leagueByName = new Map(leagues.map(l => [String(l.name || '').toLowerCase(), l.id]));
+  const authorIds    = authors.map(a => a.id).filter(Boolean);
+
+  console.log(`   sports: ${sports.length}  leagues: ${leagues.length}  authors: ${authors.length}`);
+
+  return { sportBySlug, sportByName, leagueBySlug, leagueByName, authorIds };
+}
+
+function resolveSportId(event, lookups) {
+  const slug = (event.sport || '').toLowerCase();
+  return lookups.sportBySlug.get(slug)
+      ?? lookups.sportByName.get(slug)
+      ?? null;
+}
+
+function resolveLeagueId(event, lookups) {
+  const bySlug = lookups.leagueBySlug.get((event.leagueSlug || '').toLowerCase());
+  if (bySlug != null) return bySlug;
+  return lookups.leagueByName.get((event.league || '').toLowerCase()) ?? null;
+}
+
+function pickRandomAuthorId(lookups) {
+  const { authorIds } = lookups;
+  if (!authorIds.length) return null;
+  return authorIds[Math.floor(Math.random() * authorIds.length)];
+}
+
 // ── tickets parser ─────────────────────────────────────────────────────────
 
-/**
- * Starting from startDays ahead, scan forward day-by-day until a date with
- * at least one event is found. Returns { date, events, daysAhead } for that
- * single day only. Looks up to maxLookAhead days beyond startDays before giving up.
- */
 function findDateWithTickets(startDays, maxLookAhead = 30) {
   const src = fs.readFileSync(TICKETS_FILE, 'utf-8');
-
   for (let offset = 0; offset <= maxLookAhead; offset++) {
     const candidate = addDays(startDays + offset).toISOString().split('T')[0];
-    const events    = parseTicketsForDateFromSrc(src, candidate);
-    if (events.length > 0) {
-      return { date: candidate, events, daysAhead: startDays + offset };
-    }
+    const events    = parseTicketsForDate(src, candidate);
+    if (events.length > 0) return { date: candidate, events, daysAhead: startDays + offset };
   }
   return { date: null, events: [], daysAhead: null };
 }
 
-function parseTicketsForDateFromSrc(src, targetDate) {
+function parseTicketsForDate(src, targetDate) {
   const blocks = src.split(/\n  \{\n/);
   const events = [];
 
   for (const block of blocks) {
     if (!block.includes(`date: '${targetDate}'`)) continue;
 
-    const str = (field) => {
-      const m = block.match(new RegExp(`    ${field}:\\s*'([^']*)'`));
-      return m ? m[1] : '';
-    };
-    const num = (field) => {
-      const m = block.match(new RegExp(`    ${field}:\\s*([\\d.]+)`));
-      return m ? parseFloat(m[1]) : 0;
-    };
+    const str = (f) => { const m = block.match(new RegExp(`    ${f}:\\s*'([^']*)'`)); return m ? m[1] : ''; };
+    const num = (f) => { const m = block.match(new RegExp(`    ${f}:\\s*([\\d.]+)`));  return m ? parseFloat(m[1]) : 0; };
 
     const slug = str('slug');
     if (!slug || /-44\d{9,}$/.test(slug)) continue;
@@ -137,7 +150,6 @@ function parseTicketsForDateFromSrc(src, targetDate) {
       imageUrl:     str('imageUrl'),
     });
   }
-
   return events;
 }
 
@@ -151,40 +163,25 @@ async function callClaude(systemPrompt, userPrompt, model) {
       'anthropic-version': '2023-06-01',
       'content-type':      'application/json',
     },
-    body: JSON.stringify({
-      model,
-      max_tokens: 2048,
-      system:     systemPrompt,
-      messages:   [{ role: 'user', content: userPrompt }],
-    }),
+    body: JSON.stringify({ model, max_tokens: 2048, system: systemPrompt, messages: [{ role: 'user', content: userPrompt }] }),
   });
-
-  if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`Claude API ${res.status}: ${body.slice(0, 200)}`);
-  }
-
-  const data = await res.json();
-  return data.content?.[0]?.text ?? '';
-}
-
-// ── random author ──────────────────────────────────────────────────────────
-
-function pickAuthor(authors) {
-  if (!authors || authors.length === 0) return { name: 'Ticket Nexus Sports Desk', avatar: '' };
-  return authors[Math.floor(Math.random() * authors.length)];
+  if (!res.ok) { const b = await res.text(); throw new Error(`Claude API ${res.status}: ${b.slice(0, 200)}`); }
+  return (await res.json()).content?.[0]?.text ?? '';
 }
 
 // ── article generation ─────────────────────────────────────────────────────
 
-async function generateArticle(event, template, activePrompt) {
+async function generateArticle(event, template, activePrompt, lookups) {
   const dateFormatted = formatDate(event.date);
   const ticketUrl     = `${SITE_URL}/tickets/${event.slug}`;
   const sport         = event.sport;
   const sportHint     = template.sportOverrides?.[sport] || '';
-  const icon          = template.iconMap?.[sport] ?? template.iconMap?.['default'] ?? '🎟️';
   const model         = template.model || 'claude-haiku-4-5-20251001';
-  const author        = pickAuthor(template.meta.authors);
+
+  // Resolve numeric IDs from lookup tables
+  const sportId  = resolveSportId(event, lookups);
+  const leagueId = resolveLeagueId(event, lookups);
+  const authorId = pickRandomAuthorId(lookups);
 
   const systemPrompt = [
     activePrompt.instruction,
@@ -218,46 +215,31 @@ EVENT DETAILS:
 - Ticket page: ${ticketUrl}`;
 
   const raw     = await callClaude(systemPrompt, userPrompt, model);
-  const cleaned = raw
-    .replace(/^```json\s*/im, '')
-    .replace(/^```\s*/im,     '')
-    .replace(/```\s*$/,       '')
-    .trim();
+  const cleaned = raw.replace(/^```json\s*/im, '').replace(/^```\s*/im, '').replace(/```\s*$/,'').trim();
 
   let parsed;
-  try {
-    parsed = JSON.parse(cleaned);
-  } catch {
-    throw new Error(`JSON parse failed. Raw output:\n${raw.slice(0, 400)}`);
-  }
+  try { parsed = JSON.parse(cleaned); }
+  catch { throw new Error(`JSON parse failed.\n${raw.slice(0, 400)}`); }
 
-  const today = new Date().toISOString().split('T')[0];
-
-  // Extract bare Cloudflare image ID from ticket imageUrl (e.g. /images/abc123.png → abc123.png)
-  // The news API prepends IMAGE_DELIVERY_BASE_URL, so we strip the /images/ prefix here.
-  const rawImageUrl  = event.imageUrl || '';
-  const cfImageId    = rawImageUrl.replace(/^\/images\//, '');
-  const imageUrl     = cfImageId
+  // Bare Cloudflare image ID (strip /images/ prefix — API prepends CDN base URL)
+  const rawImg   = event.imageUrl || '';
+  const cfImgId  = rawImg.replace(/^\/images\//, '')
     || (template.defaultImages?.[sport] || template.defaultImages?.['default'] || '').replace(/^\/images\//, '');
 
+  // ── Final D1 payload ────────────────────────────────────────────────────
   return {
     slug:            event.slug,
     title:           parsed.title           || event.eventName,
     snippet:         parsed.snippet         || '',
-    category:        SPORT_TO_CATEGORY[sport] || 'General',
-    icon,
-    league:          event.league,
-    leagueSlug:      event.leagueSlug || null,
-    author:          author.name,
-    authorAvatar:    author.avatar,
-    publishedAt:     event.date,   // event date → article appears as "upcoming"
-    addedon:         today,        // actual creation date
+    sport:           sportId,
+    league:          leagueId,
+    author:          authorId,
+    publishedAt:     event.date,
     readTime:        typeof parsed.readTime === 'number' ? parsed.readTime : template.meta.defaultReadTime,
-    featured:        template.meta.featured ? 1 : 0,
-    isactive:        'Y',
-    imageUrl,
+    featured:        false,
+    image:           cfImgId,
     imageCaption:    parsed.imageCaption    || `${event.eventName} at ${event.venue}`,
-    keyPoints:       JSON.stringify(Array.isArray(parsed.keyPoints) ? parsed.keyPoints.slice(0, 3) : []),
+    keyPoints:       Array.isArray(parsed.keyPoints) ? parsed.keyPoints.slice(0, 3) : [],
     metaTitle:       parsed.metaTitle       || event.eventName,
     metaDescription: parsed.metaDescription || '',
     metaKeywords:    parsed.metaKeywords    || '',
@@ -270,94 +252,72 @@ EVENT DETAILS:
 async function postArticleToApi(article) {
   const res = await fetch(NEWS_INSERT_ENDPOINT, {
     method:  'POST',
-    headers: {
-      'x-api-key':    NEWS_API_KEY,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(article),
+    headers: { 'x-api-key': NEWS_API_KEY, 'content-type': 'application/json' },
+    body:    JSON.stringify(article),
   });
-
-  if (res.status === 409) return 'duplicate'; // article with this slug already exists
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Worker API ${res.status}: ${text.slice(0, 200)}`);
-  }
+  if (res.status === 409) return 'duplicate';
+  if (!res.ok) { const t = await res.text(); throw new Error(`Worker API ${res.status}: ${t.slice(0, 200)}`); }
   return 'created';
 }
 
 // ── main ───────────────────────────────────────────────────────────────────
 
 async function main() {
-  if (!ANTHROPIC_API_KEY) {
-    console.error('❌  ANTHROPIC_API_KEY not set. Add to .env.local or GitHub Actions secrets.');
-    process.exit(1);
-  }
-  if (!NEWS_API_KEY) {
-    console.error('❌  NEWS_API_KEY not set. Add to .env.local or GitHub Actions secrets.');
-    process.exit(1);
-  }
+  if (!ANTHROPIC_API_KEY) { console.error('❌  ANTHROPIC_API_KEY not set.'); process.exit(1); }
+  if (!NEWS_API_KEY)      { console.error('❌  NEWS_API_KEY not set.');       process.exit(1); }
 
   const template     = JSON.parse(fs.readFileSync(TEMPLATE_FILE, 'utf-8'));
   const activeKey    = template.prompts?.active;
   const activePrompt = template.prompts?.available?.[activeKey];
-
-  if (!activePrompt) {
-    console.error(`❌  Active prompt "${activeKey}" not found in news-template.json → prompts.available`);
-    process.exit(1);
-  }
+  if (!activePrompt) { console.error(`❌  Prompt "${activeKey}" not found in news-template.json`); process.exit(1); }
 
   const daysAhead   = template.schedule?.articleDaysAhead  ?? 2;
   const maxArticles = template.schedule?.maxArticlesPerRun ?? 30;
 
   console.log(`\n🎯  Preferred date  : today + ${daysAhead} days`);
   console.log(`🤖  Active prompt   : "${activePrompt.name}"`);
-  console.log(`🗄️   Insert endpoint : ${NEWS_INSERT_ENDPOINT}`);
-  console.log(`📝  Edit prompt     : scripts/news-template.json → prompts.available.${activeKey}.instruction\n`);
+  console.log(`🗄️   Insert endpoint : ${NEWS_INSERT_ENDPOINT}\n`);
+
+  // Resolve sport / league / author IDs from API
+  console.log('🔍  Fetching lookup tables (sports / leagues / authors) …');
+  const lookups = await fetchLookups();
 
   const { date: targetDate, events, daysAhead: actualDaysAhead } = findDateWithTickets(daysAhead);
+  if (!targetDate) { console.log('ℹ️  No upcoming events within 30 days.'); return; }
 
-  if (!targetDate) {
-    console.log('ℹ️  No upcoming events found within 30 days. Nothing to generate.');
-    return;
-  }
-
-  if (actualDaysAhead !== daysAhead) {
+  if (actualDaysAhead !== daysAhead)
     console.log(`⏭️  No events on today + ${daysAhead} — fell back to ${targetDate} (today + ${actualDaysAhead}).`);
-  }
   console.log(`📅  Events found : ${events.length} on ${targetDate}  (today + ${actualDaysAhead} days)\n`);
 
   const limited  = events.slice(0, maxArticles);
-  let created    = 0;
-  let duplicates = 0;
-  let failed     = 0;
+  let created = 0, duplicates = 0, failed = 0;
 
   for (let i = 0; i < limited.length; i++) {
     const event = limited[i];
-    const label = `[${i + 1}/${limited.length}]`;
-    process.stdout.write(`  ${label} ${event.eventName} … `);
+    process.stdout.write(`  [${i + 1}/${limited.length}] ${event.eventName} … `);
 
     try {
-      const article = await generateArticle(event, template, activePrompt);
+      const article = await generateArticle(event, template, activePrompt, lookups);
 
-      // Brief pause between Claude calls
+      // ── Show raw payload for the first article so it can be verified ──
+      if (i === 0) {
+        console.log('\n\n📦  Sample raw payload (first article):\n');
+        console.log(JSON.stringify(article, null, 2));
+        console.log('\n');
+      }
+
       if (i < limited.length - 1) await new Promise(r => setTimeout(r, 400));
 
       const result = await postArticleToApi(article);
-      if (result === 'duplicate') {
-        console.log('⏭  duplicate (slug already exists in DB)');
-        duplicates++;
-      } else {
-        console.log('✓  saved to D1');
-        created++;
-      }
+      if (result === 'duplicate') { console.log('⏭  duplicate'); duplicates++; }
+      else                        { console.log('✓  saved');     created++;    }
     } catch (err) {
       console.log(`✗  ${err.message.split('\n')[0]}`);
       failed++;
     }
   }
 
-  console.log(`\n✅  Done — ${created} created, ${duplicates} duplicate(s) skipped, ${failed} error(s)`);
-  console.log(`    Articles now live in D1 and will appear via the news API.`);
+  console.log(`\n✅  Done — ${created} created, ${duplicates} duplicate(s), ${failed} error(s)`);
 }
 
 main().catch(e => { console.error('\n❌', e.message); process.exit(1); });
