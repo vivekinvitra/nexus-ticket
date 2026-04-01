@@ -56,7 +56,25 @@ function formatDate(dateStr) {
 // Splits tickets.ts into per-event blocks and extracts fields for a given date.
 // Only top-level string/number fields are extracted (partners array is skipped).
 
-function parseTicketsForDate(targetDate) {
+/**
+ * Starting from startDays ahead, scan forward day-by-day until a date with
+ * at least one event is found. Returns { date, events } for that single day.
+ * Looks up to maxLookAhead days beyond startDays before giving up.
+ */
+function findDateWithTickets(startDays, maxLookAhead = 30) {
+  const src = fs.readFileSync(TICKETS_FILE, 'utf-8');
+
+  for (let offset = 0; offset <= maxLookAhead; offset++) {
+    const candidate = addDays(startDays + offset).toISOString().split('T')[0];
+    const events    = parseTicketsForDateFromSrc(src, candidate);
+    if (events.length > 0) {
+      return { date: candidate, events, daysAhead: startDays + offset };
+    }
+  }
+  return { date: null, events: [], daysAhead: null };
+}
+
+function parseTicketsForDateFromSrc(src, targetDate) {
   const src    = fs.readFileSync(TICKETS_FILE, 'utf-8');
   const blocks = src.split(/\n  \{\n/);
   const events = [];
@@ -234,20 +252,22 @@ async function main() {
   const daysAhead   = template.schedule?.articleDaysAhead  ?? 2;
   const maxArticles = template.schedule?.maxArticlesPerRun ?? 30;
 
-  const targetDate  = addDays(daysAhead).toISOString().split('T')[0];
-
-  console.log(`\n🎯  Target date  : ${targetDate}  (today + ${daysAhead} days)`);
-  console.log(`🤖  Active prompt: "${activePrompt.name}"`);
+  console.log(`\n🎯  Preferred date: today + ${daysAhead} days`);
+  console.log(`🤖  Active prompt : "${activePrompt.name}"`);
   console.log(`📝  To change style, edit scripts/news-template.json → prompts.available.${activeKey}.instruction\n`);
 
-  const events = parseTicketsForDate(targetDate);
-  console.log(`📅  Events found : ${events.length} on ${targetDate}`);
+  const { date: targetDate, events, daysAhead: actualDaysAhead } = findDateWithTickets(daysAhead);
 
-  if (events.length === 0) {
-    console.log('ℹ️  No events for target date. Writing empty array to auto-articles.json');
+  if (!targetDate) {
+    console.log('ℹ️  No upcoming events found within 30 days. Writing empty array.');
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify([], null, 2));
     return;
   }
+
+  if (actualDaysAhead !== daysAhead) {
+    console.log(`⏭️  No events on today + ${daysAhead} — fell back to next available date.`);
+  }
+  console.log(`📅  Events found : ${events.length} on ${targetDate}  (today + ${actualDaysAhead} days)`);
 
   const limited  = events.slice(0, maxArticles);
   const articles = [];
