@@ -75,10 +75,13 @@ async function fetchNewsArticles() {
   }
 }
 
-/** Upcoming tickets from tickets.ts — events whose date+time >= now, sorted ascending */
+/** Upcoming tickets from tickets.ts — events within the next 20 days, sorted ascending */
 function getUpcomingTickets() {
-  const src = fs.readFileSync(path.join(SRC_DIR, 'tickets.ts'), 'utf-8');
-  const now = new Date();
+  const src    = fs.readFileSync(path.join(SRC_DIR, 'tickets.ts'), 'utf-8');
+  const now    = new Date();
+  const cutoff = new Date(now);
+  cutoff.setDate(cutoff.getDate() + 20);
+  cutoff.setHours(23, 59, 59, 999);
 
   const events = [];
   const lines  = src.split('\n');
@@ -99,7 +102,7 @@ function getUpcomingTickets() {
       const m = trimmed.match(/time:\s*'([^']+)'/);
       const time = m ? m[1] : '00:00';
       const eventDateTime = new Date(`${currentDate}T${time}:00`);
-      if (eventDateTime >= now) {
+      if (eventDateTime >= now && eventDateTime <= cutoff) {
         events.push({ slug: currentSlug, date: currentDate, sortKey: `${currentDate}T${time}` });
       }
       currentSlug = null;
