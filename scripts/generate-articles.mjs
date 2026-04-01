@@ -224,7 +224,8 @@ EVENT DETAILS:
   // Bare Cloudflare image ID (strip /images/ prefix — API prepends CDN base URL)
   const rawImg   = event.imageUrl || '';
   const cfImgId  = rawImg.replace(/^\/images\//, '')
-    || (template.defaultImages?.[sport] || template.defaultImages?.['default'] || '').replace(/^\/images\//, '');
+    || (template.defaultImages?.[sport] || template.defaultImages?.['default'] || '').replace(/^\/images\//, '')
+    || 'news/1774428801020';
 
   // ── Final D1 payload ────────────────────────────────────────────────────
   return {
