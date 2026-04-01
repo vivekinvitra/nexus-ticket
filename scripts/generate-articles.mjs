@@ -272,8 +272,8 @@ async function main() {
   const activePrompt = template.prompts?.available?.[activeKey];
   if (!activePrompt) { console.error(`❌  Prompt "${activeKey}" not found in news-template.json`); process.exit(1); }
 
-  const daysAhead   = template.schedule?.articleDaysAhead  ?? 2;
-  const maxArticles = template.schedule?.maxArticlesPerRun ?? 30;
+  const daysAhead   = template.schedule?.articleDaysAhead  ?? 5;
+  const maxArticles = template.schedule?.maxArticlesPerRun ?? 20;
 
   console.log(`\n🎯  Preferred date  : today + ${daysAhead} days`);
   console.log(`🤖  Active prompt   : "${activePrompt.name}"`);
