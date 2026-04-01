@@ -75,7 +75,6 @@ function findDateWithTickets(startDays, maxLookAhead = 30) {
 }
 
 function parseTicketsForDateFromSrc(src, targetDate) {
-  const src    = fs.readFileSync(TICKETS_FILE, 'utf-8');
   const blocks = src.split(/\n  \{\n/);
   const events = [];
 
