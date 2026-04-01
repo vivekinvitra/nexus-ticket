@@ -168,6 +168,13 @@ async function callClaude(systemPrompt, userPrompt, model) {
   return data.content?.[0]?.text ?? '';
 }
 
+// ── random author ──────────────────────────────────────────────────────────
+
+function pickAuthor(authors) {
+  if (!authors || authors.length === 0) return { name: 'Ticket Nexus Sports Desk', avatar: '' };
+  return authors[Math.floor(Math.random() * authors.length)];
+}
+
 // ── article generation ─────────────────────────────────────────────────────
 
 async function generateArticle(event, template, activePrompt) {
@@ -177,6 +184,7 @@ async function generateArticle(event, template, activePrompt) {
   const sportHint     = template.sportOverrides?.[sport] || '';
   const icon          = template.iconMap?.[sport] ?? template.iconMap?.['default'] ?? '🎟️';
   const model         = template.model || 'claude-haiku-4-5-20251001';
+  const author        = pickAuthor(template.meta.authors);
 
   const systemPrompt = [
     activePrompt.instruction,
@@ -240,8 +248,8 @@ EVENT DETAILS:
     icon,
     league:          event.league,
     leagueSlug:      event.leagueSlug || null,
-    author:          template.meta.author,
-    authorAvatar:    template.meta.authorAvatar,
+    author:          author.name,
+    authorAvatar:    author.avatar,
     publishedAt:     today,
     addedon:         today,
     readTime:        typeof parsed.readTime === 'number' ? parsed.readTime : template.meta.defaultReadTime,
