@@ -1,0 +1,78 @@
+{
+  "_readme": "Article generation template for Ticket Nexus. Edit 'prompts.available' to change writing style. Switch active prompt by changing 'prompts.active'. The 'instruction' field is passed directly to Claude as the system persona.",
+
+  "prompts": {
+    "active": "espn-analyst-v1",
+    "available": {
+      "espn-analyst-v1": {
+        "name": "ESPN Football Analyst v1",
+        "description": "Sharp ESPN-style analyst targeting sophisticated sports bettors",
+        "instruction": "Role: Act as an ESPN football analyst\nAudience: An English-speaking, 30-year-old sophisticated sports bettor seeking sharp betting insights.\nWrites with personality and a sense of humour.\nDo not reference today or tomorrow — use days of the week or specific dates.\nWhen answering any football-related query — especially about upcoming matches — always respond in concise, engaging plain text summary for general understanding.\nPlatform: A global football fan website.\nStyle rules:\n- Use short, sharp language with betting odds awareness\n- Lead with the most compelling angle, not background noise\n- Reference atmosphere, form, and value bets where relevant\n- Never pad content — every sentence earns its place"
+      }
+    }
+  },
+
+  "model": "claude-haiku-4-5-20251001",
+
+  "meta": {
+    "author": "Ticket Nexus Sports Desk",
+    "authorAvatar": "/images/authors/sports-desk.png",
+    "defaultReadTime": 3,
+    "featured": false
+  },
+
+  "schedule": {
+    "articleDaysAhead": 2,
+    "maxArticlesPerRun": 30
+  },
+
+  "sportOverrides": {
+    "football":          "Focus on form, head-to-head stats, and value bets. Include atmosphere insight and matchday experience.",
+    "tennis":            "Focus on surface advantage, recent form, and head-to-head. Highlight tournament context.",
+    "cricket":           "Focus on pitch conditions, batting line-up, and session-by-session angles. Include weather impact.",
+    "horse-racing":      "Focus on form, going conditions, trainer and jockey stats. Highlight each-way value runners.",
+    "formula-1":         "Focus on qualifying pace, tyre strategy, and safety car probability. Circuit characteristics matter.",
+    "boxing":            "Focus on styles, reach/weight advantages, knockout probability, and undercard value.",
+    "rugby":             "Focus on set-piece dominance, kicking game, and weather impact on scoring.",
+    "golf":              "Focus on course fit, recent form, and stats-driven long-shot value picks.",
+    "basketball":        "Focus on pace, three-point shooting, injury reports, and back-to-back fatigue.",
+    "ice-hockey":        "Focus on goaltender form, power-play efficiency, and home/away splits.",
+    "moto-gp":           "Focus on bike setup, tyre compounds, circuit lap records, and championship pressure."
+  },
+
+  "iconMap": {
+    "football":          "⚽",
+    "tennis":            "🎾",
+    "cricket":           "🏏",
+    "horse-racing":      "🏇",
+    "formula-1":         "🏎️",
+    "boxing":            "🥊",
+    "rugby":             "🏉",
+    "golf":              "⛳",
+    "basketball":        "🏀",
+    "ice-hockey":        "🏒",
+    "american-football": "🏈",
+    "athletics":         "🏃",
+    "cycling":           "🚴",
+    "darts":             "🎯",
+    "esports":           "🎮",
+    "moto-gp":           "🏍️",
+    "motorsports":       "🏎️",
+    "swimming":          "🏊",
+    "default":           "🎟️"
+  },
+
+  "defaultImages": {
+    "football":          "/images/sports/football-article.jpg",
+    "tennis":            "/images/sports/tennis-article.jpg",
+    "cricket":           "/images/sports/cricket-article.jpg",
+    "horse-racing":      "/images/sports/horse-racing-article.jpg",
+    "formula-1":         "/images/sports/formula1-article.jpg",
+    "boxing":            "/images/sports/boxing-article.jpg",
+    "rugby":             "/images/sports/rugby-article.jpg",
+    "golf":              "/images/sports/golf-article.jpg",
+    "basketball":        "/images/sports/basketball-article.jpg",
+    "ice-hockey":        "/images/sports/ice-hockey-article.jpg",
+    "default":           "/images/sports/sports-article.jpg"
+  }
+}

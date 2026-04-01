@@ -24,15 +24,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate AI articles from upcoming tickets
+        run: node scripts/generate-articles.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          NEXT_PUBLIC_SITE_URL: https://www.ticket-nexus.com
+
       - name: Generate sitemaps
         run: node scripts/generate-sitemap.mjs
         env:
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
           NEXT_PUBLIC_SITE_URL: https://www.ticket-nexus.com
 
-      - name: Commit and push updated sitemaps
+      - name: Commit and push updated files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/sitemap.xml public/sitemap-news.xml public/sitemap-tickets.xml
-          git diff --staged --quiet && echo "No changes to commit" || (git commit -m "chore: daily sitemap update" && git push)
+          git add src/lib/data/auto-articles.json public/sitemap.xml public/sitemap-news.xml public/sitemap-tickets.xml
+          git diff --staged --quiet && echo "No changes to commit" || (git commit -m "chore: daily articles + sitemap update" && git push)

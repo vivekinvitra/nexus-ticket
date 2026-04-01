@@ -54,6 +54,26 @@ function getLeagues() {
   return leagues;
 }
 
+/** Auto-generated articles written by generate-articles.mjs */
+function getAutoArticles() {
+  const autoPath = path.join(SRC_DIR, 'auto-articles.json');
+  if (!fs.existsSync(autoPath)) return [];
+  try {
+    const data = JSON.parse(fs.readFileSync(autoPath, 'utf-8'));
+    if (!Array.isArray(data)) return [];
+    return data.map(a => ({
+      slug:        a.slug,
+      title:       (a.title || '')
+                     .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                     .replace(/>/g, '&gt;').replace(/"/g, '&quot;'),
+      publishedAt: a.publishedAt,
+    }));
+  } catch (e) {
+    console.warn('⚠️  Could not read auto-articles.json:', e.message);
+    return [];
+  }
+}
+
 /** Fetch all active news articles from the API */
 async function fetchNewsArticles() {
   try {
@@ -189,8 +209,12 @@ async function main() {
   console.log(`✅  sitemap.xml        — ${sports.length} sports, ${leagues.length} leagues, 2 partners, 6 company pages`);
 
   const newsArticles = await fetchNewsArticles();
-  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-news.xml'), generateNewsSitemap(newsArticles));
-  console.log(`✅  sitemap-news.xml   — ${newsArticles.length} articles`);
+  const autoArticles = getAutoArticles();
+  // Merge: API articles first; auto-generated fill in (deduplicated by slug)
+  const apiSlugs     = new Set(newsArticles.map(a => a.slug));
+  const mergedNews   = [...newsArticles, ...autoArticles.filter(a => !apiSlugs.has(a.slug))];
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-news.xml'), generateNewsSitemap(mergedNews));
+  console.log(`✅  sitemap-news.xml   — ${newsArticles.length} API + ${mergedNews.length - newsArticles.length} auto-generated (${mergedNews.length} total)`);
 
   fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-tickets.xml'), generateTicketsSitemap(tickets));
   console.log(`✅  sitemap-tickets.xml — ${tickets.length} upcoming tickets`);
