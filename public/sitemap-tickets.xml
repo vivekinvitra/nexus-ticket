@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.ticket-nexus.com/tickets/deportivo-la-coruna-vs-cordoba-20260401</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-01</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/real-valladolid-vs-cadiz-cf-20260401</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-01</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/las-palmas-vs-granada-cf-20260401</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-01</lastmod>
-  </url>
-  <url>
     <loc>https://www.ticket-nexus.com/tickets/fc-barcelona-women-vs-real-madrid-women-20260402</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -1697,5 +1679,59 @@
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-20</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/fc-porto-vs-sporting-lisbon-or-avs-20260421</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/fc-porto-vs-sporting-lisbon-20260421</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/norwich-city-vs-derby-county-20260421</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/middlesbrough-vs-sheffield-wednesday-20260421</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/southampton-vs-bristol-city-20260421</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/queens-park-rangers-vs-swansea-city-20260421</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/coventry-city-vs-portsmouth-20260421</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/west-bromwich-albion-vs-watford-20260421</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/inter-milan-vs-como-20260421</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-21</lastmod>
   </url>
 </urlset>
