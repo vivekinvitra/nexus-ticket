@@ -3,17 +3,22 @@
  * generate-articles.mjs
  *
  * Uses Claude AI + the configurable prompt in scripts/news-template.json to
- * generate ESPN-style sports articles for upcoming ticket events.
+ * generate ESPN-style sports articles for upcoming ticket events, then POSTs
+ * each article directly to the Cloudflare Worker / D1 database API.
  *
  * Target date : today + schedule.articleDaysAhead  (default: 2 days ahead)
- * Output      : src/lib/data/auto-articles.json
+ *               Falls back to the next date that has tickets if that day is empty.
  *
  * Usage:
  *   node scripts/generate-articles.mjs
  *
- * Requires:
- *   ANTHROPIC_API_KEY  — in .env.local  OR  as a GitHub Actions secret
- *   NEXT_PUBLIC_SITE_URL (optional, defaults to https://www.ticket-nexus.com)
+ * Requires (in .env.local or GitHub Actions secrets):
+ *   ANTHROPIC_API_KEY   — Claude API key for article generation
+ *   NEWS_API_KEY        — Worker API key (same key used by the GET news endpoint)
+ *
+ * Optional:
+ *   NEWS_INSERT_ENDPOINT — Full POST URL (default: https://ticketapi.avi-kh.workers.dev/api/ticket/news)
+ *   NEXT_PUBLIC_SITE_URL — Site base URL for ticket links
  */
 
 import fs   from 'fs';
@@ -23,7 +28,6 @@ const ROOT_DIR      = path.join(import.meta.dirname, '..');
 const SRC_DATA_DIR  = path.join(ROOT_DIR, 'src', 'lib', 'data');
 const TICKETS_FILE  = path.join(SRC_DATA_DIR, 'tickets.ts');
 const TEMPLATE_FILE = path.join(import.meta.dirname, 'news-template.json');
-const OUTPUT_FILE   = path.join(SRC_DATA_DIR, 'auto-articles.json');
 
 // ── load env from .env.local (skipped in CI where secrets are injected) ────
 const envLocalPath = path.join(ROOT_DIR, '.env.local');
@@ -34,8 +38,33 @@ if (fs.existsSync(envLocalPath)) {
   }
 }
 
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || '';
-const SITE_URL          = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ticket-nexus.com').replace(/\/$/, '');
+const ANTHROPIC_API_KEY  = process.env.ANTHROPIC_API_KEY  || '';
+const NEWS_API_KEY       = process.env.NEWS_API_KEY       || '';
+const NEWS_INSERT_ENDPOINT = process.env.NEWS_INSERT_ENDPOINT
+  || 'https://ticketapi.avi-kh.workers.dev/api/ticket/news';
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ticket-nexus.com').replace(/\/$/, '');
+
+// ── sport slug → display category (mirrors normalizeCategory in news.ts) ──
+const SPORT_TO_CATEGORY = {
+  'football':          'Football',
+  'tennis':            'Tennis',
+  'cricket':           'Cricket',
+  'horse-racing':      'Horse Racing',
+  'boxing':            'Boxing',
+  'formula-1':         'Formula 1',
+  'rugby':             'Rugby',
+  'golf':              'Golf',
+  'american-football': 'American Football',
+  'athletics':         'Athletics',
+  'basketball':        'Basketball',
+  'ice-hockey':        'Ice Hockey',
+  'motorsports':       'Motorsports',
+  'moto-gp':           'Moto GP',
+  'cycling':           'Cycling',
+  'darts':             'Darts',
+  'esports':           'Esports',
+  'swimming':          'Swimming',
+};
 
 // ── date helpers ───────────────────────────────────────────────────────────
 
@@ -53,13 +82,11 @@ function formatDate(dateStr) {
 }
 
 // ── tickets parser ─────────────────────────────────────────────────────────
-// Splits tickets.ts into per-event blocks and extracts fields for a given date.
-// Only top-level string/number fields are extracted (partners array is skipped).
 
 /**
  * Starting from startDays ahead, scan forward day-by-day until a date with
- * at least one event is found. Returns { date, events } for that single day.
- * Looks up to maxLookAhead days beyond startDays before giving up.
+ * at least one event is found. Returns { date, events, daysAhead } for that
+ * single day only. Looks up to maxLookAhead days beyond startDays before giving up.
  */
 function findDateWithTickets(startDays, maxLookAhead = 30) {
   const src = fs.readFileSync(TICKETS_FILE, 'utf-8');
@@ -79,7 +106,6 @@ function parseTicketsForDateFromSrc(src, targetDate) {
   const events = [];
 
   for (const block of blocks) {
-    // Quick filter before doing any regex work
     if (!block.includes(`date: '${targetDate}'`)) continue;
 
     const str = (field) => {
@@ -92,7 +118,7 @@ function parseTicketsForDateFromSrc(src, targetDate) {
     };
 
     const slug = str('slug');
-    if (!slug || /-44\d{9,}$/.test(slug)) continue;  // skip duplicate feed entries
+    if (!slug || /-44\d{9,}$/.test(slug)) continue;
     if (str('date') !== targetDate) continue;
 
     events.push({
@@ -199,30 +225,31 @@ EVENT DETAILS:
 
   const today = new Date().toISOString().split('T')[0];
 
+  // Extract bare Cloudflare image ID from ticket imageUrl (e.g. /images/abc123.png → abc123.png)
+  // The news API prepends IMAGE_DELIVERY_BASE_URL, so we strip the /images/ prefix here.
+  const rawImageUrl  = event.imageUrl || '';
+  const cfImageId    = rawImageUrl.replace(/^\/images\//, '');
+  const imageUrl     = cfImageId
+    || (template.defaultImages?.[sport] || template.defaultImages?.['default'] || '').replace(/^\/images\//, '');
+
   return {
-    id:              `auto-${event.slug}`,
     slug:            event.slug,
     title:           parsed.title           || event.eventName,
     snippet:         parsed.snippet         || '',
-    category:        sport,
+    category:        SPORT_TO_CATEGORY[sport] || 'General',
     icon,
+    league:          event.league,
+    leagueSlug:      event.leagueSlug || null,
     author:          template.meta.author,
     authorAvatar:    template.meta.authorAvatar,
     publishedAt:     today,
     addedon:         today,
     readTime:        typeof parsed.readTime === 'number' ? parsed.readTime : template.meta.defaultReadTime,
-    imageUrl:        event.imageUrl
-                       || template.defaultImages?.[sport]
-                       || template.defaultImages?.['default']
-                       || '',
+    featured:        template.meta.featured ? 1 : 0,
+    isactive:        'Y',
+    imageUrl,
     imageCaption:    parsed.imageCaption    || `${event.eventName} at ${event.venue}`,
-    keyPoints:       Array.isArray(parsed.keyPoints) ? parsed.keyPoints.slice(0, 3) : [],
-    featured:        template.meta.featured ?? false,
-    leagueSlug:      event.leagueSlug       || undefined,
-    ticketSlug:      event.slug,
-    ticketUrl,
-    sportUrl:        `/${sport}`,
-    leagueUrl:       event.leagueSlug ? `/${sport}/${event.leagueSlug}` : undefined,
+    keyPoints:       JSON.stringify(Array.isArray(parsed.keyPoints) ? parsed.keyPoints.slice(0, 3) : []),
     metaTitle:       parsed.metaTitle       || event.eventName,
     metaDescription: parsed.metaDescription || '',
     metaKeywords:    parsed.metaKeywords    || '',
@@ -230,17 +257,40 @@ EVENT DETAILS:
   };
 }
 
+// ── D1 / worker API insert ─────────────────────────────────────────────────
+
+async function postArticleToApi(article) {
+  const res = await fetch(NEWS_INSERT_ENDPOINT, {
+    method:  'POST',
+    headers: {
+      'x-api-key':    NEWS_API_KEY,
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(article),
+  });
+
+  if (res.status === 409) return 'duplicate'; // article with this slug already exists
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Worker API ${res.status}: ${text.slice(0, 200)}`);
+  }
+  return 'created';
+}
+
 // ── main ───────────────────────────────────────────────────────────────────
 
 async function main() {
   if (!ANTHROPIC_API_KEY) {
-    console.error('❌  ANTHROPIC_API_KEY not set.');
-    console.error('    Add it to .env.local  OR  set it as a GitHub Actions secret.');
+    console.error('❌  ANTHROPIC_API_KEY not set. Add to .env.local or GitHub Actions secrets.');
+    process.exit(1);
+  }
+  if (!NEWS_API_KEY) {
+    console.error('❌  NEWS_API_KEY not set. Add to .env.local or GitHub Actions secrets.');
     process.exit(1);
   }
 
-  const template    = JSON.parse(fs.readFileSync(TEMPLATE_FILE, 'utf-8'));
-  const activeKey   = template.prompts?.active;
+  const template     = JSON.parse(fs.readFileSync(TEMPLATE_FILE, 'utf-8'));
+  const activeKey    = template.prompts?.active;
   const activePrompt = template.prompts?.available?.[activeKey];
 
   if (!activePrompt) {
@@ -251,26 +301,27 @@ async function main() {
   const daysAhead   = template.schedule?.articleDaysAhead  ?? 2;
   const maxArticles = template.schedule?.maxArticlesPerRun ?? 30;
 
-  console.log(`\n🎯  Preferred date: today + ${daysAhead} days`);
-  console.log(`🤖  Active prompt : "${activePrompt.name}"`);
-  console.log(`📝  To change style, edit scripts/news-template.json → prompts.available.${activeKey}.instruction\n`);
+  console.log(`\n🎯  Preferred date  : today + ${daysAhead} days`);
+  console.log(`🤖  Active prompt   : "${activePrompt.name}"`);
+  console.log(`🗄️   Insert endpoint : ${NEWS_INSERT_ENDPOINT}`);
+  console.log(`📝  Edit prompt     : scripts/news-template.json → prompts.available.${activeKey}.instruction\n`);
 
   const { date: targetDate, events, daysAhead: actualDaysAhead } = findDateWithTickets(daysAhead);
 
   if (!targetDate) {
-    console.log('ℹ️  No upcoming events found within 30 days. Writing empty array.');
-    fs.writeFileSync(OUTPUT_FILE, JSON.stringify([], null, 2));
+    console.log('ℹ️  No upcoming events found within 30 days. Nothing to generate.');
     return;
   }
 
   if (actualDaysAhead !== daysAhead) {
-    console.log(`⏭️  No events on today + ${daysAhead} — fell back to next available date.`);
+    console.log(`⏭️  No events on today + ${daysAhead} — fell back to ${targetDate} (today + ${actualDaysAhead}).`);
   }
-  console.log(`📅  Events found : ${events.length} on ${targetDate}  (today + ${actualDaysAhead} days)`);
+  console.log(`📅  Events found : ${events.length} on ${targetDate}  (today + ${actualDaysAhead} days)\n`);
 
   const limited  = events.slice(0, maxArticles);
-  const articles = [];
-  let   failed   = 0;
+  let created    = 0;
+  let duplicates = 0;
+  let failed     = 0;
 
   for (let i = 0; i < limited.length; i++) {
     const event = limited[i];
@@ -279,25 +330,26 @@ async function main() {
 
     try {
       const article = await generateArticle(event, template, activePrompt);
-      articles.push(article);
-      console.log('✓');
+
+      // Brief pause between Claude calls
+      if (i < limited.length - 1) await new Promise(r => setTimeout(r, 400));
+
+      const result = await postArticleToApi(article);
+      if (result === 'duplicate') {
+        console.log('⏭  duplicate (slug already exists in DB)');
+        duplicates++;
+      } else {
+        console.log('✓  saved to D1');
+        created++;
+      }
     } catch (err) {
       console.log(`✗  ${err.message.split('\n')[0]}`);
       failed++;
     }
-
-    // Brief pause between API calls to respect rate limits
-    if (i < limited.length - 1) await new Promise(r => setTimeout(r, 400));
   }
 
-  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(articles, null, 2));
-
-  console.log(`\n✅  Wrote ${articles.length} article(s) → src/lib/data/auto-articles.json`);
-  if (failed > 0) console.log(`⚠️  ${failed} event(s) skipped due to API errors`);
-  if (articles.length > 0) {
-    articles.slice(0, 5).forEach(a => console.log(`   • ${a.title}`));
-    if (articles.length > 5) console.log(`   … and ${articles.length - 5} more`);
-  }
+  console.log(`\n✅  Done — ${created} created, ${duplicates} duplicate(s) skipped, ${failed} error(s)`);
+  console.log(`    Articles now live in D1 and will appear via the news API.`);
 }
 
 main().catch(e => { console.error('\n❌', e.message); process.exit(1); });

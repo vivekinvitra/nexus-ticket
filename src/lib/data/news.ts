@@ -1,8 +1,5 @@
 import type { NewsArticle } from '@/lib/types';
 import { API_CONFIG, IMAGE_DELIVERY_BASE_URL, buildApiUrl } from '@/lib/config/api';
-// Auto-generated articles produced by scripts/generate-articles.mjs
-// resolveJsonModule: true in tsconfig.json enables this import
-import autoArticlesJson from '@/lib/data/auto-articles.json';
 
 const NEWS_API     = buildApiUrl(API_CONFIG.ENDPOINTS.NEWS, { page: API_CONFIG.DEFAULTS.NEWS_PAGE, limit: API_CONFIG.DEFAULTS.NEWS_LIMIT });
 const NEWS_API_KEY = process.env.NEWS_API_KEY ?? '';
@@ -93,32 +90,22 @@ function mapApiItem(item: ApiNewsItem): NewsArticle {
   };
 }
 
-const autoArticles: NewsArticle[] = Array.isArray(autoArticlesJson)
-  ? (autoArticlesJson as NewsArticle[])
-  : [];
-
 async function fetchAllNews(): Promise<NewsArticle[]> {
-  let apiArticles: NewsArticle[] = [];
-  if (NEWS_API_KEY) {
-    try {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 4000);
-      const res = await fetch(NEWS_API, {
-        signal: controller.signal,
-        headers: { 'x-api-key': NEWS_API_KEY },
-      });
-      clearTimeout(timer);
-      if (res.ok) {
-        const data: ApiNewsItem[] = await res.json();
-        apiArticles = data.filter((item) => item.isactive === 'Y').map(mapApiItem);
-      }
-    } catch {
-      // fall through to auto-articles only
-    }
+  if (!NEWS_API_KEY) return [];
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 4000);
+    const res = await fetch(NEWS_API, {
+      signal: controller.signal,
+      headers: { 'x-api-key': NEWS_API_KEY },
+    });
+    clearTimeout(timer);
+    if (!res.ok) return [];
+    const data: ApiNewsItem[] = await res.json();
+    return data.filter((item) => item.isactive === 'Y').map(mapApiItem);
+  } catch {
+    return [];
   }
-  // Merge: API articles take precedence; auto-generated fill in unique slugs
-  const apiSlugs = new Set(apiArticles.map((a) => a.slug));
-  return [...apiArticles, ...autoArticles.filter((a) => !apiSlugs.has(a.slug))];
 }
 
 export async function getAllNews(): Promise<NewsArticle[]> {
