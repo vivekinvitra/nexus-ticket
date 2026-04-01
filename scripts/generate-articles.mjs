@@ -41,7 +41,7 @@ if (fs.existsSync(envLocalPath)) {
 const ANTHROPIC_API_KEY  = process.env.ANTHROPIC_API_KEY  || '';
 const NEWS_API_KEY       = process.env.NEWS_API_KEY       || '';
 const NEWS_INSERT_ENDPOINT = process.env.NEWS_INSERT_ENDPOINT
-  || 'https://ticketapi.avi-kh.workers.dev/api/ticket/news';
+  || 'https://ticketapi.avi-kh.workers.dev/api/news';
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ticket-nexus.com').replace(/\/$/, '');
 
 // ── sport slug → display category (mirrors normalizeCategory in news.ts) ──
