@@ -112,6 +112,15 @@ export async function getAllNews(): Promise<NewsArticle[]> {
   return fetchAllNews();
 }
 
+export async function getUpcomingNews(limit?: number): Promise<NewsArticle[]> {
+  const articles = await fetchAllNews();
+  const today = new Date().toISOString().split('T')[0];
+  const upcoming = articles
+    .filter((a) => a.publishedAt >= today)
+    .sort((a, b) => a.publishedAt.localeCompare(b.publishedAt));
+  return limit ? upcoming.slice(0, limit) : upcoming;
+}
+
 export async function getNewsBySlug(slug: string): Promise<NewsArticle | undefined> {
   const articles = await fetchAllNews();
   return articles.find((a) => a.slug === slug);

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { getAllNews } from '@/lib/data/news';
+import { getUpcomingNews } from '@/lib/data/news';
 import { buildMetadata } from '@/lib/utils/seo';
 import { newsImageVariant } from '@/lib/config/api';
 
@@ -27,7 +27,7 @@ const CAT_COLORS: Record<string, string> = {
 };
 
 export default async function NewsPage() {
-  const articles = await getAllNews();
+  const articles = await getUpcomingNews();
   return (
     <>
       <Header />

@@ -188,9 +188,12 @@ async function main() {
   fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), generateMainSitemap(today));
   console.log(`✅  sitemap.xml        — ${sports.length} sports, ${leagues.length} leagues, 2 partners, 6 company pages`);
 
-  const newsArticles = await fetchNewsArticles();
+  const allNewsArticles = await fetchNewsArticles();
+  const newsArticles = allNewsArticles
+    .filter(a => a.publishedAt >= today)
+    .sort((a, b) => a.publishedAt.localeCompare(b.publishedAt));
   fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-news.xml'), generateNewsSitemap(newsArticles));
-  console.log(`✅  sitemap-news.xml   — ${newsArticles.length} articles`);
+  console.log(`✅  sitemap-news.xml   — ${newsArticles.length} upcoming articles`);
 
   fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-tickets.xml'), generateTicketsSitemap(tickets));
   console.log(`✅  sitemap-tickets.xml — ${tickets.length} upcoming tickets`);

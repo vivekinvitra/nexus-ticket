@@ -250,8 +250,8 @@ EVENT DETAILS:
     leagueSlug:      event.leagueSlug || null,
     author:          author.name,
     authorAvatar:    author.avatar,
-    publishedAt:     today,
-    addedon:         today,
+    publishedAt:     event.date,   // event date → article appears as "upcoming"
+    addedon:         today,        // actual creation date
     readTime:        typeof parsed.readTime === 'number' ? parsed.readTime : template.meta.defaultReadTime,
     featured:        template.meta.featured ? 1 : 0,
     isactive:        'Y',

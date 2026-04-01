@@ -6,7 +6,7 @@ import TicketsContainer from '@/components/home/TicketsContainer';
 import PartnersStrip from '@/components/home/PartnersStrip';
 import { buildMetadata, buildFootballEventsListJsonLd, SITE_keywords } from '@/lib/utils/seo';
 import { getEventsBySport } from '@/lib/data/tickets';
-import { getFeaturedNews } from '@/lib/data/news';
+import { getUpcomingNews } from '@/lib/data/news';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Buy FIFA World Cup 2026 Tickets Online | Football 2026 Tickets Online ',
@@ -22,7 +22,7 @@ export default async function HomePage() {
     .slice(0, 12);
 
   const footballEventsJsonLd = buildFootballEventsListJsonLd(footballEvents);
-  const featuredNews = await getFeaturedNews();
+  const featuredNews = await getUpcomingNews(3);
 
   return (
     <>
