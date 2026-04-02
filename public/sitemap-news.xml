@@ -152,7 +152,18 @@
         <news:language>en</news:language>
       </news:publication>
       <news:publication_date>2026-04-07</news:publication_date>
-      <news:title>Al Ittihad's Home Fortress Faces a Neom SC Side With Nothing to Lose – Tuesday 7 April</news:title>
+      <news:title>Al Ittihad's Title Momentum Gets Tested by Neom SC's Surprise Package – Tuesday 7 April</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/news/tba-vs-tba-20260407</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Ticket-Nexus</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-07</news:publication_date>
+      <news:title>Africa Cup of Nations Is Coming to Nelson Mandela Bay – and Tuesday 7 April Is One You Don't Want to Miss</news:title>
     </news:news>
   </url>
   <url>
