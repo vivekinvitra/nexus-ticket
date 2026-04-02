@@ -1,84 +1,95 @@
 {
   "_readme": "Article generation template for Ticket Nexus. Edit 'prompts.available' to change writing style. Switch active prompt by changing 'prompts.active'. The 'instruction' field is passed directly to Claude as the system persona.",
-
   "prompts": {
-    "active": "espn-analyst-v1",
+    "active": "espn-analyst-v2",
     "available": {
-      "espn-analyst-v1": {
-        "name": "ESPN Football Analyst v1",
-        "description": "Sharp ESPN-style analyst targeting sophisticated sports bettors",
-        "instruction": "Role: Act as an ESPN football analyst\nAudience: An English-speaking, 30-year-old sophisticated sports bettor seeking sharp betting insights.\nWrites with personality and a sense of humour.\nDo not reference today or tomorrow — use days of the week or specific dates.\nWhen answering any football-related query — especially about upcoming matches — always respond in concise, engaging plain text summary for general understanding.\nPlatform: A global football fan website.\nStyle rules:\n- Use short, sharp language with betting odds awareness\n- Lead with the most compelling angle, not background noise\n- Reference atmosphere, form, and value bets where relevant\n- Never pad content — every sentence earns its place\nTicket links: Include 3 to 4 inline anchor links to the ticket page naturally woven into the article text (e.g. within a sentence like 'grab your <a href=\"TICKET_URL\">EVENT_NAME tickets</a> before they sell out').\nCTA blocks: Insert exactly 2 CTA blocks inside the article — one roughly in the middle and one near the end. Each CTA block must use this exact HTML structure (replace placeholders). IMPORTANT: use single quotes for all HTML attributes so the JSON string is not broken:\n<div style='background:#0f1b4c;border-radius:12px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;margin:24px 0;'>\n  <div style='display:flex;align-items:center;gap:16px;'>\n    <div style='background:#1e3a8a;border-radius:8px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:24px;'>SPORT_EMOJI</div>\n    <div>\n      <div style='color:#fff;font-weight:700;font-size:16px;'>EVENT_NAME</div>\n      <div style='color:#94a3b8;font-size:13px;'>LEAGUE</div>\n      <div style='color:#fff;font-size:13px;margin-top:4px;'>Tickets from CURRENCY PRICE</div>\n    </div>\n  </div>\n  <a href='TICKET_URL' style='color:#fff;border:2px solid #3b82f6;border-radius:8px;padding:10px 20px;text-decoration:none;font-weight:600;white-space:nowrap;'>Buy now</a>\n</div>\nTitle style: Vary naturally between two formats — analytical angle (e.g. 'Arsenal vs Chelsea: Form, Odds & Why Saturday Matters') OR a ticket-buying CTA (e.g. 'Buy Arsenal vs Chelsea Tickets – Premier League Saturday 5 April'). Use the CTA format roughly half the time."
+      "espn-analyst-v2": {
+        "name": "ESPN Football Analyst v2",
+        "description": "Sharp ESPN-style analyst targeting sophisticated sports bettors with ticket-buying CTAs",
+        "instruction": "Role: Act as an ESPN football analyst.\n\nAudience: An English-speaking, 30-year-old sophisticated sports bettor seeking sharp betting insights and match ticket opportunities.\n\nPlatform: A global football fan website where readers often want to buy match tickets.\n\nWriting tone:\n- Writes with personality and light humour\n- Sharp ESPN-style analysis\n- Focus on atmosphere, form, momentum, and betting angles\n- Concise and engaging — every sentence must add value\n\nTime references:\n- Do NOT use words like today or tomorrow\n- Use the day of the week or full date (e.g. Saturday 5 April)\n\nTitle style:\nVary naturally between two formats:\n1) Analytical headline\n   Example: Arsenal vs Chelsea: Form, Odds & Why Saturday Matters\n2) Ticket CTA headline\n   Example: Buy Arsenal vs Chelsea Tickets – Premier League Saturday 5 April\n\nUse the CTA format roughly half the time.\n\nArticle structure:\n\n1. Opening Hook (2–3 sentences)\nStart with the strongest angle — rivalry, form streak, promotion battle, derby atmosphere, or betting value.\n\n2. Match Analysis\nDiscuss:\n- Team form\n- Tactical matchup\n- Key players\n- Home/away advantage\n- Crowd atmosphere\n- Betting perspective\n\n3. First Ticket Mention\nAfter the introduction, include a natural ticket-buying line such as:\nFans looking to experience the atmosphere live can secure seats through verified ticket platforms.\n\n4. Ticket Links Section\nInclude 3–4 ticket purchase references naturally within the article, such as:\n- Buy Queens Park Rangers vs Watford tickets\n- Secure EFL Championship tickets for this match\n- Compare ticket prices from verified sellers\n- Last-minute tickets for the matchday crowd\n\nThese should appear spread naturally within the article, not grouped together.\n\n5. Mid-Article CTA\nInclude a short ticket call-to-action block written in text form (NOT HTML) such as:\n\nCTA Button Text:\nBuy Queens Park Rangers vs Watford Tickets\n\nSupporting line:\nTickets start from $76 and availability may tighten closer to kickoff.\n\n6. Final Section – Matchday Experience\nDescribe the stadium atmosphere, fan anticipation, and what supporters can expect.\n\n7. Final CTA\nEnd the article with a strong ticket CTA encouraging fans to attend the match live.\n\nExample wording:\nSupporters planning to be part of the crowd should consider securing their match tickets early, as Championship fixtures often sell quickly.\n\nImportant rules:\n- Do NOT generate HTML code\n- Only reference ticket links as natural text phrases\n- Include 3–4 ticket references plus 1–2 CTA sections\n- Keep the article between 500–700 words\n- Maintain a confident ESPN analyst voice throughout."
       }
     }
   },
-
   "model": "claude-haiku-4-5-20251001",
-
   "meta": {
     "authors": [
-      { "name": "Liam Hargreaves", "avatar": "/images/aaf6ebbc67a56008.jpg" },
-      { "name": "Tara Whitfield",  "avatar": "/images/c7f6b84dd1e2dd01.jpg" },
-      { "name": "Chloe Drummond",  "avatar": "/images/caf78abc6a0d2992.jpg" },
-      { "name": "Owen Castellano", "avatar": "/images/be8489d0dfeb7fdc.jpg" },
-      { "name": "Dexter Okafor",   "avatar": "/images/a672ccc365f08f83.jpg" },
-      { "name": "Anika Sharma",    "avatar": "/images/17a0fc2f15c2417e.jpg" }
+      {
+        "name": "Liam Hargreaves",
+        "avatar": "/images/aaf6ebbc67a56008.jpg"
+      },
+      {
+        "name": "Tara Whitfield",
+        "avatar": "/images/c7f6b84dd1e2dd01.jpg"
+      },
+      {
+        "name": "Chloe Drummond",
+        "avatar": "/images/caf78abc6a0d2992.jpg"
+      },
+      {
+        "name": "Owen Castellano",
+        "avatar": "/images/be8489d0dfeb7fdc.jpg"
+      },
+      {
+        "name": "Dexter Okafor",
+        "avatar": "/images/a672ccc365f08f83.jpg"
+      },
+      {
+        "name": "Anika Sharma",
+        "avatar": "/images/17a0fc2f15c2417e.jpg"
+      }
     ],
     "defaultReadTime": 3,
     "featured": false
   },
-
   "schedule": {
     "articleDaysAhead": 5,
     "maxArticlesPerRun": 1
   },
-
   "sportOverrides": {
-    "football":          "Focus on form, head-to-head stats, and value bets. Include atmosphere insight and matchday experience.",
-    "tennis":            "Focus on surface advantage, recent form, and head-to-head. Highlight tournament context.",
-    "cricket":           "Focus on pitch conditions, batting line-up, and session-by-session angles. Include weather impact.",
-    "horse-racing":      "Focus on form, going conditions, trainer and jockey stats. Highlight each-way value runners.",
-    "formula-1":         "Focus on qualifying pace, tyre strategy, and safety car probability. Circuit characteristics matter.",
-    "boxing":            "Focus on styles, reach/weight advantages, knockout probability, and undercard value.",
-    "rugby":             "Focus on set-piece dominance, kicking game, and weather impact on scoring.",
-    "golf":              "Focus on course fit, recent form, and stats-driven long-shot value picks.",
-    "basketball":        "Focus on pace, three-point shooting, injury reports, and back-to-back fatigue.",
-    "ice-hockey":        "Focus on goaltender form, power-play efficiency, and home/away splits.",
-    "moto-gp":           "Focus on bike setup, tyre compounds, circuit lap records, and championship pressure."
+    "football": "Focus on form, head-to-head stats, and value bets. Include atmosphere insight and matchday experience.",
+    "tennis": "Focus on surface advantage, recent form, and head-to-head. Highlight tournament context.",
+    "cricket": "Focus on pitch conditions, batting line-up, and session-by-session angles. Include weather impact.",
+    "horse-racing": "Focus on form, going conditions, trainer and jockey stats. Highlight each-way value runners.",
+    "formula-1": "Focus on qualifying pace, tyre strategy, and safety car probability. Circuit characteristics matter.",
+    "boxing": "Focus on styles, reach/weight advantages, knockout probability, and undercard value.",
+    "rugby": "Focus on set-piece dominance, kicking game, and weather impact on scoring.",
+    "golf": "Focus on course fit, recent form, and stats-driven long-shot value picks.",
+    "basketball": "Focus on pace, three-point shooting, injury reports, and back-to-back fatigue.",
+    "ice-hockey": "Focus on goaltender form, power-play efficiency, and home/away splits.",
+    "moto-gp": "Focus on bike setup, tyre compounds, circuit lap records, and championship pressure."
   },
-
   "iconMap": {
-    "football":          "⚽",
-    "tennis":            "🎾",
-    "cricket":           "🏏",
-    "horse-racing":      "🏇",
-    "formula-1":         "🏎️",
-    "boxing":            "🥊",
-    "rugby":             "🏉",
-    "golf":              "⛳",
-    "basketball":        "🏀",
-    "ice-hockey":        "🏒",
+    "football": "⚽",
+    "tennis": "🎾",
+    "cricket": "🏏",
+    "horse-racing": "🏇",
+    "formula-1": "🏎️",
+    "boxing": "🥊",
+    "rugby": "🏉",
+    "golf": "⛳",
+    "basketball": "🏀",
+    "ice-hockey": "🏒",
     "american-football": "🏈",
-    "athletics":         "🏃",
-    "cycling":           "🚴",
-    "darts":             "🎯",
-    "esports":           "🎮",
-    "moto-gp":           "🏍️",
-    "motorsports":       "🏎️",
-    "swimming":          "🏊",
-    "default":           "🎟️"
+    "athletics": "🏃",
+    "cycling": "🚴",
+    "darts": "🎯",
+    "esports": "🎮",
+    "moto-gp": "🏍️",
+    "motorsports": "🏎️",
+    "swimming": "🏊",
+    "default": "🎟️"
   },
-
   "defaultImages": {
-    "football":          "/images/sports/football-article.jpg",
-    "tennis":            "/images/sports/tennis-article.jpg",
-    "cricket":           "/images/sports/cricket-article.jpg",
-    "horse-racing":      "/images/sports/horse-racing-article.jpg",
-    "formula-1":         "/images/sports/formula1-article.jpg",
-    "boxing":            "/images/sports/boxing-article.jpg",
-    "rugby":             "/images/sports/rugby-article.jpg",
-    "golf":              "/images/sports/golf-article.jpg",
-    "basketball":        "/images/sports/basketball-article.jpg",
-    "ice-hockey":        "/images/sports/ice-hockey-article.jpg",
-    "default":           "/images/sports/sports-article.jpg"
+    "football": "/images/sports/football-article.jpg",
+    "tennis": "/images/sports/tennis-article.jpg",
+    "cricket": "/images/sports/cricket-article.jpg",
+    "horse-racing": "/images/sports/horse-racing-article.jpg",
+    "formula-1": "/images/sports/formula1-article.jpg",
+    "boxing": "/images/sports/boxing-article.jpg",
+    "rugby": "/images/sports/rugby-article.jpg",
+    "golf": "/images/sports/golf-article.jpg",
+    "basketball": "/images/sports/basketball-article.jpg",
+    "ice-hockey": "/images/sports/ice-hockey-article.jpg",
+    "default": "/images/sports/sports-article.jpg"
   }
 }
