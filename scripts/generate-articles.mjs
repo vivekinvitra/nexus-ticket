@@ -219,8 +219,42 @@ EVENT DETAILS:
   const cleaned = raw.replace(/^```json\s*/im, '').replace(/^```\s*/im, '').replace(/```\s*$/,'').trim();
 
   let parsed;
-  try { parsed = JSON.parse(cleaned); }
-  catch { throw new Error(`JSON parse failed.\n${raw.slice(0, 400)}`); }
+  try {
+    parsed = JSON.parse(cleaned);
+  } catch (e1) {
+    // Claude sometimes emits unescaped double quotes inside HTML attribute
+    // values within the "content" string, breaking JSON.parse.
+    // Strategy: pull the outer JSON fields individually, parse "content"
+    // as a raw substring after converting attr=" to attr='.
+    try {
+      // Extract each top-level string field with a tolerant regex
+      const grab = (key) => {
+        const m = cleaned.match(new RegExp(`"${key}"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"`));
+        return m ? m[1].replace(/\\n/g, '\n').replace(/\\"/g, '"') : '';
+      };
+      // For content: find the value between the first `"content":  "` and the
+      // last `"` before the closing `}`, then fix HTML attr quotes.
+      const contentMatch = cleaned.match(/"content"\s*:\s*"([\s\S]*?)"\s*\}/);
+      const rawContent   = contentMatch ? contentMatch[1] : '';
+      const fixedContent = rawContent
+        .replace(/\\"/g, '"')          // unescape whatever Claude escaped
+        .replace(/="([^"<>]*)"/g, "='$1'"); // attr="val" → attr='val'
+
+      parsed = {
+        title:           grab('title'),
+        snippet:         grab('snippet'),
+        metaTitle:       grab('metaTitle'),
+        metaDescription: grab('metaDescription'),
+        metaKeywords:    grab('metaKeywords'),
+        imageCaption:    grab('imageCaption'),
+        keyPoints:       (() => { const m = cleaned.match(/"keyPoints"\s*:\s*(\[[^\]]*\])/); try { return JSON.parse(m?.[1] || '[]'); } catch { return []; } })(),
+        content:         fixedContent,
+      };
+    } catch {
+      console.error('\n--- RAW CLAUDE RESPONSE ---\n' + raw + '\n--- END ---\n');
+      throw new Error(`JSON parse failed: ${e1.message}`);
+    }
+  }
 
   // Bare Cloudflare image ID (strip /images/ prefix — API prepends CDN base URL)
   const rawImg   = event.imageUrl || '';
