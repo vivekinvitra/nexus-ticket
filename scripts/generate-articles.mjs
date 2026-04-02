@@ -201,7 +201,7 @@ async function generateArticle(event, template, activePrompt, lookups) {
   "metaKeywords": "5-6 comma-separated keywords relevant to the event and ticket buying",
   "keyPoints": ["sharp insight 1", "sharp insight 2", "sharp insight 3"],
   "imageCaption": "Short descriptive caption for the hero image",
-  "content": "Full HTML article body. Use <div>, <h2>, <p>, <strong> tags. Include 3-4 inline anchor links to the ticket page naturally woven into sentences. Insert exactly 2 CTA blocks (one mid-article, one near the end) using the styled block from your instructions — replace SPORT_EMOJI with ${sportEmoji}, EVENT_NAME with the event name, LEAGUE with the league, CURRENCY PRICE with the ticket price, and TICKET_URL with ${ticketUrl}. Do NOT use HTML entities inside this JSON string — write raw HTML tags."
+  "content": "Full HTML article body. Use <div>, <h2>, <p>, <strong> tags. CRITICAL: use single quotes for ALL HTML attributes (never double quotes) so the JSON string stays valid. Include 3-4 inline anchor links to the ticket page naturally woven into sentences. Insert exactly 2 CTA blocks (one mid-article, one near the end) using the styled block from your instructions — replace SPORT_EMOJI with ${sportEmoji}, EVENT_NAME with the event name, LEAGUE with the league, CURRENCY PRICE with the ticket price, and TICKET_URL with ${ticketUrl}. Do NOT use HTML entities inside this JSON string — write raw HTML tags."
 }
 
 EVENT DETAILS:
