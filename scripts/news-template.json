@@ -43,7 +43,7 @@
   },
   "schedule": {
     "articleDaysAhead": 5,
-    "maxArticlesPerRun": 1
+    "maxArticlesPerRun": 15
   },
   "sportOverrides": {
     "football": "Focus on form, head-to-head stats, and value bets. Include atmosphere insight and matchday experience.",
