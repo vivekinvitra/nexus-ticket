@@ -176,6 +176,7 @@ async function generateArticle(event, template, activePrompt, lookups) {
   const ticketUrl     = `${SITE_URL}/tickets/${event.slug}`;
   const sport         = event.sport;
   const sportHint     = template.sportOverrides?.[sport] || '';
+  const sportEmoji    = template.iconMap?.[sport] || template.iconMap?.['default'] || '🎟️';
   const model         = template.model || 'claude-haiku-4-5-20251001';
 
   // Resolve numeric IDs from lookup tables
@@ -200,8 +201,7 @@ async function generateArticle(event, template, activePrompt, lookups) {
   "metaKeywords": "5-6 comma-separated keywords relevant to the event and ticket buying",
   "keyPoints": ["sharp insight 1", "sharp insight 2", "sharp insight 3"],
   "imageCaption": "Short descriptive caption for the hero image",
-  "readTime": 3,
-  "content": "Full HTML article body. Use <div>, <h2>, <p>, <strong> tags. Include a prominent <a href=\\"${ticketUrl}\\">Buy ${event.eventName} Tickets</a> link. Do NOT use HTML entities inside this JSON string — write raw HTML tags."
+  "content": "Full HTML article body. Use <div>, <h2>, <p>, <strong> tags. Include 3-4 inline anchor links to the ticket page naturally woven into sentences. Insert exactly 2 CTA blocks (one mid-article, one near the end) using the styled block from your instructions — replace SPORT_EMOJI with ${sportEmoji}, EVENT_NAME with the event name, LEAGUE with the league, CURRENCY PRICE with the ticket price, and TICKET_URL with ${ticketUrl}. Do NOT use HTML entities inside this JSON string — write raw HTML tags."
 }
 
 EVENT DETAILS:
@@ -212,7 +212,8 @@ EVENT DETAILS:
 - Venue: ${event.venue}, ${event.city}
 - Ticket availability: ${event.availability}
 - Tickets from: ${event.currency}${event.minPrice.toFixed(2)}
-- Ticket page: ${ticketUrl}`;
+- Ticket page: ${ticketUrl}
+- Sport emoji: ${sportEmoji}`;
 
   const raw     = await callClaude(systemPrompt, userPrompt, model);
   const cleaned = raw.replace(/^```json\s*/im, '').replace(/^```\s*/im, '').replace(/```\s*$/,'').trim();
@@ -227,6 +228,11 @@ EVENT DETAILS:
     || (template.defaultImages?.[sport] || template.defaultImages?.['default'] || '').replace(/^\/images\//, '')
     || 'news/1774428801020';
 
+  // ── Calculate read time from content word count (200 wpm) ──────────────
+  const contentText = (parsed.content || '').replace(/<[^>]+>/g, ' ');
+  const wordCount   = contentText.trim().split(/\s+/).filter(Boolean).length;
+  const readTime    = Math.max(1, Math.round(wordCount / 200));
+
   // ── Final D1 payload ────────────────────────────────────────────────────
   return {
     slug:            event.slug,
@@ -236,7 +242,7 @@ EVENT DETAILS:
     league:          leagueId,
     author:          authorId,
     publishedAt:     event.date,
-    readTime:        typeof parsed.readTime === 'number' ? parsed.readTime : template.meta.defaultReadTime,
+    readTime,
     featured:        false,
     image:           cfImgId,
     imageCaption:    parsed.imageCaption    || `${event.eventName} at ${event.venue}`,
@@ -273,7 +279,7 @@ async function main() {
   if (!activePrompt) { console.error(`❌  Prompt "${activeKey}" not found in news-template.json`); process.exit(1); }
 
   const daysAhead   = template.schedule?.articleDaysAhead  ?? 5;
-  const maxArticles = template.schedule?.maxArticlesPerRun ?? 20;
+  const maxArticles = template.schedule?.maxArticlesPerRun ?? 15;
 
   console.log(`\n🎯  Preferred date  : today + ${daysAhead} days`);
   console.log(`🤖  Active prompt   : "${activePrompt.name}"`);
