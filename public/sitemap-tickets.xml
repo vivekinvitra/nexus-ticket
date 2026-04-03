@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.ticket-nexus.com/tickets/fc-barcelona-women-vs-real-madrid-women-20260402</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-02</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/al-ittihad-vs-al-hazem-20260403</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/al-nassr-vs-al-najma-20260403</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-03</lastmod>
-  </url>
-  <url>
     <loc>https://www.ticket-nexus.com/tickets/queens-park-rangers-vs-watford-20260403</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -1823,5 +1805,35 @@
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-22</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/al-ittihad-vs-neom-sc-20260423</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-23</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/al-nassr-vs-al-ettifaq-20260423</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-23</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/casa-pia-vs-sc-braga-20260423</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-23</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/vfb-stuttgart-vs-sc-freiburg-20260423</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-23</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/psv-eindhoven-vs-pec-zwolle-20260423</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-23</lastmod>
   </url>
 </urlset>
