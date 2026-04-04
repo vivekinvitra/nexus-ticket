@@ -1,72 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.ticket-nexus.com/tickets/queens-park-rangers-vs-watford-20260403</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/coventry-city-vs-derby-county-20260403</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/west-bromwich-albion-vs-wrexham-fc-20260403</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/leicester-city-vs-preston-north-end-20260403</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/charlton-athletic-vs-bristol-city-20260403</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/norwich-city-vs-portsmouth-20260403</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/middlesbrough-vs-millwall-20260403</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/birmingham-city-vs-blackburn-rovers-20260403</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/southampton-vs-ipswich-town-20260403</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/sheffield-united-vs-swansea-city-20260403</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-03</lastmod>
-  </url>
-  <url>
-    <loc>https://www.ticket-nexus.com/tickets/paris-saint-germain-vs-toulouse-fc-20260403</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-    <lastmod>2026-04-03</lastmod>
-  </url>
-  <url>
     <loc>https://www.ticket-nexus.com/tickets/ss-lazio-vs-parma-20260404</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -1835,5 +1769,17 @@
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-04-23</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/sunderland-vs-nottingham-forest-20260424</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-24</lastmod>
+  </url>
+  <url>
+    <loc>https://www.ticket-nexus.com/tickets/al-nassr-vs-al-ettifaq-20260424</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-04-24</lastmod>
   </url>
 </urlset>
